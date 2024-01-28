@@ -45,6 +45,7 @@ const iconComponents = {
 const Home = () => {
     return (
         <>
+        <Login/>
             <section className="_container">
                 <div className="_subContainer1">
                     <span>The Leader in Online Learning</span>
@@ -78,7 +79,7 @@ const Home = () => {
             <MasterSkills />
             <Strip/>
             <Review />
-            <Login/>
+            
         </>
     )
 };
