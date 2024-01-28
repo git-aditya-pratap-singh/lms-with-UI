@@ -1,0 +1,163 @@
+{
+    "Carrier_course":[
+        {
+            "id" : 11,
+            "icon" : "FaGraduationCap",
+            "heading" : "UI/UX Design",
+            "paragraph" : "If you think good design is expensive, you should look at the cost of bad design."
+
+        },
+        {
+            "id" : 12,
+            "icon" : "FaLaptopCode",
+            "heading" : "Web Development",
+            "paragraph" : "Responsive Web Design always plays important role whenever going to promote your website."
+
+        },
+        {
+            "id" : 13,
+            "icon" : "HiSpeakerphone",
+            "heading" : "Digital Marketing",
+            "paragraph" : "Content is not king, but a president elected by the votes of those whom it aims to rule."
+
+        },
+        {
+            "id" : 14,
+            "icon" : "FaCode",
+            "heading" : "Practical Learning",
+            "paragraph" : "Isn't it funny how day by day nothing changes, but when you look back, everything is different."
+
+        }
+    ],
+
+    "trainedSection":[
+        {
+            "id" : 15,
+            "icon" : "FaBookReader",
+            "name" : "10 K",
+            "subname" : "Online Courses"
+        },
+        {
+            "id" : 16,
+            "icon" : "FaChalkboardTeacher",
+            "name" : "240 +",
+            "subname" : "Expert Tutor"
+        },
+        {
+            "id" : 17,
+            "icon" : "FaUserGraduate",
+            "name" : "40 K",
+            "subname" : "Online Assignment"
+        },
+        {
+            "id" : 18,
+            "icon" : "PiCertificate",
+            "name" : "215 +",
+            "subname" : "Certifications"
+        }
+    ],
+    "masterSkills":[
+        {
+            "id" : 19,
+            "icon" : "PiBooksLight",
+            "msg" : "Stay motivated with engaging instruction"
+        },
+        {
+            "id" : 20,
+            "icon" : "PiApplePodcastsLogoLight",
+            "msg" : "Keep up with in the latest in cloud"
+        },
+        {
+            "id" : 21,
+            "icon" : "PiCertificateLight",
+            "msg" : "Get Certified with 100+ certification courses"
+        },
+        {
+            "id" : 22,
+            "icon" : "MdComputer",
+            "msg" : "Build skills your way, from labs to courses"
+        }
+    ],
+    "review":[
+        {
+            "id" : 23,
+            "star" : "",
+            "review" : "Lorem ipsum dolor sir amet, conseteuer sapding eliter sed diam nomoary eirmond tempor.",
+            "reviewName" : "Aditya Singh",
+            "desigination" : "React Developer"
+        },
+        {
+            "id" : 24,
+            "star" : "",
+            "review" : "Lorem ipsum dolor sir amet, conseteuer sapding eliter sed diam nomoary eirmond tempor.",
+            "reviewName" : "Allen Carry",
+            "desigination" : "Node Developer"
+        },
+        {
+            "id" : 25,
+            "star" : "",
+            "review" : "Lorem ipsum dolor sir amet, conseteuer sapding eliter sed diam nomoary eirmond tempor.",
+            "reviewName" : "Sam Curran",
+            "desigination" : "PHP Developer"
+        },
+        {
+            "id" : 26,
+            "star" : "",
+            "review" : "Lorem ipsum dolor sir amet, conseteuer sapding eliter sed diam nomoary eirmond tempor.",
+            "reviewName" : "Tom Hongiway",
+            "desigination" : "Flutter Developer"
+        },
+        {
+            "id" : 27,
+            "star" : "",
+            "review" : "Lorem ipsum dolor sir amet, conseteuer sapding eliter sed diam nomoary eirmond tempor.",
+            "reviewName" : "Sam Curran",
+            "desigination" : "PHP-8 Developer"
+        },
+        {
+            "id" : 28,
+            "star" : "",
+            "review" : "Lorem ipsum dolor sir amet, conseteuer sapding eliter sed diam nomoary eirmond tempor.",
+            "reviewName" : "Tom Hongiway",
+            "desigination" : "Flutter-2 Developer"
+        }
+    ],
+    "services" : [
+        {
+           "id" : 29,
+           "icon" : "PiBooksLight",
+           "heading" : "Learn More Anywhere",
+           "paragraph" :"The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education."
+        },
+        {
+            "id" : 30,
+            "icon" : "CiUser",
+            "heading" : "Expert Instructor",
+            "paragraph" : "What makes a child gifted and talented may not always be good grades in school, but a different way of looking at the world and learning."
+        },
+        {
+            "id" : 31,
+            "icon" : "FaChalkboardTeacher",
+            "heading" : "Team Management",
+            "paragraph" :"A simple but powerful reminder of the positive domino effect a good education can have on many aspects of a person’s life and outlook."
+        },
+        {
+            "id" : 32,
+            "icon" : "IoEyeOutline",
+            "heading" : "Course Planning",
+            "paragraph" :"The principal goal of education in the schools should be men and women who are capable of doing new things, generations have done."
+        },
+        {
+            "id" : 33,
+            "icon" : "FaRegLightbulb",
+            "heading" : "Teacher Monitoring",
+            "paragraph" :"The content of a book holds the power of education and it is with this power that we can shape our future and change lives."
+        },
+        {
+            "id" : 34,
+            "icon" : "MdOutlineMarkEmailUnread",
+            "heading" : "24/7 Strong Support",
+            "paragraph" :"Knowledge is power. Information is liberating. Education is the premise of progress in every society, in every family."
+        }
+    ]
+}

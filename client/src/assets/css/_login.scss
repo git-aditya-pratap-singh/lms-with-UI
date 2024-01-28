@@ -1,0 +1,41 @@
+@use '_index' as temp;
+
+._loginContainer{
+    @apply fixed z-[9999] w-full h-screen bg-black/40
+    flex justify-center items-center;
+    ._loginForm{
+        min-width: 350px;
+        padding: 2rem 1.5rem;
+        border-radius: 5px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        gap:0.4rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        h1{
+            font-size: 2rem;
+            color:temp.$heading-color;
+        }
+        p{
+            font-size: 0.85rem;
+            color:temp.$paragraph-color;
+        }
+        ._form{
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap:1rem;
+            align-items: flex-start;
+            input{
+                padding: 0.5rem;
+                width: 100%;
+                border: 0.09rem solid temp.$primary;
+                border-radius: 5px;
+                &:focus{
+                outline: 0.12rem solid temp.$primary; 
+                box-shadow: temp.$primary 0px 2px 5px 0px, temp.$primary 0px 0px 0px 1px;
+            }
+            }
+        }
+    }
+}

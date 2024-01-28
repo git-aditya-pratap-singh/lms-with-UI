@@ -1,0 +1,30 @@
+$primary:#007DFC;
+$secondary: #03aeec4f;
+$navbar-color:#fff;
+$navbar-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+$box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+$footer-color:#9ab3ff53;
+$text-color:#007DFC;
+$heading-color:#04223a;
+$background: #1B2631;
+$nav-text-color: #1B2631;
+$header-text : #212e3a;
+$paragraph-color:#494949;
+
+$fontStyle-1: 'Rubik', sans-serif;
+$fontStyle-2: 'Signika Negative', sans-serif;
+
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body{
+   overflow-x: hidden;
+   font-size: 16px;
+   font-family: $fontStyle-2;
+   
+}
+
+

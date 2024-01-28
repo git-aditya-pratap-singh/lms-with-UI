@@ -1,0 +1,136 @@
+@use "_index" as temp;
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  background-color: temp.$navbar-color;
+  padding: 1.3rem 5%;
+  position: fixed;
+  z-index: 100;
+}
+
+._logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: temp.$text-color;
+}
+
+.shadow-nav {
+  box-shadow: temp.$navbar-shadow;
+}
+
+._navbar {
+  ul {
+    display: flex;
+    li {
+      margin: 0rem 2rem;
+      font-weight: 600;
+      color: temp.$nav-text-color;
+      cursor: pointer;
+      padding: 0 1rem;
+      &:hover {
+        color: temp.$text-color;
+        &::after {
+          width: 100%;
+        }
+      }
+      &::after {
+        content: "";
+        width: 0%;
+        height: 2.5px;
+        background: temp.$primary;
+        display: block;
+        transition: 0.5s;
+        border-radius: 50px;
+      }
+    }
+  }
+}
+
+._navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0;
+}
+
+.active {
+  color: temp.$text-color;
+}
+
+._hamburger-menu {
+  display: none;
+}
+
+._loginbtn {
+  @apply outline outline-2 outline-offset-2 p-2 outline-blue-500 rounded w-28 flex items-center justify-center gap-2 font-semibold text-gray-700 active:scale-95 ease-in-out duration-300 active:text-white active:bg-[#007DFC];
+}
+
+// Tablet Devices -------------------------
+@media only screen and (max-width: 1068px) {
+  ._navbar {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    width: 100vw;
+    padding: 1rem 0.1rem;
+    background-color: temp.$navbar-color;
+    box-shadow: temp.$navbar-shadow;
+    ul {
+      display: block;
+      li {
+        width: 80px;
+        padding: 0.2rem 0rem;
+        &:hover {
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  ._hamburger-menu {
+    display: block;
+    border-radius: 5px;
+  }
+
+  ._loginbtn {
+    display: none;
+  }
+}
+
+// Mobile Devices --------------------------
+@media only screen and (max-width: 420px) {
+  ._navbar {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    width: 100vw;
+    padding: 1rem 0.1rem;
+    background-color: temp.$navbar-color;
+    box-shadow: temp.$navbar-shadow;
+    ul {
+      display: block;
+      li {
+        width: 80px;
+        padding: 0.2rem 0rem;
+        &:hover {
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  
+  ._hamburger-menu {
+    display: block;
+    border-radius: 5px;
+  }
+}

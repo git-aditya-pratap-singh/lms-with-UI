@@ -1,0 +1,175 @@
+@use '_index' as temp;
+
+._contactContainer{
+    padding: 12rem 8rem 8rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url('../img//toor.jpg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    ._childDiv1{
+        h2{
+            font-size: 3rem;
+            font-weight: 600;
+            color:temp.$heading-color;
+            span{
+                color:temp.$primary;
+            }
+        }
+        #msg{
+            max-width: 400px;
+            color:temp.$paragraph-color;
+        }
+        ._info{
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap:1.5rem;
+            ._block{
+                display: flex;
+                align-items: center;
+                gap:1rem;
+                color: temp.$primary;
+                label{
+                    font-size: 1.1rem;
+                    color:temp.$heading-color;
+                }
+                p{
+                    font-size: 0.85rem;
+                    color:temp.$paragraph-color;
+                }
+            }
+        }
+    }
+    ._childDiv2{
+        width: 450px;
+        backdrop-filter: saturate(180%) blur(10px);
+       ._contactForm{
+        padding: 2rem;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        border-radius: 10px;
+        width: 100%;
+        h2 {
+            font-size: 2rem;
+            color: temp.$heading-color;
+            font-weight: 600;
+        }
+        .inputBox {
+            position: relative;
+            margin-top: 10px;
+            input {
+                width: 100%;
+                padding: 5px 0;
+                font-size: 1rem;
+                margin: 10px 0;
+                border: none;
+                border-bottom: 2px solid #333;
+                outline: none;
+                resize: none;
+                background-color: transparent;
+                &:focus {
+                    ~ {
+                        span {
+                            color:temp.$primary;
+                            font-size: 0.9rem;
+                            transform: translateY(-20px);
+                        }
+                    }
+                }
+                &:valid {
+                    ~ {
+                        span {
+                             color:temp.$primary;
+                            font-size: 0.9rem;
+                            transform: translateY(-20px);
+                        }
+                    }
+                }
+            }
+            textarea {
+                width: 100%;
+                padding: 5px 0;
+                font-size: 1rem;
+                margin: 10px 0;
+                border: none;
+                border-bottom: 2px solid #333;
+                outline: none;
+                resize: none;
+                background-color: transparent;
+                &:focus {
+                    ~ {
+                        span {
+                            color:temp.$primary;
+                            font-size: 0.9rem;
+                            transform: translateY(-20px);
+                        }
+                    }
+                }
+                &:valid {
+                    ~ {
+                        span {
+                            color:temp.$primary;
+                            font-size: 0.9rem;
+                            transform: translateY(-20px);
+                        }
+                    }
+                }
+            }
+            span {
+                position: absolute;
+                left: 0;
+                padding: 5px 0;
+                font-size: 1rem;
+                margin: 10px 0;
+                pointer-events: none;
+                transition: 0.5s;
+                
+            }
+        }
+       }
+    }
+}
+
+
+// Only Tablet Devices----------------------------
+@media only screen and (min-width: 441px) and (max-width: 1068px){
+    ._contactContainer{
+        padding: 8rem 3rem;
+        flex-direction: column;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:8rem;
+    }
+}
+// Only Mobile Devices----------------------------
+@media only screen and (max-width: 440px){
+    ._contactContainer{
+        padding: 8rem 1.5rem 3rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        gap:8rem;
+        ._childDiv1{
+            h2{
+                font-size: 2.2rem;
+            }
+            ._info{
+                ._block{
+                    label{
+                        font-size: 1.2rem;
+                    }
+                    p{
+                        font-size: 0.95rem;
+                    }
+                }
+            }
+        }
+        ._childDiv2{
+            width: 100%;
+        }
+    }
+}
