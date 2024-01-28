@@ -1,7 +1,7 @@
 @use '_index' as temp;
 
 ._loginContainer{
-    @apply fixed z-[9999] w-full h-screen bg-black/40
+    @apply fixed z-[9999] w-full h-screen bg-black/60
     flex justify-center items-center;
     ._loginForm{
         min-width: 350px;
@@ -12,6 +12,13 @@
         flex-direction: column;
         gap:0.4rem;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        position: relative;
+        h3{
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+        }
         h1{
             font-size: 2rem;
             color:temp.$heading-color;
@@ -32,9 +39,34 @@
                 border: 0.09rem solid temp.$primary;
                 border-radius: 5px;
                 &:focus{
-                outline: 0.12rem solid temp.$primary; 
-                box-shadow: temp.$primary 0px 2px 5px 0px, temp.$primary 0px 0px 0px 1px;
+                outline: 0.09rem solid temp.$primary; 
+                box-shadow: temp.$primary 0px 2px 3px 0px, temp.$primary 0px -1px 5px 0px;
             }
+            }
+            button{
+                width: 100%;
+                border-radius: 5px;
+                padding: 0.5rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap:5px;
+                background-color: temp.$primary;
+                color: #fff;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+                @apply active:scale-95 ease-in-out duration-300;
+            }
+        }
+        ._loginIcon{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem;
+            span{
+                padding: 0.6rem;
+                border-radius: 5px;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+                cursor: pointer;
             }
         }
     }

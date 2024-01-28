@@ -1,3 +1,8 @@
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { BiLogInCircle } from "react-icons/bi";
+import { RxCross1 } from "react-icons/rx";
+
 import "../../assets/css/_login.scss";
 
 const Login = () => {
@@ -5,6 +10,7 @@ const Login = () => {
     <>
       <section className="_loginContainer">
         <div className="_loginForm">
+          <h3><RxCross1/></h3>
           <h1>Welcome Back!</h1>
           <p>Choose one of the option to go.</p>
           <form className="_form">
@@ -18,15 +24,15 @@ const Login = () => {
               placeholder="Password"
               name="password"
             />
-            <button>login</button>
+            <button><BiLogInCircle/>login</button>
           </form>
           <span>
             <p>or continue with</p>
           </span>
           <div className="_loginIcon">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span><FcGoogle size={20}/></span>
+            <span><FaLinkedinIn size={20} color="#007DFC"/></span>
+            <span><FaGithub size={20}/></span>
           </div>
         </div>
       </section>

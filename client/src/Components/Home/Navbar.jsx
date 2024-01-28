@@ -6,6 +6,8 @@ import { FaHome, FaUser, FaPhoneAlt, FaChartPie } from "react-icons/fa";
 import { BiLogInCircle } from "react-icons/bi";
 import { FaAngleDoubleUp } from "react-icons/fa";
 
+import Login from "./Login";
+
 import Footer from "./Footer";
 import "../../assets/css/_navbar.scss";
 
@@ -33,6 +35,7 @@ const Navbar = () => {
 
   return (
     <>
+    <Login/>
       <nav className="shadow-nav">
         <a href="#" className="_logo">
           <svg

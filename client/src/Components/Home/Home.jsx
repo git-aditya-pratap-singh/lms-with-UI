@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Login from "./Login";
+
 
 import { BiLogInCircle } from "react-icons/bi";
 import { FaPen, FaGraduationCap, FaCode} from "react-icons/fa6";
@@ -45,7 +45,7 @@ const iconComponents = {
 const Home = () => {
     return (
         <>
-        <Login/>
+        
             <section className="_container">
                 <div className="_subContainer1">
                     <span>The Leader in Online Learning</span>
