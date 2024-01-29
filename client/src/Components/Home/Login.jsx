@@ -24,7 +24,7 @@ const Login = () => {
               placeholder="Password"
               name="password"
             />
-            <button><BiLogInCircle/>login</button>
+            <button><BiLogInCircle/>loginswswswsw</button>
           </form>
           <span>
             <p>or continue with</p>
