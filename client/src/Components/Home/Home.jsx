@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 
-
 import { BiLogInCircle } from "react-icons/bi";
 import { FaPen, FaGraduationCap, FaCode} from "react-icons/fa6";
 import { FaLaptopCode, FaBookReader, FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
@@ -21,6 +20,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
+
+import { useDispatch, useSelector } from "react-redux"
+import { login_popup, registration_popup } from "../Store/Slices/StateSlice"
+
+import Registration from "./Registration";
 
 import "../../assets/css/_home.scss";
 import Data from "../Data/Data.json";
@@ -43,17 +47,22 @@ const iconComponents = {
 
 
 const Home = () => {
+    const dispatch = useDispatch();
+    const registrationState = useSelector((store)=>store.openPopup.open_registration)
     return (
-        <>
-        
+        <> 
+        {registrationState && <Registration/>}
+
             <section className="_container">
                 <div className="_subContainer1">
                     <span>The Leader in Online Learning</span>
                     <h1>Better <span>Learning future</span> starts with elearn</h1>
                     <span>It is a long established fact that reader will be distracted readable content of a page when.</span>
                     <div className="_btnSection">
-                        <button className="_loginbtn1"><FaPen />Register here..</button>
-                        <button className="_loginbtn2"><BiLogInCircle />login</button>
+                        <button className="_loginbtn1" 
+                        onClick={()=>dispatch(registration_popup(true))}><FaPen />Register here..</button>
+                        <button className="_loginbtn2" 
+                        onClick={()=>dispatch(login_popup(true))}><BiLogInCircle />login</button>
                     </div>
                 </div>
                 <div className="_subContainer2">
@@ -143,11 +152,9 @@ const Trained = () => {
                         {
                             imgData.map((imgPath, index) => {
                                 return (
-                                    <>
                                         <span key={index}>
                                             <img src={imgPath} alt="error!" className="_img" />
                                         </span>
-                                    </>
                                 )
                             })
                         }

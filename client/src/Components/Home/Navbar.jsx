@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Hamburger from "hamburger-react";
 import { NavLink, Outlet } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"
+import { login_popup } from "../Store/Slices/StateSlice"
 
 import { FaHome, FaUser, FaPhoneAlt, FaChartPie } from "react-icons/fa";
 import { BiLogInCircle } from "react-icons/bi";
@@ -12,6 +14,9 @@ import Footer from "./Footer";
 import "../../assets/css/_navbar.scss";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const loginState = useSelector((store)=>store.openPopup.open_login);
+
   const [toggle, setToggle] = useState(false);
 
   const [toggle_top, setToggleTop] = useState(false); 
@@ -35,7 +40,7 @@ const Navbar = () => {
 
   return (
     <>
-    <Login/>
+     {loginState && <Login/>}
       <nav className="shadow-nav">
         <a href="#" className="_logo">
           <svg
@@ -116,7 +121,9 @@ const Navbar = () => {
 
         </label>
 
-        <button className="_loginbtn"><BiLogInCircle />login</button>
+        <button className="_loginbtn" onClick={()=> dispatch(login_popup(true))}>
+        <BiLogInCircle />login
+        </button>
       
       </nav>
       <Outlet />
