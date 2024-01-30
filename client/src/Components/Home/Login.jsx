@@ -1,7 +1,8 @@
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaFingerprint  } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { BiLogInCircle } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
+import { MdOutlineAlternateEmail } from "react-icons/md";
 
 import { useDispatch } from "react-redux";
 import { login_popup } from "../Store/Slices/StateSlice"
@@ -18,16 +19,24 @@ const Login = () => {
           <h1>Welcome Back!</h1>
           <p>Choose one of the option to go.</p>
           <form className="_form">
-            <input
-              type="text"
-              placeholder="Username"
-              name="username"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-            />
+            <span>
+              <label>
+                <MdOutlineAlternateEmail />
+              </label>
+              <input type="email" placeholder="enter email..." name="email" />
+            </span>
+
+            <span>
+              <label>
+                <FaFingerprint />
+              </label>
+              <input
+                type="password"
+                placeholder="enter password..."
+                name="password"
+              />
+            </span>
+            
             <button><BiLogInCircle/>login</button>
           </form>
           <span>
