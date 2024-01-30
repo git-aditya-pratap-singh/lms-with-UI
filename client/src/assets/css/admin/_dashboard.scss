@@ -1,1 +1,23 @@
 @use '../index' as temp;
+
+._dashboard{
+    background:#fff;
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+    padding: 1rem;
+    height: 100vh;
+    ._navBar{
+        padding: 1.5rem;
+        background-color: #fff;
+        width: 250px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        ._logo{
+            display: flex;
+            gap:10px;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #999;
+        }
+    }
+}
