@@ -1,11 +1,11 @@
-@use '_index' as temp;
+@use '../_index' as temp;
 
 ._header{
   padding: 7rem 2rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background:url('../img/home.png');
+  background:url('../../img/home.png');
   background-repeat: no-repeat;
   background-size: cover;
   ._subHeaderA{

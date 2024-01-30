@@ -1,4 +1,4 @@
-@use "_index" as temp;
+@use '../_index' as temp;
 
 $background-color_1: #ffffff5a;
 $background-color_2: #f6c601;
@@ -10,7 +10,7 @@ $background-color_5: #f10156;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-image: url("../img/home.png");
+  background-image: url("../../img/home.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -221,7 +221,7 @@ $background-color_5: #f10156;
 
 ._carrier {
   padding: 2rem;
-  background-image: url("../img/b2.jpg");
+  background-image: url("../../img/b2.jpg");
   background-size: cover;
   ._carrierText {
     font-size: 2.5rem;
@@ -490,7 +490,7 @@ $background-color_5: #f10156;
 }
 
 ._review {
-  background-image: url("../img/home.png");
+  background-image: url("../../img/home.png");
   padding: 3.5rem;
   display: flex;
   flex-direction: column;

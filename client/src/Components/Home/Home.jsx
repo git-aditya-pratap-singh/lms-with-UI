@@ -26,7 +26,7 @@ import { login_popup, registration_popup } from "../Store/Slices/StateSlice"
 
 import Registration from "./Registration";
 
-import "../../assets/css/_home.scss";
+import "../../assets/css/home/_home.scss";
 import Data from "../Data/Data.json";
 
 const iconComponents = {

@@ -6,7 +6,7 @@ import { RxCross1 } from "react-icons/rx";
 import { FaUser, FaPhoneAlt, FaFingerprint } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
-import "../../assets/css/_registration.scss";
+import "../../assets/css/home/_registration.scss";
 
 const Registration = () => {
   const dispatch = useDispatch();

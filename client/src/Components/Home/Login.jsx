@@ -7,7 +7,7 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { login_popup } from "../Store/Slices/StateSlice"
 
-import "../../assets/css/_login.scss";
+import "../../assets/css/home/_login.scss";
 
 const Login = () => {
   const dispatch = useDispatch();

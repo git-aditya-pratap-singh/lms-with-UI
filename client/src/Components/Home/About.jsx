@@ -13,7 +13,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import '../../assets/css/_about.scss'
+import '../../assets/css/home/_about.scss'
 
 const About = () => {
     return (

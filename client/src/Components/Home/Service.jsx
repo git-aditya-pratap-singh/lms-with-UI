@@ -8,7 +8,7 @@ import { FcAddressBook, FcMindMap, FcPositiveDynamic  } from "react-icons/fc";
 import ServiceImg from "../../assets/img/serviceImg.jpg";
 
 import Data from "../Data/Data.json";
-import "../../assets/css/_service.scss";
+import "../../assets/css/home/_service.scss";
 
 const Service = () => {
     const iconComponents = {

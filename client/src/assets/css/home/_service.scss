@@ -1,8 +1,8 @@
-@use "_index" as temp;
+@use '../_index' as temp;
 
 ._serviceHeader {
   padding: 8rem 5rem 6rem;
-  background: url('../img/bg.png');
+  background: url('../../img/bg.png');
   background-position: center;
   background-repeat: repeat;
   background-size: contain;

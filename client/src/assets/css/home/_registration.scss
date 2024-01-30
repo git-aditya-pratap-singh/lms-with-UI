@@ -1,4 +1,4 @@
-@use '_index' as temp;
+@use '../_index' as temp;
 
 ._registerSection{
     @apply fixed z-[9999] w-full h-screen bg-black/60

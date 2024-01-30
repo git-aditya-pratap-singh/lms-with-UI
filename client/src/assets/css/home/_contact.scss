@@ -1,4 +1,4 @@
-@use '_index' as temp;
+@use '../_index' as temp;
 
 ._contactContainer{
     padding: 12rem 8rem 8rem;
@@ -6,7 +6,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-image: url('../img//toor.jpg');
+    background-image: url('../../img/toor.jpg');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
