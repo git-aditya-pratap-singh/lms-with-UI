@@ -1,3 +1,10 @@
+import { AiFillDashboard } from "react-icons/ai";
+import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader,FaRupeeSign,FaBell } from "react-icons/fa";
+import { FaUsersViewfinder } from "react-icons/fa6";
+import { BsFillFileEarmarkSpreadsheetFill } from "react-icons/bs";
+import { IoSettingsSharp } from "react-icons/io5";
+import { IoMdLogOut } from "react-icons/io";
+
 import "../../assets/css/admin/_dashboard.scss";
 
 const Dashboard = () => {
@@ -42,9 +49,19 @@ const Dashboard = () => {
           </div>
 
           <div className="_navItem">
-           <ul>
-           <li>Dashboard</li>
-           </ul>
+            <ul>
+              <span><AiFillDashboard size={23}/><li>Dashboard</li></span>
+              <span><FaUserCircle size={23}/><li>Profile</li></span>
+              <span><FaChalkboardTeacher size={23}/><li>Tranning</li></span>
+              <span><FaUsersViewfinder size={23}/><li>Students</li></span>
+              <span><FaUsers size={23}/><li>Teachers</li></span>
+              <span><FaBookReader size={21}/><li>Courses</li></span>
+              <span><BsFillFileEarmarkSpreadsheetFill size={21}/><li>Attendance</li></span>
+              <span><FaRupeeSign size={21}/><li>Fee Details</li></span>
+              <span><FaBell size={21}/><li>Notification</li></span>
+              <span><IoSettingsSharp size={23}/><li>Settings</li></span>
+              <span><IoMdLogOut size={23}/><li>Logout</li></span>
+            </ul>
           </div>
 
         </div>
