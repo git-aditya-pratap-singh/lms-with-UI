@@ -1,9 +1,12 @@
+import { Outlet } from "react-router-dom";
+
 import { AiFillDashboard } from "react-icons/ai";
-import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader,FaRupeeSign,FaBell } from "react-icons/fa";
-import { FaUsersViewfinder } from "react-icons/fa6";
+import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader, FaRupeeSign, FaBell } from "react-icons/fa";
+import { FaUsersViewfinder, FaCircleUser } from "react-icons/fa6";
 import { BsFillFileEarmarkSpreadsheetFill } from "react-icons/bs";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
+import { HiOutlineDotsVertical } from "react-icons/hi";
 
 import "../../assets/css/admin/_dashboard.scss";
 
@@ -50,23 +53,60 @@ const Dashboard = () => {
 
           <div className="_navItem">
             <ul>
-              <span><AiFillDashboard size={23}/><li>Dashboard</li></span>
-              <span><FaUserCircle size={23}/><li>Profile</li></span>
-              <span><FaChalkboardTeacher size={23}/><li>Tranning</li></span>
-              <span><FaUsersViewfinder size={23}/><li>Students</li></span>
-              <span><FaUsers size={23}/><li>Teachers</li></span>
-              <span><FaBookReader size={21}/><li>Courses</li></span>
-              <span><BsFillFileEarmarkSpreadsheetFill size={21}/><li>Attendance</li></span>
-              <span><FaRupeeSign size={21}/><li>Fee Details</li></span>
-              <span><FaBell size={21}/><li>Notification</li></span>
-              <span><IoSettingsSharp size={23}/><li>Settings</li></span>
-              <span><IoMdLogOut size={23}/><li>Logout</li></span>
+              <span><AiFillDashboard size={23} /><li>Dashboard</li></span>
+              <span><FaUserCircle size={23} /><li>Profile</li></span>
+              <span><FaChalkboardTeacher size={23} /><li>Tranning</li></span>
+              <span><FaUsersViewfinder size={23} /><li>Students</li></span>
+              <span><FaUsers size={23} /><li>Teachers</li></span>
+              <span><FaBookReader size={21} /><li>Courses</li></span>
+              <span><BsFillFileEarmarkSpreadsheetFill size={21} /><li>Attendance</li></span>
+              <span><FaRupeeSign size={21} /><li>Fee Details</li></span>
+              <span><FaBell size={21} /><li>Notification</li></span>
+              <span><IoSettingsSharp size={23} /><li>Settings</li></span>
+              <span><IoMdLogOut size={23} /><li>Logout</li></span>
             </ul>
           </div>
-
         </div>
-        <div className="_dashDetails"></div>
+
+
+
+        <section className="w-full flex flex-col gap-5 h-fit relative">
+          <div className="_dashSection">
+            {/* Create BreadCrum */}
+            <div className="_breadCrums">
+              <ul>
+                <li>Dashboard  /</li>
+                <li>Home</li>
+              </ul>
+              <span>Home</span>
+            </div>
+
+            <div className="_dashDetails">
+              <div>
+                <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                  </div>
+                  <input type="search" id="default-search" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg
+                 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
+                </div>
+              </div>
+              <label><FaCircleUser size={21} /></label>
+              <label><FaBell size={18} /></label>
+              <label><HiOutlineDotsVertical size={21} /></label>
+            </div>
+          </div>
+
+          <div className="_welcomeKit">
+            <label>Welcome Back Aditya!</label>
+          </div>
+        </section>
       </section>
+      <Outlet/>
     </>
   );
 };

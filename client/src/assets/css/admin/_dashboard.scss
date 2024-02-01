@@ -1,59 +1,107 @@
-@use '../index' as temp;
+@use "../index" as temp;
 
-._dashboard{
-    background:#fff;
+._dashboard {
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 1rem;
+  height: 100vh;
+  ._navBar {
+    height: auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    width: 290px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    ._logo {
+      display: flex;
+      gap: 10px;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid #999;
+    }
+    ._navItem {
+      margin-top: 1rem;
+      ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: self-start;
+        gap: 0rem;
+
+        color: temp.$primaryText;
+        li {
+          cursor: pointer;
+        }
+      }
+      span {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.8rem;
+        cursor: pointer;
+        @apply select-none ease-in-out duration-300;
+        &:hover {
+          background-color: aliceblue;
+          border-radius: 5px;
+        }
+        &:active {
+          background-color: temp.$primary;
+          border-radius: 5px;
+          color: #fff;
+        }
+      }
+    }
+  }
+  ._dashSection {
+    align-self: start;
+    padding: 1rem;
     display: flex;
     flex-direction: row;
-    gap:5px;
-    padding: 1rem;
-    height: 100vh;
-    ._navBar{
-        padding: 1.5rem;
-        background-color: #fff;
-        width: 290px;
-        border-radius: 10px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-        ._logo{
-            display: flex;
-            gap:10px;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid #999;
-        }
-        ._navItem{
-           margin-top: 1rem;
-            ul{ 
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: self-start;
-                gap: 0rem;
-
+    justify-content: space-between;
+    gap: 5px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 100%;
+    ._breadCrums {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: start;
+      ul {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        &:nth-child(1){
+            li{
                 color: temp.$primaryText;
-                li{
-                    cursor: pointer;
-                }
-            }
-            span{
-                width: 100%;
-                display: flex;
-                align-items: center;
-                gap:10px;
-                padding: 0.8rem;
-
-                @apply select-none ease-in-out duration-300;
-                &:hover{
-                    background-color:aliceblue;
-                    border-radius: 5px;
-
-                }
-                &:active{
-                    background-color:temp.$primary;
-                    border-radius: 5px;
-                    color:#fff;
-
-                }
             }
         }
+      }
+      span{
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
     }
+    ._dashDetails {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1.5rem;
+      color: temp.$primaryText;
+      label{
+        cursor: pointer;
+      }
+    }
+  }
+  ._welcomeKit{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: temp.$heading-color;
+    margin-left: 10px;
+  }
 }

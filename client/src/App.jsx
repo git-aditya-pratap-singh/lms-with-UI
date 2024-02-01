@@ -6,18 +6,27 @@ import Service from "./Components/Home/Service";
 import Contact from "./Components/Home/Contact";
 
 import Dashboard from "./Components/admin/Dashboard";
+import Home_admin from "./Components/admin/Home_admin";
+import Profile_admin from "./Components/admin/Profile_admin";
 const App = ()=>{
   return(
     <>
     <BrowserRouter>
     <Routes>
+       {/* Main Layout */}
       <Route path="/" element={<Navbar/>}>
         <Route index element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/service" element={<Service/>}/>
         <Route path="/contact" element={<Contact/>}/>
       </Route>
-      <Route path="/dashboard" element={<Dashboard/>}/>
+      
+      {/* Dashboard Layout */}
+      <Route path="/dashboard" element={<Dashboard/>}>
+        <Route index element={<Home_admin/>}/>
+        <Route path="/dashboard/profile" element={<Profile_admin/>}/>
+      </Route >
+      
     </Routes>
     </BrowserRouter>
     
