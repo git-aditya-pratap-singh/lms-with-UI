@@ -70,7 +70,7 @@ const Dashboard = () => {
 
 
 
-        <section className="w-full flex flex-col gap-5 h-fit relative">
+        <section className="w-full flex flex-col gap-5 h-fit">
           <div className="_dashSection">
             {/* Create BreadCrum */}
             <div className="_breadCrums">
@@ -104,9 +104,11 @@ const Dashboard = () => {
           <div className="_welcomeKit">
             <label>Welcome Back Aditya!</label>
           </div>
+          <div className="_outlet">
+            <Outlet/>
+          </div>
         </section>
       </section>
-      <Outlet/>
     </>
   );
 };
