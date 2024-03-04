@@ -9,6 +9,8 @@ import { IoMdLogOut } from "react-icons/io";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 
 import "../../assets/css/admin/_dashboard.scss";
+import Home_admin from "./Home_admin";
+import Profile_admin from "./Profile_admin";
 
 const Dashboard = () => {
   return (
@@ -104,9 +106,13 @@ const Dashboard = () => {
           <div className="_welcomeKit">
             <label>Welcome Back Aditya!</label>
           </div>
+
           <div className="_outlet">
             <Outlet/>
           </div>
+          
+          <Home_admin/>
+          <Profile_admin/>
         </section>
       </section>
     </>
