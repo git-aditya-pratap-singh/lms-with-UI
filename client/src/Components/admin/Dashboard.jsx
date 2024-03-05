@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 
 import { AiFillDashboard } from "react-icons/ai";
 import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader, FaRupeeSign, FaBell } from "react-icons/fa";
@@ -10,7 +10,7 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 
 import "../../assets/css/admin/_dashboard.scss";
 import Home_admin from "./Home_admin";
-import Profile_admin from "./Profile_admin";
+import Profile_admin from "./Profile";
 
 const Dashboard = () => {
   return (
@@ -55,17 +55,17 @@ const Dashboard = () => {
 
           <div className="_navItem">
             <ul>
-              <span><AiFillDashboard size={23} /><li>Dashboard</li></span>
-              <span><FaUserCircle size={23} /><li>Profile</li></span>
-              <span><FaChalkboardTeacher size={23} /><li>Tranning</li></span>
-              <span><FaUsersViewfinder size={23} /><li>Students</li></span>
-              <span><FaUsers size={23} /><li>Teachers</li></span>
-              <span><FaBookReader size={21} /><li>Courses</li></span>
-              <span><BsFillFileEarmarkSpreadsheetFill size={21} /><li>Attendance</li></span>
-              <span><FaRupeeSign size={21} /><li>Fee Details</li></span>
-              <span><FaBell size={21} /><li>Notification</li></span>
-              <span><IoSettingsSharp size={23} /><li>Settings</li></span>
-              <span><IoMdLogOut size={23} /><li>Logout</li></span>
+              <NavLink to="/dashboard"><span><AiFillDashboard size={23} /><li>Dashboard</li></span></NavLink>
+              <NavLink to="/dashboard/profile"><span><FaUserCircle size={23} /><li>Profile</li></span> </NavLink>
+              <NavLink to="/dashboard/tranning"><span><FaChalkboardTeacher size={23} /><li>Tranning</li></span></NavLink>
+              <NavLink to="/dashboard/students"><span><FaUsersViewfinder size={23} /><li>Students</li></span></NavLink>
+              <NavLink to="/dashboard/teachers"><span><FaUsers size={23} /><li>Teachers</li></span></NavLink>
+               <NavLink to="/dashboard/courses"><span><FaBookReader size={21} /><li>Courses</li></span></NavLink>
+               <NavLink to="/dashboard/attendance"><span><BsFillFileEarmarkSpreadsheetFill size={21} /><li>Attendance</li></span></NavLink>
+               <NavLink to="/dashboard/fees"><span><FaRupeeSign size={21} /><li>Fee Details</li></span></NavLink>
+               <NavLink to="/dashboard/notification"><span><FaBell size={21} /><li>Notification</li></span></NavLink>
+               <NavLink to="/dashboard/settings"><span><IoSettingsSharp size={23} /><li>Settings</li></span></NavLink>
+               <NavLink to="/dashboard"><span><IoMdLogOut size={23} /><li>Logout</li></span></NavLink>
             </ul>
           </div>
         </div>
@@ -110,9 +110,7 @@ const Dashboard = () => {
           <div className="_outlet">
             <Outlet/>
           </div>
-          
-          <Home_admin/>
-          <Profile_admin/>
+
         </section>
       </section>
     </>

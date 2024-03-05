@@ -24,7 +24,7 @@ const App = ()=>{
       
       {/* Dashboard Layout */}
       <Route path="/dashboard" element={<Dashboard/>}>
-       
+        <Route index element={<Home_admin/>}/>
         <Route path="/dashboard/profile" element={<Profile_admin/>}/>
       </Route>
       
