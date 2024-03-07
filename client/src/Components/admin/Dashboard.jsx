@@ -9,8 +9,6 @@ import { IoMdLogOut } from "react-icons/io";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 
 import "../../assets/css/admin/_dashboard.scss";
-import Home_admin from "./Home_admin";
-import Profile_admin from "./Profile";
 
 const Dashboard = () => {
   return (
@@ -60,12 +58,12 @@ const Dashboard = () => {
               <NavLink to="/dashboard/tranning"><span><FaChalkboardTeacher size={23} /><li>Tranning</li></span></NavLink>
               <NavLink to="/dashboard/students"><span><FaUsersViewfinder size={23} /><li>Students</li></span></NavLink>
               <NavLink to="/dashboard/teachers"><span><FaUsers size={23} /><li>Teachers</li></span></NavLink>
-               <NavLink to="/dashboard/courses"><span><FaBookReader size={21} /><li>Courses</li></span></NavLink>
-               <NavLink to="/dashboard/attendance"><span><BsFillFileEarmarkSpreadsheetFill size={21} /><li>Attendance</li></span></NavLink>
-               <NavLink to="/dashboard/fees"><span><FaRupeeSign size={21} /><li>Fee Details</li></span></NavLink>
-               <NavLink to="/dashboard/notification"><span><FaBell size={21} /><li>Notification</li></span></NavLink>
-               <NavLink to="/dashboard/settings"><span><IoSettingsSharp size={23} /><li>Settings</li></span></NavLink>
-               <NavLink to="/dashboard"><span><IoMdLogOut size={23} /><li>Logout</li></span></NavLink>
+              <NavLink to="/dashboard/courses"><span><FaBookReader size={21} /><li>Courses</li></span></NavLink>
+              <NavLink to="/dashboard/attendance"><span><BsFillFileEarmarkSpreadsheetFill size={21} /><li>Attendance</li></span></NavLink>
+              <NavLink to="/dashboard/fees"><span><FaRupeeSign size={21} /><li>Fee Details</li></span></NavLink>
+              <NavLink to="/dashboard/notification"><span><FaBell size={21} /><li>Notification</li></span></NavLink>
+              <NavLink to="/dashboard/settings"><span><IoSettingsSharp size={23} /><li>Settings</li></span></NavLink>
+              <NavLink to="/dashboard"><span><IoMdLogOut size={23} /><li>Logout</li></span></NavLink>
             </ul>
           </div>
         </div>
