@@ -159,5 +159,31 @@
             "heading" : "24/7 Strong Support",
             "paragraph" :"Knowledge is power. Information is liberating. Education is the premise of progress in every society, in every family."
         }
+    ],
+    "dashboard_boxModel" : [
+        {
+            "id" : 35,
+            "icon" : "Students",
+            "heading" : "Total Students",
+            "info" : "156 Students"
+        },
+        {
+            "id" : 36,
+            "icon" : "Teachers",
+            "heading" : "Total Teachers",
+            "info" : "116 Teachers"
+        },
+        {
+            "id" : 37,
+            "icon" : "Courses",
+            "heading" : "Total Courses",
+            "info" : "981 Courses"
+        },
+        {
+            "id" : 38,
+            "icon" : "Trannings",
+            "heading" : "Total Trannings",
+            "info" : "47 Trannings"
+        }
     ]
 }

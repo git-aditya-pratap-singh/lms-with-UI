@@ -8,7 +8,7 @@
   padding: 1rem;
   position: relative;
   ._navBar {
-    height: auto;
+    height: 100vh;
     padding: 1.5rem;
     background-color: #fff;
     width: 290px;
@@ -99,7 +99,7 @@
     }
   }
   ._welcomeKit{
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: temp.$heading-color;
     margin-left: 10px;
