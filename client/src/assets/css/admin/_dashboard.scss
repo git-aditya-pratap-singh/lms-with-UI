@@ -111,7 +111,7 @@
   ._outlet{
     padding: 0.5rem;
     overflow-y:scroll;
-    height: 500px;
+    height: 400px;
   }
   ._outlet::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
@@ -129,6 +129,8 @@
       }
     }
   }
+}
+
+@media only screen and (max-width: 1400px){
   
- 
 }
