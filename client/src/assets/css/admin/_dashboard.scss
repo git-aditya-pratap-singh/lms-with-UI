@@ -5,10 +5,11 @@
   display: flex;
   flex-direction: row;
   gap: 15px;
-  padding: 1rem;
+  padding: 1rem 1rem 0.2rem;
   position: relative;
+  
   ._navBar {
-    height: 100vh;
+    height: auto;
     padding: 1.5rem;
     background-color: #fff;
     width: 290px;
@@ -67,6 +68,9 @@
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
       rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     width: 100%;
+    ._navIcon{
+      display: none;
+    }
     ._breadCrums {
       display: flex;
       flex-direction: column;
@@ -104,4 +108,27 @@
     color: temp.$heading-color;
     margin-left: 10px;
   }
+  ._outlet{
+    padding: 0.5rem;
+    overflow-y:scroll;
+    height: 500px;
+  }
+  ._outlet::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+}
+
+@media only screen and (max-width: 1400px){
+  ._navBar{
+    display: none;
+  }
+  ._dashboard{
+    ._dashSection {
+      ._navIcon{
+        display: block;
+      }
+    }
+  }
+  
+ 
 }

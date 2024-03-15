@@ -1,13 +1,30 @@
+import React, {useState} from "react";
 import { Chart } from "react-google-charts";
 import PropTypes from "prop-types";
+
+// ---Calender---------
+import dayjs from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+// ---------------------
 
 import Students from "../../assets/img/totalStu.png";
 import Teachers from "../../assets/img/totalTea.png";
 import Courses from "../../assets/img/totalCourse.png";
 import Trannings from "../../assets/img/totalTrann.png";
+
 import Data from "../Data/Data.json";
 import "../../assets/css/admin/_home.scss";
 
+
+const boxiconComponents = {
+  Students,
+  Teachers,
+  Courses,
+  Trannings
+};
 
 // Maps Chart -------------------------------
 export const data = [
@@ -34,54 +51,26 @@ export const pieOptions = {
 };
 // --------------------
 
-export const data2 = [
-  [
-    { type: "date", label: "Day" },
-    "Average temperature",
-    "Average hours of daylight",
-  ],
-  [new Date(2014, 0), -0.5, 5.7],
-  [new Date(2014, 1), 0.4, 8.7],
-  [new Date(2014, 2), 0.5, 12],
-  [new Date(2014, 3), 2.9, 15.3],
-  [new Date(2014, 4), 6.3, 18.6],
-  [new Date(2014, 5), 9, 20.9],
-  [new Date(2014, 6), 10.6, 19.8],
-  [new Date(2014, 7), 10.3, 16.6],
-  [new Date(2014, 8), 7.4, 13.3],
-  [new Date(2014, 9), 4.4, 9.9],
-  [new Date(2014, 10), 1.1, 6.6],
-  [new Date(2014, 11), -0.2, 4.5],
+export const dataLine = [
+  ["Year", "Students", "Teachers"],
+  ["2004", 1000, 400],
+  ["2005", 1170, 460],
+  ["2006", 660, 1120],
+  ["2007", 1030, 540],
 ];
 
-export const options2 = {
-  chart: {
-    title: "Average Temperatures and Daylight in Iceland Throughout the Year",
-  },
-  width: 0,
-  height: 500,
-  series: {
-    // Gives each series an axis name that matches the Y-axis below.
-    0: { axis: "Temps" },
-    1: { axis: "Daylight" },
-  },
-  axes: {
-    // Adds labels to each axis; they don't have to match the axis names.
-    y: {
-      Temps: { label: "Temps (Celsius)" },
-      Daylight: { label: "Daylight" },
-    },
-  },
+export const optionsLine = {
+  title: "Performance",
+  curveType: "function",
+  legend: { position: "bottom" },
 };
 
-const boxiconComponents = {
-  Students,
-  Teachers,
-  Courses,
-  Trannings
-};
+
+
 
 const Home_admin = () => {
+  const [value, setValue] = useState(dayjs('2022-04-17'));
+
   return (
     <>
       <section className="_homeHeader">
@@ -95,7 +84,28 @@ const Home_admin = () => {
           }
         </div>
         <div className="_chart">
-          <div className="_mapsChart">
+          <div className="_lineChart">
+            <Chart
+              chartType="LineChart"
+              width="100%"
+              height="400px"
+              data={dataLine}
+              options={optionsLine}
+            />
+          </div>
+          <div className="_pieChart">
+            <Chart
+              chartType="PieChart"
+              data={data}
+              options={pieOptions}
+              width={"100%"}
+              height={"400px"}
+            />
+          </div>
+        </div>
+
+        <div className="_mapsChart">
+          <span>
             <Chart
               chartEvents={[
                 {
@@ -113,33 +123,22 @@ const Home_admin = () => {
               data={data}
               options={options}
             />
-          </div>
-          <div className="_pieChart">
-            <Chart
-              chartType="PieChart"
-              data={data}
-              options={pieOptions}
-              width={"100%"}
-              height={"400px"}
-            />
-          </div>
-        </div>
+          </span>
 
-        <div className="_lineChart">
-          <Chart
-            chartType="Line"
-            width="100%"
-            height="400px"
-            data={data}
-            options={options}
-          />
+          <span>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={['DateCalendar', 'DateCalendar']}>
+                <DemoItem label="Calendar">
+                  <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
+                </DemoItem>
+              </DemoContainer>
+            </LocalizationProvider>
+          </span>
         </div>
       </section>
     </>
   );
 };
-export default Home_admin;
-
 
 
 const Containerbox = ({ icon, heading, info }) => {
@@ -164,3 +163,5 @@ Containerbox.propTypes = {
   heading: PropTypes.string.isRequired,
   info: PropTypes.string.isRequired
 }
+
+export default Home_admin;

@@ -11,7 +11,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.13",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.17",
+    "@mui/x-charts": "^6.19.5",
+    "@mui/x-date-pickers": "^6.19.7",
     "@reduxjs/toolkit": "^2.1.0",
+    "dayjs": "^1.11.10",
     "hamburger-react": "^2.5.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -23,6 +30,7 @@
     "react-router-dom": "^6.20.0",
     "react-test-renderer": "^18.2.0",
     "saas": "^1.0.0",
+    "styled-components": "^6.1.8",
     "swiper": "^11.0.5"
   },
   "devDependencies": {

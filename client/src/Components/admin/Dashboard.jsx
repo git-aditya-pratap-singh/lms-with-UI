@@ -73,12 +73,18 @@ const Dashboard = () => {
         <section className="w-full flex flex-col gap-5 h-fit">
           <div className="_dashSection">
             {/* Create BreadCrum */}
-            <div className="_breadCrums">
-              <ul>
-                <li>Dashboard  /</li>
-                <li>Home</li>
-              </ul>
-              <span>Home</span>
+            <div className="flex justify-center items-center gap-5">
+
+                <div className="_navIcon">45</div>
+            
+              <div className="_breadCrums">
+                <ul>
+                  <li>Dashboard  /</li>
+                  <li>Home</li>
+                </ul>
+                <span>Home</span>
+              </div>
+
             </div>
 
             <div className="_dashDetails">
@@ -106,7 +112,7 @@ const Dashboard = () => {
           </div>
 
           <div className="_outlet">
-            <Outlet/>
+            <Outlet />
           </div>
 
         </section>
