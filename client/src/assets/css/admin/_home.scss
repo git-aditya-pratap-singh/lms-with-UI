@@ -3,10 +3,11 @@
 ._homeHeader{
   padding: 0rem;
   ._homeNav{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
     justify-content: space-around;
     align-items: center;
-    gap:0.5rem;
+    gap:1.5rem;
   }
   ._chart{
     padding: 1.5rem 1rem;
@@ -16,7 +17,6 @@
     gap:0.5rem;
     ._lineChart{
       width: 50vw;
-      background-color: red;
     }
     ._pieChart{
       display: flex;
@@ -85,3 +85,54 @@
   }
 
 }
+
+// Tab-Device
+@media only screen and (min-width: 741px) and (max-width: 1068px){
+  ._homeHeader{
+    ._homeNav{
+      justify-content: center;
+      grid-template-columns: repeat(3,1fr);
+    }
+    ._chart{
+      flex-direction: column;
+    }
+  }
+} 
+
+@media only screen and (min-width: 441px) and (max-width: 740px){
+  ._homeHeader{
+    ._homeNav{
+      justify-content: center;
+      grid-template-columns: repeat(2,1fr);
+    }
+    ._chart{
+      flex-direction: column;
+    }
+  }
+} 
+
+// Mobile Device
+@media only screen and (max-width: 440px){
+  ._homeHeader{
+    ._homeNav{
+      grid-template-columns: repeat(1,1fr);
+      ._boxmodel{
+        width: 100vw;
+        justify-self: center;
+        align-self: center;
+      }
+    }
+    ._chart{
+      flex-direction: column;
+      ._lineChart{
+        width: 100%;
+      }
+    }
+    ._mapsChart{
+      flex-direction: column;
+      span{
+        width: 100%;
+      }
+    }
+  }
+} 

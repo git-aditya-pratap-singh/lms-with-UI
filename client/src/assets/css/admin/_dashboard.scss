@@ -97,9 +97,15 @@
       align-items: center;
       gap: 1.5rem;
       color: temp.$primaryText;
-      label{
-        cursor: pointer;
+      span{
+        display: flex;
+        align-items: center;
+        gap:1.5rem;
+        label{
+          cursor: pointer;
+        }
       }
+      
     }
   }
   ._welcomeKit{
@@ -111,7 +117,7 @@
   ._outlet{
     padding: 0.5rem;
     overflow-y:scroll;
-    height: 400px;
+    height: 74vh;
   }
   ._outlet::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
@@ -120,17 +126,58 @@
 
 @media only screen and (max-width: 1400px){
   ._navBar{
-    display: none;
+    position: absolute;
+    z-index: 10;
+    left:-300px;
+    @apply duration-300 ease-in-out;
   }
   ._dashboard{
     ._dashSection {
       ._navIcon{
         display: block;
       }
+      ._dashDetails{
+        ._searchToggle{
+          display: none;
+        }
+      }
     }
   }
 }
 
-@media only screen and (max-width: 1400px){
-  
+@media only screen and (max-width: 440px){
+  ._dashboard{
+    padding: 0.5rem;
+    ._navBar{
+      ._navItem{
+        margin-top: 0rem;
+      }
+    }
+    ._dashSection{
+      ._breadCrums{
+        ul{
+          li{
+            font-size: 0.95rem;
+          }
+        }
+        span{
+          font-size: 0.95rem;
+        }
+      }
+      ._dashDetails{
+        span{
+          label{
+            &:nth-child(1){
+              display: none;
+            }
+            &:nth-child(2){
+              display: none;
+            }
+          }
+          gap:0.8rem;
+        }
+      }
+    }
+    
+  }
 }

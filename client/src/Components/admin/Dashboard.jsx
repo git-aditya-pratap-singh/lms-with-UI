@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
-
+import Hamburger from "hamburger-react";
 import { AiFillDashboard } from "react-icons/ai";
 import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader, FaRupeeSign, FaBell } from "react-icons/fa";
 import { FaUsersViewfinder, FaCircleUser } from "react-icons/fa6";
@@ -11,10 +12,13 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import "../../assets/css/admin/_dashboard.scss";
 
 const Dashboard = () => {
+
+  const [toggle, setToggle] = useState(false);
+
   return (
     <>
       <section className="_dashboard">
-        <div className="_navBar">
+        <div className={`_navBar ${toggle ? 'left-0 top-[5.5rem]' : 'left-[-300px] top-[5.5rem]'}`}>
           <div className="_logo">
             <svg
               id="logo-86"
@@ -53,17 +57,60 @@ const Dashboard = () => {
 
           <div className="_navItem">
             <ul>
-              <NavLink to="/dashboard"><span><AiFillDashboard size={23} /><li>Dashboard</li></span></NavLink>
-              <NavLink to="/dashboard/profile"><span><FaUserCircle size={23} /><li>Profile</li></span> </NavLink>
-              <NavLink to="/dashboard/tranning"><span><FaChalkboardTeacher size={23} /><li>Tranning</li></span></NavLink>
-              <NavLink to="/dashboard/students"><span><FaUsersViewfinder size={23} /><li>Students</li></span></NavLink>
-              <NavLink to="/dashboard/teachers"><span><FaUsers size={23} /><li>Teachers</li></span></NavLink>
-              <NavLink to="/dashboard/courses"><span><FaBookReader size={21} /><li>Courses</li></span></NavLink>
-              <NavLink to="/dashboard/attendance"><span><BsFillFileEarmarkSpreadsheetFill size={21} /><li>Attendance</li></span></NavLink>
-              <NavLink to="/dashboard/fees"><span><FaRupeeSign size={21} /><li>Fee Details</li></span></NavLink>
-              <NavLink to="/dashboard/notification"><span><FaBell size={21} /><li>Notification</li></span></NavLink>
-              <NavLink to="/dashboard/settings"><span><IoSettingsSharp size={23} /><li>Settings</li></span></NavLink>
-              <NavLink to="/dashboard"><span><IoMdLogOut size={23} /><li>Logout</li></span></NavLink>
+              <NavLink to="/dashboard"
+                onClick={() => setToggle(!toggle)}>
+                <span><AiFillDashboard size={23} /><li>Dashboard</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard/profile"
+                onClick={() => setToggle(!toggle)}>
+                <span><FaUserCircle size={23} /><li>Profile</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard/tranning"
+                onClick={() => setToggle(!toggle)}>
+                <span><FaChalkboardTeacher size={23} /><li>Tranning</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard/students"
+                onClick={() => setToggle(!toggle)}><span>
+                  <FaUsersViewfinder size={23} /><li>Students</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard/teachers"
+                onClick={() => setToggle(!toggle)}>
+                <span><FaUsers size={23} /><li>Teachers</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard/courses"
+                onClick={() => setToggle(!toggle)}>
+                <span><FaBookReader size={21} /><li>Courses</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard/attendance"
+                onClick={() => setToggle(!toggle)}>
+                <span><BsFillFileEarmarkSpreadsheetFill size={21} /><li>Attendance</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard/fees"
+                onClick={() => setToggle(!toggle)}>
+                <span><FaRupeeSign size={21} /><li>Fee Details</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard/notification"
+                onClick={() => setToggle(!toggle)}>
+                <span><FaBell size={21} /><li>Notification</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard/settings"
+                onClick={() => setToggle(!toggle)}>
+                <span><IoSettingsSharp size={23} /><li>Settings</li></span>
+              </NavLink>
+
+              <NavLink to="/dashboard"
+                onClick={() => setToggle(!toggle)}>
+                <span><IoMdLogOut size={23} /><li>Logout</li></span>
+              </NavLink>
             </ul>
           </div>
         </div>
@@ -75,8 +122,22 @@ const Dashboard = () => {
             {/* Create BreadCrum */}
             <div className="flex justify-center items-center gap-5">
 
-                <div className="_navIcon">45</div>
-            
+              <div className="_navIcon">
+                <div className="bg-gray-200 rounded">
+                  <a onClick={() => setToggle(!toggle)}>
+                    <Hamburger
+                      color="#323035"
+                      size={25}
+                      duration={0.5}
+                      easing="ease-in"
+                      rounded
+                      toggled={toggle}
+                      toggle={!toggle}
+                    />
+                  </a>
+                </div>
+              </div>
+
               <div className="_breadCrums">
                 <ul>
                   <li>Dashboard  /</li>
@@ -88,7 +149,7 @@ const Dashboard = () => {
             </div>
 
             <div className="_dashDetails">
-              <div>
+              <div className="_searchToggle">
                 <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -101,9 +162,11 @@ const Dashboard = () => {
                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
                 </div>
               </div>
-              <label><FaCircleUser size={21} /></label>
-              <label><FaBell size={18} /></label>
-              <label><HiOutlineDotsVertical size={21} /></label>
+              <span>
+                <label><FaCircleUser size={21} /></label>
+                <label><FaBell size={18} /></label>
+                <label><HiOutlineDotsVertical size={21} /></label>
+              </span>
             </div>
           </div>
 
