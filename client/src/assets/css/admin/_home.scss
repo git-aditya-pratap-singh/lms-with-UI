@@ -102,11 +102,39 @@
 @media only screen and (min-width: 441px) and (max-width: 740px){
   ._homeHeader{
     ._homeNav{
-      justify-content: center;
       grid-template-columns: repeat(2,1fr);
+      gap:1.3rem
     }
     ._chart{
       flex-direction: column;
+      ._lineChart{
+        width: 120%;
+      }
+      ._pieChart{
+        padding: 0.5rem;
+      }
+    }
+    ._mapsChart{
+      flex-direction: column; 
+      span{
+        width: 100%;
+      }
+    }
+  }
+  ._boxmodel{
+    width: 40vw;
+    padding: 1rem;
+    justify-self: center;
+    align-self: center;
+    ._box{
+      flex-direction: column;
+      gap: 0.6rem;
+      ._boxinfo{
+        align-items: center;
+        span{
+          font-size: 1.2rem;
+        }
+      }
     }
   }
 } 
@@ -115,23 +143,38 @@
 @media only screen and (max-width: 440px){
   ._homeHeader{
     ._homeNav{
-      grid-template-columns: repeat(1,1fr);
-      ._boxmodel{
-        width: 100vw;
-        justify-self: center;
-        align-self: center;
-      }
+      grid-template-columns: repeat(2,1fr);
+      gap:1.3rem
     }
     ._chart{
       flex-direction: column;
       ._lineChart{
-        width: 100%;
+        width: 120%;
+      }
+      ._pieChart{
+        padding: 0.5rem;
       }
     }
     ._mapsChart{
-      flex-direction: column;
+      flex-direction: column; 
       span{
         width: 100%;
+      }
+    }
+  }
+  ._boxmodel{
+    width: 40vw;
+    padding: 1rem;
+    justify-self: center;
+    align-self: center;
+    ._box{
+      flex-direction: column;
+      gap: 0.6rem;
+      ._boxinfo{
+        align-items: center;
+        span{
+          font-size: 1.2rem;
+        }
       }
     }
   }

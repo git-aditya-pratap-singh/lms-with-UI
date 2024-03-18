@@ -1,6 +1,7 @@
-import {useState} from "react";
+import { useState } from "react";
 import { Chart } from "react-google-charts";
 import PropTypes from "prop-types";
+import { PieChart } from '@mui/x-charts/PieChart';
 
 // ---Calender---------
 import dayjs from 'dayjs';
@@ -44,13 +45,6 @@ export const options = {
 };
 //---------------------------------------
 
-// PieChart ----------------------
-export const pieOptions = {
-  title: "My Daily Activities",
-  is3D: true,
-};
-// --------------------
-
 export const dataLine = [
   ["Year", "Students", "Teachers"],
   ["2004", 1000, 400],
@@ -65,7 +59,12 @@ export const optionsLine = {
   legend: { position: "bottom" },
 };
 
-
+const dataa = [
+  { label: 'Group A', value: 400 },
+  { label: 'Group B', value: 300 },
+  { label: 'Group C', value: 300 },
+  { label: 'Group D', value: 200 },
+];
 
 
 const Home_admin = () => {
@@ -94,12 +93,23 @@ const Home_admin = () => {
             />
           </div>
           <div className="_pieChart">
-            <Chart
-              chartType="PieChart"
-              data={data}
-              options={pieOptions}
-              width={"100%"}
-              height={"400px"}
+            <PieChart
+              series={[
+                {
+                  data: [...dataa],
+                  innerRadius: 25,
+                  outerRadius: 100,
+                  paddingAngle: 5,
+                  cornerRadius: 5,
+                  startAngle: -180,
+                  endAngle: 180,
+                  cx: 150,
+                  cy: 150,
+                }
+              ]}
+              width={400}
+              height={300}
+              // legend={{ hidden: true }}
             />
           </div>
         </div>
