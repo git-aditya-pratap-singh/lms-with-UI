@@ -9,8 +9,8 @@
   position: relative;
   
   ._navBar {
-    height: auto;
-    padding: 1.5rem;
+    height: 96vh;
+    padding: 1rem 1.5rem;
     background-color: #fff;
     width: 290px;
     border-radius: 10px;
@@ -149,6 +149,7 @@
   ._dashboard{
     padding: 0.5rem;
     ._navBar{
+      height: 100vh;
       ._navItem{
         margin-top: 0rem;
       }

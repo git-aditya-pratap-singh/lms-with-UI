@@ -18,7 +18,7 @@ const Dashboard = () => {
   return (
     <>
       <section className="_dashboard">
-        <div className={`_navBar ${toggle ? 'left-0 top-[5.5rem]' : 'left-[-300px] top-[5.5rem]'}`}>
+        <div className={`_navBar ${toggle ? 'left-0 top-[0rem]' : 'left-[-300px] top-[0rem]'}`}>
           <div className="_logo">
             <svg
               id="logo-86"

@@ -1,0 +1,149 @@
+@use "../index" as temp;
+
+._container1 {
+  box-shadow: temp.$box-shadow2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 1.5rem;
+  overflow: hidden;
+  ._subContainer11 {
+    box-shadow: temp.$box-shadow2;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 150px;
+    position: relative;
+    background: url("../../img/home.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    ._profile {
+      box-shadow: temp.$box-shadow;
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      overflow: hidden;
+      position: relative;
+      img {
+        background-position: center;
+        background-size: cover;
+      }
+    }
+    ._pfedit {
+      width: 40px;
+      height: 40px;
+      box-shadow: temp.$box-shadow2;
+      border-radius: 50%;
+      position: absolute;
+      top: 6.5rem;
+      left: 5.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.18rem;
+      background-color: #f0f8ff;
+      color: temp.$primary;
+      cursor: pointer;
+    }
+  }
+  ._subContainer22 {
+    box-shadow: temp.$box-shadow2;
+    border-radius: 10px;
+    padding: 1rem;
+    ._infodetails {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      justify-content: space-around;
+      align-items: center;
+      gap: 1.8rem;
+      span {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 0.09rem solid temp.$secondary;
+        border-radius: 5px;
+        &:focus {
+          outline: 0.09rem solid temp.$secondary;
+          box-shadow: temp.$primary 0px 2px 3px 0px,
+            temp.$primary 0px -1px 5px 0px;
+        }
+        label {
+          background-color: aliceblue;
+          padding: 0.8rem;
+          border-radius: 5px 0px 0px 5px;
+          color: temp.$primary;
+        }
+
+        input {
+          width: 100%;
+          outline: none;
+        }
+      }
+      button {
+        width: 100%;
+        border-radius: 5px;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        background-color: temp.$primary;
+        color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+          rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        @apply active:scale-95 ease-in-out duration-300;
+      }
+    }
+  }
+}
+
+._imgupdate{
+  padding: 1rem;
+  box-shadow: temp.$box-shadow2;
+  border-radius: 10px;
+  position: absolute;
+  background-color: #fff;
+  @apply space-y-4;
+
+  button {
+    width: 100%;
+    border-radius: 5px;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background-color: temp.$primary;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    @apply active:scale-95 ease-in-out duration-300;
+  }
+}
+
+
+@media only screen and (min-width: 441px) and (max-width: 780px){
+    ._container1{
+        ._subContainer22{
+            ._infodetails{
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    }
+}
+
+// mobile screen
+@media only screen and (max-width: 440px){
+    ._container1{
+        ._subContainer22{
+            ._infodetails{
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    }
+}
