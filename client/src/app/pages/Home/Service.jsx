@@ -5,10 +5,10 @@ import { IoEyeOutline } from "react-icons/io5";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { FcAddressBook, FcMindMap, FcPositiveDynamic  } from "react-icons/fc";
 
-import ServiceImg from "../../assets/img/serviceImg.jpg";
+import ServiceImg from "../../../assets/img/serviceImg.jpg";
 
-import Data from "../Data/Data.json";
-import "../../assets/css/home/_service.scss";
+import Data from "../../Data/Data.json";
+import "../../../assets/css/home/_service.scss";
 
 const Service = () => {
     const iconComponents = {

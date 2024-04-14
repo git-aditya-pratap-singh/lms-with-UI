@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
-import { registration_popup } from "../Store/Slices/StateSlice";
+import { registration_popup } from "../../Store/Slices/StateSlice";
 
 import { BiLogInCircle } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
 import { FaUser, FaPhoneAlt, FaFingerprint } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
-import "../../assets/css/home/_registration.scss";
+import "../../../assets/css/home/_registration.scss";
 
 const Registration = () => {
   const dispatch = useDispatch();

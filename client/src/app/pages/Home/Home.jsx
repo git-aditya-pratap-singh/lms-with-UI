@@ -7,12 +7,12 @@ import { HiSpeakerphone } from "react-icons/hi";
 import { PiCertificate, PiUsersThree, PiBooksLight, PiApplePodcastsLogoLight, PiCertificateLight } from "react-icons/pi";
 import { MdComputer } from "react-icons/md";
 
-import header from "../../assets/img/home-image.png";
-import join from "../../assets/img/cd.png";
-import img_1 from "../../assets/img/img_1.jpg";
-import img_2 from "../../assets/img/img_2.jpg";
-import img_3 from "../../assets/img/img_3.jpg";
-import user from "../../assets/img/user.jpg";
+import header from "../../../assets/img/home-image.png";
+import join from "../../../assets/img/cd.png";
+import img_1 from "../../../assets/img/img_1.jpg";
+import img_2 from "../../../assets/img/img_2.jpg";
+import img_3 from "../../../assets/img/img_3.jpg";
+import user from "../../../assets/img/user.jpg";
 
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -22,12 +22,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
 import { useDispatch, useSelector } from "react-redux"
-import { login_popup, registration_popup } from "../Store/Slices/StateSlice"
+import { login_popup, registration_popup } from "../../Store/Slices/StateSlice"
 
 import Registration from "./Registration";
 
-import "../../assets/css/home/_home.scss";
-import Data from "../Data/Data.json";
+import "../../../assets/css/home/_home.scss";
+import Data from "../../Data/Data.json";
 
 const iconComponents = {
     FaGraduationCap,

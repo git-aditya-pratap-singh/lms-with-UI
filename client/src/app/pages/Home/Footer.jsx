@@ -1,7 +1,7 @@
 import { FaFacebookF, FaTwitter, FaGoogle, FaPinterestP, FaDiscord, FaHome, FaPhoneAlt } from "react-icons/fa";
 import { IoMdMailUnread } from "react-icons/io";
 
-import '../../assets/css/home/_footer.scss';
+import '../../../assets/css/home/_footer.scss';
 
 const Footer = () => {
     return (

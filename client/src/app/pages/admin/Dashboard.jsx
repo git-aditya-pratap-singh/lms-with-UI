@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
+//import { useLocation } from "react-router";
+
 import Hamburger from "hamburger-react";
 import { AiFillDashboard } from "react-icons/ai";
 import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader, FaRupeeSign, FaBell } from "react-icons/fa";
@@ -9,11 +11,22 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 
-import "../../assets/css/admin/_dashboard.scss";
+import "../../../assets/css/admin/_dashboard.scss";
 
 const Dashboard = () => {
 
   const [toggle, setToggle] = useState(false);
+
+  // const location = useLocation();
+  // const pathnames = location.pathname.split('/').filter((x) => x);
+  // console.log(pathnames)
+  // pathnames.map((elem,index)=>{
+  //   const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
+  //   const isLast = index === pathnames.length - 1;
+  //   console.log(routeTo);
+  //    console.log(isLast)
+  // })
+
 
   return (
     <>
@@ -141,6 +154,9 @@ const Dashboard = () => {
               <div className="_breadCrums">
                 <ul>
                   <li>Dashboard  /</li>
+                  {
+                    
+                  }
                   <li>Home</li>
                 </ul>
                 <span>Home</span>

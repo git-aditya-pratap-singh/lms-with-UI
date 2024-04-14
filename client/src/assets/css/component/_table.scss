@@ -1,0 +1,38 @@
+@use "../index" as temp;
+
+._tableContainer {
+    overflow-x: auto; /* Enable horizontal scrollbar */
+    overflow-y: auto; /* Enable vertical scrollbar */
+    max-width: 100%;
+    max-height: 70%;
+    
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    thead {
+      tr {
+        th {
+          position: sticky;
+          top: 0;
+          z-index: 1;
+          padding: 0.6rem 0.8rem;
+          background-color: #f0f8ff;
+          @apply text-gray-700 text-sm;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          padding: 0.8rem;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+._tableContainer::-webkit-scrollbar {
+    display: none;
+    /* for Chrome, Safari, and Opera */
+  }

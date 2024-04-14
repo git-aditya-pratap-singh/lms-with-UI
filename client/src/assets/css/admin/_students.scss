@@ -1,0 +1,48 @@
+@use "../index" as temp;
+
+._studentContainer {
+  box-shadow: temp.$box-shadow2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 1.5rem;
+  overflow: hidden;
+  height: 100%;
+  ._studentSubConatiner1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    border-bottom: 1px solid #999;
+    ._studentAddDel {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 1rem;
+      ._bt {
+        @apply flex items-center gap-1 p-2 rounded
+        duration-300 ease-in-out active:scale-95;
+      }
+    }
+  }
+  ._studentSubContainer2 {
+    height: 100%;
+    ._tableHeader {
+      width: 300px;
+      ._tav {
+        a:active {
+          &:nth-child(1) {
+            @apply bg-green-100;
+          }
+          &:nth-child(2) {
+            @apply bg-green-100;
+          }
+          &:nth-child(3) {
+            @apply bg-red-100;
+          }
+        }
+      }
+    }
+  }
+}

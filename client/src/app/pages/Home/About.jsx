@@ -5,15 +5,15 @@ import { FaBook, FaUsersLine } from "react-icons/fa6";
 import { FaChrome } from "react-icons/fa";
 import { BsLinkedin, BsGithub, BsYoutube } from "react-icons/bs";
 
-import about_img from "../../assets/img/about.jpg"
-import admin from "../../assets/img/admin.jpg";
+import about_img from "../../../assets/img/about.jpg"
+import admin from "../../../assets/img/admin.jpg";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import '../../assets/css/home/_about.scss'
+import '../../../assets/css/home/_about.scss'
 
 const About = () => {
     return (

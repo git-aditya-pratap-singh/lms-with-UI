@@ -2,7 +2,7 @@ import { useState } from "react";
 import Hamburger from "hamburger-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
-import { login_popup } from "../Store/Slices/StateSlice"
+import { login_popup } from "../../Store/Slices/StateSlice"
 
 import { FaHome, FaUser, FaPhoneAlt, FaChartPie } from "react-icons/fa";
 import { BiLogInCircle } from "react-icons/bi";
@@ -11,7 +11,7 @@ import { FaAngleDoubleUp } from "react-icons/fa";
 import Login from "./Login";
 
 import Footer from "./Footer";
-import "../../assets/css/home/_navbar.scss";
+import "../../../assets/css/home/_navbar.scss";
 
 const Navbar = () => {
   const dispatch = useDispatch();

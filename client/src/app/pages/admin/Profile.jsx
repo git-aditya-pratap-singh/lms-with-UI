@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { img_update_popup } from "../Store/Slices/StateSlice"
+import { img_update_popup } from "../../Store/Slices/StateSlice"
 
 import { FaEdit, FaUser, FaPhoneAlt, FaCalendarAlt } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -8,8 +8,8 @@ import { GrUpdate } from "react-icons/gr";
 import { RxCross1 } from "react-icons/rx";
 
 
-import ag from "../../assets/img/admin.jpg";
-import "../../assets/css/admin/_profile.scss";
+import ag from "../../../assets/img/admin.jpg";
+import "../../../assets/css/admin/_profile.scss";
 
 const Profile_admin = () => {
 

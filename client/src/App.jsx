@@ -1,14 +1,16 @@
 //import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./Components/Home/Home";
-import Navbar from "./Components/Home/Navbar";
-import About from "./Components/Home/About";
-import Service from "./Components/Home/Service";
-import Contact from "./Components/Home/Contact";
+        
+import Home from "./app/pages/Home/Home";
+import Navbar from "./app/pages/Home/Navbar";
+import About from "./app/pages/Home/About";
+import Service from "./app/pages/Home/Service";
+import Contact from "./app/pages/Home/Contact";
 
-import Dashboard from "./Components/admin/Dashboard";
-import UHome from "./Components/admin/Home";
-import Profile from "./Components/admin/Profile";
+import Dashboard from "./app/pages/admin/Dashboard";
+import UHome from "./app/pages/admin/Home";
+import Profile from "./app/pages/admin/Profile";
+import Students from "./app/pages/admin/Students";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/profile",
         element: <Profile/>
+      },
+      {
+        path: "/dashboard/students",
+        element: <Students/>
       }
     ]
   }

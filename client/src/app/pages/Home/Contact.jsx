@@ -2,7 +2,7 @@ import { FaHome, FaPhone } from "react-icons/fa";
 import { IoMdMailUnread } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 //import back from "../../assets/img/toor.jpg";
-import "../../assets/css/home/_contact.scss";
+import "../../../assets/css/home/_contact.scss";
 
 const Contact = () => {
     return (

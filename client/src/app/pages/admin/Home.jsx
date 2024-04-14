@@ -11,13 +11,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 // ---------------------
 
-import Students from "../../assets/img/totalStu.png";
-import Teachers from "../../assets/img/totalTea.png";
-import Courses from "../../assets/img/totalCourse.png";
-import Trannings from "../../assets/img/totalTrann.png";
+import Students from "../../../assets/img/totalStu.png";
+import Teachers from "../../../assets/img/totalTea.png";
+import Courses from "../../../assets/img/totalCourse.png";
+import Trannings from "../../../assets/img/totalTrann.png";
 
-import Data from "../Data/Data.json";
-import "../../assets/css/admin/_home.scss";
+import Data from "../../Data/Data.json";
+import "../../../assets/css/admin/_home.scss";
 
 
 const boxiconComponents = {
