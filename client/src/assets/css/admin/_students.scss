@@ -12,6 +12,7 @@
   ._studentSubConatiner1 {
     display: flex;
     justify-content: space-between;
+    gap:1rem;
     align-items: center;
     padding: 1.2rem;
     border-bottom: 1px solid #999;
@@ -22,7 +23,7 @@
       gap: 1rem;
       ._bt {
         @apply flex items-center gap-1 p-2 rounded
-        duration-300 ease-in-out active:scale-95;
+        duration-200 ease-in-out active:scale-90;
       }
     }
   }

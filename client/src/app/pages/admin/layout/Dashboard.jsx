@@ -11,7 +11,7 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 
-import "../../../assets/css/admin/_dashboard.scss";
+import "../../../../assets/css/admin/_dashboard.scss";
 
 const Dashboard = () => {
 
@@ -120,7 +120,7 @@ const Dashboard = () => {
                 <span><IoSettingsSharp size={23} /><li>Settings</li></span>
               </NavLink>
 
-              <NavLink to="/dashboard"
+              <NavLink to="/dashboard/logout"
                 onClick={() => setToggle(!toggle)}>
                 <span><IoMdLogOut size={23} /><li>Logout</li></span>
               </NavLink>
@@ -187,7 +187,7 @@ const Dashboard = () => {
           </div>
 
           <div className="_welcomeKit">
-            <label>Welcome Back Aditya!</label>
+            <label>Welcome Back Aditya 🙋‍♂️!</label>
           </div>
 
           <div className="_outlet">

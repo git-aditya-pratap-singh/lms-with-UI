@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Chart } from "react-google-charts";
 import PropTypes from "prop-types";
-import { PieChart } from '@mui/x-charts/PieChart';
+//import { PieChart } from '@mui/x-charts/PieChart';
+import ChartOne from "../../components/charts/Charts";
+import ChartTwo from "../../components/charts/ChartTwo";
 
 // ---Calender---------
 import dayjs from 'dayjs';
@@ -84,16 +86,17 @@ const Home_admin = () => {
         </div>
         <div className="_chart">
           <div className="_lineChart">
-            <Chart
+            {/* <Chart
               chartType="LineChart"
               width="100%"
               height="400px"
               data={dataLine}
               options={optionsLine}
-            />
+            /> */}
+            <ChartOne/>
           </div>
           <div className="_pieChart">
-            <PieChart
+            {/* <PieChart
               series={[
                 {
                   data: [...dataa],
@@ -110,7 +113,8 @@ const Home_admin = () => {
               width={400}
               height={300}
               // legend={{ hidden: true }}
-            />
+            /> */}
+            <ChartTwo/>
           </div>
         </div>
 
@@ -145,6 +149,7 @@ const Home_admin = () => {
             </LocalizationProvider>
           </span>
         </div>
+        
       </section>
     </>
   );

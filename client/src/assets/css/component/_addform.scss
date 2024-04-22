@@ -1,0 +1,50 @@
+@use "../index" as temp;
+
+._addForm {
+  padding: 1.5rem;
+  border-radius: 10px;
+  background-color: #fff;
+  @apply select-none;
+ 
+  h3 {
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: small;
+    @apply text-gray-500;
+  }
+  ._form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+    @apply mt-5;
+    button {
+      border-radius: 5px;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      background-color: temp.$primary;
+      color: #fff;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+      @apply active:scale-95 ease-in-out duration-300 col-span-2;
+    }
+  }
+}
+
+// Mobile devices------------
+@media only screen and (max-width: 661px) {
+  ._addForm {
+   width: 330px;
+    ._form{
+      grid-template-columns: repeat(1, 1fr);
+      button{
+         @apply col-span-1;
+      }
+    }
+  }
+}

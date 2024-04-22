@@ -1,13 +1,17 @@
+import { useDispatch } from "react-redux";
+import { add_student_popup } from "../../Store/Slices/StateSlice";
+
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import ig from "../../assets/img/admin.jpg";
-
-import "../../assets/css/component/_table.scss";
+import "../../../assets/css/component/_table.scss";
 
 const Table = () => {
+    const dispatch = useDispatch();
     return (
         <>
             <div className="_tableContainer">
+                
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -69,7 +73,9 @@ const Table = () => {
                             </td>
                             <td>
                                 <span className="flex gap-5">
-                                    <FaEdit size={18} className="text-green-400 cursor-pointer"/> 
+                                    <FaEdit size={18} className="text-green-400 cursor-pointer ease-in-out duration-200 active:scale-90"
+                                    onClick={()=>
+                                        dispatch(add_student_popup({check: true, key: 'edit'}))}/> 
                                     <MdDelete size={18} className="text-red-500 cursor-pointer"/>
                                 </span>
                             </td>

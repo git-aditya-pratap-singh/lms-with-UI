@@ -7,10 +7,11 @@ import About from "./app/pages/Home/About";
 import Service from "./app/pages/Home/Service";
 import Contact from "./app/pages/Home/Contact";
 
-import Dashboard from "./app/pages/admin/Dashboard";
+import Dashboard from "./app/pages/admin/layout/Dashboard";
 import UHome from "./app/pages/admin/Home";
 import Profile from "./app/pages/admin/Profile";
 import Students from "./app/pages/admin/Students";
+import Teachers from "./app/pages/admin/Teachers";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/students",
         element: <Students/>
+      },
+      {
+        path: "/dashboard/teachers",
+        element: <Teachers/>
       }
     ]
   }

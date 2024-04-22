@@ -1,12 +1,19 @@
+
+import { add_student_popup } from "../../Store/Slices/StateSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import { FaUserPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-import Table from "../../components/Table";
-
+import Table from "../../components/students/Table";
+import AddForm from "../../components/students/StudentForm";
 
 import "../../../assets/css/admin/_students.scss";
 
 const Students = () => {
+
+    const dispatch = useDispatch();
+    const studentsPopup = useSelector((store) => store.openPopup.add_student_popup);
 
     return (
         <>
@@ -29,12 +36,17 @@ const Students = () => {
                         </div>
                     </div>
                     <div className="_studentAddDel">
-                        <button className="_bt bg-green-100 text-green-700"><FaUserPlus color="green" />Add</button>
+
+                        <button className="_bt bg-green-100 text-green-700"
+                            onClick={() => 
+                                dispatch(add_student_popup({check: true, key:'add'}))}>
+                                <FaUserPlus color="green" />Add</button>
+
                         <button className="_bt bg-red-100 text-red-700"><MdDelete />Del</button>
                     </div>
 
                 </div>
-                
+
                 <div className="_studentSubContainer2">
                     <div className="_tableHeader">
                         <div role="tablist" className="tabs tabs-lifted _tav">
@@ -45,8 +57,21 @@ const Students = () => {
                     </div>
                     <Table />
                 </div>
+
+
             </section>
+
+            {/* Add Form */}
+            {(studentsPopup.add || studentsPopup.edit) &&
+                <div className={`transition-all-duration-700 ease w-full left-0 h-full top-0 fixed z-10 bg-[#0707077a] flex
+                    justify-center items-center ease-in-out`}>
+                    <AddForm />
+                </div>
+            }
+
+
         </>
     )
 }
+
 export default Students;
