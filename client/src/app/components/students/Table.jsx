@@ -3,7 +3,7 @@ import { add_student_popup } from "../../Store/Slices/StateSlice";
 
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import ig from "../../assets/img/admin.jpg";
+import ig from "../../../assets/img/admin.jpg";
 import "../../../assets/css/component/_table.scss";
 
 const Table = () => {
