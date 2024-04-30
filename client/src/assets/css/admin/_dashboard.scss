@@ -59,7 +59,7 @@
   }
   ._dashSection {
     align-self: start;
-    padding: 1rem;
+    padding: 0.8rem 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -82,12 +82,12 @@
         gap: 0.3rem;
         &:nth-child(1){
             li{
-                color: temp.$primaryText;
+              color: temp.$primaryText;
             }
         }
       }
       span{
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 600;
       }
     }
@@ -109,7 +109,7 @@
     }
   }
   ._welcomeKit{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: temp.$heading-color;
     margin-left: 10px;
@@ -118,7 +118,7 @@
     position: relative;
     padding: 0.5rem;
     overflow-y:scroll;
-    height: 74vh;
+    height: 79vh;
   }
   ._outlet::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
@@ -180,6 +180,8 @@
         }
       }
     }
-    
+    ._outlet{
+      height: 80vh;
+    }
   }
 }

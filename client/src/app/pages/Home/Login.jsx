@@ -7,6 +7,8 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { login_popup } from "../../Store/Slices/StateSlice"
 
+import {NavLink} from "react-router-dom";
+
 import "../../../assets/css/home/_login.scss";
 
 const Login = () => {
@@ -37,7 +39,7 @@ const Login = () => {
               />
             </span>
             
-            <button><BiLogInCircle/>login</button>
+            <NavLink to="/dashboard"><button><BiLogInCircle/>login</button></NavLink>
           </form>
           <span>
             <p>or continue with</p>

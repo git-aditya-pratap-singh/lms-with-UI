@@ -95,7 +95,7 @@ const Dashboard = () => {
                 <span><FaUsers size={23} /><li>Teachers</li></span>
               </NavLink>
 
-              <NavLink to="/dashboard/courses"
+              <NavLink to="/dashboard/course"
                 onClick={() => setToggle(!toggle)}>
                 <span><FaBookReader size={21} /><li>Courses</li></span>
               </NavLink>
@@ -124,13 +124,14 @@ const Dashboard = () => {
                 onClick={() => setToggle(!toggle)}>
                 <span><IoMdLogOut size={23} /><li>Logout</li></span>
               </NavLink>
+              
             </ul>
           </div>
         </div>
 
 
 
-        <section className="w-full flex flex-col gap-5 h-fit">
+        <section className="w-full flex flex-col gap-2 h-fit">
           <div className="_dashSection">
             {/* Create BreadCrum */}
             <div className="flex justify-center items-center gap-5">
@@ -160,6 +161,7 @@ const Dashboard = () => {
                   <li>Home</li>
                 </ul>
                 <span>Home</span>
+                
               </div>
 
             </div>

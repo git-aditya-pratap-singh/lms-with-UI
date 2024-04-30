@@ -5,7 +5,6 @@
   border-radius: 10px;
   background-color: #fff;
   @apply select-none;
- 
   h3 {
     font-size: 1.8rem;
   }
@@ -39,7 +38,7 @@
 // Mobile devices------------
 @media only screen and (max-width: 661px) {
   ._addForm {
-   width: 330px;
+   width: 345px;
     ._form{
       grid-template-columns: repeat(1, 1fr);
       button{

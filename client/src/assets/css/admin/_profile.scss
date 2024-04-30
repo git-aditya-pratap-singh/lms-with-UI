@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  gap: 1.5rem;
+  justify-content: space-between;
+  gap:5.2rem;
   overflow: hidden;
   ._subContainer11 {
     box-shadow: temp.$box-shadow2;
@@ -53,6 +54,7 @@
     box-shadow: temp.$box-shadow2;
     border-radius: 10px;
     padding: 1rem;
+    
     ._infodetails {
       margin-top: 1rem;
       display: grid;
@@ -78,7 +80,6 @@
           border-radius: 5px 0px 0px 5px;
           color: temp.$primary;
         }
-
         input {
           width: 100%;
           outline: none;
@@ -129,6 +130,7 @@
 
 @media only screen and (min-width: 441px) and (max-width: 780px){
     ._container1{
+      gap:2.2rem;
         ._subContainer22{
             ._infodetails{
                 grid-template-columns: repeat(1, 1fr);
@@ -140,6 +142,7 @@
 // mobile screen
 @media only screen and (max-width: 440px){
     ._container1{
+      gap:2.2rem;
         ._subContainer22{
             ._infodetails{
                 grid-template-columns: repeat(1, 1fr);
