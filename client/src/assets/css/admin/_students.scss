@@ -1,14 +1,11 @@
 @use "../index" as temp;
 
 ._studentContainer {
-  box-shadow: temp.$box-shadow2;
-  border-radius: 10px;
+
   display: flex;
   flex-direction: column;
   position: relative;
   gap: 1.5rem;
-  overflow: hidden;
-  height: 100%;
   ._studentSubConatiner1 {
     display: flex;
     justify-content: space-between;

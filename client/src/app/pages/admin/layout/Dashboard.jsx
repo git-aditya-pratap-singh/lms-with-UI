@@ -105,10 +105,11 @@ const Dashboard = () => {
                 <span><BsFillFileEarmarkSpreadsheetFill size={21} /><li>Attendance</li></span>
               </NavLink>
 
-              <NavLink to="/dashboard/fees"
+              <NavLink to="/dashboard/notification"
                 onClick={() => setToggle(!toggle)}>
-                <span><FaRupeeSign size={21} /><li>Fee Details</li></span>
+                <span><FaBell size={21} /><li>Notification</li></span>
               </NavLink>
+
 
               <NavLink to="/dashboard/notification"
                 onClick={() => setToggle(!toggle)}>
@@ -131,7 +132,7 @@ const Dashboard = () => {
 
 
 
-        <section className="w-full flex flex-col gap-2 h-fit">
+        <section className="w-full flex flex-col gap-2 h-full">
           <div className="_dashSection">
             {/* Create BreadCrum */}
             <div className="flex justify-center items-center gap-5">
@@ -197,7 +198,9 @@ const Dashboard = () => {
           </div>
 
         </section>
+        
       </section>
+      
     </>
   );
 };

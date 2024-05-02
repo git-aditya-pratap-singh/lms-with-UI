@@ -5,14 +5,13 @@
   display: flex;
   flex-direction: row;
   gap: 15px;
-  padding: 1rem 1rem 0.2rem;
-  position: relative;
-  
+  padding: 0.7rem 0.7rem;
+  height: 100vh;
+  overflow: hidden;
   ._navBar {
-    height: 96vh;
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     background-color: #fff;
-    width: 290px;
+    width: 250px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
@@ -23,22 +22,20 @@
       border-bottom: 1px solid #999;
     }
     ._navItem {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       ul {
         width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: self-start;
-        gap: 0rem;
-
         color: temp.$primaryText;
         li {
           cursor: pointer;
         }
       }
       span {
-        width: 100%;
+        min-width: 150px;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -105,7 +102,6 @@
           cursor: pointer;
         }
       }
-      
     }
   }
   ._welcomeKit{
@@ -115,10 +111,8 @@
     margin-left: 10px;
   }
   ._outlet{
-    position: relative;
-    padding: 0.5rem;
+    padding: 0.1rem;
     overflow-y:scroll;
-    height: 79vh;
   }
   ._outlet::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
@@ -127,6 +121,7 @@
 
 @media only screen and (max-width: 1400px){
   ._navBar{
+    height: auto;
     position: absolute;
     z-index: 10;
     left:-300px;

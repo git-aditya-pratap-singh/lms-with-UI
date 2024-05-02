@@ -17,6 +17,7 @@ const Students = () => {
 
     return (
         <>
+            
             <section className="_studentContainer">
                 <div className="_studentSubConatiner1">
                     <div className="_studentSearch">
@@ -55,11 +56,12 @@ const Students = () => {
                             <a role="tab" className="tab">InActive<span>(45)</span></a>
                         </div>
                     </div>
-                    <Table />
                 </div>
-
-
             </section>
+            <Table/>
+            </section>
+
+            
 
             {/* Add Form */}
             {(studentsPopup.add || studentsPopup.edit) &&

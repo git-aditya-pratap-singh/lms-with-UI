@@ -1,10 +1,10 @@
 @use "../index" as temp;
 
 ._tableContainer {
-    overflow-x: auto; /* Enable horizontal scrollbar */
-    overflow-y: auto; /* Enable vertical scrollbar */
+    overflow-x: scroll; /* Enable horizontal scrollbar */
+    overflow-y: scroll; /* Enable vertical scrollbar */
     max-width: 100%;
-    max-height: 80%;
+    max-height: 75%;
     @apply select-none;
   .table {
     width: 100%;
