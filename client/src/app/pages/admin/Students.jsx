@@ -2,7 +2,7 @@
 import { add_student_popup } from "../../Store/Slices/StateSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FaUserPlus } from "react-icons/fa";
+import { FaUserPlus, FaDownload  } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 import Table from "../../components/students/Table";
@@ -38,12 +38,14 @@ const Students = () => {
                     </div>
                     <div className="_studentAddDel">
 
-                        <button className="_bt bg-green-100 text-green-700"
+                        <button className="_bt bg-green-100 text-green-500"
                             onClick={() => 
                                 dispatch(add_student_popup({check: true, key:'add'}))}>
-                                <FaUserPlus color="green" />Add</button>
+                                <FaUserPlus color="green" /></button>
 
-                        <button className="_bt bg-red-100 text-red-700"><MdDelete />Del</button>
+                        <button className="_bt bg-red-100 text-red-500"><MdDelete /></button>
+                        <button className="_bt bg-blue-100 text-blue-500"><FaDownload/></button>
+                        
                     </div>
 
                 </div>
@@ -58,10 +60,8 @@ const Students = () => {
                     </div>
                 </div>
             </section>
-            <Table/>
-            </section>
-
             
+            <Table/>
 
             {/* Add Form */}
             {(studentsPopup.add || studentsPopup.edit) &&

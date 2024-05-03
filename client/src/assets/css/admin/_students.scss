@@ -1,7 +1,6 @@
 @use "../index" as temp;
 
 ._studentContainer {
-
   display: flex;
   flex-direction: column;
   position: relative;
@@ -11,7 +10,7 @@
     justify-content: space-between;
     gap:1rem;
     align-items: center;
-    padding: 1.2rem;
+    padding: 0rem 1rem 1rem;
     border-bottom: 1px solid #999;
     ._studentAddDel {
       display: flex;
@@ -19,7 +18,7 @@
       align-items: center;
       gap: 1rem;
       ._bt {
-        @apply flex items-center gap-1 p-2 rounded
+        @apply flex items-center gap-1 p-2 rounded text-xl drop-shadow-md
         duration-200 ease-in-out active:scale-90;
       }
     }
@@ -40,6 +39,14 @@
           }
         }
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 641px){
+  ._studentContainer{
+    ._studentSubConatiner1{
+      padding: 0rem 0.2rem 1rem;
     }
   }
 }

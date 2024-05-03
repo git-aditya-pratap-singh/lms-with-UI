@@ -191,6 +191,7 @@ const Dashboard = () => {
 
           <div className="_welcomeKit">
             <label>Welcome Back Aditya 🙋‍♂️!</label>
+            {/* <label>Time: 01:24:37 AM</label> */}
           </div>
 
           <div className="_outlet">

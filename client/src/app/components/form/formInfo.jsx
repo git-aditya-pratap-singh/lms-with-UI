@@ -1,4 +1,4 @@
-import { FaUser } from "react-icons/fa";
+//import { FaUser } from "react-icons/fa";
 import { FaBookOpen, FaHandHoldingDollar, FaDollarSign, FaTag, FaBuffer } from "react-icons/fa6";
 
 import "../../../assets/css/component/_formcourse.scss";
