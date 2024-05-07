@@ -18,7 +18,7 @@
       align-items: center;
       gap: 1rem;
       ._bt {
-        @apply flex items-center gap-1 p-2 rounded text-xl drop-shadow-md
+        @apply flex items-center gap-1 p-2.5 rounded-full text-[1.1rem] shadow
         duration-200 ease-in-out active:scale-90;
       }
     }

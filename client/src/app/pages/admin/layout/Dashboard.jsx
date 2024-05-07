@@ -72,58 +72,58 @@ const Dashboard = () => {
             <ul>
               <NavLink to="/dashboard"
                 onClick={() => setToggle(!toggle)}>
-                <span><AiFillDashboard size={23} /><li>Dashboard</li></span>
+                <span><AiFillDashboard size={23} className="drop-shadow-md"/><li>Dashboard</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/profile"
                 onClick={() => setToggle(!toggle)}>
-                <span><FaUserCircle size={23} /><li>Profile</li></span>
+                <span><FaUserCircle size={23} className="drop-shadow-md"/><li>Profile</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/tranning"
                 onClick={() => setToggle(!toggle)}>
-                <span><FaChalkboardTeacher size={23} /><li>Tranning</li></span>
+                <span><FaChalkboardTeacher size={23} className="drop-shadow-md"/><li>Tranning</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/students"
                 onClick={() => setToggle(!toggle)}><span>
-                  <FaUsersViewfinder size={23} /><li>Students</li></span>
+                  <FaUsersViewfinder size={23} className="drop-shadow-md"/><li>Students</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/teachers"
                 onClick={() => setToggle(!toggle)}>
-                <span><FaUsers size={23} /><li>Teachers</li></span>
+                <span><FaUsers size={23} className="drop-shadow-md"/><li>Teachers</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/course"
                 onClick={() => setToggle(!toggle)}>
-                <span><FaBookReader size={21} /><li>Courses</li></span>
+                <span><FaBookReader size={21} className="drop-shadow-md"/><li>Courses</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/attendance"
                 onClick={() => setToggle(!toggle)}>
-                <span><BsFillFileEarmarkSpreadsheetFill size={21} /><li>Attendance</li></span>
+                <span><BsFillFileEarmarkSpreadsheetFill size={21} className="drop-shadow-md"/><li>Attendance</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/notification"
                 onClick={() => setToggle(!toggle)}>
-                <span><FaBell size={21} /><li>Notification</li></span>
+                <span><FaBell size={21} className="drop-shadow-md"/><li>Notification</li></span>
               </NavLink>
 
 
               <NavLink to="/dashboard/notification"
                 onClick={() => setToggle(!toggle)}>
-                <span><FaBell size={21} /><li>Notification</li></span>
+                <span><FaBell size={21} className="drop-shadow-md"/><li>Notification</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/settings"
                 onClick={() => setToggle(!toggle)}>
-                <span><IoSettingsSharp size={23} /><li>Settings</li></span>
+                <span><IoSettingsSharp size={23} className="drop-shadow-md"/><li>Settings</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/logout"
                 onClick={() => setToggle(!toggle)}>
-                <span><IoMdLogOut size={23} /><li>Logout</li></span>
+                <span><IoMdLogOut size={23} className="drop-shadow-md"/><li>Logout</li></span>
               </NavLink>
               
             </ul>
