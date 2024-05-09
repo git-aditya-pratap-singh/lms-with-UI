@@ -4,9 +4,9 @@ dotenv.config();
 
 const connectToDB = async (): Promise<mongoose.Connection> =>{
     try{
-        const conn = await mongoose.connect(peocess.env.MONGO_URL as string);
-        console.log("Connected to MongoDB");
-        return conn.connection;
+        const connectionInstance = await mongoose.connect(process.env.MONGO_URL as string);
+        console.log(`📥 MongoDB Connected on PORT No. => ${connectionInstance.connection.port}`)
+        return connectionInstance.connection;
     }catch(err){
         console.error("Failed to connect to database:", err);
         throw new Error("Failed to connect to database");
