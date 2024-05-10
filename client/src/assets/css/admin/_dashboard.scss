@@ -30,10 +30,6 @@
         justify-content: center;
         align-items: self-start;
         color: temp.$primaryText;
-        li {
-          cursor: pointer;
-        }
-      }
       span {
         min-width: 150px;
         display: flex;
@@ -42,16 +38,8 @@
         padding: 0.8rem;
         cursor: pointer;
         @apply select-none ease-in-out duration-300 ;
-        &:hover {
-          background-color: aliceblue;
-          border-radius: 5px;
-        }
-        &:active {
-          background-color: temp.$primary;
-          border-radius: 5px;
-          color: #fff;
-        }
       }
+    }
     }
   }
   ._dashSection {

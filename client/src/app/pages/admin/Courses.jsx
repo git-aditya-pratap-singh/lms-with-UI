@@ -13,16 +13,7 @@ const Course = () => {
                     <FromInfo />
                 </div>
                 <div className="_courseFooter">
-                    <label><button className="_coursebt"><FaArrowLeft size={12} /> Prevoius</button></label>
-                    <label>
-                        <ul className="steps text-[0.9rem]">
-                            <li data-content="✓" className="step step-primary ">Course Information</li>
-                            <li data-content="✓" className="step step-primary">Course Option</li>
-                            <li data-content="✓" className="step">Course Content</li>
-                            <li data-content="✓" className="step">Course Preview</li>
-                        </ul>
-                    </label>
-                    <label><button className="_coursebt">Next <FaArrowRight size={12} /></button></label>
+                    <label><button className="_coursebt">Submit <FaArrowRight size={12} /></button></label>
                 </div>
             </section>
         </>

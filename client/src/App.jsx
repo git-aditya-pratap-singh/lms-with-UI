@@ -13,6 +13,7 @@ import Profile from "./app/pages/admin/Profile";
 import Students from "./app/pages/admin/Students";
 import Teachers from "./app/pages/admin/Teachers";
 import Course from "./app/pages/admin/Courses";
+import Registration from "./app/pages/admin/Registration";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/course",
         element: <Course/>
+      },
+      {
+        path: "/dashboard/registration",
+        element: <Registration/>
       }
     ]
   }

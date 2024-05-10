@@ -4,7 +4,7 @@ import { Outlet, NavLink } from "react-router-dom";
 
 import Hamburger from "hamburger-react";
 import { AiFillDashboard } from "react-icons/ai";
-import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader, FaRupeeSign, FaBell } from "react-icons/fa";
+import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader, FaDatabase, FaBell } from "react-icons/fa";
 import { FaUsersViewfinder, FaCircleUser } from "react-icons/fa6";
 import { BsFillFileEarmarkSpreadsheetFill } from "react-icons/bs";
 import { IoSettingsSharp } from "react-icons/io5";
@@ -26,6 +26,15 @@ const Dashboard = () => {
   //   console.log(routeTo);
   //    console.log(isLast)
   // })
+
+  const NavLinkCSS =({isActive})=>{
+    return{
+      backgroundColor: isActive ? '#007DFC' : '',
+      color: isActive ? 'white' : '',
+      borderRadius: isActive ? '5px' : '',
+      boxShodow: isActive ? 'rgba(33, 35, 38, 0.1) 0px 10px 10px -10px' : ''
+    }
+  }
 
 
   return (
@@ -71,58 +80,58 @@ const Dashboard = () => {
           <div className="_navItem">
             <ul>
               <NavLink to="/dashboard"
-                onClick={() => setToggle(!toggle)}>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><AiFillDashboard size={23} className="drop-shadow-md"/><li>Dashboard</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/profile"
-                onClick={() => setToggle(!toggle)}>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><FaUserCircle size={23} className="drop-shadow-md"/><li>Profile</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/tranning"
-                onClick={() => setToggle(!toggle)}>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><FaChalkboardTeacher size={23} className="drop-shadow-md"/><li>Tranning</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/students"
-                onClick={() => setToggle(!toggle)}><span>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}><span>
                   <FaUsersViewfinder size={23} className="drop-shadow-md"/><li>Students</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/teachers"
-                onClick={() => setToggle(!toggle)}>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><FaUsers size={23} className="drop-shadow-md"/><li>Teachers</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/course"
-                onClick={() => setToggle(!toggle)}>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><FaBookReader size={21} className="drop-shadow-md"/><li>Courses</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/attendance"
-                onClick={() => setToggle(!toggle)}>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><BsFillFileEarmarkSpreadsheetFill size={21} className="drop-shadow-md"/><li>Attendance</li></span>
               </NavLink>
 
-              <NavLink to="/dashboard/notification"
-                onClick={() => setToggle(!toggle)}>
-                <span><FaBell size={21} className="drop-shadow-md"/><li>Notification</li></span>
+              <NavLink to="/dashboard/registration"
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
+                <span><FaDatabase size={21} className="drop-shadow-md"/><li>Registration</li></span>
               </NavLink>
 
 
               <NavLink to="/dashboard/notification"
-                onClick={() => setToggle(!toggle)}>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><FaBell size={21} className="drop-shadow-md"/><li>Notification</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/settings"
-                onClick={() => setToggle(!toggle)}>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><IoSettingsSharp size={23} className="drop-shadow-md"/><li>Settings</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/logout"
-                onClick={() => setToggle(!toggle)}>
+                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><IoMdLogOut size={23} className="drop-shadow-md"/><li>Logout</li></span>
               </NavLink>
               

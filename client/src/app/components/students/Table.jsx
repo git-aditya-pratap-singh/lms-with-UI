@@ -29,8 +29,8 @@ const Table = () => {
                             <th>Status</th>
                             <th>
                                 <span className="flex gap-5">
-                                    <FaEdit size={18} className="text-green-400"/> 
-                                    <MdDelete size={18} className="text-red-500"/>
+                                    <FaEdit size={18} className="text-[#00FFCC]"/> 
+                                    <MdDelete size={18} className="text-[#FF3675]"/>
                                 </span>
                             </th>
                         </tr>
@@ -69,14 +69,14 @@ const Table = () => {
                                 Mern
                             </td>
                             <td>
-                                <label className="p-[0.3rem] rounded bg-green-300">Active</label>
+                                <label className="p-[0.3rem] rounded bg-[#a6ffe6] text-[#1E8267]">Active</label>
                             </td>
                             <td>
                                 <span className="flex gap-5">
-                                    <FaEdit size={18} className="text-green-400 cursor-pointer ease-in-out duration-200 active:scale-90"
+                                    <FaEdit size={18} className="text-[#00ffcc8b] cursor-pointer ease-in-out duration-200 active:scale-90"
                                     onClick={()=>
                                         dispatch(add_student_popup({check: true, key: 'edit'}))}/> 
-                                    <MdDelete size={18} className="text-red-500 cursor-pointer"/>
+                                    <MdDelete size={18} className="text-[#FF3675] cursor-pointer"/>
                                 </span>
                             </td>
                         </tr>
@@ -114,12 +114,12 @@ const Table = () => {
                                 Mern
                             </td>
                             <td>
-                                <label className="p-[0.3rem] rounded bg-red-300">Inactive</label>
+                                <label className="p-[0.3rem] rounded bg-[#FFBAD6] text-[#CC0052]">Inactive</label>
                             </td>
                             <td>
                                 <span className="flex gap-5">
                                     <FaEdit size={18} className="text-green-400 cursor-pointer"/> 
-                                    <MdDelete size={18} className="text-red-500 cursor-pointer"/>
+                                    <MdDelete size={18} className="text-[#FF0066] cursor-pointer"/>
                                 </span>
                             </td>
                         </tr>

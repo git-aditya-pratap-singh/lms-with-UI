@@ -1,14 +1,22 @@
 import { useDispatch } from "react-redux";
+import Select from 'react-select'
 import { registration_popup } from "../../Store/Slices/StateSlice";
 
 import { BiLogInCircle } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
-import { FaUser, FaPhoneAlt, FaFingerprint } from "react-icons/fa";
+import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
 import "../../../assets/css/home/_registration.scss";
 
 const Registration = () => {
+
+  const options = [
+    { value: 'MERN', label: 'MERN' },
+    { value: 'MEAN', label: 'MEAN' },
+    { value: 'MEVN', label: 'MEVN' }
+  ]
+
   const dispatch = useDispatch();
   return (
     <>
@@ -45,17 +53,28 @@ const Registration = () => {
               />
             </span>
 
-            <span>
-              <label>
-                <FaFingerprint />
+            {/* Multiple select Course */}
+            <div>
+              <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-800">
+                Select Course's
               </label>
-              <input
-                type="password"
-                placeholder="enter password"
-                name="password"
-              />
-            </span>
-
+              <div className="relative mt-2 rounded-md shadow-sm w-[270%] bg-black">
+                
+                <Select options={options}
+                  isMulti
+                />
+              </div>
+            </div>
+            
+            {/* Upload Images */}
+            <div className="space-y-2">
+              <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-800">
+                Upload Image
+              </label>
+              <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10" />
+            </div>
+            
+           
             <div className="space-y-2">
               <label className="text-[0.9rem]">Select Gender : </label>
               <div className="flex">

@@ -18,6 +18,7 @@
     "@mui/x-charts": "^6.19.5",
     "@mui/x-date-pickers": "^6.19.7",
     "@reduxjs/toolkit": "^2.1.0",
+    "antd": "^5.17.0",
     "apexcharts": "^3.48.0",
     "dayjs": "^1.11.10",
     "hamburger-react": "^2.5.0",
