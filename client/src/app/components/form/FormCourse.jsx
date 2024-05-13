@@ -1,8 +1,16 @@
 //import { FaUser } from "react-icons/fa";
 import { FaBookOpen, FaHandHoldingDollar, FaDollarSign, FaTag, FaBuffer } from "react-icons/fa6";
-import { FaVideo,FaLink } from "react-icons/fa";
+import { FaVideo, FaLink } from "react-icons/fa";
+
+import { Editor } from 'primereact/editor';
+
 
 import "../../../assets/css/component/_formcourse.scss";
+
+import 'primereact/resources/themes/lara-light-indigo/theme.css'; //theme
+import 'primereact/resources/primereact.min.css'; //core css
+import 'primeicons/primeicons.css'; //icons
+import 'primeflex/primeflex.css'; // flex
 
 const FormCourse = () => {
     return (
@@ -31,6 +39,8 @@ const FormCourse = () => {
                         </div>
                     </div>
 
+
+
                     {/* Discription. */}
                     <div>
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
@@ -42,14 +52,9 @@ const FormCourse = () => {
 
                                 </span>
                             </div>
-                            <textarea
-                                name="address"
-                                id="address"
-                                className="resize-none block w-full rounded-md border-0 py-2 pl-3 pr-20 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-                                placeholder="Enter the Course Discription.."
-                                rows="3">
-
-                            </textarea>
+                            <div className="card">
+                                <Editor style={{ height: '250px' }} />
+                            </div>
                         </div>
                     </div>
 
@@ -178,7 +183,7 @@ const FormCourse = () => {
                         </div>
                     </div>
 
-                    
+
                     {/* Video URL */}
                     <div className="">
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
@@ -200,7 +205,7 @@ const FormCourse = () => {
                         </div>
                     </div>
 
-                    
+
                     {/* Source Code */}
                     <div className="">
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
@@ -284,12 +289,12 @@ const FormCourse = () => {
                         <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10" />
                     </div>
 
-                    
+
                 </form>
 
             </section>
 
-            
+
         </>
     )
 }
