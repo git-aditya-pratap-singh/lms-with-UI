@@ -32,7 +32,7 @@ const Dashboard = () => {
       backgroundColor: isActive ? '#007DFC' : '',
       color: isActive ? 'white' : '',
       borderRadius: isActive ? '5px' : '',
-      boxShodow: isActive ? 'rgba(33, 35, 38, 0.1) 0px 10px 10px -10px' : ''
+      boxShodow: isActive ? 'rgba(33, 35, 38, 0.1) 0px 10px 10px -10px' : '',
     }
   }
 
@@ -79,7 +79,7 @@ const Dashboard = () => {
 
           <div className="_navItem">
             <ul>
-              <NavLink to="/dashboard"
+              <NavLink to="/dashboard/home"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><AiFillDashboard size={23} className="drop-shadow-md"/><li>Dashboard</li></span>
               </NavLink>

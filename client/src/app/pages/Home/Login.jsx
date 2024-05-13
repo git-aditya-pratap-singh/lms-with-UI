@@ -39,7 +39,7 @@ const Login = () => {
               />
             </span>
             
-            <NavLink to="/dashboard"><button><BiLogInCircle/>login</button></NavLink>
+            <NavLink to="/dashboard/home"><button><BiLogInCircle/>login</button></NavLink>
           </form>
           <span>
             <p>or continue with</p>

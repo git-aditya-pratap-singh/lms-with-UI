@@ -4,7 +4,7 @@ import { FaVideo,FaLink } from "react-icons/fa";
 
 import "../../../assets/css/component/_formcourse.scss";
 
-const formInfo = () => {
+const FormCourse = () => {
     return (
         <>
             <section className="_courseForm">
@@ -295,4 +295,4 @@ const formInfo = () => {
 }
 
 
-export default formInfo;
+export default FormCourse;

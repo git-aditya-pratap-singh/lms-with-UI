@@ -1,6 +1,6 @@
 //import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-        
+
 import Home from "./app/pages/Home/Home";
 import Navbar from "./app/pages/Home/Navbar";
 import About from "./app/pages/Home/About";
@@ -15,70 +15,103 @@ import Teachers from "./app/pages/admin/Teachers";
 import Course from "./app/pages/admin/Courses";
 import Registration from "./app/pages/admin/Registration";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar/>,
+    element: <Navbar />,
     children: [
       {
         index: true,
-        element: <Home/>
+        element: <Home />,
+        loader: ()=>{
+          console.log("Call")
+          return null
+        }
       },
       {
         path: "/about",
-        element: <About/>
+        element: <About />
       },
       {
         path: "/service",
-        element: <Service/>
+        element: <Service />
       },
       {
         path: "/service",
-        element: <Service/>
+        element: <Service />
       },
       {
         path: "/contact",
-        element: <Contact/>
+        element: <Contact />
       }
     ]
   },
+  // {
+  //   // Catch-all route for 404 errors
+  //   path: "/dashboard",
+  //   element: <h1>NOT FOUND-1!!</h1>
+  // },
 
   {
-    path: "/dashboard",
-    element: <Dashboard/>,
+    path: "/",
+    element: <Dashboard />,
     children: [
       {
         index: true,
-        element: <UHome/>
+        path: "/dashboard/home",
+        element: <UHome />
       },
       {
         path: "/dashboard/profile",
-        element: <Profile/>
+        element: <Profile />
       },
       {
         path: "/dashboard/students",
-        element: <Students/>
+        element: <Students />
       },
       {
         path: "/dashboard/teachers",
-        element: <Teachers/>
+        element: <Teachers />
       },
       {
         path: "/dashboard/course",
-        element: <Course/>
+        element: <Course />
       },
       {
         path: "/dashboard/registration",
-        element: <Registration/>
+        element: <Registration />
       }
     ]
-  }
+  },
+  {
+    // Catch-all route for 404 errors
+    path: "*",
+    element: <h1>NOT FOUND!!</h1>
+  },
+
 ])
 
-const App = ()=>{
-  return(
+const App = () => {
+  return (
     <>
-    <RouterProvider router={router}/>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition:Bounce
+        />
+        
+      <RouterProvider router={router} />
     </>
   )
 }
