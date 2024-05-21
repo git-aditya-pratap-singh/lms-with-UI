@@ -12,33 +12,6 @@
     border-radius: 5px;
     padding: 1rem;
   }
-  ._courseFooter {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: center;
-
-    ._coursebt {
-      padding: 0.6rem;
-      box-shadow: temp.$box-shadow2;
-      border-radius: 5px;
-      background-color: temp.$primary;
-      font-size:medium;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      @apply ease-in-out duration-500 text-white;
-      &:hover {
-        background-color:rgb(96, 154, 255);
-        color: #fff;
-      }
-      &:active {
-        background-color: rgb(96, 154, 255);
-        color: #fff;
-        @apply scale-90;
-      }
-    }
-  }
 }
 
 @media only screen and (max-width: 441px) {

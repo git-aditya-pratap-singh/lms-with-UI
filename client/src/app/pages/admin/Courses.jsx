@@ -1,5 +1,3 @@
-import { FaArrowRight } from "react-icons/fa";
-
 import FormCourse from "../../components/form/FormCourse";
 
 import "../../../assets/css/admin/_courses.scss";
@@ -12,9 +10,7 @@ const Course = () => {
                 <div className="_courseHeader -mt-3">
                     <FormCourse />
                 </div>
-                <div className="_courseFooter">
-                    <label><button className="_coursebt">Submit <FaArrowRight size={12} /></button></label>
-                </div>
+               
             </section>
         </>
     )
