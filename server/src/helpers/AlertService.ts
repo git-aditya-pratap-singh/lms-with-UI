@@ -1,29 +1,29 @@
 import { Response } from 'express';
 
 class AlertService {
-    public sendSuccessResponse(res?: Response, status: Number, msg: String, data?: any){
+    public sendSuccessResponse(res: Response, status: boolean, message: string, data?: any){
         res.status(200).json({
             status: status,
-            msg: msg,
+            message: message,
             list: data
        })
     }
-    public sendErrorResponse(res: Response, status: Number, msg: String){
+    public sendErrorResponse(res: Response, status: boolean, message: string){
         res.status(201).json({
             status: status,
-            msg: msg,
+            message: message,
         })
     }
-    public sendDataResponse(res: Response, status: Number, data: any){
+    public sendDataResponse(res: Response, status: boolean, data: any){
         res.status(200).json({
             status: status,
             list: data
         })
     }
-    public sendServerErrorResponse(res: Response, status: Number, msg: any){
+    public sendServerErrorResponse(res: Response, status: boolean, message: string){
         res.status(500).json({
             status: status,
-            msg: msg
+            message: message
         })
     }
 }

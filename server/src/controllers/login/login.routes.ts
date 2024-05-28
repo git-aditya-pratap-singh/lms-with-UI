@@ -1,8 +1,9 @@
 import express from 'express';
-import LoginModels from './modules/login.model';
+import LoginController from './modules/login.model';
 
 const authRouter = express.Router();
+const LOGIN_INSTANCE = new LoginController();
 
-authRouter.post('/login', new LoginModels().Login);
+authRouter.post('/login', LOGIN_INSTANCE.Login);
 
 export default authRouter;

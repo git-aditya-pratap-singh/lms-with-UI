@@ -15,32 +15,32 @@ import "../../../assets/css/home/_navbar.scss";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const loginState = useSelector((store)=>store.openPopup.open_login);
+  const loginState = useSelector((store) => store.openPopup.open_login);
 
   const [toggle, setToggle] = useState(false);
 
-  const [toggle_top, setToggleTop] = useState(false); 
+  const [toggle_top, setToggleTop] = useState(false);
 
-  const scrollTo = () =>{
-      if(window.scrollY >= 500){
-          setToggleTop(true);
-      }
-      else{
-          setToggleTop(false);
-      }
+  const scrollTo = () => {
+    if (window.scrollY >= 500) {
+      setToggleTop(true);
+    }
+    else {
+      setToggleTop(false);
+    }
   }
-  const ScrollTop = () =>{
-      window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-      })
+  const ScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
 
   }
-  window.addEventListener('scroll',scrollTo);
+  window.addEventListener('scroll', scrollTo);
 
   return (
     <>
-     {loginState && <Login/>}
+      {loginState && <Login />}
       <nav className="shadow-nav">
         <a href="#" className="_logo">
           <svg
@@ -121,20 +121,20 @@ const Navbar = () => {
 
         </label>
 
-        <button className="_loginbtn" onClick={()=> dispatch(login_popup(true))}>
-        <BiLogInCircle />login
+        <button className="_loginbtn" onClick={() => dispatch(login_popup(true))}>
+          <BiLogInCircle />login
         </button>
-      
+
       </nav>
       <Outlet />
-      <Footer/>
-      
-      { toggle_top == true && 
+      <Footer />
+
+      {toggle_top == true &&
         <div className="bg-blue-500 p-3 rounded-full shadow-lg shadow-blue-500/70 z-10 bottom-[3%] right-[2%] fixed cursor-pointer" data-aos="zoom-in-out"
-            onClick={ScrollTop}>
-            <FaAngleDoubleUp className="text-white text-2xl"/>
+          onClick={ScrollTop}>
+          <FaAngleDoubleUp className="text-white text-2xl" />
         </div>
-        }
+      }
     </>
   );
 };
