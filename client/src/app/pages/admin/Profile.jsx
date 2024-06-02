@@ -7,14 +7,13 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr";
 import { RxCross1 } from "react-icons/rx";
 
-
 import ag from "../../../assets/img/admin.jpg";
 import "../../../assets/css/admin/_profile.scss";
 
 const Profile_admin = () => {
 
     const dispatch = useDispatch();
-
+    
     return (
         <>
             <section className="_container1">

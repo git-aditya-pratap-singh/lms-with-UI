@@ -12,15 +12,6 @@ const AUTH_PASSWORD =  new Password_Encrypt_Decrypt();
 
 class LoginControllers extends AlertService{
 
-    private GetuserByloginPass = async(userName: string): Promise<IUser | null>=>{
-        console.log(userName)
-        const userMatch: IUser | null = await loginDB.findOne({username: userName},
-            {_id: 1, username: 1, name: 1, password: 1, designation: 1, status: 1, hasAllAccess: 1}
-        );
-        console.log(userMatch)
-        return userMatch;
-    }
-
     public Login = asyncHandler(async(req: Request, res: Response): Promise<any> =>{
        
         const {username, password} = req.body;
@@ -39,11 +30,17 @@ class LoginControllers extends AlertService{
             return this.sendErrorResponse(res, false, "Invalid Password !!");
         }
          
-        console.log(userValid)
         const token: string = await this.createJWTToken(userValid);
-        //return this.sendSuccessResponse(res, true, "SUCCESS",token);
+        return this.sendSuccessResponse(res, true, "You have successfully logged in !!", {userValid, token});
 
     })
+
+    private GetuserByloginPass = async(userName: string): Promise<IUser | null>=>{
+        const userMatch: IUser | null = await loginDB.findOne({username: userName},
+            {_id: 1, username: 1, name: 1, password: 1, designation: 1, status: 1, hasAllAccess: 1}
+        );
+        return userMatch;
+    }
 
     private createJWTToken = async(userValid: any): Promise<string> =>{
         const token: string = jwt.sign(

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 //import { useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
+import toTitleCase from "../../../common/titleCase";
+import { useAuthGuard, storeTokenRemove } from "../../../_guard/auth.guard";
 
 import Hamburger from "hamburger-react";
 import { AiFillDashboard } from "react-icons/ai";
@@ -16,6 +19,8 @@ import "../../../../assets/css/admin/_dashboard.scss";
 const Dashboard = () => {
 
   const [toggle, setToggle] = useState(false);
+  const [auth, setAuth] = useAuthGuard();
+  const navigate = useNavigate();
 
   // const location = useLocation();
   // const pathnames = location.pathname.split('/').filter((x) => x);
@@ -27,8 +32,19 @@ const Dashboard = () => {
   //    console.log(isLast)
   // })
 
-  const NavLinkCSS =({isActive})=>{
-    return{
+  const logout = () => {
+    setToggle(!toggle);
+    setAuth({
+      ...auth,
+      user: null,
+      token: null,
+    })
+    storeTokenRemove();
+    navigate("../");
+  }
+
+  const NavLinkCSS = ({ isActive }) => {
+    return {
       backgroundColor: isActive ? '#007DFC' : '',
       color: isActive ? 'white' : '',
       borderRadius: isActive ? '5px' : '',
@@ -81,60 +97,60 @@ const Dashboard = () => {
             <ul>
               <NavLink to="/dashboard/home"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><AiFillDashboard size={23} className="drop-shadow-md"/><li>Dashboard</li></span>
+                <span><AiFillDashboard size={23} className="drop-shadow-md" /><li>Dashboard</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/profile"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><FaUserCircle size={23} className="drop-shadow-md"/><li>Profile</li></span>
+                <span><FaUserCircle size={23} className="drop-shadow-md" /><li>Profile</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/tranning"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><FaChalkboardTeacher size={23} className="drop-shadow-md"/><li>Tranning</li></span>
+                <span><FaChalkboardTeacher size={23} className="drop-shadow-md" /><li>Tranning</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/students"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}><span>
-                  <FaUsersViewfinder size={23} className="drop-shadow-md"/><li>Students</li></span>
+                  <FaUsersViewfinder size={23} className="drop-shadow-md" /><li>Students</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/teachers"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><FaUsers size={23} className="drop-shadow-md"/><li>Teachers</li></span>
+                <span><FaUsers size={23} className="drop-shadow-md" /><li>Teachers</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/course"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><FaBookReader size={21} className="drop-shadow-md"/><li>Courses</li></span>
+                <span><FaBookReader size={21} className="drop-shadow-md" /><li>Courses</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/attendance"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><BsFillFileEarmarkSpreadsheetFill size={21} className="drop-shadow-md"/><li>Attendance</li></span>
+                <span><BsFillFileEarmarkSpreadsheetFill size={21} className="drop-shadow-md" /><li>Attendance</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/registration"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><FaDatabase size={21} className="drop-shadow-md"/><li>Registration</li></span>
+                <span><FaDatabase size={21} className="drop-shadow-md" /><li>Registration</li></span>
               </NavLink>
 
 
               <NavLink to="/dashboard/notification"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><FaBell size={21} className="drop-shadow-md"/><li>Notification</li></span>
+                <span><FaBell size={21} className="drop-shadow-md" /><li>Notification</li></span>
               </NavLink>
 
               <NavLink to="/dashboard/settings"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><IoSettingsSharp size={23} className="drop-shadow-md"/><li>Settings</li></span>
+                <span><IoSettingsSharp size={23} className="drop-shadow-md" /><li>Settings</li></span>
               </NavLink>
 
-              <NavLink to="/dashboard/logout"
-                style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
-                <span><IoMdLogOut size={23} className="drop-shadow-md"/><li>Logout</li></span>
+              <NavLink to=""
+                style={NavLinkCSS} onClick={logout}>
+                <span><IoMdLogOut size={23} className="drop-shadow-md" /><li>Logout</li></span>
               </NavLink>
-              
+
             </ul>
           </div>
         </div>
@@ -166,12 +182,12 @@ const Dashboard = () => {
                 <ul>
                   <li>Dashboard  /</li>
                   {
-                    
+
                   }
                   <li>Home</li>
                 </ul>
                 <span>Home</span>
-                
+
               </div>
 
             </div>
@@ -199,7 +215,7 @@ const Dashboard = () => {
           </div>
 
           <div className="_welcomeKit">
-            <label>Welcome Back Aditya 🙋‍♂️!</label>
+            <label>Welcome Back {toTitleCase(auth?.user?.name)} 🙋‍♂️!</label>
             {/* <label>Time: 01:24:37 AM</label> */}
           </div>
 
@@ -208,9 +224,9 @@ const Dashboard = () => {
           </div>
 
         </section>
-        
+
       </section>
-      
+
     </>
   );
 };

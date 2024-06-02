@@ -15,8 +15,13 @@ import Teachers from "./app/pages/admin/Teachers";
 import Course from "./app/pages/admin/Courses";
 import Registration from "./app/pages/admin/Registration";
 
+import ProctedRouteGuard from "./app/_guard/route.guard";
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -26,7 +31,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        loader: ()=>{
+        loader: () => {
           console.log("Call")
           return null
         }
@@ -57,7 +62,11 @@ const router = createBrowserRouter([
 
   {
     path: "/",
-    element: <Dashboard />,
+    element: (
+      <ProctedRouteGuard>
+        <Dashboard />
+      </ProctedRouteGuard>
+    ),
     children: [
       {
         index: true,
@@ -109,8 +118,8 @@ const App = () => {
         pauseOnHover
         theme="colored"
         transition:Bounce
-        />
-        
+      />
+
       <RouterProvider router={router} />
     </>
   )

@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login_popup } from "../../Store/Slices/StateSlice"
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import ApiService from "../../service/api.service";
+import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 //-------------ICON--------------------
 import { FaGithub, FaLinkedinIn, FaFingerprint } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -15,6 +17,10 @@ import "../../../assets/css/home/_login.scss";
 const Login = () => {
 
   const dispatch = useDispatch();
+  const [auth, setAuth] = useAuthGuard();
+  const navigate = useNavigate();
+  
+
   const [formData, setFormdata] = useState({
     username: "",
     password: ""
@@ -43,13 +49,32 @@ const Login = () => {
 
     {/* Api Calling */}
     API_CALL(formData);
-  }
+  } 
 
   const API_INSTANCE = new ApiService();
 
   const API_CALL = async (loginData)=>{
-    const response = await API_INSTANCE.post('/login/login', loginData);
-    response.status === true ? '' : toast.error(response.message)
+    try {
+      const response = await API_INSTANCE.post('/login/login', loginData);
+
+      if (response.status) {
+        storeTokenInStorage(response.data.token);
+        setAuth({
+          ...auth,
+          user: response.data.userValid,
+          token: response.data.token
+        });
+        toast.success(response.message);
+        navigate('/dashboard/home')
+        
+      } else {
+        toast.error(response.message);
+      }
+    
+    }catch (err) {
+      console.error('API call error:', err);
+      toast.error('An error occurred while trying to log in.');
+    }
   }
 
 

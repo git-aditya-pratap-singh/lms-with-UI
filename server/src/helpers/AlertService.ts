@@ -5,7 +5,7 @@ class AlertService {
         res.status(200).json({
             status: status,
             message: message,
-            list: data
+            data: data
        })
     }
     public sendErrorResponse(res: Response, status: boolean, message: string){

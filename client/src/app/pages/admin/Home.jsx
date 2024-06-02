@@ -20,6 +20,7 @@ import Trannings from "../../../assets/img/totalTrann.png";
 
 import Data from "../../Data/Data.json";
 import "../../../assets/css/admin/_home.scss";
+import { useAuthGuard } from "../../_guard/auth.guard";
 
 
 const boxiconComponents = {
@@ -71,6 +72,8 @@ const dataa = [
 
 const Home_admin = () => {
   const [value, setValue] = useState(dayjs('2022-04-17'));
+  const [auth, setAuth] = useAuthGuard();
+  console.log("HOME",auth)
 
   return (
     <>

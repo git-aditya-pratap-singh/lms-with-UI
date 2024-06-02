@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       // string shorthand: http://localhost:5173/foo -> http://localhost:4567/foo
-      '/api/v1': 'http://localhost:4567'
+      '/api/v1': 'http://localhost:3000/api/v1'
     }
   }
 });
