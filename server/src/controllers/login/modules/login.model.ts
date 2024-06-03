@@ -31,12 +31,12 @@ class LoginControllers extends AlertService{
         }
          
         const token: string = await this.createJWTToken(userValid);
-        return this.sendSuccessResponse(res, true, "You have successfully logged in !!", {userValid, token});
+        return this.sendSuccessResponseToken(res, true, "You have successfully logged in !!", {userValid, token});
 
     })
 
     private GetuserByloginPass = async(userName: string): Promise<IUser | null>=>{
-        const userMatch: IUser | null = await loginDB.findOne({username: userName},
+        const userMatch: IUser | null = await loginDB.findOne({$or: [{username: userName}, {email: userName}]},
             {_id: 1, username: 1, name: 1, password: 1, designation: 1, status: 1, hasAllAccess: 1}
         );
         return userMatch;

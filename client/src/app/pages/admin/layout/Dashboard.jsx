@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 //import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 import toTitleCase from "../../../common/titleCase";
 import { useAuthGuard, storeTokenRemove } from "../../../_guard/auth.guard";
 
@@ -39,7 +40,8 @@ const Dashboard = () => {
       user: null,
       token: null,
     })
-    storeTokenRemove();
+    storeTokenRemove(); 
+    Cookies.remove('token');
     navigate("../");
   }
 

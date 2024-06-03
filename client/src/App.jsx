@@ -20,9 +20,6 @@ import ProctedRouteGuard from "./app/_guard/route.guard";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,7 +29,7 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
         loader: () => {
-          console.log("Call")
+          console.log("Api Call")
           return null
         }
       },
@@ -109,7 +106,6 @@ const App = () => {
       <ToastContainer
         position="top-right"
         autoClose={5000}
-        hideProgressBar
         newestOnTop={false}
         closeOnClick
         rtl={false}
