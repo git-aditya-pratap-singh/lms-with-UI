@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 //import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import toTitleCase from "../../../common/titleCase";
 import { useAuthGuard, storeTokenRemove } from "../../../_guard/auth.guard";
@@ -42,6 +43,7 @@ const Dashboard = () => {
     })
     storeTokenRemove(); 
     Cookies.remove('token');
+    toast.success("You have Successfully logged out!!");
     navigate("../");
   }
 
@@ -217,7 +219,7 @@ const Dashboard = () => {
           </div>
 
           <div className="_welcomeKit">
-            <label>Welcome Back {toTitleCase(auth?.user?.name)} 🙋‍♂️!</label>
+            <label>Welcome Back {auth?.user?.name} 🙋‍♂️!</label>
             {/* <label>Time: 01:24:37 AM</label> */}
           </div>
 

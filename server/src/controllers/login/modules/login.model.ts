@@ -37,7 +37,8 @@ class LoginControllers extends AlertService{
 
     private GetuserByloginPass = async(userName: string): Promise<IUser | null>=>{
         const userMatch: IUser | null = await loginDB.findOne({$or: [{username: userName}, {email: userName}]},
-            {_id: 1, username: 1, name: 1, password: 1, designation: 1, status: 1, hasAllAccess: 1}
+            {_id: 1, username: 1, name: 1, password: 1, designation: 1, 
+                status: 1, hasAllAccess: 1, email: 1, phone: 1, dob: 1, gender: 1, address: 1}
         );
         return userMatch;
     }

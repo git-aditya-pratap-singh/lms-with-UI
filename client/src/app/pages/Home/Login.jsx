@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { login_popup } from "../../Store/Slices/StateSlice"
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import ApiService from "../../service/api.service";
+import ApiService from "../../_service/api.service";
 import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 //-------------ICON--------------------
 import { FaGithub, FaLinkedinIn, FaFingerprint } from "react-icons/fa";
@@ -35,15 +35,15 @@ const Login = () => {
     event.preventDefault();
 
     if (!formData.username) {
-      toast.error("username should not be empty!!")
+      toast.warning("username should not be empty!!")
       return
     }
     if (!isNaN(formData.name)) {
-      toast.error("username field should not be entered number!!")
+      toast.warning("username field should not be entered number!!")
       return
     }
     if (!formData.password){
-      toast.error("password should not be empty!!")
+      toast.warning("password should not be empty!!")
       return
     }
 
@@ -64,6 +64,8 @@ const Login = () => {
           user: response.data.userValid,
           token: response.data.token
         });
+        
+        dispatch(login_popup(false))
         toast.success(response.message);
         navigate('/dashboard/home')
         

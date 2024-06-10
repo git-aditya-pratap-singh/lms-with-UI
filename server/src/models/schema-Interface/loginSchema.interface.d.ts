@@ -7,6 +7,9 @@ export default interface ILogin extends Document {
     designation: string;
     email: string;
     phone: string;
+    dob: Date;
+    gender: "Male" | "Female";
+    address: string;
     status: "Enabled" | "Disabled";
     hasAllAccess: 0 | 1;
     last_login: Date;

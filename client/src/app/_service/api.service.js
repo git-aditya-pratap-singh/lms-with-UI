@@ -1,5 +1,5 @@
 import axios from "axios";
-import environmentURL from "../environments/environments";
+import environmentURL from "../_environments/environments";
 import Cookies from 'js-cookie';
 
 class ApiService {

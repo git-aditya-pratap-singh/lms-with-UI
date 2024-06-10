@@ -34,11 +34,26 @@ const loginSchema: Schema<ILogin> = new Schema({
         required: true,
         trim: true
     },
+    dob: {
+        type: Date,
+        required: true,
+    },
+    gender: {
+        type: String,
+        enum:['Male','Female'],
+        required: true
+    },
+    address: {
+        type: String,
+        required: false,
+        trim: true
+    },
     status: {
         type: String,
         enum:['Enabled','Disabled'],
         default: 'Enabled'
     },
+
     hasAllAccess: {
         type: Number,
         enum:[0,1],
