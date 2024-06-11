@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 class ApiService {
     constructor() {
         const token = localStorage.getItem('token') || Cookies.get('token'); 
+        console.log("API",token)
 
         this.api = axios.create({
             baseURL: environmentURL.apiUrl,

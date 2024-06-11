@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 
 import PropTypes from "prop-types";
 
@@ -9,6 +9,19 @@ const AuthGuard = ({ children }) => {
         user: null,
         token: null
     })
+
+    useEffect(() => {
+        const data = getTokenFromStorage();
+        if(data){
+            const parseData = JSON.parse(data)
+            setAuth({
+                ...auth,
+                user : parseData.userValid,
+                token : parseData.token,
+            }) 
+        }
+    }, [])
+
     return (
         <AuthContext.Provider value={[auth, setAuth]}>
             {children}

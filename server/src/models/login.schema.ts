@@ -55,8 +55,7 @@ const loginSchema: Schema<ILogin> = new Schema({
     },
 
     hasAllAccess: {
-        type: Number,
-        enum:[0,1],
+        type: Boolean,
         required: true,
         trim: true
     },

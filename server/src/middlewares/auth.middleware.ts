@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import express from '../types/express'
+import express from '../types/express';
 import jwt, { TokenExpiredError } from "jsonwebtoken";
 import dotenv from 'dotenv';
 import AlertService from '../helpers/AlertService';
@@ -11,6 +11,7 @@ const ALERT_SERVICE = new AlertService();
 class UserAuthentication {
 
     public verifyToken = asyncHandler( async(req: Request, res: Response, next: NextFunction): Promise<any>=>{
+        console.log(req)
         const token: string | undefined = req.header("Authorization")?.replace("Bearer", "") || req.cookies?.token;
         if(!token){
             return ALERT_SERVICE.sendErrorResponse(res, false, 'Unauthorized HTTP, Token not provided!');

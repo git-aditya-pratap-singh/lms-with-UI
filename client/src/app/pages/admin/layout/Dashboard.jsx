@@ -219,7 +219,7 @@ const Dashboard = () => {
           </div>
 
           <div className="_welcomeKit">
-            <label>Welcome Back {auth?.user?.name} 🙋‍♂️!</label>
+            <label>Welcome Back {toTitleCase(auth?.user?.name)} 🙋‍♂️!</label>
             {/* <label>Time: 01:24:37 AM</label> */}
           </div>
 

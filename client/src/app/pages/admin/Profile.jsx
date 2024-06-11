@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { img_update_popup } from "../../Store/Slices/StateSlice";
 import { useAuthGuard } from "../../_guard/auth.guard";
 import toTitleCase from "../../common/titleCase";
+import ApiService from "../../_service/api.service";
 
 import { FaEdit, FaUser, FaPhoneAlt, FaCalendarAlt } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -18,10 +19,12 @@ const Profile_admin = () => {
 
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
+        username: "",
+        designation: "",
         name: "",
         email: "",
         phone: "",
-        hasAllaccess: "",
+        hasAllAccess: "",
         dob: "",
         gender: "",
         address: ""
@@ -37,9 +40,54 @@ const Profile_admin = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(!formData.name){
-            toast.warning("Name can not be empty!")
-            return
+
+        const validateFormData = () => {
+            return (
+                !formData.name ? toast.warning("Name can not be empty!") :
+                !formData.email ? toast.warning("Email can not be empty!") :
+                !formData.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/) ? toast.warning("Invalid email!") :
+                !formData.phone ? toast.warning("Phone can not be empty!") :
+                !formData.dob ? toast.warning("DOB can not be empty!") :
+                !formData.gender ? toast.warning("Please, Choose any gender!") :
+                !formData.hasAllAccess ? toast.warning("Please, Choose any AccessType!") :
+                !formData.address ? toast.warning("Address can not be empty!") :
+                true
+            );
+        }
+        if (validateFormData() !== true) {
+            return;
+        } else {
+            // build userName---------
+            const userName = formData.name.split(" ")[0].toLowerCase();
+            setFormData({...formData, ['username']: userName})
+            // Api Call
+            API_CALL(formData);
+        }
+    }
+
+    const API_INSTANCE = new ApiService();
+
+    const API_CALL = async(formData)=>{
+        try{
+            const response = await API_INSTANCE.post('/admin/updateDetails', formData);
+
+            if(response.status){
+                    // storeTokenInStorage(response.data);
+                    // setAuth({
+                    //   ...auth,
+                    //   user: response.data.userValid,
+                    //   token: response.data.token
+                    // });
+                    
+                    // dispatch(login_popup(false))
+                toast.success(response.message);
+            }else{
+                toast.error(response.message);
+            }
+
+        }catch(err){
+            console.error('API call error:', err);
+            toast.error('An error occurred while trying to log in.');   
         }
     }
 
@@ -68,10 +116,10 @@ const Profile_admin = () => {
 
                     <div className="flex justify-start items-center gap-x-10">
                         <h2>Username:
-                            <span className="text-blue-500">{auth?.user?.username}</span>
+                            <span className="text-blue-500">{formData.username}</span>
                         </h2>
                         <h2>Role:
-                            <span className="text-blue-500">{auth?.user?.designation}</span>
+                            <span className="text-blue-500">{formData.designation}</span>
                         </h2>
                     </div>
 
@@ -82,7 +130,7 @@ const Profile_admin = () => {
                                 <FaUser />
                             </label>
                             <input type="text" placeholder="enter name..." name="name"
-                                value={formData.name}
+                                value={toTitleCase(formData.name)}
                                 onChange={handleChange} />
                         </span>
 
@@ -104,12 +152,12 @@ const Profile_admin = () => {
                                 onChange={handleChange} />
                         </span>
 
-                        <span>
+                        {/* <span>
                             <label>
                                 <FaPhoneAlt />
                             </label>
                             <input type="text" placeholder="enter another phone no..." name="ano_phone" />
-                        </span>
+                        </span> */}
 
                         <span>
                             <label>
@@ -152,7 +200,7 @@ const Profile_admin = () => {
                                     name="radio-access"
                                     className="radio radio-primary"
                                     value="true"
-                                    checked={formData.hasAllaccess === 'true'}
+                                    checked={formData.hasAllAccess === true}
                                     onChange={handleChange}
 
                                 />
@@ -163,7 +211,7 @@ const Profile_admin = () => {
                                     name="radio-access"
                                     className="radio radio-primary"
                                     value="false"
-                                    checked={formData.hasAllaccess === 'false'}
+                                    checked={formData.hasAllAccess === false}
                                     onChange={handleChange}
                                 />
                             </label>
@@ -186,6 +234,7 @@ const Profile_admin = () => {
         </>
     )
 }
+
 
 const ImgUpdate = () => {
 
@@ -215,4 +264,6 @@ const ImgUpdate = () => {
 ImgUpdate.propTypes = {
     toggle: PropTypes.any.isRequired
 }
+
+
 export default Profile_admin;
