@@ -11,8 +11,9 @@ const ALERT_SERVICE = new AlertService();
 class UserAuthentication {
 
     public verifyToken = asyncHandler( async(req: Request, res: Response, next: NextFunction): Promise<any>=>{
-        console.log(req)
-        const token: string | undefined = req.header("Authorization")?.replace("Bearer", "") || req.cookies?.token;
+        //console.log(req.header("Authorization")?.replace("Bearer", "") )
+        const token: string | undefined = req.headers['authorization']?.replace("Bearer", "");
+        console.log(token)
         if(!token){
             return ALERT_SERVICE.sendErrorResponse(res, false, 'Unauthorized HTTP, Token not provided!');
         }

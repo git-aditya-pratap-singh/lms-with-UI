@@ -2,10 +2,12 @@ import axios from "axios";
 import environmentURL from "../_environments/environments";
 import Cookies from 'js-cookie';
 
+
 class ApiService {
+
     constructor() {
         const token = localStorage.getItem('token') || Cookies.get('token'); 
-        console.log("API",token)
+        //console.log("API",token)
 
         this.api = axios.create({
             baseURL: environmentURL.apiUrl,
