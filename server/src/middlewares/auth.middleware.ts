@@ -12,7 +12,7 @@ class UserAuthentication {
 
     public verifyToken = asyncHandler( async(req: Request, res: Response, next: NextFunction): Promise<any>=>{
         //console.log(req.header("Authorization")?.replace("Bearer", "") )
-        const token: string | undefined = req.headers['authorization']?.replace("Bearer", "");
+        const token: string | undefined = req.headers['authorization']?.replace("Bearer ", "").trim();
         console.log(token)
         if(!token){
             return ALERT_SERVICE.sendErrorResponse(res, false, 'Unauthorized HTTP, Token not provided!');

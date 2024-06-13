@@ -37,7 +37,7 @@ const useAuthGuard = () => {
 };
 
 const storeTokenInStorage = (serverToken)=>{
-    localStorage.setItem('token',JSON.stringify(serverToken))
+    localStorage.setItem('token',serverToken)
 }
 const getTokenFromStorage = ()=>{
     return localStorage.getItem('token')
