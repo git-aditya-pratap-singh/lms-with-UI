@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import dotenv from "dotenv";
 import ConnectDatabase from './config/dbConnection';
 import router from './routes/auth.routes';
@@ -22,6 +23,7 @@ app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("../dist/public"))
 
 app.use(cookieParser())
+app.use(bodyParser.json());
 
 // callig Database connection
 new ConnectDatabase().connectMongodb()

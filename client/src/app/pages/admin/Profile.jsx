@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
+import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
 import { img_update_popup } from "../../Store/Slices/StateSlice";
-import { useAuthGuard } from "../../_guard/auth.guard";
+//import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 import toTitleCase from "../../common/titleCase";
+import DateFormet from "../../common/dateFormet";
 import ApiService from "../../_service/api.service";
 
 import { FaEdit, FaUser, FaPhoneAlt, FaCalendarAlt } from "react-icons/fa";
@@ -30,8 +32,8 @@ const Profile_admin = () => {
         address: ""
     });
 
-    const [auth, setAuth] = useAuthGuard();
-    console.log(auth)
+    //const [auth, setAuth] = useAuthGuard();
+    const userprofileData = useLoaderData();
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -70,35 +72,25 @@ const Profile_admin = () => {
     const API_CALL = async(formData)=>{
         try{
             const response = await API_INSTANCE.post('/admin/updateDetails', formData);
-
             if(response.status){
-                    // storeTokenInStorage(response.data);
-                    // setAuth({
-                    //   ...auth,
-                    //   user: response.data.userValid,
-                    //   token: response.data.token
-                    // });
-                    
-                    // dispatch(login_popup(false))
                 toast.success(response.message);
             }else{
                 toast.error(response.message);
             }
 
         }catch(err){
-            console.error('API call error:', err);
             toast.error('An error occurred while trying to log in.');   
         }
     }
 
     useEffect(() => {
-        if (auth?.user) {
+        if (userprofileData) {
           setFormData(prevFormData => ({
             ...prevFormData,
-            ...auth?.user
+            ...userprofileData
           }));
         }
-      }, [auth?.user]);
+      }, []);
 
     return (
         <>
@@ -164,7 +156,7 @@ const Profile_admin = () => {
                                 <FaCalendarAlt />
                             </label>
                             <input type="date" placeholder="enter DOB..." name="dob"
-                                value={formData.dob}
+                                value={DateFormet(formData.dob)}
                                 onChange={handleChange} />
                         </span>
 
@@ -177,7 +169,7 @@ const Profile_admin = () => {
                                     className="radio radio-primary"
                                     value="Male"
                                     checked={formData.gender === 'Male'}
-                                    onChange={handleChange}
+                                    onChange={handleChange} 
                                 />
                             </label>
                             <label className="flex justify-center items-center space-x-2">
@@ -241,18 +233,38 @@ const ImgUpdate = () => {
     const popupState = useSelector((store) => store.openPopup.img_update_popup);
     const dispatch = useDispatch();
 
+    const API_INSTANCE = new ApiService(); 
+
+    const FileUploadFunc = async(event) =>{
+        event.preventDefault();
+        const formData = new FormData(event.target.file);
+        console.log(formData)
+        try{
+            const response = await API_INSTANCE.post('/admin/uploadProfilePicture',{});
+            if(response.status){
+                toast.success(response.message);
+            }else{
+                toast.error(response.message);
+            }
+
+        }catch(err){
+            toast.error('An error occurred while trying to log in.');   
+        } 
+    }
+
     return (
         <>
             <section className={`w-full h-full absolute bg-[#07070763] flex 
             justify-center items-start duration-300 ease-in-out ${popupState ? "scale-100" : "scale-0"}`}>
 
-                <form className="_imgupdate mt-16">
+                <form className="_imgupdate mt-16" encType="multipart/form-data" onSubmit={FileUploadFunc}>
                     <span className="flex justify-between items-center">
                         <h2 className="text-gray-700 font-semibold text-xl">Upload Image..!</h2>
                         <h3 style={{ cursor: "pointer" }} onClick={() =>
                             dispatch(img_update_popup(false))}><RxCross1 /></h3>
                     </span>
-                    <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10" />
+                    <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10" 
+                    name="files" accept="image/*" required/>
                     <button><GrUpdate />Update</button>
                 </form>
 

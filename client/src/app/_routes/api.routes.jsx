@@ -14,29 +14,24 @@ import Teachers from "../pages/admin/Teachers";
 import Course from "../pages/admin/Courses";
 import Registration from "../pages/admin/Registration";
 
-import { ProctedRouteGuard } from "../_guard/route.guard";
+import { ProctedRouteGuard, IsloginGuard } from "../_guard/route.guard";
+import ApiRoutesCall from "./api.routes.call";
 
-const homeLoader = async () => {
-    console.log("HIII")
-    // const response = await fetch('/api/home-data');
-    // if (!response.ok) {
-    //   throw new Error('Failed to fetch home data');
-    // }
-    // const data = await response.json();
-    return null
-};
+const API_INSTANCE_CALL = new ApiRoutesCall();
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: (
+            <IsloginGuard>
                 <Navbar />
+            </IsloginGuard>
         ),
         children: [
             {
                 index: true,
                 element: <Home />,
-                loader: homeLoader
+                //loader: homeLoader
             },
             {
                 path: "/about",
@@ -77,7 +72,8 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/profile",
-                element: <Profile />
+                element: <Profile />,
+                loader: API_INSTANCE_CALL.profileRoutesApiCall
             },
             {
                 path: "/dashboard/students",

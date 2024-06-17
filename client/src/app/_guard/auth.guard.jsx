@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext, useContext } from "react";
-
 import PropTypes from "prop-types";
 
 const AuthContext = createContext();
@@ -37,7 +36,7 @@ const useAuthGuard = () => {
 };
 
 const storeTokenInStorage = (serverToken)=>{
-    localStorage.setItem('token',serverToken)
+    localStorage.setItem('token',JSON.stringify(serverToken))
 }
 const getTokenFromStorage = ()=>{
     return localStorage.getItem('token')
@@ -46,5 +45,5 @@ const storeTokenRemove = ()=>{
     localStorage.removeItem('token')
 }
 
-export {useAuthGuard, storeTokenInStorage, getTokenFromStorage, storeTokenRemove};
 export default AuthGuard; 
+export {useAuthGuard, storeTokenInStorage, getTokenFromStorage, storeTokenRemove};

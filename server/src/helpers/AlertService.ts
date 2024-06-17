@@ -2,15 +2,19 @@ import { Response } from 'express';
 
 class AlertService {
 
-    private options = {
-        httpOnly: true,
-        secure: true
-    }
+    // public options = {
+    //     httpOnly: true,
+    //     secure: true,
+    //     sameSite: 'Strict'
+    // }
 
     public sendSuccessResponseToken(res: Response, status: boolean, message: string, data?: any): void{
-        res.status(200)
-        .cookie("token", data?.token, this.options)
-        .json({
+        res.cookie('token', data.token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict'
+        });
+        res.status(200).json({
             status: status,
             message: message,
             data: data

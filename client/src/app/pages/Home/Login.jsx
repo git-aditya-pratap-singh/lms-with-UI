@@ -1,7 +1,8 @@
 import { useState } from "react";
+//import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { login_popup } from "../../Store/Slices/StateSlice"
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import ApiService from "../../_service/api.service";
 import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
@@ -58,7 +59,8 @@ const Login = () => {
       const response = await API_INSTANCE.post('/login/login', loginData);
 
       if (response.status) {
-        storeTokenInStorage(response.data.token);
+        storeTokenInStorage(response.data);
+        //Cookies.set('token', JSON.stringify(response.data),{ secure: true, sameSite: 'Strict' });
         setAuth({
           ...auth,
           user: response.data.userValid,

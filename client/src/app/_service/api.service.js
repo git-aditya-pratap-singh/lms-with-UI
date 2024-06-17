@@ -1,20 +1,20 @@
 import axios from "axios";
 import environmentURL from "../_environments/environments";
-import Cookies from 'js-cookie';
-
+//import Cookies from 'js-cookie';
 
 class ApiService {
 
     constructor() {
-        const token = localStorage.getItem('token') || Cookies.get('token'); 
-        //console.log("API",token)
+        const userToken = JSON.parse(localStorage.getItem('token')); 
+        const token = userToken ? userToken.token : null;
 
         this.api = axios.create({
             baseURL: environmentURL.apiUrl,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+                'Authorization': token ? `Bearer ${token}` : ''
+            },
+            //withCredentials: true 
         });
     }
 

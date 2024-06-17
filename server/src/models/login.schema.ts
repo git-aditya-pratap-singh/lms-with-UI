@@ -26,6 +26,7 @@ const loginSchema: Schema<ILogin> = new Schema({
     },
     email: {
         type: String,
+        unique: true,
         required: true,
         trim: true
     },
