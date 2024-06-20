@@ -26,7 +26,7 @@ const Profile_admin = () => {
         name: "",
         email: "",
         phone: "",
-        hasAllAccess: "",
+        hasAllAccess: null,
         dob: "",
         gender: "",
         address: ""
@@ -36,9 +36,9 @@ const Profile_admin = () => {
     const userprofileData = useLoaderData();
 
     const handleChange = (event) => {
-        const {name, value} = event.target;
-        setFormData({...formData, [name]: value})
-    }
+        const { name, value } = event.target;
+        setFormData({...formData, [name]: value});
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -71,7 +71,7 @@ const Profile_admin = () => {
 
     const API_CALL = async(formData)=>{
         try{
-            const response = await API_INSTANCE.post('/admin/updateDetails', formData);
+            const response = await API_INSTANCE.put('/admin/updateDetails', formData);
             if(response.status){
                 toast.success(response.message);
             }else{
@@ -144,13 +144,6 @@ const Profile_admin = () => {
                                 onChange={handleChange} />
                         </span>
 
-                        {/* <span>
-                            <label>
-                                <FaPhoneAlt />
-                            </label>
-                            <input type="text" placeholder="enter another phone no..." name="ano_phone" />
-                        </span> */}
-
                         <span>
                             <label>
                                 <FaCalendarAlt />
@@ -165,7 +158,7 @@ const Profile_admin = () => {
                             <label className="flex justify-center items-center space-x-2">
                                 <p>Male</p>
                                 <input type="radio"
-                                    name="radio-gender"
+                                    name="gender"
                                     className="radio radio-primary"
                                     value="Male"
                                     checked={formData.gender === 'Male'}
@@ -175,7 +168,7 @@ const Profile_admin = () => {
                             <label className="flex justify-center items-center space-x-2">
                                 <p>Female</p>
                                 <input type="radio"
-                                    name="radio-gender"
+                                    name="gender"
                                     className="radio radio-primary"
                                     value="Female"
                                     checked={formData.gender === 'Female'}
@@ -189,10 +182,10 @@ const Profile_admin = () => {
                             <label className="flex justify-center items-center space-x-2">
                                 <p>True</p>
                                 <input type="radio"
-                                    name="radio-access"
+                                    name="hasAllAccess"
                                     className="radio radio-primary"
                                     value="true"
-                                    checked={formData.hasAllAccess === true}
+                                    checked={formData.hasAllAccess == "true"}
                                     onChange={handleChange}
 
                                 />
@@ -200,10 +193,10 @@ const Profile_admin = () => {
                             <label className="flex justify-center items-center space-x-2">
                                 <p>false</p>
                                 <input type="radio"
-                                    name="radio-access"
+                                    name="hasAllAccess"
                                     className="radio radio-primary"
                                     value="false"
-                                    checked={formData.hasAllAccess === false}
+                                    checked={formData.hasAllAccess == "false"}
                                     onChange={handleChange}
                                 />
                             </label>
@@ -232,15 +225,17 @@ const ImgUpdate = () => {
 
     const popupState = useSelector((store) => store.openPopup.img_update_popup);
     const dispatch = useDispatch();
+    const [file, setFile] = useState({
+        file: ""
+    });
 
     const API_INSTANCE = new ApiService(); 
 
     const FileUploadFunc = async(event) =>{
         event.preventDefault();
-        const formData = new FormData(event.target.file);
-        console.log(formData)
+        console.log(file)
         try{
-            const response = await API_INSTANCE.post('/admin/uploadProfilePicture',{});
+            const response = await API_INSTANCE.post('/admin/uploadProfilePicture',{"file": file.name});
             if(response.status){
                 toast.success(response.message);
             }else{
@@ -264,7 +259,7 @@ const ImgUpdate = () => {
                             dispatch(img_update_popup(false))}><RxCross1 /></h3>
                     </span>
                     <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10" 
-                    name="files" accept="image/*" required/>
+                    name="file" accept="image/*" required onChange={(event)=>setFile(event.target.files[0])}/>
                     <button><GrUpdate />Update</button>
                 </form>
 

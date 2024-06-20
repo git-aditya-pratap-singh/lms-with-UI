@@ -56,13 +56,13 @@ const loginSchema: Schema<ILogin> = new Schema({
     },
 
     hasAllAccess: {
-        type: Boolean,
+        type: String,
         required: true,
         trim: true
     },
     last_login: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     }
 });
 

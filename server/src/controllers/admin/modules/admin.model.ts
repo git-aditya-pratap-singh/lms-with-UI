@@ -50,7 +50,7 @@ class AdminModelControllers extends AlertService {
     })
 
     public uploadProfilePicture = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
-        console.log("FILE");
+        console.log("FILE",req.body);
     })
 
 }
