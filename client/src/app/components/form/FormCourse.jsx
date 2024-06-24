@@ -1,18 +1,12 @@
-//import { FaUser } from "react-icons/fa";
 import { useState } from "react";
-
 import { FaBookOpen, FaHandHoldingDollar, FaDollarSign, FaTag, FaBuffer } from "react-icons/fa6";
 import { FaVideo, FaLink, FaArrowRight } from "react-icons/fa";
-
 import Select from 'react-select'
-import { Editor } from 'primereact/editor';
-
+import JoditEditor from 'jodit-react';
+import { toast } from 'react-toastify';
+import ApiService from "../../_service/api.service";
 
 import "../../../assets/css/component/_formcourse.scss";
-import 'primereact/resources/themes/lara-light-indigo/theme.css'; //theme
-import 'primereact/resources/primereact.min.css'; //core css
-import 'primeicons/primeicons.css'; //icons
-import 'primeflex/primeflex.css'; // flex
 
 const FormCourse = () => {
 
@@ -49,9 +43,9 @@ const FormCourse = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        console.log(event.target)
         setCourseData({ ...courseData, [name]: value })
     }
+     
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -68,7 +62,7 @@ const FormCourse = () => {
             }
 
             // ------------Course Discription validate--------------
-            if (!courseData.ccourseDiscription) {
+            if (!courseData.courseDiscription) {
                 error.courseDiscription = "Course Discription shouln't be empty!"
             }
 
@@ -135,10 +129,26 @@ const FormCourse = () => {
 
         if (Object.keys(validateFormError).length > 0) {
             setError(validateFormError);
-           
+
         }
         else {
+            console.log("HIIIIIIIIIJIJIII",validateFormError)
+            console.log(courseData)
             setError(validateFormError);
+            {/* Api Calling */}
+            API_CALL(courseData);
+        }
+    }
+
+    const API_INSTANCE = new ApiService();
+
+    const API_CALL = async(courseData) =>{
+        try{
+            const response = await API_INSTANCE.post('/admin/addcourse', courseData);
+            return response
+
+        }catch(err){
+            toast.error('An error occurred while trying to log in.');
         }
 
     }
@@ -185,15 +195,14 @@ const FormCourse = () => {
                                 </span>
                             </div>
                             <div className="card">
-                                <Editor style={{ height: '250px' }}
-                                    name="courseDiscription"
-                                    value={courseData.courseDiscription} 
-                                    //onTextChange={(e) => setCourseData(e.htmlValue)} 
-                                    //headerTemplate={header}
-                                     />
+                                <JoditEditor
+                                    value={courseData.courseDiscription}
+                                    tabIndex={1} 
+                                    onBlur={newContent => setCourseData({ ...courseData, courseDescription: newContent })}
+                                />
                             </div>
                         </div>
-                        {error.courseDiscription = "Course Discription shouln't be empty!" && <label className="text-red-500 text-sm -mt-3">{error.courseDiscription = "Course Discription shouln't be empty!"}</label>}
+                        {error.courseDiscription && <label className="text-red-500 text-sm -mt-3">{error.courseDiscription}</label>}
                     </div>
 
 
@@ -393,10 +402,11 @@ const FormCourse = () => {
                                 </span>
                             </div>
                             <div className="card">
-                                <Editor style={{ height: '150px' }}
-                                    name="courseBenifit"
+                                <JoditEditor
                                     value={courseData.courseBenifit}
-                                    onChange={handleChange} />
+                                    tabIndex={1} 
+                                    onBlur={newContent => setCourseData({ ...courseData, courseBenifit: newContent })}
+                                />   
                             </div>
                         </div>
                         {error.courseBenifit && <label className="text-red-500 text-sm -mt-3">{error.courseBenifit}</label>}
@@ -431,7 +441,7 @@ const FormCourse = () => {
                             className="file-input file-input-bordered w-full h-10"
                             value={courseData.courseVideo}
                             onChange={handleChange} />
-                            {error.courseVideo && <label className="text-red-500 text-sm -mt-3">{error.courseVideo}</label>}
+                        {error.courseVideo && <label className="text-red-500 text-sm -mt-3">{error.courseVideo}</label>}
                     </div>
 
                     {/* Logo Upload. */}
@@ -444,7 +454,7 @@ const FormCourse = () => {
                             className="file-input file-input-bordered w-full h-10"
                             value={courseData.courselogo}
                             onChange={handleChange} />
-                            {error.courselogo && <label className="text-red-500 text-sm -mt-3">{error.courselogo}</label>}
+                        {error.courselogo && <label className="text-red-500 text-sm -mt-3">{error.courselogo}</label>}
                     </div>
 
 

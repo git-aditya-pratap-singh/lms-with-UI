@@ -3,7 +3,7 @@ import AlertService from '../../../helpers/AlertService';
 import asyncHandler from '../../../utils/asyncHandler';
 import loginDB from '../../../models/login.schema';
 
-class AdminModelControllers extends AlertService {
+class ProfileControllers extends AlertService {
 
     public getProfileDetails = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
         const user: any = req.user;
@@ -54,4 +54,4 @@ class AdminModelControllers extends AlertService {
     })
 
 }
-export default AdminModelControllers;
+export default ProfileControllers;

@@ -81,21 +81,22 @@ const Registration = () => {
     }
     else{
       // Form is Valid
+      console.log(data)
       setError(validateFormError)
     }
 
   }
 
   const options = [
-    { value: 'MERN1', label: "MERN!" },
-    { value: 'MEAN2' },
-    { value: 'MEVN3' },
-    { value: 'MERN4' },
-    { value: 'MEAN5' },
-    { value: 'MEVN6' },
-    { value: 'MERN7' },
-    { value: 'MEAN8' },
-    { value: 'MEVN9' }
+    { value: 'MERN1', label: "MERN" },
+    { value: 'MEAN2', label: "MERN2" },
+    { value: 'MEVN3', label: "MERN3" },
+    { value: 'MERN4', label: "MERN4" },
+    { value: 'MEAN5', label: "MERN5" },
+    { value: 'MEVN6', label: "MERN6" },
+    { value: 'MERN7', label: "MERN7" },
+    { value: 'MEAN8', label: "MERN8" },
+    { value: 'MEVN9', label: "MERN9" }
   ]
 
   const dispatch = useDispatch();

@@ -23,6 +23,7 @@
     "axios": "^1.6.8",
     "dayjs": "^1.11.10",
     "hamburger-react": "^2.5.0",
+    "jodit-react": "^4.1.2",
     "js-cookie": "^3.0.5",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
