@@ -3,9 +3,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-class ConnectDatabase {
+class DatabaseConnection {
     
-    public connectMongodb = async(): Promise<mongoose.Connection> => {
+    public connectToMongoDB = async(): Promise<mongoose.Connection> => {
         try{
             const connectionInstance = await mongoose.connect(process.env.MONGO_URL as string);
 
@@ -24,4 +24,4 @@ class ConnectDatabase {
     }
 }
 
-export default ConnectDatabase;
+export default DatabaseConnection;

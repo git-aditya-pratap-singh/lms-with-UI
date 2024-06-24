@@ -40,15 +40,15 @@ const teacherSchema: Schema<ITeachers> = new Schema({
     }],
     status: {
         type: String,
-        enum:['Enabled','Disabled'],
-        default: 'Enabled'
+        enum:['Active','Inactive'],
+        default: 'Active'
     },
     address: {
         type: String,
         required: true,
         trim: true
     },
-    img_url: {
+    imgUrl: {
         type: String,
         required: true,
         trim: true

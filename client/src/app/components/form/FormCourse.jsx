@@ -61,9 +61,9 @@ const FormCourse = () => {
                 error.courseName = 'A name must be contain only characters & length must be atleast 5 characters!';
             }
 
-            // ------------Course Discription validate--------------
-            if (!courseData.courseDiscription) {
-                error.courseDiscription = "Course Discription shouln't be empty!"
+            //------------Course Discription validate--------------
+            if (!courseData.courseDescription) {
+                error.courseDescription = "Course Discription shouln't be empty!"
             }
 
             // ------------Course Price validate--------------
@@ -202,7 +202,7 @@ const FormCourse = () => {
                                 />
                             </div>
                         </div>
-                        {error.courseDiscription && <label className="text-red-500 text-sm -mt-3">{error.courseDiscription}</label>}
+                        {error.courseDescription && <label className="text-red-500 text-sm -mt-3">{error.courseDescription}</label>}
                     </div>
 
 

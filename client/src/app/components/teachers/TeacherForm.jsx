@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { add_teacher_popup } from "../../Store/Slices/StateSlice";
+import { toast } from 'react-toastify';
 
 import Select from 'react-select'
+import ApiService from "../../_service/api.service";
+
 import { MdPhotoSizeSelectActual } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -21,6 +25,64 @@ const TeacherForm = () => {
 
     const dispatch = useDispatch();
     const formCheck = useSelector((store) => store.openPopup.add_teacher_popup);
+
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        course: [],
+        gender: "",
+        status: "",
+        address: "",
+        imgUrl: ""
+    })
+
+    const handleChange = (event) =>{
+        const {name, value} = event.target;
+        setFormData({...formData, [name]: value})
+
+    }
+
+    const handleSubmit = (event) =>{
+        event.preventDefault(); 
+
+        const validateFormData = () => {
+            return (
+                !formData.name ? toast.warning("Name can not be empty!") :
+                !formData.email ? toast.warning("Email can not be empty!") :
+                !formData.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/) ? toast.warning("Invalid email!") :
+                !formData.phone ? toast.warning("Phone can not be empty!") :
+                isNaN(formData.phone) ? toast.warning("Please, Enter the phone no.!") :
+                formData.phone.length < 10 ? toast.warning("Please, enter phone no. atleast 10 digit!") :
+                !formData.course.length === 0 ? toast.warning("Please, Choose any Course!") :
+                !formData.gender ? toast.warning("Please, Choose any gender!") :
+                !formData.status ? toast.warning("Please, Choose Status!") :
+                !formData.address ? toast.warning("Address can not be empty!") :
+                !formData.imgUrl ? toast.warning("Please, upload the Image!") :
+                true
+            );
+        }
+        if (validateFormData() !== true) {
+            return;
+        }else{
+           API_CALL(formData)
+        }
+    }
+
+    const API_INSTANCE = new ApiService();
+
+    const API_CALL = async(formData)=>{
+        try{
+            const response = await API_INSTANCE.post('/admin/addTeachers', formData);
+            if(response.status){
+                toast.success(response.message);
+            }else{
+                toast.error(response.message);
+            }
+        }catch(err){
+            toast.error('An error occurred while trying to log in.'); 
+        }
+    }
 
     return (
         <>
@@ -42,7 +104,7 @@ const TeacherForm = () => {
                     </span>
                 </div>
                 <h2>{`Please, ${formCheck.add ? 'add' : 'edit'} Teachers`}</h2>
-                <form className="_form">
+                <form className="_form" onSubmit={handleSubmit}>
                     {/* Name */}
                     <div>
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-800">
@@ -57,7 +119,8 @@ const TeacherForm = () => {
                             <input
                                 type="text"
                                 name="name"
-                                id="name"
+                                value={formData.name}
+                                onChange={handleChange}
                                 className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-800 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
                                 placeholder="Enter the name.."
                             />
@@ -78,7 +141,8 @@ const TeacherForm = () => {
                             <input
                                 type="email"
                                 name="email"
-                                id="email"
+                                value={formData.email}
+                                onChange={handleChange}
                                 className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-800 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                                 placeholder="Enter the email.."
                             />
@@ -99,7 +163,8 @@ const TeacherForm = () => {
                             <input
                                 type="tel"
                                 name="phone"
-                                id="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
                                 className="block w-full rounded-md border-0 py-2 pl-9 pr-10 text-gray-800 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                                 placeholder="Enter the phone no.."
                             />
@@ -119,6 +184,9 @@ const TeacherForm = () => {
                             </div>
                             <Select options={options}
                                 isMulti
+                                name="course"
+                                value={formData.course}
+                                onChange={(selectedOptions) => setFormData({ ...formData, course: selectedOptions })}
                             />
                         </div>
                     </div>
@@ -128,12 +196,23 @@ const TeacherForm = () => {
                         <label className="text-[0.9rem]">Gender : </label>
                         <div className="flex">
                             <div className="flex items-center me-4">
-                                <input id="inline-radio" type="radio" value="" name="inline-radio-group" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500
-                 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "/>
+                                <input type="radio"
+                                   name="gender"  
+                                   value="Male"
+                                   checked={formData.gender === 'Male'}
+                                   onChange={handleChange} 
+                                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500
+                                     dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "/>
                                 <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male</label>
                             </div>
+
                             <div className="flex items-center me-4">
-                                <input id="inline-radio" type="radio" value="" name="inline-radio-group" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500
+                                <input type="radio" 
+                                name="gender"  
+                                value="Female"
+                                checked={formData.gender === 'Female'}
+                                onChange={handleChange}  
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500
                  dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "/>
                                 <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
                             </div>
@@ -145,12 +224,22 @@ const TeacherForm = () => {
                         <label className="text-[0.9rem]">Status : </label>
                         <div className="flex">
                             <div className="flex items-center me-4">
-                                <input id="inline-radio" type="checkbox" value="" name="inline-radio-group" className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
-                 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 " defaultChecked />
+                                <input id="inline-radio" 
+                                type="checkbox" 
+                                name="status" 
+                                value="Active"
+                                onChange={handleChange}
+                                className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
+                 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 " />
                                 <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Active</label>
                             </div>
                             <div className="flex items-center me-4">
-                                <input id="inline-radio" type="checkbox" value="" name="inline-radio-group" className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
+                                <input id="inline-radio" 
+                                type="checkbox"  
+                                name="status" 
+                                value="Inactive"
+                                onChange={handleChange}
+                                className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
                  dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 " disabled />
                                 <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inactive</label>
                             </div>
@@ -170,7 +259,8 @@ const TeacherForm = () => {
                             </div>
                             <textarea
                                 name="address"
-                                id="address"
+                                value={formData.address}
+                                onChange={handleChange}
                                 className="resize-none block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-800 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                                 placeholder="Enter the Parmanent address.."
                                 rows="5">
@@ -193,7 +283,12 @@ const TeacherForm = () => {
                                         className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                                     >
                                         <span>Upload a file</span>
-                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                        <input id="file-upload" 
+                                        name="imgUrl" 
+                                        type="file"
+                                        value={formData.imgUrl} 
+                                        onChange={handleChange}
+                                        className="sr-only" />
                                     </label>
                                     <p className="pl-1">or drag and drop</p>
                                 </div>

@@ -7,10 +7,10 @@ export default interface ITeachers extends Document {
     email: string;
     phone: string;
     gender: string;
-    course: Types.ObjectId[];
+    course: Schema.Types.ObjectId[];
     status: string;
     address: string;
-    img_url: string;
+    imgUrl: string;
     last_login: Date;
     admin_logs: string;
 }

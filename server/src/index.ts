@@ -3,20 +3,13 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from "dotenv";
-import ConnectDatabase from './config/dbConnection';
+import DatabaseConnection from './config/dbConnection';
 import router from './routes/auth.routes';
 
 dotenv.config();
 const app = express();
 
 const apiUrl = process.env.HOST +':'+ process.env.PORT;
-
-app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-    allowedHeaders: ['Content-Type', 'Authorization'], 
-    credentials: true
-}))
 
 app.use(express.json({limit: "16kb"}))
 app.use(express.urlencoded({extended: true, limit: "16kb"}))
@@ -25,8 +18,17 @@ app.use(express.static("../dist/public"))
 app.use(cookieParser())
 app.use(bodyParser.json());
 
+app.use(cors({
+    origin: process.env.CORS_ORIGIN,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: 'HEAD,GET,POST,PUT,PATCH,DELETE',
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+}))
+
 // callig Database connection
-new ConnectDatabase().connectMongodb()
+new DatabaseConnection().connectToMongoDB()
 
 app.use('/api/v1', router)
 
