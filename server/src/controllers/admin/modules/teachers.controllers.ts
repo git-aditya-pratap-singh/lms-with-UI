@@ -6,7 +6,12 @@ class TeachersControllers extends AlertService {
 
     private createUserName = async( userName: string, res: Response): Promise<string | any> =>{
         try{
-           return ""
+            let usernameArray: string[] = [];
+            userName.toLowerCase().split(" ").map((item: string, index: number)=>{
+                usernameArray.push(item)
+            })
+            let username: string = usernameArray.join('-') + Math.floor(Math.random() * 111)
+            return usernameArray.join('-');
         }catch(err){
             return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`,);
         }
