@@ -36,7 +36,7 @@ const teacherSchema: Schema<ITeachers> = new Schema({
     course: [{
         type: Schema.Types.ObjectId,
         ref: 'course', 
-        required: true
+        required: false
     }],
     status: {
         type: String,
@@ -64,5 +64,5 @@ const teacherSchema: Schema<ITeachers> = new Schema({
     }
 });
 
-const teachersDB: Model<ITeachers> = mongoose.model<ITeachers>("student", teacherSchema);
+const teachersDB: Model<ITeachers> = mongoose.model<ITeachers>("teacher", teacherSchema);
 export default teachersDB;

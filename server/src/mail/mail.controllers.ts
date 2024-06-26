@@ -23,8 +23,8 @@ class NewMailFunctions {
         
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
-            port: 466,
-            secure: false, // true for 465, false for other ports
+            port: 465,
+            secure: true, // true for 465, false for other ports
             auth: {
                 user: process.env.NOTIFICATION_USERNAME || '',
                 pass: process.env.NOTIFICATION_PASSWORD || ''
@@ -32,7 +32,7 @@ class NewMailFunctions {
         });
 
         let mailOptions: nodemailer.SendMailOptions = {
-            from: FromNm ? `"${FromNm}" <singhadityapratap370@gmail.com>` : '"elearn" <singhadityapratap370@gmail.com>',
+            from: FromNm ? `"${FromNm}" <singhadityapratap272@gmail.com>` : '"elearn" <singhadityapratap272@gmail.com>',
             subject: subject,
             html: MessageHTML
         };

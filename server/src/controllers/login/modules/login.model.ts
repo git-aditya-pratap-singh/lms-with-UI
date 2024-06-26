@@ -6,7 +6,7 @@ import asyncHandler from '../../../utils/asyncHandler';
 import AlertService from '../../../helpers/AlertService';
 import Password_Encrypt_Decrypt from "../../../helpers/PswdEncrypt";
 import loginDB from '../../../models/login.schema';
-import NewMailFunctions from "../../../mail/mail.controller";
+import NewMailFunctions from "../../../mail/mail.controllers";
 
 dotenv.config();
 const AUTH_PASSWORD =  new Password_Encrypt_Decrypt();

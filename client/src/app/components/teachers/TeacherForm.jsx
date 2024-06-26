@@ -54,7 +54,7 @@ const TeacherForm = () => {
                 !formData.phone ? toast.warning("Phone can not be empty!") :
                 isNaN(formData.phone) ? toast.warning("Please, Enter the phone no.!") :
                 formData.phone.length < 10 ? toast.warning("Please, enter phone no. atleast 10 digit!") :
-                !formData.course.length === 0 ? toast.warning("Please, Choose any Course!") :
+                formData.course.length === 0 ? toast.warning("Please, Choose any Course!") :
                 !formData.gender ? toast.warning("Please, Choose any gender!") :
                 !formData.status ? toast.warning("Please, Choose Status!") :
                 !formData.address ? toast.warning("Address can not be empty!") :
@@ -76,6 +76,12 @@ const TeacherForm = () => {
             const response = await API_INSTANCE.post('/admin/addTeachers', formData);
             if(response.status){
                 toast.success(response.message);
+                if (formCheck.add == true) {
+                    dispatch(add_teacher_popup({ check: false, key: 'add' }))
+                }
+                if (formCheck.edit == true) {
+                    dispatch(add_teacher_popup({ check: false, key: 'edit' }))
+                }
             }else{
                 toast.error(response.message);
             }
