@@ -73,18 +73,24 @@ const TeacherForm = () => {
 
     const API_CALL = async(formData)=>{
         try{
-            const response = await API_INSTANCE.post('/admin/addTeachers', formData);
-            if(response.status){
-                toast.success(response.message);
-                if (formCheck.add == true) {
+            if (formCheck.add == true){
+                const response = await API_INSTANCE.post('/admin/addTeachers', formData);
+                if(response.status){
+                    toast.success(response.message);
                     dispatch(add_teacher_popup({ check: false, key: 'add' }))
+                }else{
+                    toast.error(response.message);
                 }
-                if (formCheck.edit == true) {
-                    dispatch(add_teacher_popup({ check: false, key: 'edit' }))
-                }
-            }else{
-                toast.error(response.message);
             }
+            if (formCheck.edit == true) {
+                const response = await API_INSTANCE.post('/admin/editTeachers', formData);
+                if(response.status){
+                    toast.success(response.message);
+                    dispatch(add_teacher_popup({ check: false, key: 'edit' }))
+                }else{
+                    toast.error(response.message);
+                }
+            }  
         }catch(err){
             toast.error('An error occurred while trying to log in.'); 
         }

@@ -81,7 +81,8 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/teachers",
-                element: <Teachers />
+                element: <Teachers />,
+                loader: API_INSTANCE_CALL.teachersRoutesApiCall
             },
             {
                 path: "/dashboard/course",

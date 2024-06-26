@@ -1,4 +1,4 @@
-import express, {Request, Response} from 'express';
+import {Request, Response} from 'express';
 import AlertService from '../../../helpers/AlertService';
 import asyncHandler from '../../../utils/asyncHandler';
 import CommonServices from '../../../helpers/common.services';
@@ -104,6 +104,11 @@ class TeachersControllers extends AlertService {
         .catch(err =>{
             return this.sendErrorResponse(res, false, "Credentials hasn't Added!!");
         })
+    });
+
+    public editTeachers = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
+        console.log(req.body)
+        const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
     })
 
 }
