@@ -11,7 +11,7 @@ class ProfileControllers extends AlertService {
             {_id: user._id},
             {username: 1, name: 1, designation: 1, email: 1, phone: 1, status: 1, hasAllAccess: 1,  gender: 1, dob: 1, address: 1}
         )
-        return this.sendSuccessResponse(res, true, "Fetch-Succefully", userDetails);
+        return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", userDetails);
 
     })
 

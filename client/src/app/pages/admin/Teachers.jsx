@@ -1,4 +1,5 @@
-
+//import { createContext } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { add_teacher_popup } from "../../Store/Slices/StateSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,8 +13,12 @@ import "../../../assets/css/admin/_students.scss";
 
 const Teachers = () => {
 
+    const teacherList = useLoaderData();
+    //const teacherContext = createContext();
+
     const dispatch = useDispatch();
     const teacherPopup = useSelector((store) => store.openPopup.add_teacher_popup);
+    console.log(teacherPopup)
 
     return (
         <>
@@ -58,9 +63,13 @@ const Teachers = () => {
                     </div>
                 </div>
             </section>
+            
+            {/* <teacherContext.Provider value={teacherList}>
+                <Table />
+            </teacherContext.Provider> */}
 
-            <Table />
-
+            <Table list={teacherList}/>
+            
             {/* Add Form */}
             {(teacherPopup.add || teacherPopup.edit) &&
                 <div className={`transition-all-duration-700 ease w-full left-0 h-full top-0 fixed z-10 bg-[#0707077a] flex
@@ -68,10 +77,10 @@ const Teachers = () => {
                     <TeacherForm />
                 </div>
             }
-
-
         </>
     )
 }
 
+
+//export { teacherContext };
 export default Teachers;

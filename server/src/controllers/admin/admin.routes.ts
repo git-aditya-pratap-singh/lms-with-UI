@@ -10,17 +10,17 @@ const INSTANCE_OF_PROFILE = new ProfileControllers();
 const INSTANCE_Of_COURSE = new CourseControllers();
 const INSTANCE_OF_TEACHER = new TeachersControllers();
 
-//-----------METHOD-> GET-------------------
+//-----------Routes -> Profile-------------------
 adminRoutes.get('/getProfileDetails', INSTANCE_OF_PROFILE.getProfileDetails);
-adminRoutes.get('/getProfileDetails', INSTANCE_OF_PROFILE.getProfileDetails);getTeachersDeatils
-
-//-----------METHOD-> POST-------------------
+adminRoutes.put('/updateDetails', INSTANCE_OF_PROFILE.updateDetails);
 adminRoutes.post('/uploadProfilePicture', upload.single("file"), INSTANCE_OF_PROFILE.uploadProfilePicture);
+
+//-----------Routes -> course-------------------
 adminRoutes.post('/addcourse', INSTANCE_Of_COURSE.addCourse);
+
+//----------------Routes -> Teachers------------------
+adminRoutes.get('/getTeachersDeatils', INSTANCE_OF_TEACHER.getTeachersDeatils);
 adminRoutes.post('/addTeachers', INSTANCE_OF_TEACHER.addTeachers);
 adminRoutes.post('/editTeachers', INSTANCE_OF_TEACHER.editTeachers);
-
-//-----------METHOD-> PUT-------------------
-adminRoutes.put('/updateDetails', INSTANCE_OF_PROFILE.updateDetails);
 
 export default adminRoutes;

@@ -8,11 +8,12 @@ const StateSlice = createSlice({
         img_update_popup : false,
         add_student_popup : {
             add : false,
-            edit : false
+            edit : false, 
         },
         add_teacher_popup : {
             add : false,
-            edit : false
+            edit : false,
+            item : ''
         }
     },
     reducers : {
@@ -34,6 +35,7 @@ const StateSlice = createSlice({
         
         add_teacher_popup : (state, action)=>{
             state.add_teacher_popup[action.payload.key === 'add' ? 'add' : 'edit'] = action.payload.check;
+            state.add_teacher_popup.item = action.payload.item;
         }
     }
 })

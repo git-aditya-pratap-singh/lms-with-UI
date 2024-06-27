@@ -10,7 +10,7 @@ class ApiRoutesCall {
             if(response.status === true){
                 return response.data;
             }
-        } catch (err) {
+        }catch (err) {
             console.log(err);
             return null;
         }

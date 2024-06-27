@@ -47,6 +47,20 @@ class TeachersControllers extends AlertService {
         }
     }
 
+    public getTeachersDeatils = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
+        const response = await teachersDB.find({},{
+            name: 1,
+            email: 1,
+            phone: 1,
+            course: 1,
+            gender: 1,
+            status: 1,
+            address: 1,
+            imgUrl: 1
+        })
+        return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
+    })
+
     public addTeachers = asyncHandler( async(req: Request, res: Response): Promise<any> =>{
       
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
@@ -57,7 +71,8 @@ class TeachersControllers extends AlertService {
         }
 
         const userName: string = await new CommonServices().createUserName(name, res);
-        if(userName){
+        const validUsername: string = await this.credentialUsernameCheck(userName, res)
+        if(validUsername){
             return this.sendErrorResponse(res, false, "This Username is already exists!!")
         }
 
