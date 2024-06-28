@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { add_teacher_popup } from "../../Store/Slices/StateSlice";
 import { toast } from 'react-toastify';
@@ -25,6 +25,7 @@ const TeacherForm = () => {
 
     const dispatch = useDispatch();
     const formCheck = useSelector((store) => store.openPopup.add_teacher_popup);
+    console.log(formCheck)
 
     const [formData, setFormData] = useState({
         name: "",
@@ -36,6 +37,12 @@ const TeacherForm = () => {
         address: "",
         imgUrl: ""
     })
+
+    useEffect(() => {
+        setFormData(formCheck.item);
+    }, [formCheck.item]);
+
+
 
     const handleChange = (event) =>{
         const {name, value} = event.target;
@@ -95,6 +102,8 @@ const TeacherForm = () => {
             toast.error('An error occurred while trying to log in.'); 
         }
     }
+
+  
 
     return (
         <>

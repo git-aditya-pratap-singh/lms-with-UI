@@ -18,7 +18,6 @@ const Teachers = () => {
 
     const dispatch = useDispatch();
     const teacherPopup = useSelector((store) => store.openPopup.add_teacher_popup);
-    console.log(teacherPopup)
 
     return (
         <>
