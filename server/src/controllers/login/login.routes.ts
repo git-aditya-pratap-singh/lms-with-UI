@@ -1,9 +1,9 @@
 import express from 'express';
 import LoginController from './modules/login.model';
 
-const authRoutes = express.Router();
+const loginRoutes = express.Router();
 const LOGIN_INSTANCE = new LoginController();
 
-authRoutes.post('/login', LOGIN_INSTANCE.Login);
+loginRoutes.post('/login', LOGIN_INSTANCE.Login);
 
-export default authRoutes;
+export default loginRoutes;

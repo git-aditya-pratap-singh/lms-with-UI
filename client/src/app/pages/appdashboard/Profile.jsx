@@ -71,7 +71,7 @@ const Profile_admin = () => {
 
     const API_CALL = async(formData)=>{
         try{
-            const response = await API_INSTANCE.put('/admin/updateDetails', formData);
+            const response = await API_INSTANCE.put('/dashboard/profiles/updateDetails', formData);
             if(response.status){
                 toast.success(response.message);
             }else{
@@ -235,7 +235,7 @@ const ImgUpdate = () => {
         event.preventDefault();
         console.log(file)
         try{
-            const response = await API_INSTANCE.post('/admin/uploadProfilePicture',{"file": file.name});
+            const response = await API_INSTANCE.post('/dashboard/profiles/uploadProfilePicture',{"file": file.name});
             if(response.status){
                 toast.success(response.message);
             }else{

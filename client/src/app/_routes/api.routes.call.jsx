@@ -6,7 +6,7 @@ class ApiRoutesCall {
 
     profileRoutesApiCall = async ()=>{
         try {
-            const response = await API_INSTANCE.get('/admin/getProfileDetails');
+            const response = await API_INSTANCE.get('/dashboard/profiles/getProfileDetails');
             if(response.status === true){
                 return response.data;
             }
@@ -18,7 +18,7 @@ class ApiRoutesCall {
 
     teachersRoutesApiCall = async()=>{
         try{
-            const response = await API_INSTANCE.get('/admin/getTeachersDeatils');
+            const response = await API_INSTANCE.get('/dashboard/teachers/getTeachersDeatils');
             if(response.status == true){
                 return response.data;
             }

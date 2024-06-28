@@ -1,15 +1,13 @@
 import express from 'express';
-import authRoutes from '../controllers/login/login.routes';
-import adminRoutes from '../controllers/admin/admin.routes';
-import userRoutes from '../controllers/users/user.routes';
+import loginRoutes from '../controllers/login/login.routes';
+import dashboardRoutes from '../controllers/controllers.routes';
 
 import UserAuthentication from '../middlewares/auth.middleware';
 
-const router = express.Router();
-const AUTH_TOKEN_VERIFICATION = new UserAuthentication();
+const AUTH_VERIFICATION = new UserAuthentication();
+const authRouter = express.Router();
 
-router.use('/login', authRoutes);
-router.use('/admin', AUTH_TOKEN_VERIFICATION.verifyToken, adminRoutes);
-router.use('/user', AUTH_TOKEN_VERIFICATION.verifyToken, userRoutes);
+authRouter.use('/dashboard', AUTH_VERIFICATION.verifyToken, dashboardRoutes);
+authRouter.use('/login', loginRoutes)
 
-export default router;
+export default authRouter;

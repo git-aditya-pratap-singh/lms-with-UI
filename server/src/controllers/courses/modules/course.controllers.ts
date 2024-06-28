@@ -1,4 +1,4 @@
-import express, {Request, Response} from 'express';
+import {Request, Response} from 'express';
 import AlertService from '../../../helpers/AlertService';
 import asyncHandler from '../../../utils/asyncHandler';
 

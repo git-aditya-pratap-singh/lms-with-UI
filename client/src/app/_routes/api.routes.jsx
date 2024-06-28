@@ -1,18 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Home from "../pages/Home/Home";
-import Navbar from "../pages/Home/Navbar";
-import About from "../pages/Home/About";
-import Service from "../pages/Home/Service";
-import Contact from "../pages/Home/Contact";
+import Home from "../pages/home/Home";
+import Navbar from "../pages/home/Navbar";
+import About from "../pages/home/About";
+import Service from "../pages/home/Service";
+import Contact from "../pages/home/Contact";
 
-import Dashboard from "../pages/admin/layout/Dashboard";
-import UHome from "../pages/admin/Home";
-import Profile from "../pages/admin/Profile";
-import Students from "../pages/admin/Students";
-import Teachers from "../pages/admin/Teachers";
-import Course from "../pages/admin/Courses";
-import Registration from "../pages/admin/Registration";
+import Dashboard from "../pages/appdashboard/layout/Dashboard";
+import UHome from "../pages/appdashboard/Home";
+import Profile from "../pages/appdashboard/Profile";
+import Students from "../pages/appdashboard/Students";
+import Teachers from "../pages/appdashboard/Teachers";
+import Course from "../pages/appdashboard/Courses";
+import Registration from "../pages/appdashboard/Registration";
 
 import { ProctedRouteGuard, IsloginGuard } from "../_guard/route.guard";
 import ApiRoutesCall from "./api.routes.call";

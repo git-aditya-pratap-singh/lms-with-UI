@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dotenv from "dotenv";
 import DatabaseConnection from './config/dbConnection';
-import router from './routes/auth.routes';
+import authRouter from './routes/auth.routes';
 
 dotenv.config();
 const app = express();
@@ -30,7 +30,7 @@ app.use(cors({
 // callig Database connection
 new DatabaseConnection().connectToMongoDB()
 
-app.use('/api/v1', router)
+app.use('/api/v1', authRouter)
 
 const PORT: string = process.env.PORT || '5000';
 
