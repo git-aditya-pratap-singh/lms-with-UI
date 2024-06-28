@@ -1,6 +1,7 @@
 
 import { add_student_popup } from "../../Store/Slices/StateSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useLoaderData } from 'react-router-dom';
 
 import { FaUserPlus, FaDownload  } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -14,6 +15,7 @@ const Students = () => {
 
     const dispatch = useDispatch();
     const studentsPopup = useSelector((store) => store.openPopup.add_student_popup);
+    const studentList = useLoaderData();
 
     return (
         <>
@@ -61,7 +63,7 @@ const Students = () => {
                 </div>
             </section>
             
-            <Table/>
+            <Table list={studentList}/>
 
             {/* Add Form */}
             {(studentsPopup.add || studentsPopup.edit) &&

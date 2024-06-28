@@ -16,6 +16,18 @@ class ApiRoutesCall {
         }
     }
 
+    studentsRoutesApiCall = async()=>{
+        try{
+            const response = await API_INSTANCE.get('/dashboard/students/getStudentsDeatils');
+            if(response.status == true){
+                return response.data;
+            }
+        }catch(err){
+            console.log(err);
+            return null;
+        }
+    }
+
     teachersRoutesApiCall = async()=>{
         try{
             const response = await API_INSTANCE.get('/dashboard/teachers/getTeachersDeatils');

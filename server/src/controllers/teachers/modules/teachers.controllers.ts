@@ -127,5 +127,4 @@ class TeachersControllers extends AlertService {
     })
 
 }
-
 export default TeachersControllers;

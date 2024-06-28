@@ -9,6 +9,7 @@ const StateSlice = createSlice({
         add_student_popup : {
             add : false,
             edit : false, 
+            item: ''
         },
         add_teacher_popup : {
             add : false,

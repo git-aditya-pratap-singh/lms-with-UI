@@ -17,8 +17,6 @@ import Registration from "../pages/appdashboard/Registration";
 import { ProctedRouteGuard, IsloginGuard } from "../_guard/route.guard";
 import ApiRoutesCall from "./api.routes.call";
 
-const API_INSTANCE_CALL = new ApiRoutesCall();
-
 const router = createBrowserRouter([
     {
         path: "/",
@@ -73,16 +71,17 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/profile",
                 element: <Profile />,
-                loader: API_INSTANCE_CALL.profileRoutesApiCall
+                loader: new ApiRoutesCall().profileRoutesApiCall
             },
             {
                 path: "/dashboard/students",
-                element: <Students />
+                element: <Students />,
+                loader: new ApiRoutesCall().studentsRoutesApiCall
             },
             {
                 path: "/dashboard/teachers",
                 element: <Teachers />,
-                loader: API_INSTANCE_CALL.teachersRoutesApiCall
+                loader: new ApiRoutesCall().teachersRoutesApiCall
             },
             {
                 path: "/dashboard/course",
