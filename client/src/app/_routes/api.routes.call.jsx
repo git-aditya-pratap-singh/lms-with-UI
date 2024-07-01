@@ -11,33 +11,69 @@ class ApiRoutesCall {
                 return response.data;
             }
         }catch (err) {
-            console.log(err);
             return null;
         }
     }
 
     studentsRoutesApiCall = async()=>{
         try{
-            const response = await API_INSTANCE.get('/dashboard/students/getStudentsDeatils');
-            if(response.status == true){
-                return response.data;
+            const apiCalls = [
+                API_INSTANCE.get('/dashboard/students/getStudentsDeatils'),
+                API_INSTANCE.get('/dashboard/course/getCourseList'),
+            ];
+
+            const responses = await Promise.all(apiCalls);
+            const allResponsesSuccessful = responses.every(response => response.status === true);
+      
+            if (allResponsesSuccessful) {
+                return responses.map(response => response.data);
+            } else {
+                return null;
             }
         }catch(err){
-            console.log(err);
             return null;
         }
     }
 
     teachersRoutesApiCall = async()=>{
         try{
-            const response = await API_INSTANCE.get('/dashboard/teachers/getTeachersDeatils');
-            if(response.status == true){
-                return response.data;
+            const apiCalls = [
+                API_INSTANCE.get('/dashboard/teachers/getTeachersDeatils'),
+                API_INSTANCE.get('/dashboard/course/getCourseList'),
+            ];
+
+            const responses = await Promise.all(apiCalls);
+            const allResponsesSuccessful = responses.every(response => response.status === true);
+      
+            if (allResponsesSuccessful) {
+                return responses.map(response => response.data);
+            } else {
+                return null;
             }
         }catch(err){
-            console.log(err);
             return null;
         }
     }
+
+    courseRoutesApiCall = async () => {
+        try {
+          const apiCalls = [
+            API_INSTANCE.get('/dashboard/teachers/getCourseTeachersDeatils'),
+            API_INSTANCE.get('/dashboard/courseTags/getCourseTags'),
+          ];
+      
+          const responses = await Promise.all(apiCalls);
+          const allResponsesSuccessful = responses.every(response => response.status === true);
+      
+          if (allResponsesSuccessful) {
+            return responses.map(response => response.data);
+          } else {
+            return null;
+          }
+        } catch (err) {
+          return null;
+        }
+      };
+      
 }
 export default ApiRoutesCall;

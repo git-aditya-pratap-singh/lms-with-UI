@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from "react-redux";
 import { add_teacher_popup } from "../../Store/Slices/StateSlice";
-import toTitleCase from "../../common/titleCase"
+import toTitleCase from "../../common/titleCase";
 
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -10,9 +10,8 @@ import ig from "../../../assets/img/admin.jpg";
 import "../../../assets/css/component/_table.scss";
 
 const Table = (props) => {
+  
   const dispatch = useDispatch();
-  //const allTeacherList = useContext(teacherContext)
-  console.log(props.list);
 
   return (
     <>

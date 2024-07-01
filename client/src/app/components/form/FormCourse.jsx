@@ -1,28 +1,30 @@
 import { useState } from "react";
-import { FaBookOpen, FaHandHoldingDollar, FaDollarSign, FaTag, FaBuffer } from "react-icons/fa6";
-import { FaVideo, FaLink, FaArrowRight } from "react-icons/fa";
+import PropTypes from 'prop-types';
 import Select from 'react-select'
 import JoditEditor from 'jodit-react';
 import { toast } from 'react-toastify';
+import toTitleCase from '../../common/titleCase';
 import ApiService from "../../_service/api.service";
+
+import { FaBookOpen, FaHandHoldingDollar, FaDollarSign, FaTag, FaBuffer } from "react-icons/fa6";
+import { FaVideo, FaLink, FaArrowRight } from "react-icons/fa";
 
 import "../../../assets/css/component/_formcourse.scss";
 
-const FormCourse = () => {
+const FormCourse = (props) => {
 
-    const options2 = [
-        { value: 'MERN1', label: 'Aditya' },
-        { value: 'MEAN2', label: "Arun" },
-        { value: 'MEVN3', label: "Varun" },
-        { value: 'MERN4' },
-        { value: 'MEAN5' },
-        { value: 'MEVN6' },
-        { value: 'MERN7' },
-        { value: 'MEAN8' },
-        { value: 'MEVN9' }
-    ]
+    const faculityList = [];
+    const courseTagsList = [];
 
-    const [courseData, setCourseData] = useState({
+    props?.list[0]?.map((item)=>{  // for teachers
+        faculityList.push({value: item?._id, label: toTitleCase(item?.name)})
+    })
+
+    props?.list[1]?.map((item)=>{  // for courseTags
+        courseTagsList.push({value: item?._id, label: toTitleCase(item?.tagName)})
+    })
+
+    const initialState = {
         courseName: '',
         courseDiscription: '',
         coursePrice: '',
@@ -37,7 +39,9 @@ const FormCourse = () => {
         faculity: [],
         courseVideo: '',
         courselogo: ''
-    });
+    }
+
+    const [courseData, setCourseData] = useState(initialState);
 
     const [error, setError] = useState({});
 
@@ -119,7 +123,7 @@ const FormCourse = () => {
 
             //------------course courselogo -----------------
             if (!courseData.courselogo) {
-                error.courselogo = 'Please! Upload a Video.'
+                error.courselogo = 'Please! Upload a Logo.'
             }
 
             return error;
@@ -132,8 +136,6 @@ const FormCourse = () => {
 
         }
         else {
-            console.log("HIIIIIIIIIJIJIII",validateFormError)
-            console.log(courseData)
             setError(validateFormError);
             {/* Api Calling */}
             API_CALL(courseData);
@@ -144,11 +146,12 @@ const FormCourse = () => {
 
     const API_CALL = async(courseData) =>{
         try{
-            const response = await API_INSTANCE.post('/admin/addcourse', courseData);
-            return response
-
+            const response = await API_INSTANCE.post('/dashboard/course/addCourse', courseData);
+            response.status ? 
+            (toast.success(response.message), setCourseData(initialState)) 
+            : toast.error(response.message);
         }catch(err){
-            toast.error('An error occurred while trying to log in.');
+            toast.error('An error occurred while trying to add course.');
         }
 
     }
@@ -264,14 +267,12 @@ const FormCourse = () => {
                                     <FaTag color='#007DFC' />
                                 </span>
                             </div>
-                            <input
-                                type="text"
+                            <Select
+                                options={courseTagsList}
+                                isMulti
                                 name="courseTags"
-                                id="courseTags"
                                 value={courseData.courseTags}
-                                onChange={handleChange}
-                                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
-                                placeholder="Enter the Course Tags.."
+                                onChange={(selectedOptions) => setCourseData({ ...courseData, courseTags: selectedOptions })}
                             />
                         </div>
                         {error.courseTags && <label className="text-red-500 text-sm -mt-3">{error.courseTags}</label>}
@@ -310,11 +311,11 @@ const FormCourse = () => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <select name="courseLevel" value={courseData.courseLevel} onChange={handleChange}
                                 className="block w-full rounded-md border-0 py-2 pl-3 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6">
-                                <option disabled selected>Select Course Level</option>
-                                <option>Easy</option>
-                                <option>Medium</option>
-                                <option>Hard</option>
-                                <option>Deep Dive</option>
+                                <option value="" disabled >Select Course Level</option>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                                <option value="Deep Dive">Deep Dive</option>
                             </select>
                         </div>
                         {error.courseLevel && <label className="text-red-500 text-sm -mt-3">{error.courseLevel}</label>}
@@ -420,7 +421,7 @@ const FormCourse = () => {
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm bg-black">
                             <Select
-                                options={options2}
+                                options={faculityList}
                                 isMulti
                                 name="faculity"
                                 value={courseData.faculity}
@@ -472,7 +473,26 @@ const FormCourse = () => {
 
         </>
     )
-}
+};
+
+FormCourse.propTypes = {
+    list: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }))).isRequired,
+};
+
+FormCourse.propTypes = {
+    list: PropTypes.arrayOf(
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          _id: PropTypes.string,
+          name: PropTypes.string,
+          tagName: PropTypes.string,
+        })
+      )
+    ).isRequired,
+};
 
 
 export default FormCourse;

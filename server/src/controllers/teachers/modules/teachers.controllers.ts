@@ -1,4 +1,5 @@
 import {Request, Response} from 'express';
+import {ObjectId} from 'mongodb';
 import AlertService from '../../../helpers/AlertService';
 import asyncHandler from '../../../utils/asyncHandler';
 import CommonServices from '../../../helpers/common.services';
@@ -61,9 +62,20 @@ class TeachersControllers extends AlertService {
         return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
     })
 
+    public getCourseTeachersDeatils = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
+        const response = await teachersDB.find({},{
+            _id: 1,
+            name: 1,
+        })
+        return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
+    })
+
     public addTeachers = asyncHandler( async(req: Request, res: Response): Promise<any> =>{
       
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
+
+        const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));
+
 
         const credential: any = await this.credentialCheck(email, phone, res);
         if(credential){
@@ -105,7 +117,7 @@ class TeachersControllers extends AlertService {
            email: email,
            phone: phone,
            gender: gender,
-           //course: [new ObjectId("edeferfrfdce988u80fef")],     course pr kaam krna baki hai abhi
+           course: courseList,     
            status: status,
            address: address,
            imgUrl: imgUrl,

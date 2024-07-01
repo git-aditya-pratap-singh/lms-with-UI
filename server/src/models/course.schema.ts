@@ -23,11 +23,10 @@ const courseSchema: Schema<ICourse> = new Schema({
         required: true,
         trim: true
     },
-    tags: {
-        type: [String],
-        required: true,
-        trim: true
-    },
+    tags: [{
+        type: Schema.Types.ObjectId,
+        required: true
+    }],
     categories: {
         type: String,
         required: true,
@@ -58,7 +57,6 @@ const courseSchema: Schema<ICourse> = new Schema({
     },
     faculty: [{
         type: Schema.Types.ObjectId,
-        ref: 'Faculty', 
         required: true
     }],
     video_uploaded_url: {

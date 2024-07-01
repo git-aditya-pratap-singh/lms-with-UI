@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from "react-redux";
 import { add_student_popup } from "../../Store/Slices/StateSlice";
 import { toast } from "react-toastify";
+import toTitleCase from "../../common/titleCase";
 
 import Select from "react-select";
 import ApiService from "../../_service/api.service";
@@ -15,15 +17,16 @@ import { FaPlus } from "react-icons/fa6";
 
 import "../../../assets/css/component/_addform.scss";
 
-const options = [
-  { value: "MERN", label: "MERN" },
-  { value: "MEAN", label: "MEAN" },
-  { value: "MEVN", label: "MEVN" },
-];
 
-const AddForm = () => {
+const AddForm = (props) => {
+
+  const courseList = [];
+  props?.courseList.map((item)=>{  // for courseList
+    courseList.push({value: item?._id, label: toTitleCase(item?.name)})
+  });
+
   const dispatch = useDispatch();
-  const formCheck = useSelector((store) => store.openPopup.add_student_popup);
+  const formEditinfo = useSelector((store) => store.openPopup.add_student_popup);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -80,54 +83,51 @@ const AddForm = () => {
 
   const API_CALL = async (formData) => {
     try {
-      if (formCheck.add == true) {
-        const response = await API_INSTANCE.post(
-          "/dashboard/students/addStudents",
-          formData
-        );
-        if (response.status) {
-          toast.success(response.message);
-          dispatch(add_student_popup({ check: false, key: "add" }));
-        } else {
-          toast.error(response.message);
-        }
-      }
-      if (formCheck.edit == true) {
-        const response = await API_INSTANCE.post(
-          "/dashboard/students/editStudents",
-          formData
-        );
-        if (response.status) {
-          toast.success(response.message);
-          dispatch(add_student_popup({ check: false, key: "edit" }));
-        } else {
-          toast.error(response.message);
-        }
+      const endpoint = formEditinfo.add ? "/dashboard/students/addStudents" : "/dashboard/students/editStudents";
+      const response = formEditinfo.add ? await API_INSTANCE.post(endpoint, formData) : await API_INSTANCE.put(endpoint, formData);
+      if (response.status) {
+        toast.success(response.message);
+        dispatch(add_student_popup({ check: false, key: formEditinfo.add ? "add" : "edit" }));
+      } else {
+        toast.error(response.message);
       }
     } catch (err) {
       toast.error("An error occurred while trying to log in.");
     }
   };
 
+  useEffect(() => {
+    console.log("HII")
+    setFormData({
+    name: formEditinfo.item.name,
+    email: formEditinfo.item.email,
+    phone: formEditinfo.item.phone,
+    course: formEditinfo.item.course,
+    gender: formEditinfo.item.gender,
+    status: formEditinfo.item.status,
+    address: formEditinfo.item.address
+    })
+  }, [formEditinfo.item]);
+
   return (
     <>
       <section className="_addForm">
         <div className="flex justify-between items-center">
-          <h3>{`${formCheck.add ? "Add" : "Edit"} Students 🙋‍♂️`}</h3>
+          <h3>{`${formEditinfo.add ? "Add" : "Edit"} Students 🙋‍♂️`}</h3>
           <span className="cursor-pointer">
             <RxCross1
               onClick={() => {
-                if (formCheck.add == true) {
+                if (formEditinfo.add == true) {
                   dispatch(add_student_popup({ check: false, key: "add" }));
                 }
-                if (formCheck.edit == true) {
+                if (formEditinfo.edit == true) {
                   dispatch(add_student_popup({ check: false, key: "edit" }));
                 }
               }}
             />
           </span>
         </div>
-        <h2>{`Please, ${formCheck.add ? "add" : "edit"} students`}</h2>
+        <h2>{`Please, ${formEditinfo.add ? "add" : "edit"} students`}</h2>
         <form className="_form" onSubmit={handleSubmit}>
           {/* Name */}
           <div>
@@ -217,7 +217,7 @@ const AddForm = () => {
                 <span className="text-gray-800 sm:text-sm"></span>
               </div>
               <Select
-                options={options}
+                options={courseList}
                 isMulti
                 name="course"
                 value={formData.course}
@@ -272,10 +272,10 @@ const AddForm = () => {
                   type="checkbox"
                   name="status"
                   value="Active"
+                  checked={formData.status === "Active"}
                   onChange={handleChange}
                   className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
                                 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
-                  defaultChecked
                 />
                 <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                   Active
@@ -286,10 +286,11 @@ const AddForm = () => {
                   type="checkbox"
                   name="status"
                   value="Inactive"
+                  checked={formData.status === "Inactive"}
                   onChange={handleChange}
+                  disabled={formEditinfo.add}
                   className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
                                  dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
-                  disabled
                 />
                 <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                   Inactive
@@ -342,6 +343,7 @@ const AddForm = () => {
                   >
                     <span>Upload a file</span>
                     <input
+                      id="file-upload"
                       name="imgUrl"
                       type="file"
                       value={formData.imgUrl}
@@ -358,12 +360,22 @@ const AddForm = () => {
             </div>
           </div>
           <button className="button">
-            {`${formCheck.add ? "Add Students" : "Update"}`}
-            {formCheck.add ? <FaPlus /> : <GrUpdate />}
+            {`${formEditinfo.add ? "Add Students" : "Update"}`}
+            {formEditinfo.add ? <FaPlus /> : <GrUpdate />}
           </button>
         </form>
       </section>
     </>
   );
 };
+
+AddForm.propTypes = {
+  courseList: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
 export default AddForm;

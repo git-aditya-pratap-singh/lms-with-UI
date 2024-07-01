@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { add_student_popup } from "../../Store/Slices/StateSlice";
+import toTitleCase from "../../common/titleCase";
 
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -54,7 +55,7 @@ const Table = (props) => {
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{item?.name}</div>
+                        <div className="font-bold">{toTitleCase(item?.name)}</div>
                         <div className="text-sm opacity-50">INDIA</div>
                       </div>
                     </div>

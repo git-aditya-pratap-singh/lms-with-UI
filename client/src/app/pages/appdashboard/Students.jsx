@@ -15,7 +15,7 @@ const Students = () => {
 
     const dispatch = useDispatch();
     const studentsPopup = useSelector((store) => store.openPopup.add_student_popup);
-    const studentList = useLoaderData();
+    const itemList = useLoaderData();
 
     return (
         <>
@@ -42,7 +42,7 @@ const Students = () => {
 
                         <button className="_bt bg-green-50 "
                             onClick={() => 
-                                dispatch(add_student_popup({check: true, key:'add'}))}>
+                                dispatch(add_student_popup({check: true, key:'add', item: ''}))}>
                                 <FaUserPlus  className="text-green-600" /></button>
 
                         <button className="_bt bg-red-100 text-red-500"><MdDelete /></button>
@@ -63,13 +63,13 @@ const Students = () => {
                 </div>
             </section>
             
-            <Table list={studentList}/>
+            <Table list={itemList[0]}/>
 
             {/* Add Form */}
             {(studentsPopup.add || studentsPopup.edit) &&
                 <div className={`transition-all-duration-700 ease w-full left-0 h-full top-0 fixed z-10 bg-[#0707077a] flex
                     justify-center items-center ease-in-out`}>
-                    <AddForm />
+                    <AddForm courseList={itemList[1]}/>
                 </div>
             }
 

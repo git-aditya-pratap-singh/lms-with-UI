@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from "react-redux";
 import { add_teacher_popup } from "../../Store/Slices/StateSlice";
 import { toast } from "react-toastify";
-
 import Select from "react-select";
+import toTitleCase from "../../common/titleCase";
 import ApiService from "../../_service/api.service";
 
 import { MdPhotoSizeSelectActual } from "react-icons/md";
@@ -15,16 +16,16 @@ import { FaPlus } from "react-icons/fa6";
 
 import "../../../assets/css/component/_addform.scss";
 
-const options = [
-  { value: "MERN", label: "MERN" },
-  { value: "MEAN", label: "MEAN" },
-  { value: "MEVN", label: "MEVN" },
-];
 
-const TeacherForm = () => {
+const TeacherForm = (props) => {
+
+  const courseList = [];
+  props?.courseList.map((item)=>{  // for courseList
+    courseList.push({value: item?._id, label: toTitleCase(item?.name)})
+  });
+
   const dispatch = useDispatch();
-  const formCheck = useSelector((store) => store.openPopup.add_teacher_popup);
-  console.log(formCheck);
+  const formEditinfo = useSelector((store) => store.openPopup.add_teacher_popup);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -81,54 +82,53 @@ const TeacherForm = () => {
 
   const API_CALL = async (formData) => {
     try {
-      if (formCheck.add == true) {
-        const response = await API_INSTANCE.post(
-          "/dashboard/teachers/addTeachers",
-          formData
-        );
-        if (response.status) {
-          toast.success(response.message);
-          dispatch(add_teacher_popup({ check: false, key: "add" }));
-        } else {
-          toast.error(response.message);
-        }
-      }
-      if (formCheck.edit == true) {
-        const response = await API_INSTANCE.post(
-          "/dashboard/teachers/editTeachers",
-          formData
-        );
-        if (response.status) {
-          toast.success(response.message);
-          dispatch(add_teacher_popup({ check: false, key: "edit" }));
-        } else {
-          toast.error(response.message);
-        }
+      const endpoint = formEditinfo.add ? "/dashboard/teachers/addTeachers" : "/dashboard/teachers/editTeachers";
+      const response = formEditinfo.add ? await API_INSTANCE.post(endpoint, formData) : await API_INSTANCE.put(endpoint, formData);
+      if (response.status) {
+        toast.success(response.message);
+        dispatch(add_teacher_popup({ check: false, key: formEditinfo.add ? "add" : "edit" }));
+      } else {
+        toast.error(response.message);
       }
     } catch (err) {
       toast.error("An error occurred while trying to log in.");
     }
   };
 
+  useEffect(() => {
+    console.log("HII")
+    if(formEditinfo.item.name){
+      setFormData({
+        name: formEditinfo.item.name,
+        email: formEditinfo.item.email,
+        phone: formEditinfo.item.phone,
+        course: formEditinfo.item.course,
+        gender: formEditinfo.item.gender,
+        status: formEditinfo.item.status,
+        address: formEditinfo.item.address
+        })
+    }
+  }, [formEditinfo.item]);
+
   return (
     <>
       <section className="_addForm">
         <div className="flex justify-between items-center">
-          <h3>{`${formCheck.add ? "Add" : "Edit"} Teachers 🙋‍♂️`}</h3>
+          <h3>{`${formEditinfo.add ? "Add" : "Edit"} Teachers 🙋‍♂️`}</h3>
           <span className="cursor-pointer">
             <RxCross1
               onClick={() => {
-                if (formCheck.add == true) {
+                if (formEditinfo.add == true) {
                   dispatch(add_teacher_popup({ check: false, key: "add" }));
                 }
-                if (formCheck.edit == true) {
+                if (formEditinfo.edit == true) {
                   dispatch(add_teacher_popup({ check: false, key: "edit" }));
                 }
               }}
             />
           </span>
         </div>
-        <h2>{`Please, ${formCheck.add ? "add" : "edit"} Teachers`}</h2>
+        <h2>{`Please, ${formEditinfo.add ? "add" : "edit"} Teachers`}</h2>
         <form className="_form" onSubmit={handleSubmit}>
           {/* Name */}
           <div>
@@ -218,13 +218,11 @@ const TeacherForm = () => {
                 <span className="text-gray-800 sm:text-sm"></span>
               </div>
               <Select
-                options={options}
+                options={courseList}
                 isMulti
                 name="course"
                 value={formData.course}
-                onChange={(selectedOptions) =>
-                  setFormData({ ...formData, course: selectedOptions })
-                }
+                onChange={(selectedOptions) =>setFormData({ ...formData, course: selectedOptions }) }
               />
             </div>
           </div>
@@ -275,6 +273,7 @@ const TeacherForm = () => {
                   type="checkbox"
                   name="status"
                   value="Active"
+                  checked={formData.status === "Active"}
                   onChange={handleChange}
                   className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
                  dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
@@ -289,10 +288,11 @@ const TeacherForm = () => {
                   type="checkbox"
                   name="status"
                   value="Inactive"
+                  checked={formData.status === "Inactive"}
                   onChange={handleChange}
+                  disabled={formEditinfo.add}
                   className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
                  dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
-                  disabled
                 />
                 <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                   Inactive
@@ -356,18 +356,27 @@ const TeacherForm = () => {
                   <p className="pl-1">or drag and drop</p>
                 </div>
                 <p className="text-xs leading-5 text-gray-600">
-                  PNG, JPG, GIF up to 10MB
+                  PNG, JPG, GIF up to 1MB
                 </p>
               </div>
             </div>
           </div>
           <button className="button">
-            {`${formCheck.add ? "Add Teachers" : "Update"}`}
-            {formCheck.add ? <FaPlus /> : <GrUpdate />}
+            {`${formEditinfo.add ? "Add Teachers" : "Update"}`}
+            {formEditinfo.add ? <FaPlus /> : <GrUpdate />}
           </button>
         </form>
       </section>
     </>
   );
+};
+
+TeacherForm.propTypes = {
+  courseList: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 export default TeacherForm;

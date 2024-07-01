@@ -1,3 +1,4 @@
+
 import { useDispatch } from "react-redux";
 import { add_student_popup } from "../../Store/Slices/StateSlice";
 
@@ -8,6 +9,7 @@ import "../../../assets/css/component/_studentaddTable.scss";
 
 const StudentAddTable = () => {
     const dispatch = useDispatch();
+
     return (
         <>
             <div className="_tableContainerAdd">

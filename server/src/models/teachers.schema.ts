@@ -35,8 +35,7 @@ const teacherSchema: Schema<ITeachers> = new Schema({
     },
     course: [{
         type: Schema.Types.ObjectId,
-        ref: 'course', 
-        required: false
+        required: true
     }],
     status: {
         type: String,

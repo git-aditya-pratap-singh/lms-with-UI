@@ -6,7 +6,7 @@ const asyncHandler = (func: Function) =>
         try{
             await func(req, res, next)
         }catch(err){
-           return new AlertService().sendServerErrorResponse(res, false, "SERVER_ERROR!!")
+           return new AlertService().sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`)
         }
     }
 

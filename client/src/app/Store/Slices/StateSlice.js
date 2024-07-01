@@ -32,6 +32,7 @@ const StateSlice = createSlice({
 
         add_student_popup : (state, action)=>{ 
             state.add_student_popup[action.payload.key === 'add' ? 'add' : 'edit'] = action.payload.check;
+            state.add_student_popup.item = action.payload.item;
         },
         
         add_teacher_popup : (state, action)=>{

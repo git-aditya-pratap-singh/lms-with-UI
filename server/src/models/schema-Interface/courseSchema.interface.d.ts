@@ -5,7 +5,7 @@ export default interface ICourse extends Document {
     description: string; 
     price: number;
     estimated_price: number;
-    tags: string[]; 
+    tags: Types.ObjectId[]; 
     categories: string;
     level: string;
     video_title: string;

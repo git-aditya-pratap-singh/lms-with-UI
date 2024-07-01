@@ -13,8 +13,7 @@ import "../../../assets/css/admin/_students.scss";
 
 const Teachers = () => {
 
-    const teacherList = useLoaderData();
-    //const teacherContext = createContext();
+    const itemList = useLoaderData();
 
     const dispatch = useDispatch();
     const teacherPopup = useSelector((store) => store.openPopup.add_teacher_popup);
@@ -43,7 +42,7 @@ const Teachers = () => {
 
                         <button className="_bt bg-green-100 text-green-500"
                             onClick={() => 
-                                dispatch(add_teacher_popup({check: true, key:'add'}))}>
+                                dispatch(add_teacher_popup({check: true, key:'add', item: ''}))}>
                                 <FaUserPlus color="green" /></button>
 
                         <button className="_bt bg-red-100 text-red-500"><MdDelete /></button>
@@ -67,13 +66,13 @@ const Teachers = () => {
                 <Table />
             </teacherContext.Provider> */}
 
-            <Table list={teacherList}/>
+            <Table list={itemList[0]}/>
             
             {/* Add Form */}
             {(teacherPopup.add || teacherPopup.edit) &&
                 <div className={`transition-all-duration-700 ease w-full left-0 h-full top-0 fixed z-10 bg-[#0707077a] flex
                     justify-center items-center ease-in-out`}>
-                    <TeacherForm />
+                    <TeacherForm courseList={itemList[1]}/>
                 </div>
             }
         </>
