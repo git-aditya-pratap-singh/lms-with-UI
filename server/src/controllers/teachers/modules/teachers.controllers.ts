@@ -49,16 +49,40 @@ class TeachersControllers extends AlertService {
     }
 
     public getTeachersDeatils = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
-        const response = await teachersDB.find({},{
-            name: 1,
-            email: 1,
-            phone: 1,
-            course: 1,
-            gender: 1,
-            status: 1,
-            address: 1,
-            imgUrl: 1
-        })
+
+        const teacherList = [
+                {
+                '$match': {'status': { '$ne': "Disabled" } }
+                },
+                {
+                  '$lookup': {
+                    'from': 'courses', 'localField': 'course', 'foreignField': '_id', 'as': 'courseList'
+                  }
+                }, {
+                  '$addFields': {
+                    'courseList': {
+                      '$map': {'input': '$courseList', 'as': 'courseItem', 
+                        'in': {'_id': '$$courseItem._id', 'name': '$$courseItem.name'}}
+                    }
+                  }
+                }, {
+                  '$project': {
+                    '_id': 1, 'name': 1, 'email': 1, 'phone': 1, 'gender': 1, 
+                    'status': 1, 'address': 1, 'imgUrl': 1, 'courseList': 1
+                  }
+                }
+        ]
+        const response = await teachersDB.aggregate(teacherList);
+        // const response = await teachersDB.find({},{
+        //     name: 1,
+        //     email: 1,
+        //     phone: 1,
+        //     course: 1,
+        //     gender: 1,
+        //     status: 1,
+        //     address: 1,
+        //     imgUrl: 1
+        // })
         return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
     })
 
