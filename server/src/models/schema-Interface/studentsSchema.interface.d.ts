@@ -7,7 +7,7 @@ export default interface IStudents extends Document {
     email: string;
     phone: string;
     gender: string;
-    course: Schema.Types.ObjectId[];
+    course: Types.ObjectId[];
     status: string;
     address: string;
     imgUrl: string;

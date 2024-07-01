@@ -34,8 +34,7 @@ const studentSchema: Schema<IStudents> = new Schema({
         trim: true
     },
     course: [{
-        type: Schema.Types.ObjectId,
-        ref: 'course', 
+        type: Schema.Types.ObjectId, 
         required: true
     }],
     status: {
