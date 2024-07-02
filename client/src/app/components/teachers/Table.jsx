@@ -10,6 +10,7 @@ import ig from "../../../assets/img/admin.jpg";
 import "../../../assets/css/component/_table.scss";
 
 const Table = (props) => {
+  console.log(props)
   
   const dispatch = useDispatch();
 
@@ -70,7 +71,11 @@ const Table = (props) => {
                   </td>
                   <td>+91 {item?.phone}</td>
                   <td>{item?.gender}</td>
-                  <td>{item?.course}</td>
+                  <td>{item?.courseList.map((items)=>{
+                    return(
+                      <span key={items._id}>{toTitleCase(items?.name)}</span>
+                    )
+                  })}</td>
                   <td>
                     <label className={`p-[0.3rem] rounded ${item?.status === "Active" ? "bg-[#a6ffe6] text-[#1E8267]" : "bg-[#FFBAD6] text-[#CC0052]"}`}>
                       {item?.status}

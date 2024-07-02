@@ -48,10 +48,10 @@ class ApiRoutesCall {
             if (allResponsesSuccessful) {
                 return responses.map(response => response.data);
             } else {
-                return null;
+                return 0;
             }
         }catch(err){
-            return null;
+            return 0;
         }
     }
 

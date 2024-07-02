@@ -66,13 +66,13 @@ const Teachers = () => {
                 <Table />
             </teacherContext.Provider> */}
 
-            <Table list={itemList[0]}/>
+            { itemList && <Table list={itemList[0]}/> }
             
             {/* Add Form */}
             {(teacherPopup.add || teacherPopup.edit) &&
                 <div className={`transition-all-duration-700 ease w-full left-0 h-full top-0 fixed z-10 bg-[#0707077a] flex
                     justify-center items-center ease-in-out`}>
-                    <TeacherForm courseList={itemList[1]}/>
+                    { itemList && <TeacherForm courseList={itemList[1]}/> }
                 </div>
             }
         </>

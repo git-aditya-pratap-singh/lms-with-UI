@@ -36,7 +36,7 @@ class CourseControllers extends AlertService {
         const courseTagsList: ObjectId[] = courseTags.map((tags: any) => new ObjectId(tags.value));
         const facultyList: ObjectId[] = faculity.map((faculty: any) => new ObjectId(faculty.value));
 
-        if(await this.IsCourseExists(courseName, res)){
+        if(!await this.IsCourseExists(courseName, res)){
             return this.sendErrorResponse(res, false, "Course is already Exists!!")
         }
 

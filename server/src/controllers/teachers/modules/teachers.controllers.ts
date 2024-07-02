@@ -49,40 +49,60 @@ class TeachersControllers extends AlertService {
     }
 
     public getTeachersDeatils = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
-
         const teacherList = [
-                {
-                '$match': {'status': { '$ne': "Disabled" } }
-                },
-                {
-                  '$lookup': {
-                    'from': 'courses', 'localField': 'course', 'foreignField': '_id', 'as': 'courseList'
+            {
+                '$match': {'status': {'$ne': 'Disabled'}}
+            }, 
+            {
+                '$lookup': {
+                    'from': 'courses', 'localField': 'course', 'foreignField': '_id', 'as': 'courseList', 
+                    'pipeline': [
+                      {
+                        '$match': {'status': {'$ne': 'Disabled'}}
+                      }
+                    ]
                   }
-                }, {
-                  '$addFields': {
+            }, 
+            {
+                '$addFields': {
                     'courseList': {
-                      '$map': {'input': '$courseList', 'as': 'courseItem', 
-                        'in': {'_id': '$$courseItem._id', 'name': '$$courseItem.name'}}
+                      '$map': {
+                        'input': '$courseList', 'as': 'courseItem', 
+                        'in': { '_id': '$$courseItem._id', 'name': '$$courseItem.name'}
+                      }
+                    }
+                }
+            }, 
+            {
+                '$lookup': {
+                    'from': 'courses', 'localField': '_id', 'foreignField': 'faculty', 'as': 'faculityCourse'
+                }
+            }, 
+            {
+                '$addFields': {
+                    'faculityCourse': {
+                      '$map': {
+                        'input': '$faculityCourse', 'as': 'faculityCourse', 
+                        'in': {'_id': '$$faculityCourse._id', 'name': '$$faculityCourse.name'}
+                      }
                     }
                   }
-                }, {
-                  '$project': {
+            }, 
+            {
+                '$project': {
                     '_id': 1, 'name': 1, 'email': 1, 'phone': 1, 'gender': 1, 
-                    'status': 1, 'address': 1, 'imgUrl': 1, 'courseList': 1
-                  }
+                    'status': 1, 'address': 1, 'imgUrl': 1, 'courseList': 1, 
+                    'faculityCourse': 1
                 }
+            }
         ]
-        const response = await teachersDB.aggregate(teacherList);
-        // const response = await teachersDB.find({},{
-        //     name: 1,
-        //     email: 1,
-        //     phone: 1,
-        //     course: 1,
-        //     gender: 1,
-        //     status: 1,
-        //     address: 1,
-        //     imgUrl: 1
-        // })
+        let response = await teachersDB.aggregate(teacherList);
+        await Promise.all(response.map(async(item: any) => {
+            item.courseList.push(await item.faculityCourse.filter((courseItem: any) => {
+                return !item.courseList.some((course: any) => course._id === courseItem._id);
+            }));
+        }));
+        console.log(response)
         return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
     })
 
@@ -97,26 +117,20 @@ class TeachersControllers extends AlertService {
     public addTeachers = asyncHandler( async(req: Request, res: Response): Promise<any> =>{
       
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
-
         const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));
-
-
         const credential: any = await this.credentialCheck(email, phone, res);
         if(credential){
             return this.sendErrorResponse(res, false, "This User is already exists!!")
         }
-
         const userName: string = await new CommonServices().createUserName(name, res);
         const validUsername: string = await this.credentialUsernameCheck(userName, res)
         if(validUsername){
             return this.sendErrorResponse(res, false, "This Username is already exists!!")
         }
-
         const generatePswd: any = await this.generatePassword(name, res);
         if(!generatePswd){
             return this.sendErrorResponse(res, false, "Password isn't to be generated!!")
         }
-
         const toEmail = email;
         const subject: string = '🪬Your Account Credential from elearn SoftTech Pvt. Ltd';
         const messagehtml = `
@@ -133,7 +147,6 @@ class TeachersControllers extends AlertService {
         if(!sent){
             return this.sendErrorResponse(res, false, "Failed to Send Credential on your email !!")
         }
-
         const response = await new teachersDB({
            username: userName,
            name: name,
@@ -146,7 +159,6 @@ class TeachersControllers extends AlertService {
            address: address,
            imgUrl: imgUrl,
            admin_logs: req?.user?.username
-
         });
         response.save()
         .then(saveData =>{
