@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import {ObjectId} from 'mongodb';
+import { PipelineStage } from 'mongoose';
 import AlertService from '../../../helpers/AlertService';
 import asyncHandler from '../../../utils/asyncHandler';
 import CommonServices from '../../../helpers/common.services';
@@ -49,10 +50,7 @@ class TeachersControllers extends AlertService {
     }
 
     public getTeachersDeatils = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
-        const teacherList = [
-            {
-                '$match': {'status': {'$ne': 'Disabled'}}
-            }, 
+        const teacherList: PipelineStage[]  = [
             {
                 '$lookup': {
                     'from': 'courses', 'localField': 'course', 'foreignField': '_id', 'as': 'courseList', 
@@ -68,7 +66,7 @@ class TeachersControllers extends AlertService {
                     'courseList': {
                       '$map': {
                         'input': '$courseList', 'as': 'courseItem', 
-                        'in': { '_id': '$$courseItem._id', 'name': '$$courseItem.name'}
+                        'in': { '_id': '$$courseItem._id', 'label': '$$courseItem.name'}
                       }
                     }
                 }
@@ -83,7 +81,7 @@ class TeachersControllers extends AlertService {
                     'faculityCourse': {
                       '$map': {
                         'input': '$faculityCourse', 'as': 'faculityCourse', 
-                        'in': {'_id': '$$faculityCourse._id', 'name': '$$faculityCourse.name'}
+                        'in': {'_id': '$$faculityCourse._id', 'label': '$$faculityCourse.name'}
                       }
                     }
                   }
@@ -94,15 +92,19 @@ class TeachersControllers extends AlertService {
                     'status': 1, 'address': 1, 'imgUrl': 1, 'courseList': 1, 
                     'faculityCourse': 1
                 }
-            }
-        ]
+            },{'$sort': {'name': 1}}
+        ];
+
         let response = await teachersDB.aggregate(teacherList);
+        //--------------- Teacher collection and course collection merge and findout courseList------------------------
         await Promise.all(response.map(async(item: any) => {
-            item.courseList.push(await item.faculityCourse.filter((courseItem: any) => {
-                return !item.courseList.some((course: any) => course._id === courseItem._id);
-            }));
+            await item.faculityCourse.filter((courseItem: any) => {
+                item.courseList.some((course: any) => {
+                    (course._id === courseItem._id) ? null : item.courseList.push(courseItem);
+                });
+            });
         }));
-        console.log(response)
+        //------------------------------------------------------------------------------------------------------------
         return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
     })
 

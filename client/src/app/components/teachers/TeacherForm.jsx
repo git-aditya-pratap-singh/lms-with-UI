@@ -1,5 +1,5 @@
-import { useState,useEffect } from "react";
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { add_teacher_popup } from "../../Store/Slices/StateSlice";
 import { toast } from "react-toastify";
@@ -16,16 +16,18 @@ import { FaPlus } from "react-icons/fa6";
 
 import "../../../assets/css/component/_addform.scss";
 
-
 const TeacherForm = (props) => {
-
-  const courseList = [];
-  props?.courseList.map((item)=>{  // for courseList
-    courseList.push({value: item?._id, label: toTitleCase(item?.name)})
+  
+  //-----------------Get Course List---------------------------------
+  const courseListItem = [];
+  props?.courseDataList.map((item) => {   // for get course list
+    courseListItem.push({ value: item?._id, label: toTitleCase(item?.name) });
   });
+  //------------------------------------------------------------------
 
   const dispatch = useDispatch();
   const formEditinfo = useSelector((store) => store.openPopup.add_teacher_popup);
+  console.log("Teachers",formEditinfo)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -86,7 +88,7 @@ const TeacherForm = (props) => {
       const response = formEditinfo.add ? await API_INSTANCE.post(endpoint, formData) : await API_INSTANCE.put(endpoint, formData);
       if (response.status) {
         toast.success(response.message);
-        dispatch(add_teacher_popup({ check: false, key: formEditinfo.add ? "add" : "edit" }));
+        dispatch(add_teacher_popup({check: false, key: formEditinfo.add ? "add" : "edit",}));
       } else {
         toast.error(response.message);
       }
@@ -96,19 +98,26 @@ const TeacherForm = (props) => {
   };
 
   useEffect(() => {
-    console.log("HII")
-    if(formEditinfo.item.name){
-      setFormData({
-        name: formEditinfo.item.name,
-        email: formEditinfo.item.email,
-        phone: formEditinfo.item.phone,
-        course: formEditinfo.item.course,
-        gender: formEditinfo.item.gender,
-        status: formEditinfo.item.status,
-        address: formEditinfo.item.address
+    if (formEditinfo?.item?.name) {
+      //----------------Selected course list Array-------------------------
+      const selectedCourseList = [];
+      formEditinfo?.item?.courseList.map((course)=>{
+        courseListItem.some((courseObj)=>{
+          courseObj.value === course._id ? selectedCourseList.push(courseObj) : null;
         })
+      });
+      
+      setFormData({
+        name: formEditinfo?.item?.name,
+        email: formEditinfo?.item?.email,
+        phone: formEditinfo?.item?.phone,
+        course: selectedCourseList,
+        gender: formEditinfo?.item?.gender,
+        status: formEditinfo?.item?.status,
+        address: formEditinfo?.item?.address,
+      });
     }
-  }, [formEditinfo.item]);
+  }, [formEditinfo?.item]);
 
   return (
     <>
@@ -134,8 +143,7 @@ const TeacherForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Name
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -159,8 +167,7 @@ const TeacherForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Email
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -184,8 +191,7 @@ const TeacherForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Phone no.
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -209,8 +215,7 @@ const TeacherForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Select Course's
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -218,11 +223,13 @@ const TeacherForm = (props) => {
                 <span className="text-gray-800 sm:text-sm"></span>
               </div>
               <Select
-                options={courseList}
+                options={courseListItem}
                 isMulti
                 name="course"
                 value={formData.course}
-                onChange={(selectedOptions) =>setFormData({ ...formData, course: selectedOptions }) }
+                onChange={(selectedOptions) =>
+                  setFormData({ ...formData, course: selectedOptions })
+                }
               />
             </div>
           </div>
@@ -372,7 +379,7 @@ const TeacherForm = (props) => {
 };
 
 TeacherForm.propTypes = {
-  courseList: PropTypes.arrayOf(
+  courseDataList: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

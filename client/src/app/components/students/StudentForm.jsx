@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { add_student_popup } from "../../Store/Slices/StateSlice";
 import { toast } from "react-toastify";
@@ -17,16 +17,16 @@ import { FaPlus } from "react-icons/fa6";
 
 import "../../../assets/css/component/_addform.scss";
 
-
 const AddForm = (props) => {
-
   const courseList = [];
-  props?.courseList.map((item)=>{  // for courseList
-    courseList.push({value: item?._id, label: toTitleCase(item?.name)})
+  props?.courseList.map((item) => {// for courseList
+    courseList.push({ value: item?._id, label: toTitleCase(item?.name) });
   });
 
   const dispatch = useDispatch();
-  const formEditinfo = useSelector((store) => store.openPopup.add_student_popup);
+  const formEditinfo = useSelector(
+    (store) => store.openPopup.add_student_popup
+  );
 
   const [formData, setFormData] = useState({
     name: "",
@@ -87,26 +87,26 @@ const AddForm = (props) => {
       const response = formEditinfo.add ? await API_INSTANCE.post(endpoint, formData) : await API_INSTANCE.put(endpoint, formData);
       if (response.status) {
         toast.success(response.message);
-        dispatch(add_student_popup({ check: false, key: formEditinfo.add ? "add" : "edit" }));
+        dispatch(add_student_popup({check: false, key: formEditinfo.add ? "add" : "edit",}) );
       } else {
         toast.error(response.message);
       }
     } catch (err) {
-      toast.error("An error occurred while trying to log in.");
+      toast.error("An error occurred while trying to Student form.");
     }
   };
 
   useEffect(() => {
-    console.log("HII")
+    console.log("HII");
     setFormData({
-    name: formEditinfo.item.name,
-    email: formEditinfo.item.email,
-    phone: formEditinfo.item.phone,
-    course: formEditinfo.item.course,
-    gender: formEditinfo.item.gender,
-    status: formEditinfo.item.status,
-    address: formEditinfo.item.address
-    })
+      name: formEditinfo.item.name,
+      email: formEditinfo.item.email,
+      phone: formEditinfo.item.phone,
+      course: formEditinfo.item.course,
+      gender: formEditinfo.item.gender,
+      status: formEditinfo.item.status,
+      address: formEditinfo.item.address,
+    });
   }, [formEditinfo.item]);
 
   return (
@@ -133,8 +133,7 @@ const AddForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Name
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -158,8 +157,7 @@ const AddForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Email
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -183,8 +181,7 @@ const AddForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Phone no.
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -208,8 +205,7 @@ const AddForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Select Course's
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -303,8 +299,7 @@ const AddForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Parmanent address
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -326,21 +321,19 @@ const AddForm = (props) => {
           <div className="hidden md:block">
             <label
               htmlFor="cover-photo"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
+              className="block text-sm font-medium leading-6 text-gray-900">
               Cover photo
             </label>
             <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
               <div className="text-center">
                 <MdPhotoSizeSelectActual
                   className="mx-auto h-12 w-12 text-gray-300"
-                  aria-hidden="true"
-                />
+                  aria-hidden="true"/>
                 <div className="mt-4 flex text-sm leading-6 text-gray-600">
                   <label
                     htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                  >
+                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2
+                     focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                     <span>Upload a file</span>
                     <input
                       id="file-upload"
