@@ -66,7 +66,9 @@ const Teachers = () => {
                 <Table />
             </teacherContext.Provider> */}
 
-            { itemList && <Table list={itemList[0]}/> }
+           {itemList && itemList.length > 0  && (
+                <Table list={itemList[0]} />
+            )}
             
             {/* Add Form */}
             {(teacherPopup.add || teacherPopup.edit) &&

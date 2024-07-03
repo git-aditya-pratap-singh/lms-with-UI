@@ -96,14 +96,15 @@ class TeachersControllers extends AlertService {
         ];
 
         let response = await teachersDB.aggregate(teacherList);
-        //--------------- Teacher collection and course collection merge and findout courseList------------------------
-        await Promise.all(response.map(async(item: any) => {
-            await item.faculityCourse.filter((courseItem: any) => {
-                item.courseList.some((course: any) => {
-                    (course._id === courseItem._id) ? null : item.courseList.push(courseItem);
-                });
+        //--------------- Teacher collection and course collection merge and findout courseList-----------------------
+        const faculityCourseIds = new Set(response.flatMap(item => item.faculityCourse.map((course: any) => course._id)));
+        response.forEach(item => {
+            item.faculityCourse.forEach((courseItem: any) => {
+                if (!item.courseList.some((course: any) => course._id === courseItem._id)) {
+                    item.courseList.push(courseItem);
+                }
             });
-        }));
+        });
         //------------------------------------------------------------------------------------------------------------
         return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
     })
