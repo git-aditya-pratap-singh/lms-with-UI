@@ -39,12 +39,10 @@ const Teachers = () => {
                         </div>
                     </div>
                     <div className="_studentAddDel">
-
                         <button className="_bt bg-green-100 text-green-500"
                             onClick={() => 
                                 dispatch(add_teacher_popup({check: true, key:'add', item: ''}))}>
                                 <FaUserPlus color="green" /></button>
-
                         <button className="_bt bg-red-100 text-red-500"><MdDelete /></button>
                         <button className="_bt bg-blue-100 text-blue-500"><FaDownload/></button>
                     </div>

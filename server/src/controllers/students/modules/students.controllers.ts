@@ -11,43 +11,7 @@ import studentsDB from "../../../models/students.schema";
 
 const INSTANCE_OF_PSWD = new Password_Encrypt_Decrypt();
 const INSTANCE_OF_MAIL = new NewMailFunctions();
-
 class StudentsControllers extends AlertService {
-
-    private credentialCheck = async(email: string, phone: string, res: Response): Promise<any> =>{
-        try{
-           const response = await studentsDB.findOne({
-            $or: [
-                {email: email},
-                {phone: phone}
-            ]
-           })
-           return response;
-        }catch(err){
-            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
-        }
-    }
-
-    private credentialUsernameCheck = async(userName: string, res: Response): Promise<any> =>{
-        try{
-            const response = await studentsDB.findOne({
-                username: userName
-            })
-           return response;
-        }catch(err){
-            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
-        }
-    }
-
-    private generatePassword = async(name: string, res: Response): Promise<any>=>{
-        try{ 
-            const pswd = name.toLowerCase().split(" ")[0] + '@' + Math.floor(Math.random() * 1000);
-            const encyPswd = await INSTANCE_OF_PSWD.passwordEncrypt(pswd);
-            return {encyPswd, pswd}
-        }catch(err){
-            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
-        }
-    }
 
     public getStudentsDeatils = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
         const studentList: PipelineStage[] = [
@@ -72,7 +36,7 @@ class StudentsControllers extends AlertService {
         ];
         const response = await studentsDB.aggregate(studentList);
         return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
-    })
+    });
 
     public addStudents = asyncHandler( async(req: Request, res: Response): Promise<any> =>{
       
@@ -95,25 +59,12 @@ class StudentsControllers extends AlertService {
         if(!generatePswd){
             return this.sendErrorResponse(res, false, "Password isn't to be generated!!")
         }
-
-        const toEmail = email;
-        const subject: string = '🪬Your Account Credential from elearn SoftTech Pvt. Ltd';
-        const messagehtml = `
-            <p>Dear ${name},</p>
-            <p>Your account has been created successfully. Below are your login Credential:</p>
-            <p><strong>Username:</strong> <span style="color: #007DFC">${userName}</span></p>
-            <p><strong>Password:</strong> <span style="color: #007DFC">${generatePswd.pswd}</span></p>
-            <p>Please keep this information safe and secure.</p><br><br>
-            <p style="color: #007DFC">Best regards,</p>
-            <p style="color: #007DFC">elearn SoftTech Pvt. Ltd</p>
-            <p style="color: #007DFC">Address: WMGV+P43, Varthur Main Rd, Devarabisanahalli, Uttarahalli Hobli, Bengaluru, Karnataka 560103</p>`
-
-        const sent = await INSTANCE_OF_MAIL.newSmtpMail(toEmail, subject, messagehtml)
-        if(!sent){
+        const emailSent = await this.sendCredentialsByEmail(res, name, userName, generatePswd.pswd, email);
+        if(!emailSent){
             return this.sendErrorResponse(res, false, "Failed to Send Credential on your email !!")
         }
 
-        const response = await new studentsDB({
+        const studentData = new studentsDB({
            username: userName,
            name: name,
            password: generatePswd.encyPswd,
@@ -126,7 +77,8 @@ class StudentsControllers extends AlertService {
            imgUrl: imgUrl,
            admin_logs: req?.user?.username
         });
-        response.save()
+
+        await studentData.save()
         .then(saveData =>{
             return this.sendSuccessResponse(res, true, "Credentials Added Successfully!!");
         })
@@ -136,24 +88,31 @@ class StudentsControllers extends AlertService {
     });
 
     public editStudents = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
-        console.log(req.body)
-        const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
 
+        const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
         // const credential: any = await this.credentialCheck(email, phone, res);
         // if(credential){
         //     return this.sendErrorResponse(res, false, "This Email or Phoneno. is already exists!!")
         // }
-
+        if(req?.user?.designation !== 'admin'){
+            const hasStudentStatus: boolean = await this.isCheckStudentStatus(email, res);
+            if(!hasStudentStatus){
+                return this.sendErrorResponse(res, false, "Account has been Deactivate. Please, Contact to Administrator!!")
+            }
+        }
+        
+        const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));
         const updateStudentData = await studentsDB.updateOne(
             {email: email},
             {$set: {
                 name: name,
                 email: email,
                 phone: phone,
-                course: course,
+                course: courseList,
                 gender: gender,  
                 status: status,
                 address: address,
+                imgUrl: imgUrl,
                 admin_logs: req?.user?.username
             }},
             {$new: true}
@@ -161,8 +120,74 @@ class StudentsControllers extends AlertService {
         return updateStudentData
             ? this.sendSuccessResponse(res, true, `Student Credential Updated!!`)
             : this.sendErrorResponse(res, false, `Failed to update student Credential !!`);
+    });
 
-    })
+    private credentialCheck = async(email: string, phone: string, res: Response): Promise<any> =>{
+        try{
+           const response = await studentsDB.findOne({
+            $or: [
+                {email: email},
+                {phone: phone}
+            ]
+           })
+           return response;
+        }catch(err){
+            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
+        }
+    };
 
+    private credentialUsernameCheck = async(userName: string, res: Response): Promise<any> =>{
+        try{
+            const response = await studentsDB.findOne({
+                username: userName
+            })
+           return response;
+        }catch(err){
+            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
+        }
+    };
+
+    private isCheckStudentStatus = async(email: string, res: Response): Promise<boolean | any> =>{
+        try{
+            const hasStatus = await studentsDB.findOne({
+                email: email,
+                status: { $ne: "Disabled" }
+            });
+            return hasStatus ? true : false;
+        }catch(err){
+            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
+        }
+    }
+
+    private generatePassword = async(name: string, res: Response): Promise<any>=>{
+        try{ 
+            const pswd = name.toLowerCase().split(" ")[0] + '@' + Math.floor(Math.random() * 1000);
+            const encyPswd = await INSTANCE_OF_PSWD.passwordEncrypt(pswd);
+            return {encyPswd, pswd}
+        }catch(err){
+            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
+        }
+    };
+
+    private sendCredentialsByEmail = async(res: Response, name: string, userName: string, password: string, email: string): Promise<boolean | any> =>{
+        try{
+            const toEmail = email;
+            const subject: string = '🪬Your Account Credential from elearn SoftTech Pvt. Ltd';
+            const messagehtml = `
+                <p>Dear ${name},</p>
+                <p>Your account has been created successfully. Below are your login Credential:</p>
+                <p><strong>Username:</strong> <span style="color: #007DFC">${userName}</span></p>
+                <p><strong>Password:</strong> <span style="color: #007DFC">${password}</span></p>
+                <p>Please keep this information safe and secure.</p><br><br>
+                <p style="color: #007DFC">Best regards,</p>
+                <p style="color: #007DFC">elearn SoftTech Pvt. Ltd</p>
+                <p style="color: #007DFC">Address: WMGV+P43, Varthur Main Rd, Devarabisanahalli, Uttarahalli Hobli, Bengaluru, Karnataka 560103</p>`
+    
+            const sent = await INSTANCE_OF_MAIL.newSmtpMail(toEmail, subject, messagehtml)
+            return sent ? true : false;
+        }catch(err){
+            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
+        }
+    };
 }
 export default StudentsControllers;
