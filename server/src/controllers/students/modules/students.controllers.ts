@@ -69,17 +69,8 @@ class StudentsControllers extends AlertService {
                 }
               }
             },{'$sort': {'name': 1}}
-          ]
-        const response = await studentsDB.find({},{
-            name: 1,
-            email: 1,
-            phone: 1,
-            course: 1,
-            gender: 1,
-            status: 1,
-            address: 1,
-            imgUrl: 1
-        })
+        ];
+        const response = await studentsDB.aggregate(studentList);
         return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
     })
 
@@ -134,7 +125,6 @@ class StudentsControllers extends AlertService {
            address: address,
            imgUrl: imgUrl,
            admin_logs: req?.user?.username
-
         });
         response.save()
         .then(saveData =>{
@@ -148,6 +138,30 @@ class StudentsControllers extends AlertService {
     public editStudents = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
         console.log(req.body)
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
+
+        // const credential: any = await this.credentialCheck(email, phone, res);
+        // if(credential){
+        //     return this.sendErrorResponse(res, false, "This Email or Phoneno. is already exists!!")
+        // }
+
+        const updateStudentData = await studentsDB.updateOne(
+            {email: email},
+            {$set: {
+                name: name,
+                email: email,
+                phone: phone,
+                course: course,
+                gender: gender,  
+                status: status,
+                address: address,
+                admin_logs: req?.user?.username
+            }},
+            {$new: true}
+        );
+        return updateStudentData
+            ? this.sendSuccessResponse(res, true, `Student Credential Updated!!`)
+            : this.sendErrorResponse(res, false, `Failed to update student Credential !!`);
+
     })
 
 }

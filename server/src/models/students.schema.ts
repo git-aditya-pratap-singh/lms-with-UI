@@ -5,7 +5,6 @@ const studentSchema: Schema<IStudents> = new Schema({
     username: {
         type: String,
         lowercase: true,
-        required: true,
         trim: true
     },
     name: {
@@ -49,7 +48,6 @@ const studentSchema: Schema<IStudents> = new Schema({
     },
     imgUrl: {
         type: String,
-        required: true,
         trim: true
     },
     last_login: {

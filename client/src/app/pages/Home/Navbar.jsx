@@ -96,7 +96,7 @@ const Navbar = () => {
         </div>
 
         <div className="_hamburger-menu bg-gray-200">
-          <a onClick={() => setToggle(!toggle)}><Hamburger
+          <div onClick={() => setToggle(!toggle)}><Hamburger
             color="#323035"
             size={25}
             duration={0.5}
@@ -105,7 +105,7 @@ const Navbar = () => {
             toggled={toggle}
             toggle={!toggle}
           />
-          </a>
+          </div>
         </div>
 
         <label className="swap swap-rotate lg:right-16 fixed top-[5.6rem] lg:top-[5.2rem] -z-10 bg-[#007DFC] p-2 text-white rounded">

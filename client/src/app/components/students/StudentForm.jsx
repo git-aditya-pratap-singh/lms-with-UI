@@ -18,6 +18,7 @@ import { FaPlus } from "react-icons/fa6";
 import "../../../assets/css/component/_addform.scss";
 
 const AddForm = (props) => {
+
   const courseList = [];
   props?.courseList.map((item) => {// for courseList
     courseList.push({ value: item?._id, label: toTitleCase(item?.name) });
@@ -68,8 +69,6 @@ const AddForm = (props) => {
         ? toast.warning("Please, Choose Status!")
         : !formData.address
         ? toast.warning("Address can not be empty!")
-        : !formData.imgUrl
-        ? toast.warning("Please, upload the Image!")
         : true;
     };
     if (validateFormData() !== true) {
@@ -87,7 +86,7 @@ const AddForm = (props) => {
       const response = formEditinfo.add ? await API_INSTANCE.post(endpoint, formData) : await API_INSTANCE.put(endpoint, formData);
       if (response.status) {
         toast.success(response.message);
-        dispatch(add_student_popup({check: false, key: formEditinfo.add ? "add" : "edit",}) );
+        dispatch(add_student_popup({check: false, key: formEditinfo.add ? "add" : "edit"}) );
       } else {
         toast.error(response.message);
       }
@@ -97,17 +96,28 @@ const AddForm = (props) => {
   };
 
   useEffect(() => {
-    console.log("HII");
-    setFormData({
-      name: formEditinfo.item.name,
-      email: formEditinfo.item.email,
-      phone: formEditinfo.item.phone,
-      course: formEditinfo.item.course,
-      gender: formEditinfo.item.gender,
-      status: formEditinfo.item.status,
-      address: formEditinfo.item.address,
-    });
-  }, [formEditinfo.item]);
+
+    if (formEditinfo?.item?.name) {
+      //----------------Selected course list Array-------------------------
+      const selectedCourseLists = [];
+      formEditinfo?.item?.selectedCourseList.map((course)=>{
+        courseList.some((courseObj)=>{
+          courseObj.value === course._id ? selectedCourseLists.push(courseObj) : null;
+        })
+      });
+
+      setFormData({
+        name: formEditinfo.item.name,
+        email: formEditinfo.item.email,
+        phone: formEditinfo.item.phone,
+        course: selectedCourseLists,
+        gender: formEditinfo.item.gender,
+        status: formEditinfo.item.status,
+        address: formEditinfo.item.address,
+      });
+    }
+    
+  }, [formEditinfo?.item]);
 
   return (
     <>

@@ -1,11 +1,13 @@
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { add_student_popup } from "../../Store/Slices/StateSlice";
-import toTitleCase from "../../common/titleCase";
+import toTitleCase from "../../common/titleCase"
+import profileName from "../../common/profileName";
+import getRandomHexColor from "../../common/randomColorgenerate"; 
 
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import ig from "../../../assets/img/admin.jpg";
+//import ig from "../../../assets/img/admin.jpg";
 import "../../../assets/css/component/_table.scss";
 
 const Table = (props) => {
@@ -50,8 +52,13 @@ const Table = (props) => {
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
+                        {/* <div className="mask mask-squircle w-12 h-12">
                           <img src={ig} alt="Avatar Tailwind CSS Component" />
+                        </div> */}
+                        <div className="avatar placeholder">
+                          <div className={`text-white w-10 shadow rounded-full`} style={{ backgroundColor: getRandomHexColor()}}>
+                            <span className="text-[1rem] ">{profileName(item?.name)}</span>
+                          </div>
                         </div>
                       </div>
                       <div>
@@ -69,9 +76,15 @@ const Table = (props) => {
                   </td>
                   <td>+91 {item?.phone}</td>
                   <td>{item?.gender}</td>
-                  <td>{item?.course}</td>
                   <td>
-                  <label className={`p-[0.3rem] rounded ${item?.status === "Active" ? "bg-[#a6ffe6] text-[#1E8267]" : "bg-[#FFBAD6] text-[#CC0052]"}`}>
+                    {item?.selectedCourseList.map((items) => {
+                      return (
+                        <span key={items._id} className="badge badge-ghost badge-sm">{toTitleCase(items?.label)}</span>
+                      );
+                    })}
+                  </td>
+                  <td>
+                    <label className={`p-[0.3rem] rounded ${item?.status === "Active" ? "bg-[#a6ffe6] text-[#1E8267]" : "bg-[#FFBAD6] text-[#CC0052]"}`}>
                       {item?.status}
                     </label>
                   </td>

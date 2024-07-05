@@ -27,7 +27,6 @@ const TeacherForm = (props) => {
 
   const dispatch = useDispatch();
   const formEditinfo = useSelector((store) => store.openPopup.add_teacher_popup);
-  console.log("Teachers",formEditinfo)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -88,7 +87,7 @@ const TeacherForm = (props) => {
       const response = formEditinfo.add ? await API_INSTANCE.post(endpoint, formData) : await API_INSTANCE.put(endpoint, formData);
       if (response.status) {
         toast.success(response.message);
-        dispatch(add_teacher_popup({check: false, key: formEditinfo.add ? "add" : "edit",}));
+        dispatch(add_teacher_popup({check: false, key: formEditinfo.add ? "add" : "edit" }));
       } else {
         toast.error(response.message);
       }

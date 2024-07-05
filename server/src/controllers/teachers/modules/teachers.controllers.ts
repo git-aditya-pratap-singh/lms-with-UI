@@ -160,7 +160,7 @@ class TeachersControllers extends AlertService {
            course: courseList,     
            status: status,
            address: address,
-           imgUrl: imgUrl,
+           imgUrl: imgUrl ? imgUrl : '',
            admin_logs: req?.user?.username
         });
         response.save()

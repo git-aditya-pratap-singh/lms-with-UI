@@ -16,12 +16,12 @@ const FormCourse = (props) => {
     const faculityList = [];
     const courseTagsList = [];
 
-    props?.list[0]?.map((item)=>{  // for teachers
-        faculityList.push({value: item?._id, label: toTitleCase(item?.name)})
+    props?.list[0]?.map((item) => {  // for teachers
+        faculityList.push({ value: item?._id, label: toTitleCase(item?.name) })
     })
 
-    props?.list[1]?.map((item)=>{  // for courseTags
-        courseTagsList.push({value: item?._id, label: toTitleCase(item?.tagName)})
+    props?.list[1]?.map((item) => {  // for courseTags
+        courseTagsList.push({ value: item?._id, label: toTitleCase(item?.tagName) })
     })
 
     const initialState = {
@@ -49,7 +49,7 @@ const FormCourse = (props) => {
         const { name, value } = event.target;
         setCourseData({ ...courseData, [name]: value })
     }
-     
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -137,20 +137,20 @@ const FormCourse = (props) => {
         }
         else {
             setError(validateFormError);
-            {/* Api Calling */}
+            {/* Api Calling */ }
             API_CALL(courseData);
         }
     }
 
     const API_INSTANCE = new ApiService();
 
-    const API_CALL = async(courseData) =>{
-        try{
+    const API_CALL = async (courseData) => {
+        try {
             const response = await API_INSTANCE.post('/dashboard/course/addCourse', courseData);
-            response.status ? 
-            (toast.success(response.message), setCourseData(initialState)) 
-            : toast.error(response.message);
-        }catch(err){
+            response.status ?
+                (toast.success(response.message), setCourseData(initialState))
+                : toast.error(response.message);
+        } catch (err) {
             toast.error('An error occurred while trying to add course.');
         }
 
@@ -200,7 +200,7 @@ const FormCourse = (props) => {
                             <div className="card">
                                 <JoditEditor
                                     value={courseData.courseDiscription}
-                                    tabIndex={1} 
+                                    tabIndex={1}
                                     onBlur={newContent => setCourseData({ ...courseData, courseDescription: newContent })}
                                 />
                             </div>
@@ -405,9 +405,9 @@ const FormCourse = (props) => {
                             <div className="card">
                                 <JoditEditor
                                     value={courseData.courseBenifit}
-                                    tabIndex={1} 
+                                    tabIndex={1}
                                     onBlur={newContent => setCourseData({ ...courseData, courseBenifit: newContent })}
-                                />   
+                                />
                             </div>
                         </div>
                         {error.courseBenifit && <label className="text-red-500 text-sm -mt-3">{error.courseBenifit}</label>}
@@ -477,20 +477,20 @@ const FormCourse = (props) => {
 
 FormCourse.propTypes = {
     list: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
     }))).isRequired,
 };
 
 FormCourse.propTypes = {
     list: PropTypes.arrayOf(
-      PropTypes.arrayOf(
-        PropTypes.shape({
-          _id: PropTypes.string,
-          name: PropTypes.string,
-          tagName: PropTypes.string,
-        })
-      )
+        PropTypes.arrayOf(
+            PropTypes.shape({
+                _id: PropTypes.string,
+                name: PropTypes.string,
+                tagName: PropTypes.string,
+            })
+        )
     ).isRequired,
 };
 
