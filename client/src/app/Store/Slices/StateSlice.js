@@ -15,7 +15,9 @@ const StateSlice = createSlice({
             add : false,
             edit : false,
             item : ''
-        }
+        },
+        otpVariable: false
+        
     },
     reducers : {
         login_popup : (state, action)=>{
@@ -26,7 +28,7 @@ const StateSlice = createSlice({
             state.open_registration = action.payload;
         },
 
-        img_update_popup : (state,action)=>{
+        img_update_popup : (state, action)=>{
             state.img_update_popup = action.payload;
         },
 
@@ -38,9 +40,14 @@ const StateSlice = createSlice({
         add_teacher_popup : (state, action)=>{
             state.add_teacher_popup[action.payload.key === 'add' ? 'add' : 'edit'] = action.payload.check;
             state.add_teacher_popup.item = action.payload.item;
-        }
+        },
+
+        otp_popup : (state, action)=>{
+            console.log(action)
+            state.otpVariable = action.payload;
+        },
     }
 })
 
 export default StateSlice;
-export const {login_popup, registration_popup, img_update_popup, add_student_popup, add_teacher_popup} = StateSlice.actions;
+export const {login_popup, registration_popup, img_update_popup, add_student_popup, add_teacher_popup, otp_popup} = StateSlice.actions;
