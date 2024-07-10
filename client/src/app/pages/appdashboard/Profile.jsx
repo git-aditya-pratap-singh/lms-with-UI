@@ -77,7 +77,6 @@ const Profile_admin = () => {
             }else{
                 toast.error(response.message);
             }
-
         }catch(err){
             toast.error('An error occurred while trying to log in.');   
         }

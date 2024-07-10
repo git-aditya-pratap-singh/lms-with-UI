@@ -4,12 +4,19 @@ const API_INSTANCE = new ApiService();
 
 class ApiRoutesCall {
 
-    profileRoutesApiCall = async ()=>{
+    atHomeCourseList = async()=>{
+        try {
+            const response = await API_INSTANCE.get('/fetchcourseOfregistration/getCourseList');
+            return response.status === true ? response.data : null;
+        }catch (err) {
+            return null;
+        }
+    } 
+
+    profileRoutesApiCall = async()=>{
         try {
             const response = await API_INSTANCE.get('/dashboard/profiles/getProfileDetails');
-            if(response.status === true){
-                return response.data;
-            }
+            return response.status === true ? response.data : null;
         }catch (err) {
             return null;
         }
@@ -24,12 +31,7 @@ class ApiRoutesCall {
 
             const responses = await Promise.all(apiCalls);
             const allResponsesSuccessful = responses.every(response => response.status === true);
-      
-            if (allResponsesSuccessful) {
-                return responses.map(response => response.data);
-            } else {
-                return null;
-            }
+            return allResponsesSuccessful ? responses.map(response => response.data) : null;
         }catch(err){
             return null;
         }
@@ -44,12 +46,7 @@ class ApiRoutesCall {
 
             const responses = await Promise.all(apiCalls);
             const allResponsesSuccessful = responses.every(response => response.status === true);
-      
-            if (allResponsesSuccessful) {
-                return responses.map(response => response.data);
-            } else {
-                return 0;
-            }
+            return allResponsesSuccessful ? responses.map(response => response.data) : null;
         }catch(err){
             return 0;
         }
@@ -64,12 +61,7 @@ class ApiRoutesCall {
       
           const responses = await Promise.all(apiCalls);
           const allResponsesSuccessful = responses.every(response => response.status === true);
-      
-          if (allResponsesSuccessful) {
-            return responses.map(response => response.data);
-          } else {
-            return null;
-          }
+          return allResponsesSuccessful ? responses.map(response => response.data) : null;
         } catch (err) {
           return null;
         }

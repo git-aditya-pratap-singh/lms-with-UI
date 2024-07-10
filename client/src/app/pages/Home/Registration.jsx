@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useLoaderData } from 'react-router-dom';
 import Select from 'react-select'
 import { registration_popup } from "../../Store/Slices/StateSlice";
+import toTitleCase from "../../common/titleCase";
+
 import { BiLogInCircle } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
@@ -11,6 +14,16 @@ import "../../../assets/css/home/_registration.scss";
 
 const Registration = () => {
 
+  const CourseList = useLoaderData();
+  const dispatch = useDispatch();
+
+  const courseListItem = [];
+  if(CourseList !== null){
+    CourseList.map((item) => {   // for get course list
+      courseListItem.push({ value: item?._id, label: toTitleCase(item?.name) });
+    });
+  }
+  
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -19,7 +32,6 @@ const Registration = () => {
     gender: "",
     address: ""
   })
-
   const [error, setError] = useState({});
 
   const handleChange = (event) => {
@@ -87,19 +99,6 @@ const Registration = () => {
 
   }
 
-  const options = [
-    { value: 'MERN1', label: "MERN" },
-    { value: 'MEAN2', label: "MERN2" },
-    { value: 'MEVN3', label: "MERN3" },
-    { value: 'MERN4', label: "MERN4" },
-    { value: 'MEAN5', label: "MERN5" },
-    { value: 'MEVN6', label: "MERN6" },
-    { value: 'MERN7', label: "MERN7" },
-    { value: 'MEAN8', label: "MERN8" },
-    { value: 'MEVN9', label: "MERN9" }
-  ]
-
-  const dispatch = useDispatch();
   return (
     <>
       <section className="_registerSection">
@@ -141,7 +140,7 @@ const Registration = () => {
               </label>
               <div className="relative mt-2 rounded-md shadow-sm bg-black">
                 <Select
-                  options={options}
+                  options={courseListItem}
                   isMulti
                   name="course"
                   value={data.course}

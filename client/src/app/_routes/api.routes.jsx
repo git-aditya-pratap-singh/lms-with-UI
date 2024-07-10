@@ -29,7 +29,7 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
-                //loader: homeLoader
+                loader: new ApiRoutesCall().atHomeCourseList
             },
             {
                 path: "/about",

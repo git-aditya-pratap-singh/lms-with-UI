@@ -1,3 +1,4 @@
+import { useState } from "react";
 import OtpInput from "react-otp-input";
 import { useDispatch } from "react-redux";
 import { otp_popup } from "../../Store/Slices/StateSlice";
@@ -12,7 +13,12 @@ import "../../../assets/css/home/_otp.scss";
 const OtpLayout = () => {
 
   const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [otp, setOTP] = useState('');
 
+  const handleChange = (event) =>{
+    setEmail(event.target.value)
+  }
 
   return (
     <>
@@ -29,17 +35,17 @@ const OtpLayout = () => {
                 <MdOutlineAlternateEmail />
               </label>
               <input
-                type="name"
+                type="email"
                 placeholder="enter email..."
                 name="username"
-                // value={formData.username}
-                // onChange={handleChange}
+                value={email}
+                onChange={handleChange}
               />
             </span>
 
             <OtpInput
-              //   value={otp}
-              //   onChange={setOtp}
+             value={otp}
+              onChange={setOTP}
               numInputs={4}
               separator={<span>-</span>}
               renderInput={(props) => <input {...props} />}
