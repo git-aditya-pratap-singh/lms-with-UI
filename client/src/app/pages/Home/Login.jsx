@@ -131,11 +131,11 @@ const Login = () => {
             <span>
               <p>or Continue with</p>
             </span>
-            <span>
-              <p className="text-red-500 cursor-pointer"
+            <label>
+              <label className="text-[#007DFC] hover:text-green-500 cursor-pointer text-sm hover:underline"
               onClick={()=> dispatch(otp_popup(true))}
-              >Reset Password</p>
-            </span>
+              >Login via OTP</label>
+            </label>
           </div>
 
           <div className="_loginIcon">
