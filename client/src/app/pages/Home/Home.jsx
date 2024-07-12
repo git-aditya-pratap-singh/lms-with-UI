@@ -59,7 +59,7 @@ const Home = () => {
                     <h1>Better <span>Learning future</span> starts with elearn</h1>
                     <span>It is a long established fact that reader will be distracted readable content of a page when.</span>
                     <div className="_btnSection">
-                        <button className="_loginbtn1" 
+                        <button className="_loginbtn1 bgColor" 
                         onClick={()=>dispatch(registration_popup(true))}><FaPen />Register here..</button>
                         <button className="_loginbtn2" 
                         onClick={()=>dispatch(login_popup(true))}><BiLogInCircle />login</button>

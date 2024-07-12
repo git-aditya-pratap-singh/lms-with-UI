@@ -44,7 +44,7 @@ const OtpLayout = () => {
             </span>
 
             <OtpInput
-             value={otp}
+              value={otp}
               onChange={setOTP}
               numInputs={4}
               separator={<span>-</span>}

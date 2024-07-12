@@ -5,6 +5,13 @@ $background-color_2: #f6c601;
 $background-color_3: #03ecb0;
 $background-color_5: #f10156;
 
+.bgColor{
+  background-color: temp.$primary;
+}
+.textColor{
+  color: temp.$primary;
+}
+
 ._container {
   display: flex;
   flex-direction: row;
@@ -39,7 +46,7 @@ $background-color_5: #f10156;
     line-height: 4.5rem;
     text-shadow: 1px 1px 5px #00000089;
     span {
-      color: temp.$text-color;
+      color: temp.$primary;
       font-weight: 600;
       font-size: 4rem;
     }
@@ -119,7 +126,7 @@ $background-color_5: #f10156;
 }
 
 ._loginbtn1 {
-  @apply outline outline-2 outline-offset-2 p-2 outline-blue-500 rounded flex items-center justify-center gap-x-2 font-semibold text-white active:scale-95 ease-in-out duration-300 bg-[#007DFC];
+  @apply outline outline-2 outline-offset-2 p-2 outline-blue-500 rounded flex items-center justify-center gap-x-2 font-semibold text-white active:scale-95 ease-in-out duration-300;
   background-image: radial-gradient(
       93% 87% at 87% 89%,
       rgba(0, 0, 0, 0.23) 0%,
@@ -314,7 +321,7 @@ $background-color_5: #f10156;
   gap: 1.2rem;
   span {
     font-size: 1.2rem;
-    color: temp.$text-color;
+    color: temp.$primary;
   }
   h1 {
     font-size: 2.5rem;
@@ -439,7 +446,7 @@ $background-color_5: #f10156;
     gap: 1rem;
     label {
       font-size: 1.2em;
-      color: temp.$text-color;
+      color: temp.$primary;
       font-weight: 600;
     }
     h1 {
@@ -496,7 +503,7 @@ $background-color_5: #f10156;
   flex-direction: column;
   gap: 0.8rem;
   p {
-    color: temp.$text-color;
+    color: temp.$primary;
     font-size: 1.2rem;
   }
   h1 {

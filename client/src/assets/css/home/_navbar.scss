@@ -34,7 +34,7 @@ nav {
       cursor: pointer;
       padding: 0 1rem;
       &:hover {
-        color: temp.$text-color;
+        color: temp.$primary;
         &::after {
           width: 100%;
         }
@@ -68,8 +68,17 @@ nav {
 }
 
 ._loginbtn {
-  @apply outline outline-2 outline-offset-2 p-2 outline-blue-500 rounded w-28 flex items-center justify-center gap-2 font-semibold text-gray-700 active:scale-95 ease-in-out duration-300 active:text-white active:bg-[#007DFC];
+  @apply outline outline-2 outline-offset-2 p-2 outline-blue-500 rounded w-28 flex items-center justify-center gap-2 font-semibold text-gray-700 active:scale-95 ease-in-out duration-300 active:text-white active:bg-[temp.$primary];
 }
+
+.bgColor{
+  background-color: temp.$primary;
+}
+.textColor{
+  color: temp.$primary;
+}
+
+
 
 // Tablet Devices -------------------------
 @media only screen and (max-width: 1068px) {

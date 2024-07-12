@@ -1,10 +1,11 @@
-@use '../_index' as temp;
+@use '../_index' as index;
 
 ._registerSection{
     @apply fixed z-[9999] w-full h-screen bg-black/60
     flex justify-center items-center;
+   
     ._regisForm{
-        max-width: 420px;
+        width: 350px;
         padding: 2rem 1.5rem;
         border-radius: 5px;
         background-color: #fff;
@@ -13,6 +14,9 @@
         gap:0.4rem;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
         position: relative;
+        //@include slidepopupModel;
+        animation: slidepopupModel 0.7s cubic-bezier(0.215, 0.610, 0.355, 1); 
+       
         h3{
             position: absolute;
             right: 20px;
@@ -21,11 +25,11 @@
         }
         h1{
             font-size: 2rem;
-            color:temp.$heading-color;
+            color:index.$heading-color;
         }
         p{
             font-size: 0.85rem;
-            color:temp.$paragraph-color;
+            color:index.$paragraph-color;
         }
         ._form{
             margin-top: 10px;
@@ -42,13 +46,13 @@
                 input{
                     width: 100%;
                     outline: none;
-                    @apply pl-12 pr-4 py-2 border rounded placeholder-opacity-25  focus:ring-2 focus:ring-blue-500;
+                    @apply pl-12 pr-4 py-2 border rounded placeholder-opacity-25 focus:ring-2 focus:ring-blue-500;
                 }
                 label{
                     background-color: aliceblue;
                     padding: 0.8rem;
                     border-radius: 5px 0px 0px 5px;
-                    color:temp.$primary;
+                    color:index.$primary;
                     @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none;
                 }
             }
@@ -61,7 +65,7 @@
                 justify-content: center;
                 align-items: center;
                 gap:5px;
-                background-color: temp.$primary;
+                background-color: index.$primary;
                 color: #fff;
                 box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
                 @apply active:scale-95 ease-in-out duration-300;
@@ -69,3 +73,15 @@
         }
     }
 }
+
+@keyframes slidepopupModel {
+    0% {
+        opacity: 0;
+        transform: translateY(-25%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
