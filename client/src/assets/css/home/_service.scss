@@ -9,9 +9,9 @@
   label {
     font-size: 2.5rem;
     font-weight: 600;
-    color: temp.$heading-color;
+    color: var(--heading-color);
     span {
-      color: temp.$primary;
+      color: var(--primary);
     }
   }
   ._itemGrid {
@@ -38,21 +38,21 @@
           padding: 0.8rem;
           border-radius: 50%;
           font-size: 1.8rem;
-          color: temp.$primary;
-          background-color: #03aeec4f;
-          box-shadow: temp.$box-shadow;
+          color: var(--primary);
+          background-color: var(--secondary);
+          box-shadow: var(--box-shadow);
         }
         h2{
           font-size: 1.5rem;
           font-weight: 600;
-          color:temp.$heading-color;
+          color: var(--heading-color);
         } 
       }
       p{
         margin-top: 1rem;
         text-align: justify;
         font-size: 0.9rem;
-        color:temp.$paragraph-color;
+        color:var(--paragraph-color);
         font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
       }
       &:hover{
@@ -69,7 +69,6 @@
   justify-content: space-evenly;
   align-items: center;
   gap:3rem;
-  background-color: #fde7f9;
   background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%);
   ._serviceFooterChild-1{ 
     display: flex;
@@ -78,22 +77,22 @@
     width: 40vw;
     span{
       font-size: 1.2rem;
-      color:temp.$primary;
+      color:var(--primary);
       font-weight: 600;
     }
     h2{
       font-size: 3rem;
-      color:temp.$heading-color;
+      color:var(--heading-color);
       font-weight: 600;
       line-height: normal;
       span{
         font-size: 3rem;
         font-weight: 600;
-        color:temp.$primary;
+        color:var(--primary);
       }
     }
     p{
-      color: temp.$paragraph-color;
+      color: var(--paragraph-color);
       font-size: 1.0rem;
       
     }
@@ -106,9 +105,12 @@
         align-items: center;
         gap:0.8rem;
         font-size: medium;
+        input{
+          @apply accent-[var(--primary)]
+        }
         label{
           font-size: 1rem;
-          color:temp.$paragraph-color;
+          color: var(--paragraph-color);
         }
       }
     }
@@ -130,7 +132,7 @@
         align-items: center;
         gap:0.5rem;
         padding: 0.8rem;
-        background-color: #fff;
+        background-color: var(--card);
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
         rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -142,7 +144,7 @@
           }
           p{
             font-size: 0.9rem;
-            color: temp.$paragraph-color;
+            color: var(--paragraph-color);
           }
         }
       }

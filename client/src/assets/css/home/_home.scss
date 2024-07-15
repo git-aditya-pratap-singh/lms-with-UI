@@ -5,13 +5,6 @@ $background-color_2: #f6c601;
 $background-color_3: #03ecb0;
 $background-color_5: #f10156;
 
-.bgColor{
-  background-color: temp.$primary;
-}
-.textColor{
-  color: temp.$primary;
-}
-
 ._container {
   display: flex;
   flex-direction: row;
@@ -35,18 +28,18 @@ $background-color_5: #f10156;
   justify-content: center;
   text-align: start;
   span {
-    color: temp.$header-text;
+    color: var(--foreground);
     font-weight: 200;
     font-size: 1.1rem;
   }
   h1 {
-    color: #04223a;
+    color: var(--heading-color);
     font-weight: 600;
     font-size: 4rem;
     line-height: 4.5rem;
     text-shadow: 1px 1px 5px #00000089;
     span {
-      color: temp.$primary;
+      color: var(--primary);
       font-weight: 600;
       font-size: 4rem;
     }
@@ -63,8 +56,8 @@ $background-color_5: #f10156;
     left: -15%;
     width: 220px;
     padding: 0.8rem;
-    background-color: #fff;
-    box-shadow: temp.$box-shadow;
+    background-color: var(--background);
+    box-shadow: var(--box-shadow);
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -74,18 +67,18 @@ $background-color_5: #f10156;
       rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     animation: pulse 1.5s infinite ease-in-out;
     span {
-      color: temp.$primary;
+      color: var(--primary);
       font-size: 3rem;
     }
     h1 {
       font-size: 2rem;
       font-weight: 600;
-      color: temp.$heading-color;
+      color: var(--heading-color);
     }
     p {
       line-height: 1rem;
       font-size: 0.8rem;
-      color: temp.$paragraph-color;
+      color: var(--paragraph-color);
     }
   }
   ._subIconContainer2 {
@@ -94,8 +87,8 @@ $background-color_5: #f10156;
     left: 55%;
     width: 220px;
     padding: 0.8rem;
-    background-color: #fff;
-    box-shadow: temp.$box-shadow;
+    background-color: var(--background);
+    box-shadow: var(--box-shadow);
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -105,18 +98,18 @@ $background-color_5: #f10156;
       rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     animation: pulse 1.5s infinite ease-in-out;
     span {
-      color: temp.$primary;
+      color: var(--primary);
       font-size: 3rem;
     }
     h1 {
       font-size: 2rem;
       font-weight: 600;
-      color: temp.$heading-color;
+      color: var(--heading-color);
     }
     p {
       line-height: 1rem;
       font-size: 0.8rem;
-      color: temp.$paragraph-color;
+      color: var(--paragraph-color);
     }
   }
 }
@@ -126,7 +119,8 @@ $background-color_5: #f10156;
 }
 
 ._loginbtn1 {
-  @apply outline outline-2 outline-offset-2 p-2 outline-blue-500 rounded flex items-center justify-center gap-x-2 font-semibold text-white active:scale-95 ease-in-out duration-300;
+  @apply outline outline-2 outline-offset-2 p-2 outline-[var(--primary)] rounded flex items-center justify-center gap-x-2 
+  font-semibold text-white active:scale-95 ease-in-out duration-300 bg-[var(--primary)];
   background-image: radial-gradient(
       93% 87% at 87% 89%,
       rgba(0, 0, 0, 0.23) 0%,
@@ -142,7 +136,8 @@ $background-color_5: #f10156;
 }
 
 ._loginbtn2 {
-  @apply outline outline-2 outline-offset-2 p-2 outline-blue-500 w-28 rounded flex items-center justify-center gap-x-2 font-semibold text-gray-700 active:scale-95 ease-in-out duration-300 active:text-white active:bg-[#007DFC];
+  @apply outline outline-2 outline-offset-2 p-2 outline-[var(--primary)] w-28 rounded flex items-center justify-center gap-x-2 font-semibold text-[var(--foreground)] active:scale-95 ease-in-out 
+  duration-300 active:text-[var(--foreground-active)] active:bg-[var(--primary)];
   display: none;
 }
 
@@ -158,8 +153,7 @@ $background-color_5: #f10156;
   ._sub-strip {
     width: 250px;
     padding: 0.8rem;
-    background-color: #fff;
-    box-shadow: temp.$box-shadow;
+    background-color: var(--background);
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -176,18 +170,18 @@ $background-color_5: #f10156;
     h1 {
       font-size: 2rem;
       font-weight: 600;
-      color: temp.$heading-color;
+      color: var(--heading-color);
     }
     p {
       line-height: 1rem;
       font-size: 0.8rem;
-      color: temp.$paragraph-color;
+      color: var(--paragraph-color);
     }
     &:nth-child(1) {
       span {
         background-color: #93f5aa;
         color: #046e1d;
-        box-shadow: temp.$box-shadow;
+        box-shadow: var(--box-shadow);
       }
       h1 {
         color: #046e1d;
@@ -197,7 +191,7 @@ $background-color_5: #f10156;
       span {
         background-color: #fc365a94;
         color: #f10156;
-        box-shadow: temp.$box-shadow;
+        box-shadow: var(--box-shadow);
       }
       h1 {
         color: #f10156;
@@ -207,7 +201,7 @@ $background-color_5: #f10156;
       span {
         background-color: #b5affa;
         color: #0b017c;
-        box-shadow: temp.$box-shadow;
+        box-shadow: var(--box-shadow);
       }
       h1 {
         color: #0b017c;
@@ -217,7 +211,7 @@ $background-color_5: #f10156;
       span {
         background-color: #f6c50151;
         color: #f6c601;
-        box-shadow: temp.$box-shadow;
+        box-shadow: var(--box-shadow);
       }
       h1 {
         color: #f6c601;
@@ -233,10 +227,10 @@ $background-color_5: #f10156;
   ._carrierText {
     font-size: 2.5rem;
     font-weight: 600;
-    color: temp.$heading-color;
+    color: var(--heading-color);
     span {
       font-size: 2.5rem;
-      color: temp.$primary;
+      color: var(--primary);
     }
   }
 }
@@ -271,12 +265,12 @@ $background-color_5: #f10156;
       font-size: 1.1rem;
       text-align: justify;
       font-weight: 600;
-      color: temp.$heading-color;
+      color: var(--heading-color);
     }
     p {
       font-size: 0.9rem;
       text-align: justify;
-      color: temp.$paragraph-color;
+      color: var(--paragraph-color);
     }
     &:hover {
       scale: (1.1);
@@ -293,7 +287,7 @@ $background-color_5: #f10156;
     }
     &:nth-child(3) {
       span {
-        background-color: temp.$primary;
+        background-color: var(--primary);
       }
     }
     &:nth-child(4) {
@@ -321,17 +315,17 @@ $background-color_5: #f10156;
   gap: 1.2rem;
   span {
     font-size: 1.2rem;
-    color: temp.$primary;
+    color: var(--primary);
   }
   h1 {
     font-size: 2.5rem;
     font-weight: 600;
-    color: temp.$heading-color;
+    color: var(--heading-color);
     line-height: 3rem;
   }
   p {
     font-size: 0.9rem;
-    color: temp.$paragraph-color;
+    color: var(--paragraph-color);
     text-align: justify;
   }
 }
@@ -383,7 +377,7 @@ $background-color_5: #f10156;
       font-weight: 600;
     }
     p {
-      color: temp.$paragraph-color;
+      color: var(--paragraph-color);
       font-weight: 600;
       font-size: 0.7rem;
     }
@@ -391,7 +385,7 @@ $background-color_5: #f10156;
       span {
         background-color: #93f5aa;
         color: #046e1d;
-        box-shadow: temp.$box-shadow;
+        box-shadow: var(--box-shadow);
       }
       h1 {
         color: #046e1d;
@@ -401,7 +395,7 @@ $background-color_5: #f10156;
       span {
         background-color: #fc365a94;
         color: #f10156;
-        box-shadow: temp.$box-shadow;
+        box-shadow: var(--box-shadow);
       }
       h1 {
         color: #f10156;
@@ -411,7 +405,7 @@ $background-color_5: #f10156;
       span {
         background-color: #b5affa;
         color: #0b017c;
-        box-shadow: temp.$box-shadow;
+        box-shadow: var(--box-shadow);
       }
       h1 {
         color: #0b017c;
@@ -421,7 +415,7 @@ $background-color_5: #f10156;
       span {
         background-color: #f6c50151;
         color: #f6c601;
-        box-shadow: temp.$box-shadow;
+        box-shadow: var(--box-shadow);
       }
       h1 {
         color: #f6c601;
@@ -434,7 +428,6 @@ $background-color_5: #f10156;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #fde7f9;
   background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%);
   padding: 2rem 4rem;
   ._child-masterSkills-1 {
@@ -446,12 +439,12 @@ $background-color_5: #f10156;
     gap: 1rem;
     label {
       font-size: 1.2em;
-      color: temp.$primary;
+      color: var(--primary);
       font-weight: 600;
     }
     h1 {
       font-size: 2.5rem;
-      color: temp.$heading-color;
+      color: var(--heading-color);
       font-weight: 600;
       line-height: normal;
     }
@@ -464,24 +457,23 @@ $background-color_5: #f10156;
         padding: 1rem;
         border-radius: 10px;
         max-width: 280px;
-        background-color: #ffffff63;
+        background-color: var(--card);
         display: flex;
         align-items: center;
         justify-content: space-evenly;
         gap: 1.2rem;
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-          rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        box-shadow: var(--box-shadow2)
       }
       span {
         padding: 0.5rem;
         border-radius: 10px;
-        background-color: #03aeec4f;
-        color: temp.$primary;
+        background-color: var(--secondary);
+        color: var(--primary);
         font-size: 1.5rem;
       }
       p {
         font-size: 0.8rem;
-        color: temp.$paragraph-color;
+        color: var(--paragraph-color);
       }
     }
   }
@@ -503,16 +495,16 @@ $background-color_5: #f10156;
   flex-direction: column;
   gap: 0.8rem;
   p {
-    color: temp.$primary;
+    color: var(--primary);
     font-size: 1.2rem;
   }
   h1 {
-    color: temp.$heading-color;
+    color: var(--heading-color);
     font-size: 2.5rem;
     font-weight: 600;
     line-height: normal;
     span {
-      color: temp.$primary;
+      color: var(--primary);
     }
   }
   ._studentReview {
@@ -528,14 +520,13 @@ $background-color_5: #f10156;
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      background: #ffffffbd;
-      border-radius: 5px;
-      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--box-shadow2);
 
       transition: all 0.6s ease-in-out;
       p {
-        color: temp.$paragraph-color;
+        color: var(--paragraph-color);
         font-size: 0.8rem;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
@@ -545,7 +536,7 @@ $background-color_5: #f10156;
         align-items: center;
         gap: 1rem;
         padding: 1rem 0.5rem 0rem;
-        border-top: 0.05rem solid temp.$primary;
+        border-top: 0.05rem solid var(--primary);
         img {
           width: 60px;
           border-radius: 50%;
@@ -553,13 +544,13 @@ $background-color_5: #f10156;
         }
         span {
           display: block;
-          color: temp.$paragraph-color;
+          color: var(--paragraph-color);
           h2 {
             font-size: 0.9rem;
           }
           label {
             font-size: 0.8rem;
-            color: temp.$primary;
+            color: var(--primary);
           }
         }
       }

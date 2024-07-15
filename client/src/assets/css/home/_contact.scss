@@ -14,14 +14,14 @@
         h2{
             font-size: 3rem;
             font-weight: 600;
-            color:temp.$heading-color;
+            color: var(--heading-color);
             span{
-                color:temp.$primary;
+                color: var(--primary);
             }
         }
         #msg{
             max-width: 400px;
-            color:temp.$paragraph-color;
+            color: var(--paragraph-color);
         }
         ._info{
             margin-top: 2rem;
@@ -32,14 +32,14 @@
                 display: flex;
                 align-items: center;
                 gap:1rem;
-                color: temp.$primary;
+                color:  var(--primary);
                 label{
                     font-size: 1.1rem;
-                    color:temp.$heading-color;
+                    color: var(--heading-color);
                 }
                 p{
                     font-size: 0.85rem;
-                    color:temp.$paragraph-color;
+                    color: var(--paragraph-color);
                 }
             }
         }
@@ -54,7 +54,7 @@
         width: 100%;
         h2 {
             font-size: 2rem;
-            color: temp.$heading-color;
+            color: var(--heading-color);
             font-weight: 600;
         }
         .inputBox {
@@ -73,7 +73,7 @@
                 &:focus {
                     ~ {
                         span {
-                            color:temp.$primary;
+                            color: var(--primary);
                             font-size: 0.9rem;
                             transform: translateY(-20px);
                         }
@@ -82,7 +82,7 @@
                 &:valid {
                     ~ {
                         span {
-                             color:temp.$primary;
+                            color: var(--primary);
                             font-size: 0.9rem;
                             transform: translateY(-20px);
                         }
@@ -102,7 +102,7 @@
                 &:focus {
                     ~ {
                         span {
-                            color:temp.$primary;
+                            color: var(--primary);
                             font-size: 0.9rem;
                             transform: translateY(-20px);
                         }
@@ -111,7 +111,7 @@
                 &:valid {
                     ~ {
                         span {
-                            color:temp.$primary;
+                            color: var(--primary);
                             font-size: 0.9rem;
                             transform: translateY(-20px);
                         }

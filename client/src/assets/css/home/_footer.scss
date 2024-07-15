@@ -15,7 +15,7 @@ $background-color_7: #212121;
 	justify-content: center;
 	gap: 0.2rem;
 	padding: 1rem;
-	background-color: temp.$footer-color;
+	background-color: var(--footer-color);
 }
 
 ._subContainer-1 {
@@ -24,19 +24,19 @@ $background-color_7: #212121;
 	text-align: justify;
 	h1 {
 		font-size: 1.7rem;
-		color: temp.$heading-color;
+		color: var(--heading-color);
 	}
 	p {
 		font-size: 1rem;
 		margin-top: 1rem;
-		color: temp.$paragraph-color;
+		color: var(--paragraph-color);
 	}
 }
 
 ._subContainer-2 {
 	h2 {
 		font-size: 1.7rem;
-		color: temp.$heading-color;
+		color: var(--heading-color);
 	}
 	padding: 3rem;
 	max-width: 400px;
@@ -44,7 +44,7 @@ $background-color_7: #212121;
 ._subContainer-3 {
 	h2 {
 		font-size: 1.7rem;
-		color: temp.$heading-color;
+		color: var(--heading-color);
 	}
 	padding: 3rem;
 	max-width: 400px;
@@ -64,13 +64,13 @@ $background-color_7: #212121;
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		color: temp.$paragraph-color;
+		color: var(--paragraph-color);
 		font-weight: 600;
 		label {
 			color: $color_3;
 			padding: 0.5rem;
 			border-radius: 50px;
-			box-shadow: temp.$box-shadow;
+			box-shadow: var(--box-shadow);
 			cursor: pointer;
 		}
 		&:nth-child(1) {
@@ -99,7 +99,7 @@ $background-color_7: #212121;
 			}
 		}
 		span {
-			color: temp.$heading-color;
+			color: var(--heading-color);
 			font-size: 1.2rem;
 		}
 	}
@@ -112,10 +112,10 @@ $background-color_7: #212121;
 	padding: 1.5rem;
 	box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 	color: $color_3;
-	background-color: temp.$background;
+	background-color: #1B2631;;
 	h1{
 		span{
-			color:temp.$primary;
+			color:var(--primary);
 		}
 	}
 }

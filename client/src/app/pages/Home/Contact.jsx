@@ -56,7 +56,7 @@ const Contact = () => {
                             </div>
 
                             <div className="inputBox">
-                                <button className="bg-[#007DFC] p-2 w-28 rounded-md 
+                                <button className="bg-[var(--primary)] p-2 w-28 rounded-md 
                         text-white shadow-md flex justify-center items-center gap-x-2 active:scale-90 ease-in-out duration-300">
                                     <IoSend /> Send</button>
                             </div>

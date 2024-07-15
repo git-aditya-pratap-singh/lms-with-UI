@@ -30,17 +30,18 @@ const OtpLayout = () => {
           <h1>Login via OTP!</h1>
           <p>Choose OTP of the option to go.</p>
           <form className="_form">
+
             <span>
-              <label>
-                <MdOutlineAlternateEmail />
-              </label>
               <input
                 type="email"
-                placeholder="enter email..."
+                placeholder="john.doe@company.com"
                 name="username"
                 value={email}
                 onChange={handleChange}
               />
+               <label>
+                <MdOutlineAlternateEmail />
+              </label>
             </span>
 
             <OtpInput
@@ -56,22 +57,22 @@ const OtpLayout = () => {
                 height: "40px",
                 fontSize: "18px",
                 margin: "0 18px",
-                border: "1px solid #525152",
+                border: "1px solid var(--primary)",
                 borderRadius: "5px",
                 boxShadow:
                   "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;",
               }}
             />
 
-            <div className="flex justify-between w-full gap-x-5">
-              <button>
-                <BiLogInCircle />
-                Send OTP
-              </button>
-
+            <div className="flex justify-between w-full gap-x-8">
               <button>
                 <FaArrowRotateLeft />
                 Resend OTP
+              </button>
+
+              <button>
+                <BiLogInCircle />
+                Send OTP
               </button>
             </div>
 

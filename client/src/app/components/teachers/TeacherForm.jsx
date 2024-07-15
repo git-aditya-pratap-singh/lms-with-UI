@@ -145,21 +145,18 @@ const TeacherForm = (props) => {
               className="block text-sm font-medium leading-3 text-gray-800">
               Name
             </label>
-            <div className="relative mt-2 rounded-md shadow-sm">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-800 sm:text-sm">
-                  <FaUser color="#007DFC" />
-                </span>
-              </div>
+            <span className="relative mt-2 rounded-md shadow-sm">
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-800 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
                 placeholder="Enter the name.."
               />
-            </div>
+              <label>
+                <FaUser />
+              </label>
+            </span>
           </div>
 
           {/* Email */}
@@ -169,21 +166,18 @@ const TeacherForm = (props) => {
               className="block text-sm font-medium leading-3 text-gray-800">
               Email
             </label>
-            <div className="relative mt-2 rounded-md shadow-sm">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-800 sm:text-sm">
-                  <MdOutlineAlternateEmail color="#007DFC" />
-                </span>
-              </div>
+            <span className="relative mt-2 rounded-md shadow-sm">
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-800 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                 placeholder="Enter the email.."
               />
-            </div>
+              <label>
+                <MdOutlineAlternateEmail />
+              </label>
+            </span>
           </div>
 
           {/* phone no. */}
@@ -192,22 +186,19 @@ const TeacherForm = (props) => {
               htmlFor="price"
               className="block text-sm font-medium leading-3 text-gray-800">
               Phone no.
-            </label>
-            <div className="relative mt-2 rounded-md shadow-sm">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-800 sm:text-sm">
-                  <FaPhoneAlt color="#007DFC" />
-                </span>
-              </div>
+            </label>         
+            <span className="relative mt-2 rounded-md shadow-sm">
               <input
                 type="tel"
                 name="phone"
                 value={formData.phone}
-                onChange={handleChange}
-                className="block w-full rounded-md border-0 py-2 pl-9 pr-10 text-gray-800 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                onChange={handleChange}              
                 placeholder="Enter the phone no.."
               />
-            </div>
+              <label>
+                <FaPhoneAlt />
+              </label>
+            </span>
           </div>
 
           {/* Multiple select Course */}
@@ -217,7 +208,7 @@ const TeacherForm = (props) => {
               className="block text-sm font-medium leading-3 text-gray-800">
               Select Course's
             </label>
-            <div className="relative mt-2 rounded-md shadow-sm">
+            <div className="relative mt-2 rounded-md shadow-sm w-[300px] md:w-[250px]">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <span className="text-gray-800 sm:text-sm"></span>
               </div>
@@ -244,10 +235,10 @@ const TeacherForm = (props) => {
                   value="Male"
                   checked={formData.gender === "Male"}
                   onChange={handleChange}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500
-                                     dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
+                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
+                                 dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
                 />
-                <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-gray-300">
                   Male
                 </label>
               </div>
@@ -259,10 +250,10 @@ const TeacherForm = (props) => {
                   value="Female"
                   checked={formData.gender === "Female"}
                   onChange={handleChange}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500
-                 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
+                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
+                  dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
                 />
-                <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-gray-300">
                   Female
                 </label>
               </div>
@@ -281,10 +272,10 @@ const TeacherForm = (props) => {
                   value="Active"
                   checked={formData.status === "Active"}
                   onChange={handleChange}
-                  className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
-                 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
+                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
+                                dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
                 />
-                <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-gray-300">
                   Active
                 </label>
               </div>
@@ -297,10 +288,10 @@ const TeacherForm = (props) => {
                   checked={formData.status === "Inactive"}
                   onChange={handleChange}
                   disabled={formEditinfo.add}
-                  className="w-4 h-4 text-[#007DFC] bg-gray-100 border-gray-300 focus:ring-[#007DFC]
-                 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
+                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
+                                dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
                 />
-                <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-gray-300">
                   Inactive
                 </label>
               </div>
@@ -323,7 +314,8 @@ const TeacherForm = (props) => {
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
-                className="resize-none block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-800 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                className="resize-none block w-full rounded focus:shadow-md focus:shadow-blue-200/50 py-1.5 pl-3 pr-20 text-gray-800 placeholder:text-gray-400 
+                 ring-1 ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6"
                 placeholder="Enter the Parmanent address.."
                 rows="5"
               ></textarea>
@@ -334,21 +326,21 @@ const TeacherForm = (props) => {
           <div className="hidden md:block">
             <label
               htmlFor="cover-photo"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium leading-6  text-[var(--foreground)]"
             >
               Cover photo
             </label>
             <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
               <div className="text-center">
                 <MdPhotoSizeSelectActual
-                  className="mx-auto h-12 w-12 text-gray-300"
+                  className="mx-auto h-12 w-12  text-[var(--foreground)]"
                   aria-hidden="true"
                 />
                 <div className="mt-4 flex text-sm leading-6 text-gray-600">
                   <label
                     htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                  >
+                    className="relative cursor-pointer rounded-md bg-white font-semibold text-[var(--primary)] focus-within:outline-none focus-within:ring-2
+                     focus-within:ring-[var(--primary)] focus-within:ring-offset-2 hover:text-[var(--primary)]">
                     <span>Upload a file</span>
                     <input
                       id="file-upload"

@@ -1,7 +1,6 @@
 @use "../index" as temp;
 
 ._dashboard {
-  background: #fff;
   display: flex;
   flex-direction: row;
   gap: 15px;
@@ -10,7 +9,7 @@
   overflow: hidden;
   ._navBar {
     padding: 0.8rem 1.5rem;
-    background-color: #fff;
+    background-color: var(--card);
     width: 250px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
@@ -29,7 +28,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: self-start;
-        color: temp.$primaryText;
+        color: var(--card-foreground);
       span {
         min-width: 150px;
         display: flex;
@@ -67,7 +66,7 @@
         gap: 0.3rem;
         &:nth-child(1){
             li{
-              color: temp.$primaryText;
+              color: var(--card-foreground);
             }
         }
       }
@@ -81,7 +80,7 @@
       justify-content: flex-end;
       align-items: center;
       gap: 1.5rem;
-      color: temp.$primaryText;
+      color: var(--paragraph-color);
       span{
         display: flex;
         align-items: center;
@@ -98,7 +97,7 @@
     align-items: center;
     font-size: 1.2rem;
     font-weight: 600;
-    color: temp.$heading-color;
+    color: var(--heading-color);
     padding: 0rem 1rem ;
   }
   ._outlet{

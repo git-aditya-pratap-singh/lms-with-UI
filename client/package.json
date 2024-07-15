@@ -43,6 +43,7 @@
     "react-test-renderer": "^18.2.0",
     "react-toastify": "^10.0.5",
     "saas": "^1.0.0",
+    "sass-extract": "^3.0.0",
     "styled-components": "^6.1.8",
     "swiper": "^11.0.5"
   },

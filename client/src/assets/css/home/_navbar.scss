@@ -5,7 +5,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  background-color: temp.$navbar-color;
+  background-color: var(--background);
   padding: 1.3rem 5%;
   position: fixed;
   z-index: 100;
@@ -17,11 +17,11 @@ nav {
   gap: 10px;
   font-size: 1.5rem;
   font-weight: 600;
-  color: temp.$text-color;
+  color: var(--foreground);
 }
 
 .shadow-nav {
-  box-shadow: temp.$navbar-shadow;
+  box-shadow: var(--navbar-shadow);
 }
 
 ._navbar {
@@ -30,11 +30,11 @@ nav {
     li {
       margin: 0rem 2rem;
       font-weight: 600;
-      color: temp.$nav-text-color;
+      color: var(--foreground);
       cursor: pointer;
       padding: 0 1rem;
       &:hover {
-        color: temp.$primary;
+        color: var(--primary);
         &::after {
           width: 100%;
         }
@@ -43,7 +43,7 @@ nav {
         content: "";
         width: 0%;
         height: 2.5px;
-        background: temp.$primary;
+        background: var(--primary);
         display: block;
         transition: 0.5s;
         border-radius: 50px;
@@ -60,7 +60,7 @@ nav {
 }
 
 .active {
-  color: temp.$text-color;
+  color: var(--primary);
 }
 
 ._hamburger-menu {
@@ -68,17 +68,9 @@ nav {
 }
 
 ._loginbtn {
-  @apply outline outline-2 outline-offset-2 p-2 outline-blue-500 rounded w-28 flex items-center justify-center gap-2 font-semibold text-gray-700 active:scale-95 ease-in-out duration-300 active:text-white active:bg-[temp.$primary];
+  @apply outline outline-2 outline-offset-2 p-2 outline-[var(--primary)] rounded w-28 flex items-center justify-center gap-2 font-semibold 
+  text-[var(--foreground)] active:scale-95 ease-in-out duration-300 active:text-[var(--foreground-active)] active:bg-[var(--primary)];
 }
-
-.bgColor{
-  background-color: temp.$primary;
-}
-.textColor{
-  color: temp.$primary;
-}
-
-
 
 // Tablet Devices -------------------------
 @media only screen and (max-width: 1068px) {
@@ -88,8 +80,8 @@ nav {
     top: 80px;
     width: 100vw;
     padding: 1rem 0.1rem;
-    background-color: temp.$navbar-color;
-    box-shadow: temp.$navbar-shadow;
+    background-color: var(--background);
+    box-shadow: var(--navbar-shadow);
     ul {
       display: block;
       li {
@@ -122,8 +114,6 @@ nav {
     top: 80px;
     width: 100vw;
     padding: 1rem 0.1rem;
-    background-color: temp.$navbar-color;
-    box-shadow: temp.$navbar-shadow;
     ul {
       display: block;
       li {

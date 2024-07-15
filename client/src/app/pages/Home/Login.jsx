@@ -94,23 +94,21 @@ const Login = () => {
           <h1>Welcome Back!</h1>
           <p>Choose one of the option to go.</p>
           <form className="_form" onSubmit={handleSubmit}>
+
             <span>
-              <label>
-                <MdOutlineAlternateEmail />
-              </label>
               <input
-                type="name"
-                placeholder="enter username..."
+                type="text"
+                placeholder="enter username/email..."
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
               />
+              <label>
+                <MdOutlineAlternateEmail />
+              </label>
             </span>
 
-            <span>
-              <label>
-                <FaFingerprint />
-              </label>
+            <span> 
               <input
                 type="password"
                 autoComplete="off"
@@ -119,6 +117,9 @@ const Login = () => {
                 value={formData.password}
                 onChange={handleChange}
               />
+               <label>
+                <FaFingerprint />
+              </label>
             </span>
 
             <button>
@@ -132,7 +133,7 @@ const Login = () => {
               <p>or Continue with</p>
             </span>
             <label>
-              <label className="text-[#007DFC] hover:text-green-500 cursor-pointer text-sm hover:underline"
+              <label className="text-[var(--primary)] hover:text-green-500 cursor-pointer text-sm underline"
               onClick={()=> dispatch(otp_popup(true))}
               >Login via OTP</label>
             </label>

@@ -1,7 +1,7 @@
 @use "../index" as temp;
 
 ._container1 {
-  box-shadow: temp.$box-shadow2;
+  box-shadow: var(--box-shadow2);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
   gap:5.2rem;
   overflow: hidden;
   ._subContainer11 {
-    box-shadow: temp.$box-shadow2;
+    box-shadow: var(--box-shadow2);
     border-radius: 10px;
     padding: 1rem;
     display: flex;
@@ -22,7 +22,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     ._profile {
-      box-shadow: temp.$box-shadow;
+      box-shadow: var(--box-shadow);
       border-radius: 50%;
       width: 120px;
       height: 120px;
@@ -36,7 +36,7 @@
     ._pfedit {
       width: 40px;
       height: 40px;
-      box-shadow: temp.$box-shadow2;
+      box-shadow: var(--box-shadow2);
       border-radius: 50%;
       position: absolute;
       top: 6.5rem;
@@ -45,13 +45,13 @@
       justify-content: center;
       align-items: center;
       font-size: 1.18rem;
-      background-color: #f0f8ff;
-      color: temp.$primary;
+      background-color: var(--card);
+      color: var(--primary);
       cursor: pointer;
     }
   }
   ._subContainer22 {
-    box-shadow: temp.$box-shadow2;
+    box-shadow: var(--box-shadow2);
     border-radius: 10px;
     padding: 1rem;
     
@@ -62,27 +62,23 @@
       justify-content: space-around;
       align-items: center;
       gap: 1.8rem;
-      span {
-        width: 100%;
+      span{
+        width:100%;
         display: flex;
         align-items: center;
-        gap: 10px;
-        border: 0.09rem solid temp.$secondary;
-        border-radius: 5px;
-        &:focus {
-          outline: 0.09rem solid temp.$secondary;
-          box-shadow: temp.$primary 0px 2px 3px 0px,
-            temp.$primary 0px -1px 5px 0px;
+        gap:10px;
+        position: relative;
+        input{
+            width: 100%;
+            outline: none;
+            @apply pl-12 pr-4 py-2 border border-gray-300 focus:shadow-md focus:shadow-blue-200/50  rounded placeholder-opacity-25 focus:ring-1 focus:ring-ring text-sm;
         }
-        label {
-          background-color: aliceblue;
-          padding: 0.8rem;
-          border-radius: 5px 0px 0px 5px;
-          color: temp.$primary;
-        }
-        input {
-          width: 100%;
-          outline: none;
+        label{
+            background-color: aliceblue;
+            padding: 0.8rem;
+            border-radius: 5px 5px 5px 5px;
+            color: var(--primary);
+            @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none;
         }
       }
       button {
@@ -93,7 +89,7 @@
         justify-content: center;
         align-items: center;
         gap: 5px;
-        background-color: temp.$primary;
+        background-color: var(--primary);
         color: #fff;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
           rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
@@ -105,10 +101,10 @@
 
 ._imgupdate{
   padding: 1rem;
-  box-shadow: temp.$box-shadow2;
+  box-shadow: var(--box-shadow2);
   border-radius: 10px;
   position: absolute;
-  background-color: #fff;
+  background-color: var(--card);
   @apply space-y-4;
 
   button {
@@ -119,7 +115,7 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
-    background-color: temp.$primary;
+    background-color:  var(--primary);
     color: #fff;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;

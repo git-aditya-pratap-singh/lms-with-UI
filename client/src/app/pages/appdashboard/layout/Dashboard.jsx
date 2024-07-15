@@ -41,7 +41,7 @@ const Dashboard = () => {
       user: null,
       token: null,
     })
-    storeTokenRemove(); 
+    storeTokenRemove();
     Cookies.remove('token');
     toast.success("You have Successfully logged out!!");
     navigate("../");
@@ -49,7 +49,7 @@ const Dashboard = () => {
 
   const NavLinkCSS = ({ isActive }) => {
     return {
-      backgroundColor: isActive ? '#007DFC' : '',
+      backgroundColor: isActive ? 'var(--primary)' : '',
       color: isActive ? 'white' : '',
       borderRadius: isActive ? '5px' : '',
       boxShodow: isActive ? 'rgba(33, 35, 38, 0.1) 0px 10px 10px -10px' : '',
@@ -91,7 +91,7 @@ const Dashboard = () => {
             5.0401 8.73625 3.82684 9.2388C2.61358 9.74134 1.31322 10 5.4439e-06 10L5.00679e-06 20C2.62644 20 5.22716 19.4827 7.65368 
             18.4776C10.0802 17.4725 12.285 15.9993 14.1421 14.1421C15.9993 12.285 17.4725 10.0802 18.4776 7.65367C19.4827 5.22715 20 
             2.62643 20 -3.81469e-06L10 5.16562e-07Z"
-                fill="#007DFC"
+                fill="red"
               ></path>
             </svg>
             <h1>elearn</h1>
@@ -190,7 +190,7 @@ const Dashboard = () => {
                   }
                   <li>Home</li>
                 </ul>
-                <span>Home</span>
+                <span className="text-[var(--primary)]">Home</span>
 
               </div>
 
@@ -220,7 +220,11 @@ const Dashboard = () => {
 
           <div className="_welcomeKit">
             <label>Welcome Back {toTitleCase(auth?.user?.name)} 🙋‍♂️!</label>
-            {/* <label>Time: 01:24:37 AM</label> */}
+            <label>Time: <label className="text-blue-500">01</label> : 
+              <label className="text-red-500"> 24</label> :
+              <label className="text-green-500"> 37</label>
+              <label className="text-yellow-500"> AM</label>
+            </label>
           </div>
 
           <div className="_outlet">

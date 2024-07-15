@@ -7,12 +7,13 @@
         min-width: 350px;
         padding: 2rem 1.5rem 1.5rem;
         border-radius: 5px;
-        background-color: #fff;
+        background-color: var(--card);
         display: flex;
         flex-direction: column;
         gap:0.4rem;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
         position: relative;
+        animation: var(--slide-down);
         h3{
             position: absolute;
             right: 20px;
@@ -21,11 +22,11 @@
         }
         h1{
             font-size: 2rem;
-            color:temp.$heading-color;
+            color:var(--heading-color);
         }
         p{
             font-size: 0.85rem;
-            color:temp.$paragraph-color;
+            color:var(--paragraph-color);
         }
         ._form{
             margin-top: 10px;
@@ -38,33 +39,29 @@
                 display: flex;
                 align-items: center;
                 gap:10px;
-                border: 0.09rem solid temp.$primary;
-                border-radius: 5px;
-                &:focus{
-                    outline: 0.09rem solid temp.$primary; 
-                    box-shadow: temp.$primary 0px 2px 3px 0px, temp.$primary 0px -1px 5px 0px;
+                position: relative;
+                input{
+                    width: 100%;
+                    outline: none;
+                    @apply pl-12 pr-4 py-2  border border-gray-300 focus:shadow-md focus:shadow-blue-200/50  rounded placeholder-opacity-25 focus:ring-1 focus:ring-ring text-sm;
                 }
                 label{
                     background-color: aliceblue;
                     padding: 0.8rem;
-                    border-radius: 5px 0px 0px 5px;
-                    color:temp.$primary;
-                }
-            
-                input{
-                    width: 100%;
-                    outline: none;
+                    border-radius: 5px 5px 5px 5px;
+                    color: var(--primary);
+                    @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none;
                 }
             }
             button{
                 width: 100%;
                 border-radius: 5px;
-                padding: 0.5rem;
+                padding: 0.45rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 gap:5px;
-                background-color: temp.$primary;
+                background-color: var(--primary);
                 color: #fff;
                 box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
                 @apply active:scale-95 ease-in-out duration-300;
@@ -89,13 +86,3 @@
         }
     }
 }
-
-// @keyframes slideDownPopup {
-//     0%,
-//     50% {
-//       tranlslate
-//     }
-//     100% {
-//       transform: scale(0.9);
-//     }
-//   }

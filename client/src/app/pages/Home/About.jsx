@@ -126,7 +126,7 @@ const Aboutme = ()=>{
     return(
         <>
         <section className="flex flex-col justify-center items-center space-y-5 w-11/12 mx-auto py-10 px-5 rounded" data-aos="zoom-in">
-            <h1 className="font text-4xl text-[#007DFC]">About me</h1>
+            <h1 className="font text-4xl text-[var(--primary)]">About me</h1>
             <img src={admin} alt="Error!" className="w-44 h-44 object-cover rounded-full flex justify-center items-center drop-shadow-xl" data-aos="zoom-out"/>
             <h1 className="font text-xl">Aditya Pratap Singh</h1>
             <p className="text-gray-600 text-justify font-serif lg:w-1/2 text-[1rem]"> Hello! I am Aditya Pratap Singh, a passionate MERN-Stack Web developer specializing in Reactjs, Nodejs, Expressjs & MongoDB. With a strong foundation 

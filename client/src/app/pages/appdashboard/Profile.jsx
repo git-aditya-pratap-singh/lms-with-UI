@@ -107,10 +107,10 @@ const Profile_admin = () => {
 
                     <div className="flex justify-start items-center gap-x-10">
                         <h2>Username:
-                            <span className="text-blue-500">{formData.username}</span>
+                            <span className="text-[var(--primary)]"> {formData.username}</span>
                         </h2>
                         <h2>Role:
-                            <span className="text-blue-500">{formData.designation}</span>
+                            <span className="text-[var(--primary)]"> {formData.designation}</span>
                         </h2>
                     </div>
 
@@ -153,22 +153,22 @@ const Profile_admin = () => {
                         </span>
 
                         <div className="flex justify-start items-center space-x-4">
-                            <label>Gender : </label>
+                            <label className="text-[var(--foreground)]">Gender : </label>
                             <label className="flex justify-center items-center space-x-2">
-                                <p>Male</p>
+                                <p className="text-[var(--foreground)]">Male</p>
                                 <input type="radio"
                                     name="gender"
-                                    className="radio radio-primary"
+                                    className="radio radio-primary accent-[var(--primary)]"
                                     value="Male"
                                     checked={formData.gender === 'Male'}
                                     onChange={handleChange} 
                                 />
                             </label>
                             <label className="flex justify-center items-center space-x-2">
-                                <p>Female</p>
+                                <p className="text-[var(--foreground)]">Female</p>
                                 <input type="radio"
                                     name="gender"
-                                    className="radio radio-primary"
+                                    className="radio radio-primary accent-[var(--primary)]"
                                     value="Female"
                                     checked={formData.gender === 'Female'}
                                     onChange={handleChange}
@@ -177,12 +177,12 @@ const Profile_admin = () => {
                         </div>
 
                         <div className="flex justify-start items-center space-x-4">
-                            <label>All-Access : </label>
+                            <label className="text-[var(--foreground)]">All-Access : </label>
                             <label className="flex justify-center items-center space-x-2">
-                                <p>True</p>
+                                <p className="text-[var(--foreground)]">True</p>
                                 <input type="radio"
                                     name="hasAllAccess"
-                                    className="radio radio-primary"
+                                    className="radio radio-primary accent-[var(--primary)]"
                                     value="true"
                                     checked={formData.hasAllAccess == "true"}
                                     onChange={handleChange}
@@ -190,10 +190,10 @@ const Profile_admin = () => {
                                 />
                             </label>
                             <label className="flex justify-center items-center space-x-2">
-                                <p>false</p>
+                                <p className="text-[var(--foreground)]">False</p>
                                 <input type="radio"
                                     name="hasAllAccess"
-                                    className="radio radio-primary"
+                                    className="radio radio-primary accent-[var(--primary)]"
                                     value="false"
                                     checked={formData.hasAllAccess == "false"}
                                     onChange={handleChange}
