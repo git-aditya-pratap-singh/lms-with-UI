@@ -5,7 +5,7 @@
 
 @layer base{
   :root{
-    --primary: green;
+    --primary: #007DFC;
     --secondary: #03aeec4f;
 
     --fontStyle: 'Signika Negative', sans-serif;
