@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
-import { img_update_popup } from "../../Store/Slices/StateSlice";
+import { img_update_popup } from "../../redux/Slices/StateSlice";
 //import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 import toTitleCase from "../../common/titleCase";
 import DateFormet from "../../common/dateFormet";

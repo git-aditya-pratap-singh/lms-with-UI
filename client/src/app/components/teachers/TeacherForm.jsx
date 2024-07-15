@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { add_teacher_popup } from "../../Store/Slices/StateSlice";
+import { add_teacher_popup } from "../../redux/Slices/StateSlice";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import toTitleCase from "../../common/titleCase";

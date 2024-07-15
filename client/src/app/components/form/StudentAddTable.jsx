@@ -1,6 +1,6 @@
 
 import { useDispatch } from "react-redux";
-import { add_student_popup } from "../../Store/Slices/StateSlice";
+import { add_student_popup } from "../../redux/Slices/StateSlice";
 
 import { FaUserPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";

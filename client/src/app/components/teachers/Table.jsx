@@ -1,7 +1,7 @@
 //import { useContext } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { add_teacher_popup } from "../../Store/Slices/StateSlice";
+import { add_teacher_popup } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase";
 import profileName from "../../common/profileName";
 import getRandomHexColor from "../../common/randomColorgenerate";

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import { add_student_popup } from "../../Store/Slices/StateSlice";
+import { add_student_popup } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase"
 import profileName from "../../common/profileName";
 import getRandomHexColor from "../../common/randomColorgenerate"; 

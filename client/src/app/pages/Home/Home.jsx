@@ -22,7 +22,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
 import { useDispatch, useSelector } from "react-redux"
-import { login_popup, registration_popup } from "../../Store/Slices/StateSlice"
+import { login_popup, registration_popup } from "../../redux/Slices/StateSlice"
 
 import Registration from "./Registration";
 

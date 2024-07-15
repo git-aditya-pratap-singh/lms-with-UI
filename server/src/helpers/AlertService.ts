@@ -15,6 +15,7 @@ class AlertService {
         sameSite: 'strict'
         });
         res.status(200).json({
+            statusCode: 200,
             status: status,
             message: message,
             data: data
@@ -22,6 +23,7 @@ class AlertService {
     }
     public sendSuccessResponse(res: Response, status: boolean, message: string, data?: any): void{
         res.status(200).json({
+            statusCode: 200,
             status: status,
             message: message,
             data: data
@@ -29,12 +31,14 @@ class AlertService {
     }
     public sendErrorResponse(res: Response, status: boolean, message: string): void{
         res.status(201).json({
+            statusCode: 201,
             status: status,
             message: message,
         })
     }
     public sendServerErrorResponse(res: Response, status: boolean, message: string): void{
         res.status(500).json({
+            statusCode: 500,
             status: status,
             message: message
         })

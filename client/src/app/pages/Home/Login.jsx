@@ -2,7 +2,7 @@ import { useState } from "react";
 //import Cookies from 'js-cookie';
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { login_popup, otp_popup } from "../../Store/Slices/StateSlice";
+import { login_popup, otp_popup } from "../../redux/Slices/StateSlice";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../../_service/api.service";
 import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
@@ -93,7 +93,7 @@ const Login = () => {
           </h3>
           <h1>Welcome Back!</h1>
           <p>Choose one of the option to go.</p>
-          <form className="_form" onSubmit={handleSubmit}>
+          <form className="_form" onSubmit={handleSubmit} action="../../_api/login" method="POST">
 
             <span>
               <input

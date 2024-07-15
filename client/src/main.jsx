@@ -3,7 +3,7 @@ import App from './App.jsx'
 import './index.css'
 import { PrimeReactProvider } from "primereact/api";
 import { Provider } from "react-redux";
-import Store from "./app/Store/Store";
+import Store from "./app/redux/Store";
 import AuthGuard from "./app/_guard/auth.guard";
 
 ReactDOM.createRoot(document.getElementById('root')).render(

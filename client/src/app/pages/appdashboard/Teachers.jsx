@@ -1,6 +1,6 @@
 //import { createContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { add_teacher_popup } from "../../Store/Slices/StateSlice";
+import { add_teacher_popup } from "../../redux/Slices/StateSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FaUserPlus, FaDownload } from "react-icons/fa";

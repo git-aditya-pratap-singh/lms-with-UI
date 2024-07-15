@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLoaderData } from 'react-router-dom';
 import Select from 'react-select'
-import { registration_popup } from "../../Store/Slices/StateSlice";
+import { registration_popup } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase";
 
 import { BiLogInCircle } from "react-icons/bi";

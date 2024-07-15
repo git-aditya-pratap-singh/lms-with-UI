@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Hamburger from "hamburger-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { login_popup } from "../../Store/Slices/StateSlice";
+import { login_popup } from "../../redux/Slices/StateSlice";
 
 import { FaHome, FaUser, FaPhoneAlt, FaChartPie } from "react-icons/fa";
 import { BiLogInCircle } from "react-icons/bi";

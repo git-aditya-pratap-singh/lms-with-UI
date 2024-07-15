@@ -1,5 +1,5 @@
 
-import { add_student_popup } from "../../Store/Slices/StateSlice";
+import { add_student_popup } from "../../redux/Slices/StateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoaderData } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import OtpInput from "react-otp-input";
 import { useDispatch } from "react-redux";
-import { otp_popup } from "../../Store/Slices/StateSlice";
+import { otp_popup } from "../../redux/Slices/StateSlice";
 
 import { BiLogInCircle } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
