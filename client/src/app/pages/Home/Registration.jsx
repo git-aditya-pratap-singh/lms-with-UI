@@ -92,8 +92,6 @@ const Registration = () => {
       setError(validateFormError);
     }
     else{
-      // Form is Valid
-      console.log(data)
       setError(validateFormError)
     }
 

@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { login_popup, otp_popup } from "../../redux/Slices/StateSlice";
 import { useNavigate } from "react-router-dom";
-import ApiService from "../../_service/api.service";
-import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
+import { useAuthGuard, storeTokenInStorage} from "../../_guard/auth.guard";
+import Apiauth from "../../_api/auth/Apiauth";
 
 //-------------ICON--------------------
 import { FaGithub, FaLinkedinIn, FaFingerprint } from "react-icons/fa";
@@ -22,8 +22,6 @@ const Login = () => {
   const [auth, setAuth] = useAuthGuard();
   const navigate = useNavigate();
 
- 
-
   const [formData, setFormdata] = useState({
     username: "",
     password: "",
@@ -34,7 +32,7 @@ const Login = () => {
     setFormdata({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
     if (!formData.username) {
@@ -50,37 +48,18 @@ const Login = () => {
       return;
     }
 
-    {
-      /* Api Calling */
+    const apiResponse = await new Apiauth().login(formData);
+    if (apiResponse.status) {
+      storeTokenInStorage(apiResponse.data);
+      setAuth({
+        ...auth,
+        user: apiResponse.data.userValid,
+        token: apiResponse.data.token,
+      });
+      dispatch(login_popup(false));
+      navigate("/dashboard/home");
     }
-    API_CALL(formData);
-  };
 
-  const API_INSTANCE = new ApiService();
-
-  const API_CALL = async (loginData) => {
-    try {
-      const response = await API_INSTANCE.post("/login/login", loginData);
-
-      if (response.status) {
-        storeTokenInStorage(response.data);
-        //Cookies.set('token', JSON.stringify(response.data),{ secure: true, sameSite: 'Strict' });
-        setAuth({
-          ...auth,
-          user: response.data.userValid,
-          token: response.data.token,
-        });
-
-        dispatch(login_popup(false));
-        toast.success(response.message);
-        navigate("/dashboard/home");
-      } else {
-        toast.error(response.message);
-      }
-    } catch (err) {
-      console.error("API call error:", err);
-      toast.error("An error occurred while trying to log in.");
-    }
   };
 
   return (
@@ -93,7 +72,7 @@ const Login = () => {
           </h3>
           <h1>Welcome Back!</h1>
           <p>Choose one of the option to go.</p>
-          <form className="_form" onSubmit={handleSubmit} action="../../_api/login" method="POST">
+          <form className="_form" onSubmit={handleSubmit}>
 
             <span>
               <input

@@ -8,6 +8,7 @@ import { img_update_popup } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase";
 import DateFormet from "../../common/dateFormet";
 import ApiService from "../../_service/api.service";
+import Apiadmin from "../../_api/admin/Apiadmin";
 
 import { FaEdit, FaUser, FaPhoneAlt, FaCalendarAlt } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -37,7 +38,7 @@ const Profile_admin = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setFormData({...formData, [name]: value});
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = (event) => {
@@ -46,14 +47,14 @@ const Profile_admin = () => {
         const validateFormData = () => {
             return (
                 !formData.name ? toast.warning("Name can not be empty!") :
-                !formData.email ? toast.warning("Email can not be empty!") :
-                !formData.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/) ? toast.warning("Invalid email!") :
-                !formData.phone ? toast.warning("Phone can not be empty!") :
-                !formData.dob ? toast.warning("DOB can not be empty!") :
-                !formData.gender ? toast.warning("Please, Choose any gender!") :
-                !formData.hasAllAccess ? toast.warning("Please, Choose any AccessType!") :
-                !formData.address ? toast.warning("Address can not be empty!") :
-                true
+                    !formData.email ? toast.warning("Email can not be empty!") :
+                        !formData.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/) ? toast.warning("Invalid email!") :
+                            !formData.phone ? toast.warning("Phone can not be empty!") :
+                                !formData.dob ? toast.warning("DOB can not be empty!") :
+                                    !formData.gender ? toast.warning("Please, Choose any gender!") :
+                                        !formData.hasAllAccess ? toast.warning("Please, Choose any AccessType!") :
+                                            !formData.address ? toast.warning("Address can not be empty!") :
+                                                true
             );
         }
         if (validateFormData() !== true) {
@@ -61,35 +62,22 @@ const Profile_admin = () => {
         } else {
             // build userName---------
             const userName = formData.name.split(" ")[0].toLowerCase();
-            setFormData({...formData, ['username']: userName})
-            // Api Call
-            API_CALL(formData);
-        }
-    }
+            setFormData({ ...formData, ['username']: userName })
 
-    const API_INSTANCE = new ApiService();
-
-    const API_CALL = async(formData)=>{
-        try{
-            const response = await API_INSTANCE.put('/dashboard/profiles/updateDetails', formData);
-            if(response.status){
-                toast.success(response.message);
-            }else{
-                toast.error(response.message);
-            }
-        }catch(err){
-            toast.error('An error occurred while trying to log in.');   
+            // api call
+            new Apiadmin().profileUpdate(formData);
+    
         }
     }
 
     useEffect(() => {
         if (userprofileData) {
-          setFormData(prevFormData => ({
-            ...prevFormData,
-            ...userprofileData
-          }));
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                ...userprofileData
+            }));
         }
-      }, []);
+    }, []);
 
     return (
         <>
@@ -161,7 +149,7 @@ const Profile_admin = () => {
                                     className="radio radio-primary accent-[var(--primary)]"
                                     value="Male"
                                     checked={formData.gender === 'Male'}
-                                    onChange={handleChange} 
+                                    onChange={handleChange}
                                 />
                             </label>
                             <label className="flex justify-center items-center space-x-2">
@@ -228,22 +216,22 @@ const ImgUpdate = () => {
         file: ""
     });
 
-    const API_INSTANCE = new ApiService(); 
+    const API_INSTANCE = new ApiService();
 
-    const FileUploadFunc = async(event) =>{
+    const FileUploadFunc = async (event) => {
         event.preventDefault();
         console.log(file)
-        try{
-            const response = await API_INSTANCE.post('/dashboard/profiles/uploadProfilePicture',{"file": file.name});
-            if(response.status){
+        try {
+            const response = await API_INSTANCE.post('/dashboard/profiles/uploadProfilePicture', { "file": file.name });
+            if (response.status) {
                 toast.success(response.message);
-            }else{
+            } else {
                 toast.error(response.message);
             }
 
-        }catch(err){
-            toast.error('An error occurred while trying to log in.');   
-        } 
+        } catch (err) {
+            toast.error('An error occurred while trying to log in.');
+        }
     }
 
     return (
@@ -257,8 +245,8 @@ const ImgUpdate = () => {
                         <h3 style={{ cursor: "pointer" }} onClick={() =>
                             dispatch(img_update_popup(false))}><RxCross1 /></h3>
                     </span>
-                    <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10" 
-                    name="file" accept="image/*" required onChange={(event)=>setFile(event.target.files[0])}/>
+                    <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10"
+                        name="file" accept="image/*" required onChange={(event) => setFile(event.target.files[0])} />
                     <button><GrUpdate />Update</button>
                 </form>
 
