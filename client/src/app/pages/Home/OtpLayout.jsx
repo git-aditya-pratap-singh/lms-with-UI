@@ -1,9 +1,10 @@
 import { useState } from "react";
 import OtpInput from "react-otp-input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { otp_popup } from "../../redux/Slices/StateSlice";
 
 import { BiLogInCircle } from "react-icons/bi";
+import { FaFingerprint } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { FaArrowRotateLeft } from "react-icons/fa6";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -13,6 +14,9 @@ import "../../../assets/css/home/_otp.scss";
 const OtpLayout = () => {
 
   const dispatch = useDispatch();
+  const otpStatus = useSelector((store)=> store.openPopup.otp_popup);
+  console.log(otpStatus)
+
   const [email, setEmail] = useState('');
   const [otp, setOTP] = useState('');
 
@@ -22,6 +26,7 @@ const OtpLayout = () => {
 
   return (
     <>
+    { (otpStatus.otpLogin || otpStatus.forgetPswdOtp) && 
       <section className="_otpContainer">
         <div className="_loginForm">
           <h3 onClick={() => dispatch(otp_popup(false))}>
@@ -64,6 +69,19 @@ const OtpLayout = () => {
               }}
             />
 
+            <span>
+              <input
+                type="password"
+                placeholder="create new password"
+                name="password"
+                
+                onChange={handleChange}
+              />
+               <label>
+                <FaFingerprint />
+              </label>
+            </span>
+
             <div className="flex justify-between w-full gap-x-8">
               <button>
                 <FaArrowRotateLeft />
@@ -79,6 +97,7 @@ const OtpLayout = () => {
           </form>
         </div>
       </section>
+    }    
     </>
   );
 };

@@ -16,7 +16,10 @@ const StateSlice = createSlice({
             edit : false,
             item : ''
         },
-        otpVariable: false
+        otp_popup_state: {
+            otpLogin: false,
+            forgetPswdOtp: false
+        }
         
     },
     reducers : {
@@ -43,8 +46,8 @@ const StateSlice = createSlice({
         },
 
         otp_popup : (state, action)=>{
-            console.log(action)
-            state.otpVariable = action.payload;
+            state.otp_popup_state[action.payload.key === 'otpLogin' ? 'otpLogin' : 'forgetPswdOtp'] = action.payload.check;
+            console.log(state)
         },
     }
 })

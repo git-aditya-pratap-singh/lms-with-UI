@@ -2,9 +2,8 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import Select from 'react-select'
 import JoditEditor from 'jodit-react';
-import { toast } from 'react-toastify';
 import toTitleCase from '../../common/titleCase';
-import ApiService from "../../_service/api.service";
+import Apiadmin from "../../_api/admin/Apiadmin.service";
 
 import { FaBookOpen, FaHandHoldingDollar, FaDollarSign, FaTag, FaBuffer } from "react-icons/fa6";
 import { FaVideo, FaLink, FaArrowRight } from "react-icons/fa";
@@ -19,7 +18,6 @@ const FormCourse = (props) => {
     props?.list[0]?.map((item) => {  // for teachers
         faculityList.push({ value: item?._id, label: toTitleCase(item?.name) })
     })
-
     props?.list[1]?.map((item) => {  // for courseTags
         courseTagsList.push({ value: item?._id, label: toTitleCase(item?.tagName) })
     })
@@ -42,7 +40,6 @@ const FormCourse = (props) => {
     }
 
     const [courseData, setCourseData] = useState(initialState);
-
     const [error, setError] = useState({});
 
     const handleChange = (event) => {
@@ -50,116 +47,89 @@ const FormCourse = (props) => {
         setCourseData({ ...courseData, [name]: value })
     }
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const FormValidation = () => {
             const error = {};
-
             // ------------Course Name validate--------------
-            if (!courseData.courseName) {
+            if (!courseData.courseName) 
                 error.courseName = "Course-name shouln't be empty!"
-            }
-            else if (!courseData.courseName.match(/^[a-zA-Z\s]{5,150}$/)) {
+            
+            else if (!courseData.courseName.match(/^[a-zA-Z\s]{5,150}$/)) 
                 error.courseName = 'A name must be contain only characters & length must be atleast 5 characters!';
-            }
-
+            
             //------------Course Discription validate--------------
-            if (!courseData.courseDescription) {
+            if (!courseData.courseDescription) 
                 error.courseDescription = "Course Discription shouln't be empty!"
-            }
 
             // ------------Course Price validate--------------
-            if (!courseData.coursePrice) {
+            if (!courseData.coursePrice) 
                 error.coursePrice = "Course Price($) shouln't be empty!"
-            }
-            else if (isNaN(courseData.coursePrice)) {
+            
+            else if (isNaN(courseData.coursePrice)) 
                 error.coursePrice = "Course Price($) shouln't be Alphabet only Number Allowed!"
-            }
 
             // ------------Course Estimated Price validate--------------
-            if (!courseData.courseEstiPrice) {
+            if (!courseData.courseEstiPrice) 
                 error.courseEstiPrice = "Course Estimated Price($) shouln't be empty!"
-            }
-            else if (isNaN(courseData.courseEstiPrice)) {
+            
+            else if (isNaN(courseData.courseEstiPrice)) 
                 error.courseEstiPrice = "Course Estimated Price($) shouln't be Alphabet only Number Allowed!"
-            }
 
             //------------course Validation -----------------
-            if (courseData.courseTags.length === 0) {
+            if (courseData.courseTags.length === 0)
                 error.courseTags = 'Please! Select atleast One Tags.'
-            }
 
             //------------course courseCategories -----------------
-            if (!courseData.courseCategories) {
+            if (!courseData.courseCategories) 
                 error.courseCategories = 'Please! Select atleast One Categories.'
-            }
 
             //------------course courseLevel-----------------
-            if (!courseData.courseLevel) {
+            if (!courseData.courseLevel) 
                 error.courseLevels = 'Please! Select Level.'
-            }
 
             //------------course videoTitle-----------------
-            if (!courseData.videoTitle) {
+            if (!courseData.videoTitle)
                 error.videoTitle = 'Please! Enter the Video Title.'
-            }
 
             // ------------Course Discription validate--------------
-            if (!courseData.courseBenifit) {
+            if (!courseData.courseBenifit)
                 error.courseBenifit = "Course Benifits shouln't be empty!"
-            }
 
             //------------course Validation -----------------
-            if (courseData.faculity.length === 0) {
+            if (courseData.faculity.length === 0)
                 error.faculity = 'Please! Select atleast One faculity member.'
-            }
 
             //------------course courseVideo -----------------
-            if (!courseData.courseVideo) {
+            if (!courseData.courseVideo) 
                 error.courseVideo = 'Please! Upload a Video.'
-            }
 
             //------------course courselogo -----------------
-            if (!courseData.courselogo) {
+            if (!courseData.courselogo) 
                 error.courselogo = 'Please! Upload a Logo.'
-            }
 
             return error;
         }
 
         const validateFormError = FormValidation();
 
-        if (Object.keys(validateFormError).length > 0) {
+        if (Object.keys(validateFormError).length > 0) 
             setError(validateFormError);
-
-        }
         else {
             setError(validateFormError);
             {/* Api Calling */ }
-            API_CALL(courseData);
+            new Apiadmin().addCourses(courseData)
+            .then((apiResponse)=>{
+                if(apiResponse.status)
+                    setCourseData(initialState)
+            })
         }
-    }
-
-    const API_INSTANCE = new ApiService();
-
-    const API_CALL = async (courseData) => {
-        try {
-            const response = await API_INSTANCE.post('/dashboard/course/addCourse', courseData);
-            response.status ?
-                (toast.success(response.message), setCourseData(initialState))
-                : toast.error(response.message);
-        } catch (err) {
-            toast.error('An error occurred while trying to add course.');
-        }
-
     }
 
     return (
         <>
             <section className="_courseForm">
-
                 <form className="_courseForm1" onSubmit={handleSubmit}>
                     {/* Name */}
                     <div className="">
@@ -184,8 +154,6 @@ const FormCourse = (props) => {
                         {error.courseName && <label className="text-red-500 text-sm -mt-3">{error.courseName}</label>}
                     </div>
 
-
-
                     {/* Discription. */}
                     <div>
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
@@ -207,7 +175,6 @@ const FormCourse = (props) => {
                         </div>
                         {error.courseDescription && <label className="text-red-500 text-sm -mt-3">{error.courseDescription}</label>}
                     </div>
-
 
                     {/* Price */}
                     <div className="">
@@ -278,7 +245,6 @@ const FormCourse = (props) => {
                         {error.courseTags && <label className="text-red-500 text-sm -mt-3">{error.courseTags}</label>}
                     </div>
 
-
                     {/* categories */}
                     <div>
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
@@ -344,7 +310,6 @@ const FormCourse = (props) => {
                         {error.videoTitle && <label className="text-red-500 text-sm -mt-3">{error.videoTitle}</label>}
                     </div>
 
-
                     {/* Video URL */}
                     <div className="">
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
@@ -366,7 +331,6 @@ const FormCourse = (props) => {
                             />
                         </div>
                     </div>
-
 
                     {/* Source Code */}
                     <div className="">
@@ -390,7 +354,6 @@ const FormCourse = (props) => {
                         </div>
                     </div>
 
-
                     {/* Course Benifits */}
                     <div>
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
@@ -413,7 +376,6 @@ const FormCourse = (props) => {
                         {error.courseBenifit && <label className="text-red-500 text-sm -mt-3">{error.courseBenifit}</label>}
                     </div>
 
-
                     {/* Select teachers */}
                     <div className="w-full">
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-800">
@@ -430,7 +392,6 @@ const FormCourse = (props) => {
                         </div>
                         {error.faculity && <label className="text-red-500 text-sm -mt-3">{error.faculity}</label>}
                     </div>
-
 
                     {/* Upload Video. */}
                     <div className="w-full space-y-2">
@@ -465,12 +426,8 @@ const FormCourse = (props) => {
                             Submit <FaArrowRight size={12} />
                         </button>
                     </div>
-
                 </form>
-
             </section>
-
-
         </>
     )
 };

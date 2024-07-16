@@ -5,7 +5,7 @@ import { add_teacher_popup } from "../../redux/Slices/StateSlice";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import toTitleCase from "../../common/titleCase";
-import ApiService from "../../_service/api.service";
+import Apiadmin from "../../_api/admin/Apiadmin.service";
 
 import { MdPhotoSizeSelectActual } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
@@ -75,24 +75,12 @@ const TeacherForm = (props) => {
     if (validateFormData() !== true) {
       return;
     } else {
-      API_CALL(formData);
-    }
-  };
-
-  const API_INSTANCE = new ApiService();
-
-  const API_CALL = async (formData) => {
-    try {
-      const endpoint = formEditinfo.add ? "/dashboard/teachers/addTeachers" : "/dashboard/teachers/editTeachers";
-      const response = formEditinfo.add ? await API_INSTANCE.post(endpoint, formData) : await API_INSTANCE.put(endpoint, formData);
-      if (response.status) {
-        toast.success(response.message);
-        dispatch(add_teacher_popup({check: false, key: formEditinfo.add ? "add" : "edit" }));
-      } else {
-        toast.error(response.message);
-      }
-    } catch (err) {
-      toast.error("An error occurred while trying to log in.");
+      //--------API Calling
+      new Apiadmin().addTeachers(formEditinfo, formData)
+      .then((apiResponse)=>{
+        if (apiResponse.status)
+          dispatch(add_teacher_popup({check: false, key: formEditinfo.add ? "add" : "edit" }));
+      })
     }
   };
 

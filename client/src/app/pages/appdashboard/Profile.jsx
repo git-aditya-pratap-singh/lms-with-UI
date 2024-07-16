@@ -8,7 +8,7 @@ import { img_update_popup } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase";
 import DateFormet from "../../common/dateFormet";
 import ApiService from "../../_service/api.service";
-import Apiadmin from "../../_api/admin/Apiadmin";
+import Apiadmin from "../../_api/admin/Apiadmin.service";
 
 import { FaEdit, FaUser, FaPhoneAlt, FaCalendarAlt } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";

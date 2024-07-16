@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { login_popup, otp_popup } from "../../redux/Slices/StateSlice";
 import { useNavigate } from "react-router-dom";
 import { useAuthGuard, storeTokenInStorage} from "../../_guard/auth.guard";
-import Apiauth from "../../_api/auth/Apiauth";
+import Apiauth from "../../_api/auth/Apiauth.service";
 
 //-------------ICON--------------------
 import { FaGithub, FaLinkedinIn, FaFingerprint } from "react-icons/fa";
@@ -47,7 +47,7 @@ const Login = () => {
       toast.warning("password should not be empty!!");
       return;
     }
-
+    //---API calling
     const apiResponse = await new Apiauth().login(formData);
     if (apiResponse.status) {
       storeTokenInStorage(apiResponse.data);
@@ -64,7 +64,6 @@ const Login = () => {
 
   return (
     <>
-   
       <section className="_loginContainer">
         <div className="_loginForm">
           <h3 onClick={() => dispatch(login_popup(false))}>
@@ -108,16 +107,21 @@ const Login = () => {
           </form>
 
           <div className="flex justify-between items-center">
-            <span>
-              <p>or Continue with</p>
-            </span>
+            <label>
+              <label className="text-red-500 cursor-pointer text-sm underline hover:text-red-400"
+              onClick={()=> dispatch(otp_popup({ check: true, key: "forgetPswdOtp" })) }
+              >forget password</label>
+            </label>
             <label>
               <label className="text-[var(--primary)] hover:text-green-500 cursor-pointer text-sm underline"
-              onClick={()=> dispatch(otp_popup(true))}
+              onClick={()=> dispatch(otp_popup({ check: true, key: "otpLogin" })) }
               >Login via OTP</label>
             </label>
           </div>
 
+          <span className="-mt-3">
+              <p>or Continue with</p>
+          </span>
           <div className="_loginIcon">
             <span>
               <FcGoogle size={20} />
