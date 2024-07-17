@@ -14,7 +14,12 @@ import "../../../assets/css/home/_otp.scss";
 const OtpLayout = () => {
 
   const dispatch = useDispatch();
+<<<<<<< HEAD
   const otpStatus = useSelector((store)=> store.openPopup.otp_popup_state);
+=======
+  const otpStatus = useSelector((store)=> store.openPopup.otp_popup);
+  console.log("data->",otpStatus)
+>>>>>>> 69e9bb9af41410b4f25e97f05d2b7728b1eed3cc
 
   const [email, setEmail] = useState('');
   const [otp, setOTP] = useState('');

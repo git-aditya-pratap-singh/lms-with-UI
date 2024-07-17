@@ -46,7 +46,12 @@ const StateSlice = createSlice({
         },
 
         otp_popup : (state, action)=>{
+            console.log("payload->",action.payload)
             state.otp_popup_state[action.payload.key === 'otpLogin' ? 'otpLogin' : 'forgetPswdOtp'] = action.payload.check;
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 69e9bb9af41410b4f25e97f05d2b7728b1eed3cc
         },
     }
 })
