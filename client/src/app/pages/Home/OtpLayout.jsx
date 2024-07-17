@@ -14,8 +14,7 @@ import "../../../assets/css/home/_otp.scss";
 const OtpLayout = () => {
 
   const dispatch = useDispatch();
-  const otpStatus = useSelector((store)=> store.openPopup.otp_popup);
-  console.log(otpStatus)
+  const otpStatus = useSelector((store)=> store.openPopup.otp_popup_state);
 
   const [email, setEmail] = useState('');
   const [otp, setOTP] = useState('');
@@ -26,10 +25,14 @@ const OtpLayout = () => {
 
   return (
     <>
-    { (otpStatus.otpLogin || otpStatus.forgetPswdOtp) && 
+    { (otpStatus.otpLogin || otpStatus.forgetPswdOtp) &&
+
       <section className="_otpContainer">
         <div className="_loginForm">
-          <h3 onClick={() => dispatch(otp_popup(false))}>
+          <h3 onClick={() => {
+            otpStatus.otpLogin ? dispatch(otp_popup({ check: false, key: "otpLogin" })) : dispatch(otp_popup({ check: false, key: "forgetPswdOtp" }))
+            }}
+          >
             <RxCross1 />
           </h3>
           <h1>Login via OTP!</h1>
