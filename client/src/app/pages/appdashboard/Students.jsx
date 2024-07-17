@@ -19,7 +19,6 @@ const Students = () => {
 
     return (
         <>
-            
             <section className="_studentContainer">
                 <div className="_studentSubConatiner1">
                     <div className="_studentSearch">
@@ -72,8 +71,6 @@ const Students = () => {
                     <AddForm courseList={itemList[1]}/>
                 </div>
             }
-
-
         </>
     )
 }

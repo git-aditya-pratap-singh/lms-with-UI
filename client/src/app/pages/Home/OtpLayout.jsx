@@ -15,7 +15,7 @@ const OtpLayout = () => {
 
   const dispatch = useDispatch();
   const otpStatus = useSelector((store)=> store.openPopup.otp_popup);
-  console.log(otpStatus)
+  console.log("data->",otpStatus)
 
   const [email, setEmail] = useState('');
   const [otp, setOTP] = useState('');
