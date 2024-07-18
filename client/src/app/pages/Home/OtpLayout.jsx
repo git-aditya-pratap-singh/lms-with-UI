@@ -14,15 +14,11 @@ import "../../../assets/css/home/_otp.scss";
 const OtpLayout = () => {
 
   const dispatch = useDispatch();
-<<<<<<< HEAD
   const otpStatus = useSelector((store)=> store.openPopup.otp_popup_state);
-=======
-  const otpStatus = useSelector((store)=> store.openPopup.otp_popup);
-  console.log("data->",otpStatus)
->>>>>>> 69e9bb9af41410b4f25e97f05d2b7728b1eed3cc
-
   const [email, setEmail] = useState('');
-  const [otp, setOTP] = useState('');
+  const [loginotp, setloginOTP] = useState(null);
+  const [Verifiedloginotp, VerifiedsetloginOTP] = useState(null);
+
 
   const handleChange = (event) =>{
     setEmail(event.target.value)
@@ -35,7 +31,9 @@ const OtpLayout = () => {
       <section className="_otpContainer">
         <div className="_loginForm">
           <h3 onClick={() => {
-            otpStatus.otpLogin ? dispatch(otp_popup({ check: false, key: "otpLogin" })) : dispatch(otp_popup({ check: false, key: "forgetPswdOtp" }))
+            otpStatus.otpLogin 
+            ? dispatch(otp_popup({ check: false, key: "otpLogin" })) 
+            : dispatch(otp_popup({ check: false, key: "forgetPswdOtp" }))
             }}
           >
             <RxCross1 />
@@ -56,10 +54,11 @@ const OtpLayout = () => {
                 <MdOutlineAlternateEmail />
               </label>
             </span>
-
+          
+          { loginotp && 
             <OtpInput
-              value={otp}
-              onChange={setOTP}
+              value={loginotp}
+              onChange={setloginOTP}
               numInputs={4}
               separator={<span>-</span>}
               renderInput={(props) => <input {...props} />}
@@ -72,16 +71,18 @@ const OtpLayout = () => {
                 margin: "0 18px",
                 border: "1px solid var(--primary)",
                 borderRadius: "5px",
-                boxShadow:
-                  "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;",
+                boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
               }}
             />
+          }
 
+          { Verifiedloginotp && 
             <span>
               <input
                 type="password"
                 placeholder="create new password"
                 name="password"
+                autoComplete="off"
                 
                 onChange={handleChange}
               />
@@ -89,7 +90,9 @@ const OtpLayout = () => {
                 <FaFingerprint />
               </label>
             </span>
+          }
 
+          { !loginotp &&
             <div className="flex justify-between w-full gap-x-8">
               <button>
                 <FaArrowRotateLeft />
@@ -99,6 +102,21 @@ const OtpLayout = () => {
               <button>
                 <BiLogInCircle />
                 Send OTP
+              </button>
+            </div>
+          }
+
+            <div className="flex justify-between w-full gap-x-8">
+              <button>
+                <BiLogInCircle />
+                Verified OTP
+              </button>
+            </div>
+
+            <div className="flex justify-between w-full gap-x-8">
+              <button>
+                <BiLogInCircle />
+                Generate New Password
               </button>
             </div>
 
