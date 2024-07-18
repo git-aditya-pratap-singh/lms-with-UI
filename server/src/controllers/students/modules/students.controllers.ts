@@ -41,28 +41,24 @@ class StudentsControllers extends AlertService {
     public addStudents = asyncHandler( async(req: Request, res: Response): Promise<any> =>{
       
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
-
         const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));
 
         const credential: any = await this.credentialCheck(email, phone, res);
-        if(credential){
+        if(credential)
             return this.sendErrorResponse(res, false, "This User is already exists!!")
-        }
 
         const userName: string = await new CommonServices().createUserName(name, res);
         const validUsername: string = await this.credentialUsernameCheck(userName, res)
-        if(validUsername){
+        if(validUsername)
             return this.sendErrorResponse(res, false, "This Username is already exists!!")
-        }
 
         const generatePswd: any = await this.generatePassword(name, res);
-        if(!generatePswd){
+        if(!generatePswd)
             return this.sendErrorResponse(res, false, "Password isn't to be generated!!")
-        }
+        
         const emailSent = await this.sendCredentialsByEmail(res, name, userName, generatePswd.pswd, email);
-        if(!emailSent){
+        if(!emailSent)
             return this.sendErrorResponse(res, false, "Failed to Send Credential on your email !!")
-        }
 
         const studentData = new studentsDB({
            username: userName,
@@ -96,9 +92,8 @@ class StudentsControllers extends AlertService {
         // }
         if(req?.user?.designation !== 'admin'){
             const hasStudentStatus: boolean = await this.isCheckStudentStatus(email, res);
-            if(!hasStudentStatus){
+            if(!hasStudentStatus)
                 return this.sendErrorResponse(res, false, "Account has been Deactivate. Please, Contact to Administrator!!")
-            }
         }
         
         const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));

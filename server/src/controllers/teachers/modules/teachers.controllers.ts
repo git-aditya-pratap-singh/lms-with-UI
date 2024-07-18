@@ -85,29 +85,25 @@ class TeachersControllers extends AlertService {
     public addTeachers = asyncHandler( async(req: Request, res: Response): Promise<any> =>{
       
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body; 
-
         const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));
 
         const credential: any = await this.credentialCheck(email, phone, res);
-        if(credential){
+        if(credential)
             return this.sendErrorResponse(res, false, "This User is already exists!!")
-        }
 
         const userName: string = await new CommonServices().createUserName(name, res);
         const validUsername: string = await this.credentialUsernameCheck(userName, res)
-        if(validUsername){
+        if(validUsername)
             return this.sendErrorResponse(res, false, "This Username is already exists!!")
-        }
 
         const generatePswd: any = await this.generatePassword(name, res);
-        if(!generatePswd){
+        if(!generatePswd)
             return this.sendErrorResponse(res, false, "Password isn't to be generated!!")
-        }
 
         const emailSent = await this.sendCredentialsByEmail(res, name, userName, generatePswd.pswd, email);
-        if(!emailSent){
+        if(!emailSent)
             return this.sendErrorResponse(res, false, "Failed to Send Credential on your email !!")
-        }
+        
         const response = new teachersDB({
            username: userName,
            name: name,
@@ -131,10 +127,10 @@ class TeachersControllers extends AlertService {
     });
 
     public editTeachers = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
-        console.log(req.body)
+        
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
-
         const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));
+        
         const updateTeacherData = await teachersDB.updateOne(
             {email: email},
             {$set: {

@@ -9,8 +9,8 @@ const App = () => {
     <>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
-        newestOnTop={false}
+        autoClose={3000}
+        newestOnTop={true}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss

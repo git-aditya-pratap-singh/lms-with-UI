@@ -13,6 +13,18 @@ class Apiauth extends BaseControllerResponse {
     }
   }
 
+  forgetpasswordSendOTP = async(email)=>{
+    try {
+      console.log(email)
+      const emailData = {email: email};
+      const response = await new ApiService().post("/forget-password/send-otp", emailData);
+      this.handleResponse(response);
+      return response;
+    } catch (err) {
+      return this.handleResponse(err);
+    }
+  }
+
 }
 
 export default Apiauth;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 //import Cookies from 'js-cookie';
 import { toast } from "react-toastify";
 import { useDispatch,useSelector } from "react-redux";
@@ -23,8 +23,7 @@ const Login = () => {
   const [auth, setAuth] = useAuthGuard();
   const navigate = useNavigate();
   const otpStatus = useSelector((store)=> store.openPopup.otp_popup_state);
-  const loginStatus = useSelector((store)=> store.openPopup.open_login);
-  console.log(loginStatus)
+  //const loginStatus = useSelector((store)=> store.openPopup.open_login);
 
   const [formData, setFormdata] = useState({
     username: "",
@@ -68,10 +67,11 @@ const Login = () => {
 
   return (
     <>
+    <section className="_loginContainer">
      {(otpStatus.otpLogin || otpStatus.forgetPswdOtp) ?  <OtpLayout/> : 
      
      /** This is a Login Models */
-      <section className="_loginContainer">
+  
         <div className="_loginForm">
           <h3 onClick={() => dispatch(login_popup(false))}>
             <RxCross1 />
@@ -141,8 +141,8 @@ const Login = () => {
             </span>
           </div>
         </div>
-      </section>
     }
+    </section>
     </>
   );
 };

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState,useCallback } from "react";
+import { toast } from "react-toastify";
 import OtpInput from "react-otp-input";
 import { useDispatch, useSelector } from "react-redux";
 import { otp_popup } from "../../redux/Slices/StateSlice";
+import Apiauth from "../../_api/auth/Apiauth.service";
 
 import { BiLogInCircle } from "react-icons/bi";
 import { FaFingerprint } from "react-icons/fa";
@@ -15,20 +17,37 @@ const OtpLayout = () => {
 
   const dispatch = useDispatch();
   const otpStatus = useSelector((store)=> store.openPopup.otp_popup_state);
+
   const [email, setEmail] = useState('');
-  const [loginotp, setloginOTP] = useState(null);
-  const [Verifiedloginotp, VerifiedsetloginOTP] = useState(null);
+  const [forgetOTPStatus, setforgetOTPStatus] = useState(false)
+  const [forgetotp, setforgetnOTP] = useState();
+  const [Verifiedloginotp, VerifiedsetloginOTP] = useState();
 
+  const handleChange = useCallback((event) => {
+    setEmail(event.target.value);
+  }, []);
 
-  const handleChange = (event) =>{
-    setEmail(event.target.value)
+  const handleOtpInputChange = useCallback((otp) => {
+    setforgetnOTP(otp);
+  }, []);
+
+  const funcSendOTPforpswd = async(event)=>{
+    event.preventDefault();
+    if(!email){
+      return toast.error("Email can't be empty!!");
+    }
+    const apiResponse = await new Apiauth().forgetpasswordSendOTP(email);
+    console.log('responseget')
+    if(apiResponse.status)
+      setforgetOTPStatus(true)
   }
 
   return (
     <>
+ 
     { (otpStatus.otpLogin || otpStatus.forgetPswdOtp) &&
 
-      <section className="_otpContainer">
+      
         <div className="_loginForm">
           <h3 onClick={() => {
             otpStatus.otpLogin 
@@ -38,7 +57,9 @@ const OtpLayout = () => {
           >
             <RxCross1 />
           </h3>
-          <h1>Login via OTP!</h1>
+          
+          {otpStatus.otpLogin ? <h1>Login via OTP!</h1> : <h1>Reset Password by OTP!</h1>}
+          
           <p>Choose OTP of the option to go.</p>
           <form className="_form">
 
@@ -55,10 +76,10 @@ const OtpLayout = () => {
               </label>
             </span>
           
-          { loginotp && 
+          { forgetotp && 
             <OtpInput
-              value={loginotp}
-              onChange={setloginOTP}
+              value={forgetotp}
+              onChange={handleOtpInputChange}
               numInputs={4}
               separator={<span>-</span>}
               renderInput={(props) => <input {...props} />}
@@ -92,38 +113,35 @@ const OtpLayout = () => {
             </span>
           }
 
-          { !loginotp &&
+          { (!forgetOTPStatus && !Verifiedloginotp) && 
             <div className="flex justify-between w-full gap-x-8">
-              <button>
-                <FaArrowRotateLeft />
-                Resend OTP
-              </button>
-
-              <button>
-                <BiLogInCircle />
-                Send OTP
-              </button>
+              <button><FaArrowRotateLeft />Resend OTP</button>
+              <button onClick={funcSendOTPforpswd}><BiLogInCircle />Send OTP</button>
             </div>
           }
-
+          
+          { forgetOTPStatus && 
             <div className="flex justify-between w-full gap-x-8">
               <button>
                 <BiLogInCircle />
                 Verified OTP
               </button>
             </div>
+          }
 
+          { Verifiedloginotp && 
             <div className="flex justify-between w-full gap-x-8">
               <button>
                 <BiLogInCircle />
                 Generate New Password
               </button>
             </div>
-
+          }
           </form>
         </div>
-      </section>
-    }    
+      
+    } 
+
     </>
   );
 };

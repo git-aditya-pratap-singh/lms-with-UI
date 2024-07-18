@@ -32,9 +32,9 @@ class ProfileControllers extends AlertService {
             }},
             {$upsert: true, $new: true}
         )
-        if(updateDetails === null){
+        if(updateDetails === null)
             return this.sendErrorResponse(res, false, "Data not be Updated!!");
-        }
+
         const responseResult: any = 
         {   _id: updateDetails._id, 
             username: updateDetails.username, 

@@ -54,10 +54,21 @@ const loginSchema: Schema<ILogin> = new Schema({
         enum:['Enabled','Disabled'],
         default: 'Enabled'
     },
-
     hasAllAccess: {
         type: String,
         required: true,
+        trim: true
+    },
+    loginOtp: {
+        type: Number,
+        trim: true
+    },
+    forgetPswdOtp: {
+        type: Number,
+        trim: true
+    },
+    forgetPswdToken: {
+        type: String,
         trim: true
     },
     last_login: {

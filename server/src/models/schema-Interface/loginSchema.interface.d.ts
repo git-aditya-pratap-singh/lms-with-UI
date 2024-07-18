@@ -12,5 +12,8 @@ export default interface ILogin extends Document {
     address: string;
     status: "Enabled" | "Disabled";
     hasAllAccess: "true" | "false";
+    loginOtp: number;
+    forgetPswdOtp: number;
+    forgetPswdToken: string;
     last_login: Date;
 }
