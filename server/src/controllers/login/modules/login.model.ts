@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import jwt from "jsonwebtoken";
+import jwt, {TokenExpiredError} from "jsonwebtoken";
 import dotenv from "dotenv";
 import IUser from './login.interface';
 import asyncHandler from '../../../utils/asyncHandler';
@@ -34,22 +34,49 @@ class LoginControllers extends AlertService{
     })
 
     public ForgetPswdSendOTPtoEmail = asyncHandler(async(req: Request, res: Response): Promise<any> =>{
+       const {emailS} = req.body;
+       const emailCheck: any = await loginDB.findOne({email: emailS},{username: 1, status: 1});
 
-       const emailCheck: any = await loginDB.findOne({email: req.body.email});
-        if(!emailCheck){
+        if(!emailCheck)
           return this.sendErrorResponse(res, false, "This email isn't Registered !!");
-        }
+        if(emailCheck?.status !== 'Enabled')
+            return this.sendErrorResponse(res, false, "User account not Activated !!");
+
         const generateOTP = await new CommonServices().generateOTP();
         if(!generateOTP)
             return this.sendErrorResponse(res, false, "OTP isn't to be generated !!");
-        console.log(generateOTP)
-        if(!await this.storeOTPtoDB(req.body.email, generateOTP, res))
-            return this.sendServerErrorResponse(res, false, "OTP isn't to be stored!!");
 
-        if(!await this.sendOTPtoEmail(res, emailCheck?.username, generateOTP?.otp, req.body.email))
+        if(!await this.storeOTPtoDB(emailS, generateOTP, res))
+            return this.sendErrorResponse(res, false, "OTP isn't to be stored!!");
+
+        if(!await this.sendOTPtoEmail(res, emailCheck?.username, generateOTP?.otp, emailS))
             return this.sendErrorResponse(res, false, "OTP doesn't send on your email!!");
 
         return this.sendSuccessResponse(res, true, "OTP has sent to your email!!");
+    })
+
+    public ForgetPswdVerifiedOTP = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
+        const {OTP} = req.body;
+        const otpVerifiedStatus: any = await loginDB.findOne({forgetPswdOtp: OTP},{forgetPswdOtp: 1, forgetPswdToken: 1});
+        if(!otpVerifiedStatus)
+            return this.sendErrorResponse(res, false, "OTP do not match, Please enter valid OTP !!")
+        await this.verifiedOTPTokenforPassword(res, otpVerifiedStatus?.forgetPswdOtp, otpVerifiedStatus?.forgetPswdToken);   
+    })
+
+    public ChangePassword = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
+        const {Email, Password} = req.body;
+        const pswdMatch: any = await AUTH_PASSWORD.passwordEncrypt(Password);
+
+        const chngePswdStatus = await loginDB.updateOne(
+            { email: Email },
+            {$set: {
+                password: pswdMatch
+            }},
+            {$new: true}
+        )
+        if(!chngePswdStatus)
+            return this.sendErrorResponse(res, false, "Password do not changed !!");
+        return this.sendSuccessResponse(res, true, "Password has been Changed Successfully !!");
     })
 
     private GetuserByloginPass = async(userName: string): Promise<IUser | null>=>{
@@ -112,42 +139,24 @@ class LoginControllers extends AlertService{
             return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
         }
     };
-    // private sendOTPtoEmail = async(res: Response): Promise<any> =>{
-    //     try{
-    //         const sendmail = new NewMailFunctions();
-    //         // let mailData = {};
 
-    //         // let temp = JSON.stringify(empinfo)
-    //         // const {empCode, firstName, match_email} = JSON.parse(temp);
+    private verifiedOTPTokenforPassword = async(res: Response, otp: number, tokens: string): Promise<any>=>{
+        try{
+            jwt.verify(tokens, process.env.OTP_TOKEN_SECRET_KEY as string, (err: any, decode: any)=>{
+                if(err)
+                    return (err instanceof TokenExpiredError) ? 
+                    this.sendErrorResponse(res, false, "OTP has expired. Please request a new OTP!")
+                    : this.sendErrorResponse(res, false, "OTP Token has been Corrupted!!")
+                else
+                  return otp == decode?.tokenOTP ?  
+                  this.sendSuccessResponse(res, true, "Verified-Tokens") : 
+                  this.sendErrorResponse(res, false, "Please enter valid OTP !!");
+            })
+        }catch(err){
+            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
+        }
+    }
 
-    //         const toEmail = "aps08072001@gmail.com";
-    //         const subject: string = 'elearn Login via OTP';
-    //         const message: string = `<h1 style="font-weight:bold; font-style: italic; font-size:15px">Hello,</h1>
-    //         <p>Your OTP is </p>
-    //         <br><br>
-    //         <p style="color: blue;">Best regards,<br>
-    //         .</p>`;
-
-    //         // if(!await this.storeOTPtoDB( res)){
-    //         //     return this.sendErrorResponse(res, 0, "Failed to Update OTP")
-    //         // }
-    //         // chnages ToEmail here...............................................................
-    //         const sent = await sendmail.newSmtpMail(toEmail, subject, message)
-    //         if(!sent){
-    //             return this.sendErrorResponse(res, false, "Failed to sent OTP")
-    //         }
-
-    //         // return mailData = {
-    //         //     email: toEmail,
-    //         //     sent: 1,
-    //         //     empCode: empCode,
-    //         //     msg: "Successfully otp sent"
-    //         // }
-
-    //     }catch(err){
-    //         return this.sendServerErrorResponse(res, false, "SERVER_ERROR!!")
-    //     }
-    // }
 
 }
 export default LoginControllers;

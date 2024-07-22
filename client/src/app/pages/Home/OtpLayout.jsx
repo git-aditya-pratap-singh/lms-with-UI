@@ -19,12 +19,17 @@ const OtpLayout = () => {
   const otpStatus = useSelector((store)=> store.openPopup.otp_popup_state);
 
   const [email, setEmail] = useState('');
-  const [forgetOTPStatus, setforgetOTPStatus] = useState(false)
-  const [forgetotp, setforgetnOTP] = useState();
-  const [Verifiedloginotp, VerifiedsetloginOTP] = useState();
+  const [password, setPassword] = useState('');
+  const [forgetotp, setforgetnOTP] = useState(null);
+  const [forgetOTPStatus, setforgetOTPStatus] = useState(false);
+  const [Verifiedloginotp, VerifiedsetloginOTP] = useState(false);
 
   const handleChange = useCallback((event) => {
     setEmail(event.target.value);
+  }, []);
+
+  const handleChangePswd = useCallback((event) => {
+    setPassword(event.target.value);
   }, []);
 
   const handleOtpInputChange = useCallback((otp) => {
@@ -37,16 +42,42 @@ const OtpLayout = () => {
       return toast.error("Email can't be empty!!");
     }
     const apiResponse = await new Apiauth().forgetpasswordSendOTP(email);
-    console.log('responseget')
-    if(apiResponse.status)
-      setforgetOTPStatus(true)
+    if(apiResponse.status){
+      setforgetOTPStatus(true);
+      VerifiedsetloginOTP(false);
+    }  
+  }
+
+  const funcSendOTPforLogin = async(event)=>{
+    event.preventDefault();
+    if(!email){
+      return toast.error("Email can't be empty!!");
+    }
+    console.log("ass")
+  }
+
+  const verifiedOTPFunc = async(event)=>{
+    event.preventDefault();
+    const apiotpResponse = await new Apiauth().forgetpasswordVerifiedOTP(forgetotp);
+    if(apiotpResponse.status){
+      setforgetOTPStatus(false);
+      VerifiedsetloginOTP(true);
+    } 
+  }
+
+  const funcGenPswd = async(event)=>{
+    event.preventDefault();
+    const apiResponse = await new Apiauth().forgetpasswordChanged(email, password);
+    if(apiResponse.status){
+      setforgetOTPStatus(false);
+      VerifiedsetloginOTP(true);
+      dispatch(otp_popup({ check: false, key: "forgetPswdOtp" }))
+    } 
   }
 
   return (
     <>
- 
     { (otpStatus.otpLogin || otpStatus.forgetPswdOtp) &&
-
       
         <div className="_loginForm">
           <h3 onClick={() => {
@@ -76,7 +107,7 @@ const OtpLayout = () => {
               </label>
             </span>
           
-          { forgetotp && 
+          { forgetOTPStatus && 
             <OtpInput
               value={forgetotp}
               onChange={handleOtpInputChange}
@@ -104,8 +135,7 @@ const OtpLayout = () => {
                 placeholder="create new password"
                 name="password"
                 autoComplete="off"
-                
-                onChange={handleChange}
+                onChange={handleChangePswd}
               />
                <label>
                 <FaFingerprint />
@@ -116,13 +146,13 @@ const OtpLayout = () => {
           { (!forgetOTPStatus && !Verifiedloginotp) && 
             <div className="flex justify-between w-full gap-x-8">
               <button><FaArrowRotateLeft />Resend OTP</button>
-              <button onClick={funcSendOTPforpswd}><BiLogInCircle />Send OTP</button>
+              <button onClick={otpStatus.otpLogin ? funcSendOTPforLogin : funcSendOTPforpswd}><BiLogInCircle />Send OTP</button>
             </div>
           }
           
           { forgetOTPStatus && 
             <div className="flex justify-between w-full gap-x-8">
-              <button>
+              <button onClick={verifiedOTPFunc}>
                 <BiLogInCircle />
                 Verified OTP
               </button>
@@ -131,7 +161,7 @@ const OtpLayout = () => {
 
           { Verifiedloginotp && 
             <div className="flex justify-between w-full gap-x-8">
-              <button>
+              <button onClick={funcGenPswd}>
                 <BiLogInCircle />
                 Generate New Password
               </button>

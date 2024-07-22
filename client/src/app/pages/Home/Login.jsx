@@ -69,9 +69,7 @@ const Login = () => {
     <>
     <section className="_loginContainer">
      {(otpStatus.otpLogin || otpStatus.forgetPswdOtp) ?  <OtpLayout/> : 
-     
      /** This is a Login Models */
-  
         <div className="_loginForm">
           <h3 onClick={() => dispatch(login_popup(false))}>
             <RxCross1 />
