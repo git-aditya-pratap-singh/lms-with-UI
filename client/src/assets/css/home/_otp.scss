@@ -1,8 +1,8 @@
 @use '../_index' as temp;
 
-// ._otpContainer{
-//     @apply fixed z-[9999] w-full h-screen bg-black/60
-//     flex justify-center items-center;
+._otpContainer{
+    @apply fixed -z-0 w-full h-screen bg-black/60
+    flex justify-center items-center;
     ._loginForm{
         min-width: 350px;
         padding: 2rem 1.5rem 1.5rem;
@@ -85,4 +85,4 @@
             }
         }
     }
-//}
+}

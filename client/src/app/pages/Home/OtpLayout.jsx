@@ -53,7 +53,10 @@ const OtpLayout = () => {
     if(!email){
       return toast.error("Email can't be empty!!");
     }
-    console.log("ass")
+    const apiOtpResponse = await new Apiauth().loginViaSendOTP(email);
+    console.log(apiOtpResponse)
+    if(apiOtpResponse.status)
+      setforgetOTPStatus(true);
   }
 
   const verifiedOTPFunc = async(event)=>{
@@ -77,7 +80,8 @@ const OtpLayout = () => {
 
   return (
     <>
-    { (otpStatus.otpLogin || otpStatus.forgetPswdOtp) &&
+     <section className="_otpContainer">
+    {/* { (otpStatus.otpLogin || otpStatus.forgetPswdOtp) && */}
       
         <div className="_loginForm">
           <h3 onClick={() => {
@@ -170,8 +174,8 @@ const OtpLayout = () => {
           </form>
         </div>
       
-    } 
-
+     
+    </section>
     </>
   );
 };

@@ -31,14 +31,14 @@ class LoginControllers extends AlertService{
          
         const token: string = await this.createJWTToken(userValid);
         return this.sendSuccessResponseToken(res, true, "You have successfully logged in !!", {userValid, token});
-    })
+    });
 
     public ForgetPswdSendOTPtoEmail = asyncHandler(async(req: Request, res: Response): Promise<any> =>{
        const {emailS} = req.body;
-       const emailCheck: any = await loginDB.findOne({email: emailS},{username: 1, status: 1});
+       const emailCheck: any = await this.findUserByEmail(emailS);
 
         if(!emailCheck)
-          return this.sendErrorResponse(res, false, "This email isn't Registered !!");
+            return this.sendErrorResponse(res, false, "This email isn't Registered !!");
         if(emailCheck?.status !== 'Enabled')
             return this.sendErrorResponse(res, false, "User account not Activated !!");
 
@@ -46,14 +46,14 @@ class LoginControllers extends AlertService{
         if(!generateOTP)
             return this.sendErrorResponse(res, false, "OTP isn't to be generated !!");
 
-        if(!await this.storeOTPtoDB(emailS, generateOTP, res))
+        if(!await this.storeOTPtoDB(res, emailS, generateOTP.otp, generateOTP.token))
             return this.sendErrorResponse(res, false, "OTP isn't to be stored!!");
 
         if(!await this.sendOTPtoEmail(res, emailCheck?.username, generateOTP?.otp, emailS))
             return this.sendErrorResponse(res, false, "OTP doesn't send on your email!!");
 
         return this.sendSuccessResponse(res, true, "OTP has sent to your email!!");
-    })
+    });
 
     public ForgetPswdVerifiedOTP = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
         const {OTP} = req.body;
@@ -61,7 +61,7 @@ class LoginControllers extends AlertService{
         if(!otpVerifiedStatus)
             return this.sendErrorResponse(res, false, "OTP do not match, Please enter valid OTP !!")
         await this.verifiedOTPTokenforPassword(res, otpVerifiedStatus?.forgetPswdOtp, otpVerifiedStatus?.forgetPswdToken);   
-    })
+    });
 
     public ChangePassword = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
         const {Email, Password} = req.body;
@@ -77,7 +77,36 @@ class LoginControllers extends AlertService{
         if(!chngePswdStatus)
             return this.sendErrorResponse(res, false, "Password do not changed !!");
         return this.sendSuccessResponse(res, true, "Password has been Changed Successfully !!");
-    })
+    });
+
+    public LoginSendOTPtoEmail = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
+        const {Email, key} = req.body;
+        const emailCheck: any = await this.findUserByEmail(Email);
+        console.log(emailCheck)
+
+        if(!emailCheck)
+            return this.sendErrorResponse(res, false, "This email isn't Registered !!");
+        if(emailCheck?.status !== 'Enabled')
+            return this.sendErrorResponse(res, false, "User account not Activated !!");
+
+        const generateOTP = await new CommonServices().generateOTP();
+        if(!generateOTP)
+            return this.sendErrorResponse(res, false, "OTP isn't to be generated !!");
+        //---------LOGIN TOKENS GENERATE-------------------
+        const tokens: string = await this.createJWTToken(emailCheck, key);
+
+        if(!await this.storeOTPtoDB(res, Email, generateOTP?.otp, tokens, key))
+            return this.sendErrorResponse(res, false, "OTP isn't to be stored!!");
+
+        if(!await this.sendOTPtoEmail(res, emailCheck?.username, generateOTP?.otp, Email))
+            return this.sendErrorResponse(res, false, "OTP doesn't send on your email!!");
+
+        return this.sendSuccessResponse(res, true, "OTP has sent to your email!!");
+    });
+
+    private findUserByEmail = async(email: string): Promise<any> => {
+        return await loginDB.findOne({ email: email }, { username: 1, status: 1 });
+    }
 
     private GetuserByloginPass = async(userName: string): Promise<IUser | null>=>{
         const userMatch: IUser | null = await loginDB.findOne({$or: [{username: userName}, {email: userName}]},
@@ -85,7 +114,7 @@ class LoginControllers extends AlertService{
                 status: 1, hasAllAccess: 1, email: 1, phone: 1, dob: 1, gender: 1, address: 1}
         );
         return userMatch;
-    }
+    };
 
     // private emailValid = (email: string): boolean => {
     //     const pattern: RegExp =
@@ -93,33 +122,58 @@ class LoginControllers extends AlertService{
     //     return pattern.test(email);
     // }
 
-    private createJWTToken = async(userValid: any): Promise<string> =>{
+    private createJWTToken = async(userValid: any, key?: string): Promise<string> =>{
+        const payload: any = {
+            _id: userValid._id,
+            username: userValid.username,
+            name: userValid.name,
+            designation: userValid.designation,
+            status: userValid.status,
+            allAccess: userValid.hasAllAccess,
+            loginKey: "viaPassword"
+        };
+        if (key == "viaOTP") 
+            payload.loginKey = 'viaOTP';
+
         const token: string = jwt.sign(
-            { _id: userValid._id, username: userValid.username, name: userValid.name, designation: userValid.designation, 
-            status: userValid.status, allAccess: userValid.hasAllAccess, loginKey: 'viaPassword'}, 
-            process.env.TOKEN_SECRET_KEY as string, 
+            payload,
+            process.env.TOKEN_SECRET_KEY as string,
             {
                 expiresIn: process.env.TOKEN_EXPIRY_TIME,
-            });
+            }
+        );
         return token;
-    }
+    };
 
-    private storeOTPtoDB = async(email: string, generateOTP: any, res: Response): Promise<any> =>{
+    private storeOTPtoDB = async(res: Response, email: string, generateOTP: any, tokens: any, key?: string ): Promise<any> =>{
         const emailExists = await loginDB.findOne({email: email});
         if(!emailExists)
             return this.sendErrorResponse(res, false, "User Record Not Found To Store OTP");
-        const saveOtp = await loginDB.updateOne(
-            {email: email},
-            {$set: {
-                forgetPswdToken: generateOTP?.token,
-                forgetPswdOtp:  generateOTP?.otp
-            }},
-            {upsert: true, new: true}
-        )
+
+        let saveOtp;
+        
+        (key == "viaOTP") ?
+            saveOtp = await loginDB.updateOne(
+                {email: email},
+                {$set: {
+                    loginOtp:  generateOTP
+                }},
+                {$new: true}
+            )
+            
+        :
+            saveOtp = await loginDB.updateOne(
+                {email: email},
+                {$set: {
+                    forgetPswdToken: tokens,
+                    forgetPswdOtp:  generateOTP
+                }},
+                {$new: true}
+            )
         if(!saveOtp) 
-            return false;
+                return false;
         return true;
-    }
+    };
 
     private sendOTPtoEmail = async(res: Response, name: string, otp: number, email: string): Promise<boolean | any> =>{
         try{
@@ -155,7 +209,7 @@ class LoginControllers extends AlertService{
         }catch(err){
             return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
         }
-    }
+    };
 
 
 }

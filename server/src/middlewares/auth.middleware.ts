@@ -24,6 +24,7 @@ class UserAuthentication {
             : ALERT_SERVICE.sendErrorResponse(res, false, 'Authentication failed!');
            }
            else{
+            console.log(decode)
             req.user = decode;
             next();
            }
