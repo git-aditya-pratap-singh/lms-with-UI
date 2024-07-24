@@ -1,7 +1,7 @@
 @use '../_index' as index;
 
 ._registerSection{
-    @apply fixed z-[9999] w-full h-screen bg-black/60
+    @apply fixed z-[2] w-full h-screen bg-black/60
     flex justify-center items-center;
    
     ._regisForm{

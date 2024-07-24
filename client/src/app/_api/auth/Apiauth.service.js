@@ -23,9 +23,9 @@ class Apiauth extends BaseControllerResponse {
     }
   }
 
-  forgetpasswordVerifiedOTP = async(otp)=>{
+  forgetpasswordVerifiedOTP = async(email, otp)=>{
     try {
-      const response = await new ApiService().post("/forget-password/verified-otp", {OTP: otp});
+      const response = await new ApiService().post("/forget-password/verified-otp", {email: email, OTP: otp});
       this.handleResponse(response);
       return response;
     } catch (err) {
@@ -45,7 +45,17 @@ class Apiauth extends BaseControllerResponse {
 
   loginViaSendOTP = async(email)=>{
     try{
-      const response = await new ApiService().post("/forget-password/login-sent-otp", {Email: email, key: "viaOTP"});
+      const response = await new ApiService().post("/login/login-sent-otp", {Email: email, key: "viaOTP"});
+      this.handleResponse(response);
+      return response;
+    }catch(err){
+      return this.handleResponse(err);
+    }
+  }
+
+  loginWithOTP = async(email, otp)=>{
+    try{
+      const response = await new ApiService().post("/login/login-with-otp", {Email: email, otp: otp, key: "viaOTP"});
       this.handleResponse(response);
       return response;
     }catch(err){

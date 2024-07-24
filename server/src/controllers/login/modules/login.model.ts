@@ -16,57 +16,52 @@ const INSTANCE_OF_MAIL = new NewMailFunctions();
 class LoginControllers extends AlertService{
 
     public Login = asyncHandler(async(req: Request, res: Response): Promise<any> =>{
-       
         const {username, password} = req.body;
         const userValid = await this.GetuserByloginPass(username.toLowerCase());
         if(!userValid)
             return this.sendErrorResponse(res, false, "User not found !!");
-        
         if(userValid.status !== 'Enabled')
             return this.sendErrorResponse(res, false, "User account not Activated !!");
-
         const pswdMatch: boolean = await AUTH_PASSWORD.passwordDecrypt(password, userValid.password);
         if (!pswdMatch) 
             return this.sendErrorResponse(res, false, "Invalid Password !!");
-         
         const token: string = await this.createJWTToken(userValid);
         return this.sendSuccessResponseToken(res, true, "You have successfully logged in !!", {userValid, token});
     });
 
+
     public ForgetPswdSendOTPtoEmail = asyncHandler(async(req: Request, res: Response): Promise<any> =>{
        const {emailS} = req.body;
        const emailCheck: any = await this.findUserByEmail(emailS);
-
         if(!emailCheck)
             return this.sendErrorResponse(res, false, "This email isn't Registered !!");
         if(emailCheck?.status !== 'Enabled')
             return this.sendErrorResponse(res, false, "User account not Activated !!");
-
         const generateOTP = await new CommonServices().generateOTP();
         if(!generateOTP)
             return this.sendErrorResponse(res, false, "OTP isn't to be generated !!");
-
         if(!await this.storeOTPtoDB(res, emailS, generateOTP.otp, generateOTP.token))
             return this.sendErrorResponse(res, false, "OTP isn't to be stored!!");
-
         if(!await this.sendOTPtoEmail(res, emailCheck?.username, generateOTP?.otp, emailS))
             return this.sendErrorResponse(res, false, "OTP doesn't send on your email!!");
-
         return this.sendSuccessResponse(res, true, "OTP has sent to your email!!");
     });
 
+
     public ForgetPswdVerifiedOTP = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
-        const {OTP} = req.body;
-        const otpVerifiedStatus: any = await loginDB.findOne({forgetPswdOtp: OTP},{forgetPswdOtp: 1, forgetPswdToken: 1});
+        const {email,OTP} = req.body;
+        const otpVerifiedStatus: any = await loginDB.findOne({$and: [{email: email},{forgetPswdOtp: OTP}]},
+            {forgetPswdOtp: 1, otpToken: 1}
+        );
         if(!otpVerifiedStatus)
             return this.sendErrorResponse(res, false, "OTP do not match, Please enter valid OTP !!")
-        await this.verifiedOTPTokenforPassword(res, otpVerifiedStatus?.forgetPswdOtp, otpVerifiedStatus?.forgetPswdToken);   
+       await this.verifiedOTPToken(res, otpVerifiedStatus?.forgetPswdOtp, otpVerifiedStatus?.otpToken); 
     });
+
 
     public ChangePassword = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
         const {Email, Password} = req.body;
         const pswdMatch: any = await AUTH_PASSWORD.passwordEncrypt(Password);
-
         const chngePswdStatus = await loginDB.updateOne(
             { email: Email },
             {$set: {
@@ -79,34 +74,40 @@ class LoginControllers extends AlertService{
         return this.sendSuccessResponse(res, true, "Password has been Changed Successfully !!");
     });
 
+
     public LoginSendOTPtoEmail = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
         const {Email, key} = req.body;
         const emailCheck: any = await this.findUserByEmail(Email);
-        console.log(emailCheck)
-
         if(!emailCheck)
             return this.sendErrorResponse(res, false, "This email isn't Registered !!");
         if(emailCheck?.status !== 'Enabled')
             return this.sendErrorResponse(res, false, "User account not Activated !!");
-
         const generateOTP = await new CommonServices().generateOTP();
         if(!generateOTP)
             return this.sendErrorResponse(res, false, "OTP isn't to be generated !!");
         //---------LOGIN TOKENS GENERATE-------------------
-        const tokens: string = await this.createJWTToken(emailCheck, key);
-
-        if(!await this.storeOTPtoDB(res, Email, generateOTP?.otp, tokens, key))
+        //const tokens: string = await this.createJWTToken(emailCheck, key);
+        if(!await this.storeOTPtoDB(res, Email, generateOTP?.otp, generateOTP?.token, key))
             return this.sendErrorResponse(res, false, "OTP isn't to be stored!!");
-
         if(!await this.sendOTPtoEmail(res, emailCheck?.username, generateOTP?.otp, Email))
             return this.sendErrorResponse(res, false, "OTP doesn't send on your email!!");
-
         return this.sendSuccessResponse(res, true, "OTP has sent to your email!!");
     });
+
+
+    public LoginWithOTP = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
+        const {Email, otp, key} = req.body;
+        const otpVerifiedStatus: any = await loginDB.findOne({$and: [{email: Email},{loginOtp: otp}]},{});
+        if(!otpVerifiedStatus)
+            return this.sendErrorResponse(res, false, "OTP do not match, Please enter valid OTP !!")
+        await this.verifiedOTPToken(res, otpVerifiedStatus?.loginOtp, otpVerifiedStatus?.otpToken, Email, key);  
+    });
+
 
     private findUserByEmail = async(email: string): Promise<any> => {
         return await loginDB.findOne({ email: email }, { username: 1, status: 1 });
     }
+
 
     private GetuserByloginPass = async(userName: string): Promise<IUser | null>=>{
         const userMatch: IUser | null = await loginDB.findOne({$or: [{username: userName}, {email: userName}]},
@@ -118,7 +119,7 @@ class LoginControllers extends AlertService{
 
     // private emailValid = (email: string): boolean => {
     //     const pattern: RegExp =
-    //         /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))@(bdsus\.net|crescdata\.com)$/i;
+    //         /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))@(yahoo\.com|gmail\.com)$/i;
     //     return pattern.test(email);
     // }
 
@@ -134,7 +135,6 @@ class LoginControllers extends AlertService{
         };
         if (key == "viaOTP") 
             payload.loginKey = 'viaOTP';
-
         const token: string = jwt.sign(
             payload,
             process.env.TOKEN_SECRET_KEY as string,
@@ -145,35 +145,35 @@ class LoginControllers extends AlertService{
         return token;
     };
 
+
     private storeOTPtoDB = async(res: Response, email: string, generateOTP: any, tokens: any, key?: string ): Promise<any> =>{
         const emailExists = await loginDB.findOne({email: email});
         if(!emailExists)
             return this.sendErrorResponse(res, false, "User Record Not Found To Store OTP");
-
         let saveOtp;
-        
         (key == "viaOTP") ?
             saveOtp = await loginDB.updateOne(
                 {email: email},
                 {$set: {
-                    loginOtp:  generateOTP
+                    loginOtp:  generateOTP,
+                    otpToken: tokens
                 }},
                 {$new: true}
-            )
-            
+            )   
         :
             saveOtp = await loginDB.updateOne(
                 {email: email},
                 {$set: {
-                    forgetPswdToken: tokens,
-                    forgetPswdOtp:  generateOTP
+                    forgetPswdOtp:  generateOTP,
+                    otpToken: tokens,
                 }},
                 {$new: true}
             )
         if(!saveOtp) 
-                return false;
+            return false;
         return true;
     };
+
 
     private sendOTPtoEmail = async(res: Response, name: string, otp: number, email: string): Promise<boolean | any> =>{
         try{
@@ -194,23 +194,40 @@ class LoginControllers extends AlertService{
         }
     };
 
-    private verifiedOTPTokenforPassword = async(res: Response, otp: number, tokens: string): Promise<any>=>{
-        try{
-            jwt.verify(tokens, process.env.OTP_TOKEN_SECRET_KEY as string, (err: any, decode: any)=>{
-                if(err)
-                    return (err instanceof TokenExpiredError) ? 
-                    this.sendErrorResponse(res, false, "OTP has expired. Please request a new OTP!")
-                    : this.sendErrorResponse(res, false, "OTP Token has been Corrupted!!")
-                else
-                  return otp == decode?.tokenOTP ?  
-                  this.sendSuccessResponse(res, true, "Verified-Tokens") : 
-                  this.sendErrorResponse(res, false, "Please enter valid OTP !!");
-            })
-        }catch(err){
-            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
+
+    private verifiedOTPToken = async (res: Response, otp: number, tokens: string, email?: any, key?: string): Promise<any> => {
+        try {
+            const decoded: any = jwt.verify(tokens, process.env.OTP_TOKEN_SECRET_KEY as string);
+            console.log(decoded)
+    
+            if (otp !== Number(decoded?.tokenOTP))
+                return this.sendErrorResponse(res, false, 'OTP do not match. Please enter valid OTP !!');
+    
+            if (key === 'viaOTP') {
+                const userValid = await this.GetuserByloginPass(email);
+                const token: string = await this.createJWTToken(userValid, key);
+                return this.sendSuccessResponseToken(res, true, 'You have successfully logged in !!', { userValid, token });
+            }
+            return this.sendSuccessResponse(res, true, 'Verified OTP !!');
+        } catch (err) {
+            if (err instanceof TokenExpiredError) {
+                return this.sendErrorResponse(res, false, 'OTP has expired. Please request a new OTP !!');
+            } else {
+                console.error(`Error verifying OTP token: ${err}`);
+                return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!`);
+            }
         }
     };
-
+    
+    private async getUserFromDecodedToken(decoded: any): Promise<any> {
+        // Implement your logic to fetch user details from decoded JWT token
+        // For example:
+        // const userId = decoded._id;
+        // const user = await loginDB.findById(userId);
+        // return user;
+        return decoded; // Dummy implementation, replace with actual logic
+    }
+    
 
 }
 export default LoginControllers;

@@ -67,7 +67,7 @@ const loginSchema: Schema<ILogin> = new Schema({
         type: Number,
         trim: true
     },
-    forgetPswdToken: {
+    otpToken: {
         type: String,
         trim: true
     },

@@ -11,6 +11,7 @@ loginRoutes.post('/verified-otp', LOGIN_INSTANCE.ForgetPswdVerifiedOTP);
 loginRoutes.post('/change-password', LOGIN_INSTANCE.ChangePassword);
 //--------LOGIN-VIA-OTP-----------
 loginRoutes.post('/login-sent-otp', LOGIN_INSTANCE.LoginSendOTPtoEmail); 
+loginRoutes.post('/login-with-otp', LOGIN_INSTANCE.LoginWithOTP); 
 
 
 export default loginRoutes;
