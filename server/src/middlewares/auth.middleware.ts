@@ -13,10 +13,9 @@ class UserAuthentication {
     public verifyToken = asyncHandler( async(req: Request, res: Response, next: NextFunction): Promise<any>=>{
         const token: string | undefined = req.headers['authorization']?.replace("Bearer ", "").trim();
 
-        if(!token){
+        if(!token)
             return ALERT_SERVICE.sendErrorResponse(res, false, 'Unauthorized HTTP, Token not provided!');
-        }
-
+        
         jwt.verify(token, process.env.TOKEN_SECRET_KEY as string,(err, decode)=>{
            if(err){
             return (err instanceof TokenExpiredError) 
@@ -24,7 +23,6 @@ class UserAuthentication {
             : ALERT_SERVICE.sendErrorResponse(res, false, 'Authentication failed!');
            }
            else{
-            console.log(decode)
             req.user = decode;
             next();
            }

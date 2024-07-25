@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import OtpInput from "react-otp-input";
 import { useDispatch, useSelector } from "react-redux";
 import { otp_popup } from "../../redux/Slices/StateSlice";
+import OtpTimer from "../../components/OtpTimer";
 import { useAuthGuard, storeTokenInStorage} from "../../_guard/auth.guard";
 import Apiauth from "../../_api/auth/Apiauth.service";
 
@@ -25,8 +26,8 @@ const OtpLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [otp, setOTP] = useState(null);
-  const [otpStatusX, setotpStatus] = useState(false);
-  const [Verifiedloginotp, VerifiedsetloginOTP] = useState(false);
+  const [getOtpStatus, setOtpStatus] = useState(false);
+  const [VerifiedOtpStatus, SetVerifiedOtpStatus] = useState(false);
 
   const handleChange = useCallback((event) => {
     setEmail(event.target.value);
@@ -47,8 +48,8 @@ const OtpLayout = () => {
     }
     const apiResponse = await new Apiauth().forgetpasswordSendOTP(email);
     if(apiResponse.status){
-      setotpStatus(true);
-      VerifiedsetloginOTP(false);
+      setOtpStatus(true);
+      SetVerifiedOtpStatus(false);
     }  
   }
 
@@ -60,24 +61,27 @@ const OtpLayout = () => {
     const apiOtpResponse = await new Apiauth().loginViaSendOTP(email);
     console.log(apiOtpResponse)
     if(apiOtpResponse.status)
-      setotpStatus(true);
+      setOtpStatus(true);
   }
 
   const verifiedOTPFunc = async(event)=>{
     event.preventDefault();
     const apiotpResponse = await new Apiauth().forgetpasswordVerifiedOTP(email, otp);
     if(apiotpResponse.status){
-      setotpStatus(false);
-      VerifiedsetloginOTP(true);
+      setOtpStatus(false);
+      SetVerifiedOtpStatus(true);
     } 
   }
 
   const funcGenPswd = async(event)=>{
     event.preventDefault();
+    if(!password){
+      return toast.error("Password can't be empty!!");
+    }
     const apiResponse = await new Apiauth().forgetpasswordChanged(email, password);
     if(apiResponse.status){
-      setotpStatus(false);
-      VerifiedsetloginOTP(true);
+      setOtpStatus(false);
+      SetVerifiedOtpStatus(true);
       dispatch(otp_popup({ check: false, key: "forgetPswdOtp" }))
     } 
   }
@@ -86,9 +90,9 @@ const OtpLayout = () => {
     event.preventDefault();
     const apiResponse = await new Apiauth().loginWithOTP(email, otp);
     if(apiResponse.status){
-      setotpStatus(false);
-      VerifiedsetloginOTP(false);
-      dispatch(otp_popup({ check: false, key: "forgetPswdOtp" }))
+      setOtpStatus(false);
+      SetVerifiedOtpStatus(false);
+      dispatch(otp_popup({ check: false, key: "otpLogin" }))
       storeTokenInStorage(apiResponse.data);
       setAuth({
         ...auth,
@@ -116,7 +120,8 @@ const OtpLayout = () => {
           
           <p>Choose OTP of the option to go.</p>
           <form className="_form">
-
+            
+            { (!getOtpStatus && !VerifiedOtpStatus) &&
             <span>
               <input
                 type="email"
@@ -124,14 +129,15 @@ const OtpLayout = () => {
                 name="username"
                 value={email}
                 onChange={handleChange}
-                disabled={Verifiedloginotp}
               />
                <label>
                 <MdOutlineAlternateEmail />
               </label>
             </span>
+            }
           
-          { otpStatusX && 
+          { getOtpStatus && 
+            ( <>
             <OtpInput
               value={otp}
               onChange={handleOtpInputChange}
@@ -150,9 +156,11 @@ const OtpLayout = () => {
                 boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
               }}
             />
+            <OtpTimer/>
+            </> )
           }
 
-          { Verifiedloginotp && 
+          { VerifiedOtpStatus && 
             <span>
               <input
                 type="password"
@@ -167,15 +175,16 @@ const OtpLayout = () => {
             </span>
           }
 
-          { (!otpStatusX && !Verifiedloginotp) && 
+          { (!getOtpStatus && !VerifiedOtpStatus) && 
             <div className="flex justify-between w-full gap-x-8">
               <button><FaArrowRotateLeft />Resend OTP</button>
               <button onClick={otpStatus.otpLogin ? funcSendOTPforLogin : funcSendOTPforpswd}><BiLogInCircle />Send OTP</button>
             </div>
           }
           
-          { otpStatusX && 
+          { getOtpStatus && 
             <div className="flex justify-between w-full gap-x-8">
+              <button><FaArrowRotateLeft />Resend OTP</button>
               <button onClick={otpStatus.otpLogin ? loginWithOTPFunc : verifiedOTPFunc}>
                 <BiLogInCircle />
                 {otpStatus.otpLogin ? 'Login via OTP' : 'Verified OTP'}
@@ -183,7 +192,7 @@ const OtpLayout = () => {
             </div>
           }
 
-          { Verifiedloginotp && 
+          { VerifiedOtpStatus && 
             <div className="flex justify-between w-full gap-x-8">
               <button onClick={funcGenPswd}>
                 <BiLogInCircle />

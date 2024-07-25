@@ -85,8 +85,6 @@ class LoginControllers extends AlertService{
         const generateOTP = await new CommonServices().generateOTP();
         if(!generateOTP)
             return this.sendErrorResponse(res, false, "OTP isn't to be generated !!");
-        //---------LOGIN TOKENS GENERATE-------------------
-        //const tokens: string = await this.createJWTToken(emailCheck, key);
         if(!await this.storeOTPtoDB(res, Email, generateOTP?.otp, generateOTP?.token, key))
             return this.sendErrorResponse(res, false, "OTP isn't to be stored!!");
         if(!await this.sendOTPtoEmail(res, emailCheck?.username, generateOTP?.otp, Email))
@@ -106,7 +104,7 @@ class LoginControllers extends AlertService{
 
     private findUserByEmail = async(email: string): Promise<any> => {
         return await loginDB.findOne({ email: email }, { username: 1, status: 1 });
-    }
+    };
 
 
     private GetuserByloginPass = async(userName: string): Promise<IUser | null>=>{
@@ -198,11 +196,9 @@ class LoginControllers extends AlertService{
     private verifiedOTPToken = async (res: Response, otp: number, tokens: string, email?: any, key?: string): Promise<any> => {
         try {
             const decoded: any = jwt.verify(tokens, process.env.OTP_TOKEN_SECRET_KEY as string);
-            console.log(decoded)
-    
             if (otp !== Number(decoded?.tokenOTP))
                 return this.sendErrorResponse(res, false, 'OTP do not match. Please enter valid OTP !!');
-    
+
             if (key === 'viaOTP') {
                 const userValid = await this.GetuserByloginPass(email);
                 const token: string = await this.createJWTToken(userValid, key);
@@ -219,15 +215,5 @@ class LoginControllers extends AlertService{
         }
     };
     
-    private async getUserFromDecodedToken(decoded: any): Promise<any> {
-        // Implement your logic to fetch user details from decoded JWT token
-        // For example:
-        // const userId = decoded._id;
-        // const user = await loginDB.findById(userId);
-        // return user;
-        return decoded; // Dummy implementation, replace with actual logic
-    }
-    
-
 }
 export default LoginControllers;
