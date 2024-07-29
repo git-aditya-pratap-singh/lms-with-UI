@@ -9,6 +9,7 @@ import { BiLogInCircle } from "react-icons/bi";
 import { FaAngleDoubleUp } from "react-icons/fa";
 
 import Login from "./Login";
+import UserLogin from "./UserLogin";
 import OtpLayout from "./OtpLayout";
 
 import Footer from "./Footer";
@@ -18,6 +19,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const loginState = useSelector((store) => store.openPopup.open_login);
   const otpStatus = useSelector((store)=> store.openPopup.otp_popup_state);
+  const userLoginStatus = useSelector((store)=>store.openPopup.userLoginPopup_state);
 
   const [toggle, setToggle] = useState(false);
   const [toggle_top, setToggleTop] = useState(false);
@@ -38,15 +40,14 @@ const Navbar = () => {
   window.addEventListener("scroll", scrollTo);
 
   useEffect(() => {
-    if (otpStatus && (otpStatus.otpLogin || otpStatus.forgetPswdOtp)) {
-      dispatch(login_popup(false));
-    }
-  }, [otpStatus]);
+    dispatch(login_popup(false));
+  }, [otpStatus, userLoginStatus, dispatch]);
 
   return (
     <>
-     {loginState && <Login />}
-     {(otpStatus.otpLogin || otpStatus.forgetPswdOtp) && <OtpLayout />}
+     { loginState && <Login /> }
+     { (otpStatus.otpLogin || otpStatus.forgetPswdOtp) && <OtpLayout /> }
+     { userLoginStatus && <UserLogin/> }
 
       <nav className="shadow-nav">
         <a href="#" className="_logo">

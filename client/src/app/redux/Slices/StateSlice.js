@@ -19,7 +19,8 @@ const StateSlice = createSlice({
         otp_popup_state: {
             otpLogin: false,
             forgetPswdOtp: false
-        }
+        },
+        userLoginPopup_state: false
         
     },
     reducers : {
@@ -48,8 +49,13 @@ const StateSlice = createSlice({
         otp_popup : (state, action)=>{
             state.otp_popup_state[action.payload.key === 'otpLogin' ? 'otpLogin' : 'forgetPswdOtp'] = action.payload.check;
         },
+
+        user_login_popup: (state, action)=>{
+            state.userLoginPopup_state = action.payload;
+        }
     }
 })
 
 export default StateSlice;
-export const {login_popup, registration_popup, img_update_popup, add_student_popup, add_teacher_popup, otp_popup} = StateSlice.actions;
+export const {login_popup, registration_popup, img_update_popup, 
+    add_student_popup, add_teacher_popup, otp_popup, user_login_popup} = StateSlice.actions;

@@ -16,9 +16,11 @@
         animation: var(--slide-down);
         h3{
             position: absolute;
-            right: 20px;
-            top: 20px;
+            right: -10px;
+            top: -10px;
             cursor: pointer;
+            color: var(--card-foreground);
+            @apply p-2 rounded-full bg-[var(--card)] drop-shadow-md;
         }
         h1{
             font-size: 2rem;
