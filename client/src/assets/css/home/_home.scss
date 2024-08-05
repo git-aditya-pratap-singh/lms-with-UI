@@ -447,6 +447,9 @@ $background-color_5: #f10156;
       font-weight: 600;
       line-height: normal;
     }
+    p{
+      color: var(--paragraph-color);
+    }
     ._subChild-masterSkills {
       display: grid;
       grid-template-columns: repeat(2, 1fr);

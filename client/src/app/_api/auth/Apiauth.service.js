@@ -3,6 +3,16 @@ import BaseControllerResponse from '../../utils/BaseControllerResponse';
 
 class Apiauth extends BaseControllerResponse {
 
+  registrationStudent = async (formData) =>{
+    try{
+      const response = await new ApiService().post("/add-temp-student", formData);
+      this.handleResponse(response);
+      return response;
+    }catch(err){
+      return this.handleResponse(err);
+    }
+  }
+
   login = async (formData) => {
     try {
       const response = await new ApiService().post("/login/login", formData);

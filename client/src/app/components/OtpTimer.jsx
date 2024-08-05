@@ -24,9 +24,9 @@ const OtpTimer = ({ initialTime = 120 }) => {
 
   return (
     <div className="w-full flex justify-start items-center gap-x-1">
-      <p>Time left:</p> 
+      <p>OTP Expire in</p> 
       <label className="text-[var(--primary)] font-bold">{formatTime(timeLeft)}</label>
-      <p>second</p>
+      <p>min</p>
     </div>
   );
 };

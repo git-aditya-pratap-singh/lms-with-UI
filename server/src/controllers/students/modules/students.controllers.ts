@@ -4,6 +4,7 @@ import { PipelineStage } from 'mongoose';
 import AlertService from '../../../helpers/AlertService';
 import asyncHandler from '../../../utils/asyncHandler';
 import CommonServices from '../../../helpers/common.services';
+import StudentCommonFunc from "./students.commonFunc";
 import Password_Encrypt_Decrypt from '../../../helpers/PswdEncrypt';
 import NewMailFunctions from "../../../mail/mail.controllers";
 
@@ -43,7 +44,7 @@ class StudentsControllers extends AlertService {
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
         const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));
 
-        const credential: any = await this.credentialCheck(email, phone, res);
+        const credential: any = await new StudentCommonFunc().credentialCheck(email, phone, res);
         if(credential)
             return this.sendErrorResponse(res, false, "This User is already exists!!")
 
@@ -117,19 +118,19 @@ class StudentsControllers extends AlertService {
             : this.sendErrorResponse(res, false, `Failed to update student Credential !!`);
     });
 
-    private credentialCheck = async(email: string, phone: string, res: Response): Promise<any> =>{
-        try{
-           const response = await studentsDB.findOne({
-            $or: [
-                {email: email},
-                {phone: phone}
-            ]
-           })
-           return response;
-        }catch(err){
-            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
-        }
-    };
+    // credentialCheck = async(email: string, phone: string, res: Response): Promise<any> =>{
+    //     try{
+    //        const response = await studentsDB.findOne({
+    //         $or: [
+    //             {email: email},
+    //             {phone: phone}
+    //         ]
+    //        })
+    //        return response;
+    //     }catch(err){
+    //         return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
+    //     }
+    // };
 
     private credentialUsernameCheck = async(userName: string, res: Response): Promise<any> =>{
         try{

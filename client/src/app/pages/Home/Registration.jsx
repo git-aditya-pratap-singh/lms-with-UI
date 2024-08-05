@@ -4,6 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 import Select from 'react-select'
 import { registration_popup } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase";
+import Apiauth from "../../_api/auth/Apiauth.service";
 
 import { BiLogInCircle } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
@@ -39,50 +40,46 @@ const Registration = () => {
     setData({ ...data, [name]: value })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
     const validateForm = () => {
       const error = {};
       
       {/* Name Validation */}
-      if(!data.name){
+      if(!data.name)
         error.name="Name shouln't be empty!";
-      }
-      else if (!data.name.match(/^[a-zA-Z\s]{3,50}$/)) {
+      
+      else if (!data.name.match(/^[a-zA-Z\s]{3,50}$/)) 
         error.name = 'A name must be contain only characters & length must be atleast 3 characters!';
-      }
+      
       
       {/* Email Validation */}
-      if(!data.email){
+      if(!data.email)
         error.email = "Email shouldn't be empty";
-      }
-      else if (!data.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/)) {
+      
+      else if (!data.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/))
         error.email = 'Invalid email address';
-      }
 
       {/* phone Validation */}
-      if(!data.phone){
+      if(!data.phone)
         error.phone = "Phone no. shouldn't be empty!";
-      } 
-      else if (!data.phone.match(/^\d{10}$/)) {
+       
+      else if (!data.phone.match(/^\d{10}$/))
         error.phone = 'Phone number must be a 10-digit number';
-      }
       
       {/* course Validation */}
-      if (data.course.length === 0) {
+      if (data.course.length === 0)
         error.course = 'Please! Select atleast One Course.'
-      }
        
       {/* Address Validation */}
-      if (!data.address) {
+      if (!data.address) 
         error.address = "Address shouldn't be empty!"
-      }
       
       {/* gender Validation */}
-      if (!data.gender) {
+      if (!data.gender)
         error.gender = "Please! Select a gender."
-      }
+
       return error
     }
 
@@ -93,6 +90,8 @@ const Registration = () => {
     }
     else{
       setError(validateFormError)
+      //---API calling
+      await new Apiauth().registrationStudent(data);
     }
 
   }
