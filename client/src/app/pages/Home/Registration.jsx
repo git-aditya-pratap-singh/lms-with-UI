@@ -91,7 +91,13 @@ const Registration = () => {
     else{
       setError(validateFormError)
       //---API calling
-      await new Apiauth().registrationStudent(data);
+      const apiResponse = await new Apiauth().registrationStudent(data);
+      if(apiResponse?.status){
+        dispatch(registration_popup(false));
+        console.log(apiResponse)
+        //-- save token into localstorage and open OTP Popup
+        localStorage.setItem("OTPToken",apiResponse?.data)
+      }
     }
 
   }
