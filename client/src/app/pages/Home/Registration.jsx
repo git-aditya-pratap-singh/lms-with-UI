@@ -96,7 +96,8 @@ const Registration = () => {
         dispatch(registration_popup(false));
         console.log(apiResponse)
         //-- save token into localstorage and open OTP Popup
-        localStorage.setItem("OTPToken",apiResponse?.data)
+        localStorage.setItem("OTPToken",apiResponse?.data);
+        
       }
     }
 

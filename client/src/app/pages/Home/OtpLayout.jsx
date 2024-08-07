@@ -43,9 +43,9 @@ const OtpLayout = () => {
 
   const funcSendOTPforpswd = async(event)=>{
     event.preventDefault();
-    if(!email){
+    if(!email)
       return toast.error("Email can't be empty!!");
-    }
+    
     const apiResponse = await new Apiauth().forgetpasswordSendOTP(email);
     if(apiResponse.status){
       setOtpStatus(true);
@@ -55,11 +55,10 @@ const OtpLayout = () => {
 
   const funcSendOTPforLogin = async(event)=>{
     event.preventDefault();
-    if(!email){
+    if(!email)
       return toast.error("Email can't be empty!!");
-    }
+    
     const apiOtpResponse = await new Apiauth().loginViaSendOTP(email);
-    console.log(apiOtpResponse)
     if(apiOtpResponse.status)
       setOtpStatus(true);
   }
@@ -75,9 +74,9 @@ const OtpLayout = () => {
 
   const funcGenPswd = async(event)=>{
     event.preventDefault();
-    if(!password){
+    if(!password)
       return toast.error("Password can't be empty!!");
-    }
+    
     const apiResponse = await new Apiauth().forgetpasswordChanged(email, password);
     if(apiResponse.status){
       setOtpStatus(false);

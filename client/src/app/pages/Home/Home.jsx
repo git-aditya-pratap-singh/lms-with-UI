@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { login_popup, registration_popup } from "../../redux/Slices/StateSlice"
 
 import Registration from "./Registration";
+import OtpRegistrationLayout from './OtpRegistrationLayout';
 
 import "../../../assets/css/home/_home.scss";
 import Data from "../../Data/Data.json";
@@ -52,6 +53,7 @@ const Home = () => {
     return (
         <> 
         {registrationState && <Registration/>}
+        {<OtpRegistrationLayout/>}
 
             <section className="_container">
                 <div className="_subContainer1">
