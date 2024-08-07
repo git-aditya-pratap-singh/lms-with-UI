@@ -1,4 +1,7 @@
 import { useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { registration_otp_popup } from "../../redux/Slices/StateSlice";
+import Apiauth from '../../_api/auth/Apiauth.service';
 
 import OtpInput from "react-otp-input";
 import OtpTimer from "../../components/OtpTimer";
@@ -9,20 +12,27 @@ import "../../../assets/css/home/_otp.scss";
 
 const OtpRegistrationLayout = () => {
 
+  const dispatch = useDispatch();
+  const registrationData = useSelector((store)=>store.openPopup.registrationData);
+
   const [otp, setOTP] = useState(null);
   const handleOtpInputChange = useCallback((otp) => {
     setOTP(otp);
   }, []);
 
+  const VerifiedOTPandRegistartion = async(event)=>{
+    event.preventDefault();
+    const token = localStorage.getItem("OTPToken");
+    const apiResponse = await new Apiauth().registrationStudent_withOTP_verified(otp, token, registrationData);
+  }
+
   return (
     <>
       <section className="_otpContainer">
         <div className="_loginForm">
-          <h3><RxCross1 /></h3>
-          <h1>Validate Credinitial</h1>
-          <p className="text-green-400">OTP send on your email.</p>
-
-
+          <h3 onClick={ dispatch(registration_otp_popup(false)) }><RxCross1 /></h3>
+          <h1>Verify your email.</h1>
+          <label className="text-green-500 text-sm">OTP send on your email.</label>
           <form className="_form">
             <OtpInput
               value={otp}
@@ -43,6 +53,9 @@ const OtpRegistrationLayout = () => {
               }}
             />
             <OtpTimer />
+            <div className="flex justify-between w-full">
+              <button onClick={VerifiedOTPandRegistartion}>Verified</button>
+            </div>
           </form>
         </div>
       </section>

@@ -19,7 +19,8 @@ class StudentTempControllers extends AlertService {
         const otpSentStatus = await this.sendOTPtoEmail(res, otp, email);
         if(!otpSentStatus)
             return this.sendErrorResponse(res, false, "OTP hasn't sent on your email !!")
-        return this.sendSuccessResponse(res, true, "OTP has sent on your email !!", token);
+        const regisData = req.body;
+        return this.sendSuccessResponse(res, true, "OTP has sent on your email !!", {token, regisData});
     });
 
     private sendOTPtoEmail = async(res: Response, otp: number, email: string): Promise<boolean | any> =>{

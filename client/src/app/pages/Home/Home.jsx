@@ -49,11 +49,12 @@ const iconComponents = {
 
 const Home = () => {
     const dispatch = useDispatch();
-    const registrationState = useSelector((store)=>store.openPopup.open_registration)
+    const registrationState = useSelector((store)=>store.openPopup.open_registration);
+    const registrationOTPpopupStatus = useSelector((store)=>store.openPopup.registrationOTPpopup);
     return (
         <> 
-        {registrationState && <Registration/>}
-        {<OtpRegistrationLayout/>}
+        { registrationState && <Registration/> }
+        { registrationOTPpopupStatus && <OtpRegistrationLayout/> }
 
             <section className="_container">
                 <div className="_subContainer1">

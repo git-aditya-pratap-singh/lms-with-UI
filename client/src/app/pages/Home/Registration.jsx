@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLoaderData } from 'react-router-dom';
 import Select from 'react-select'
-import { registration_popup } from "../../redux/Slices/StateSlice";
+import { registration_popup, registration_otp_popup, registration_Data } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase";
 import Apiauth from "../../_api/auth/Apiauth.service";
 
@@ -46,40 +46,32 @@ const Registration = () => {
     const validateForm = () => {
       const error = {};
       
-      {/* Name Validation */}
       if(!data.name)
         error.name="Name shouln't be empty!";
       
       else if (!data.name.match(/^[a-zA-Z\s]{3,50}$/)) 
         error.name = 'A name must be contain only characters & length must be atleast 3 characters!';
       
-      
-      {/* Email Validation */}
       if(!data.email)
         error.email = "Email shouldn't be empty";
       
       else if (!data.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/))
         error.email = 'Invalid email address';
 
-      {/* phone Validation */}
       if(!data.phone)
         error.phone = "Phone no. shouldn't be empty!";
        
       else if (!data.phone.match(/^\d{10}$/))
         error.phone = 'Phone number must be a 10-digit number';
       
-      {/* course Validation */}
       if (data.course.length === 0)
         error.course = 'Please! Select atleast One Course.'
        
-      {/* Address Validation */}
       if (!data.address) 
         error.address = "Address shouldn't be empty!"
       
-      {/* gender Validation */}
       if (!data.gender)
         error.gender = "Please! Select a gender."
-
       return error
     }
 
@@ -91,16 +83,16 @@ const Registration = () => {
     else{
       setError(validateFormError)
       //---API calling
-      const apiResponse = await new Apiauth().registrationStudent(data);
+      const apiResponse = await new Apiauth().registrationStudentSendOTP(data);
       if(apiResponse?.status){
-        dispatch(registration_popup(false));
         console.log(apiResponse)
         //-- save token into localstorage and open OTP Popup
-        localStorage.setItem("OTPToken",apiResponse?.data);
-        
+        localStorage.setItem("OTPToken",apiResponse?.data?.token);
+        dispatch(registration_popup(false));
+        dispatch(registration_otp_popup(true));
+        dispatch(registration_Data(apiResponse?.data?.regisData));
       }
     }
-
   }
 
   return (

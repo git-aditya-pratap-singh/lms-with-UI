@@ -3,11 +3,19 @@ import BaseControllerResponse from '../../utils/BaseControllerResponse';
 
 class Apiauth extends BaseControllerResponse {
 
-  registrationStudent = async (formData) =>{
+  registrationStudentSendOTP = async(formData) =>{
     try{
       const response = await new ApiService().post("/add-temp-student", formData);
       this.handleResponse(response);
       return response;
+    }catch(err){
+      return this.handleResponse(err);
+    }
+  }
+
+  registrationStudent_withOTP_verified = async()=>{
+    try{
+
     }catch(err){
       return this.handleResponse(err);
     }
