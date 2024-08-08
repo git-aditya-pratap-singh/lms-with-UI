@@ -5,7 +5,7 @@ class Apiauth extends BaseControllerResponse {
 
   registrationStudentSendOTP = async(formData) =>{
     try{
-      const response = await new ApiService().post("/add-temp-student", formData);
+      const response = await new ApiService().post("/add-temp-student-verify", formData);
       this.handleResponse(response);
       return response;
     }catch(err){
@@ -13,9 +13,12 @@ class Apiauth extends BaseControllerResponse {
     }
   }
 
-  registrationStudent_withOTP_verified = async()=>{
+  registrationStudent_withOTP_verified = async(otp, token, formStudentData)=>{
     try{
-
+      const formData = {OTP: otp, TOKEN: token, formData: formStudentData};
+      const response = await new ApiService().post("/add-temp-student", formData);
+      this.handleResponse(response);
+      return response;
     }catch(err){
       return this.handleResponse(err);
     }

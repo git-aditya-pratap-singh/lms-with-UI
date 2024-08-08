@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import jwt, { TokenExpiredError } from "jsonwebtoken";
 import AlertService from "../../../helpers/AlertService";
 import asyncHandler from "../../../utils/asyncHandler";
 import NewMailFunctions from "../../../mail/mail.controllers";
@@ -23,6 +24,15 @@ class StudentTempControllers extends AlertService {
         return this.sendSuccessResponse(res, true, "OTP has sent on your email !!", {token, regisData});
     });
 
+    public TempStudentAdd = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
+        console.log("+++++++----->>>",req.body)
+        const {OTP, TOKEN, formData} = req.body;
+        //--token verified and otp verified after the you can register students
+        const otpStatus = await this.OTPverified(res, OTP, TOKEN);
+        console.log("RESP->>>",otpStatus)
+
+    });
+
     private sendOTPtoEmail = async(res: Response, otp: number, email: string): Promise<boolean | any> =>{
         try{
             const toEmail = email;
@@ -41,6 +51,41 @@ class StudentTempControllers extends AlertService {
             return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
         }
     };
+
+    private OTPverified = async(res: Response,  otp: number, token: string): Promise<any>=>{
+        try{
+            const decoded: any = jwt.verify(token, process.env.OTP_TOKEN_SECRET_KEY as string);
+            console.log(decoded)
+            if (otp != decoded?.tokenOTP)
+                return this.sendErrorResponse(res, false, 'OTP do not match. Please enter valid OTP !!');
+            return true;
+            
+        }catch(err){
+            if (err instanceof TokenExpiredError) 
+                return this.sendErrorResponse(res, false, 'OTP has expired. Please request a new OTP !!');
+        }
+            
+            
+            //     const decoded: any = jwt.verify(tokens, process.env.OTP_TOKEN_SECRET_KEY as string);
+            //     if (otp !== Number(decoded?.tokenOTP))
+            //         return this.sendErrorResponse(res, false, 'OTP do not match. Please enter valid OTP !!');
+    
+            //     if (key === 'viaOTP') {
+            //         const userValid = await this.GetuserByloginPass(email);
+            //         const token: string = await this.createJWTToken(userValid, key);
+            //         return this.sendSuccessResponseToken(res, true, 'You have successfully logged in !!', { userValid, token });
+            //     }
+            //     return this.sendSuccessResponse(res, true, 'Verified OTP !!');
+            // } catch (err) {
+            //     if (err instanceof TokenExpiredError) {
+            //         return this.sendErrorResponse(res, false, 'OTP has expired. Please request a new OTP !!');
+            //     } else {
+            //         console.error(`Error verifying OTP token: ${err}`);
+            //         return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!`);
+            //     }
+    }
+
+       
 }
 
 export default StudentTempControllers;

@@ -14,7 +14,9 @@ authRouter.use('/login', loginRoutes);
 authRouter.use('/forget-password', loginRoutes);
 
 authRouter.get('/fetchcourseOfregistration/getCourseList', new FetchCourseList().getCourseList);
-authRouter.post('/add-temp-student', new StudentTempControllers().StudentAddTempOTP);
+authRouter.post('/add-temp-student-verify', new StudentTempControllers().StudentAddTempOTP);
+authRouter.post('/add-temp-student', new StudentTempControllers().TempStudentAdd);
+
 
 
 export default authRouter;

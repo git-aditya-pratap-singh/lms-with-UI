@@ -30,7 +30,7 @@ const OtpRegistrationLayout = () => {
     <>
       <section className="_otpContainer">
         <div className="_loginForm">
-          <h3 onClick={ dispatch(registration_otp_popup(false)) }><RxCross1 /></h3>
+          <h3 onClick={ ()=> dispatch(registration_otp_popup(false)) }><RxCross1 /></h3>
           <h1>Verify your email.</h1>
           <label className="text-green-500 text-sm">OTP send on your email.</label>
           <form className="_form">

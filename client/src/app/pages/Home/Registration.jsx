@@ -89,8 +89,11 @@ const Registration = () => {
         //-- save token into localstorage and open OTP Popup
         localStorage.setItem("OTPToken",apiResponse?.data?.token);
         dispatch(registration_popup(false));
-        dispatch(registration_otp_popup(true));
         dispatch(registration_Data(apiResponse?.data?.regisData));
+
+        setTimeout(()=>{
+          dispatch(registration_otp_popup(true));
+        },3000);
       }
     }
   }
