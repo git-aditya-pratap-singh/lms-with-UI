@@ -6,12 +6,12 @@ import asyncHandler from '../../../utils/asyncHandler';
 import AlertService from '../../../helpers/AlertService';
 import Password_Encrypt_Decrypt from "../../../helpers/PswdEncrypt";
 import loginDB from '../../../models/login.schema';
-import NewMailFunctions from "../../../mail/mail.controllers";
+import EmailSetupService from "../../../mail/emailSetup.services";
 import CommonServices from "../../../helpers/common.services";
 
 dotenv.config();
 const AUTH_PASSWORD = new Password_Encrypt_Decrypt();
-const INSTANCE_OF_MAIL = new NewMailFunctions();
+const INSTANCE_OF_MAIL = new EmailSetupService();
 
 class LoginControllers extends AlertService{
 
@@ -42,7 +42,7 @@ class LoginControllers extends AlertService{
             return this.sendErrorResponse(res, false, "OTP isn't to be generated !!");
         if(!await this.storeOTPtoDB(res, emailS, generateOTP.otp, generateOTP.token))
             return this.sendErrorResponse(res, false, "OTP isn't to be stored!!");
-        if(!await this.sendOTPtoEmail(res, emailCheck?.username, generateOTP?.otp, emailS))
+        if(!await INSTANCE_OF_MAIL.sendOTPtoEmailforLogin(res, emailCheck?.username, generateOTP?.otp, emailS))
             return this.sendErrorResponse(res, false, "OTP doesn't send on your email!!");
         return this.sendSuccessResponse(res, true, "OTP has sent to your email!!");
     });
@@ -87,7 +87,7 @@ class LoginControllers extends AlertService{
             return this.sendErrorResponse(res, false, "OTP isn't to be generated !!");
         if(!await this.storeOTPtoDB(res, Email, generateOTP?.otp, generateOTP?.token, key))
             return this.sendErrorResponse(res, false, "OTP isn't to be stored!!");
-        if(!await this.sendOTPtoEmail(res, emailCheck?.username, generateOTP?.otp, Email))
+        if(!await INSTANCE_OF_MAIL.sendOTPtoEmailforLogin(res, emailCheck?.username, generateOTP?.otp, Email))
             return this.sendErrorResponse(res, false, "OTP doesn't send on your email!!");
         return this.sendSuccessResponse(res, true, "OTP has sent to your email!!");
     });
@@ -170,26 +170,6 @@ class LoginControllers extends AlertService{
         if(!saveOtp) 
             return false;
         return true;
-    };
-
-
-    private sendOTPtoEmail = async(res: Response, name: string, otp: number, email: string): Promise<boolean | any> =>{
-        try{
-            const toEmail = email;
-            const subject: string = '🪬Your OTP send from elearn SoftTech Pvt. Ltd';
-            const messagehtml = `
-                <p>Dear ${name},</p>
-                <p><strong>Your OTP is: </strong> <span style="color: #007DFC">${otp}</span></p>
-                <p>Please, don't share to OTP.</p><br><br>
-                <p style="color: #007DFC">Best regards,</p>
-                <p style="color: #007DFC">elearn SoftTech Pvt. Ltd</p>
-                <p style="color: #007DFC">Address: WMGV+P43, Varthur Main Rd, Devarabisanahalli, Uttarahalli Hobli, Bengaluru, Karnataka 560103</p>`
-    
-            const sent = await INSTANCE_OF_MAIL.newSmtpMail(toEmail, subject, messagehtml)
-            return sent ? true : false;
-        }catch(err){
-            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
-        }
     };
 
 
