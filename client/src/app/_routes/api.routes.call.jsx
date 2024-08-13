@@ -52,7 +52,7 @@ class ApiRoutesCall {
         }
     }
 
-    courseRoutesApiCall = async () => {
+    courseRoutesApiCall = async()=>{
         try {
           const apiCalls = [
             API_INSTANCE.get('/dashboard/teachers/getCourseTeachersDeatils'),
@@ -65,7 +65,16 @@ class ApiRoutesCall {
         } catch (err) {
           return null;
         }
-      };
+    }
+
+    tempStudentRoutesApiCall = async()=>{
+        try{
+            const response = await API_INSTANCE.get('/dashboard/students/tempstudentsList');
+            return response.status === true ? response : null;
+        }catch(err){
+            return null;
+        }
+    }
       
 }
 export default ApiRoutesCall;

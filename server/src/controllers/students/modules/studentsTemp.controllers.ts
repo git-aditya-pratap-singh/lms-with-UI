@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {ObjectId} from 'mongodb';
+import { PipelineStage } from 'mongoose';
 import jwt, { TokenExpiredError } from "jsonwebtoken";
 import AlertService from "../../../helpers/AlertService";
 import asyncHandler from "../../../utils/asyncHandler";
@@ -10,6 +11,32 @@ import tempStudentsDB from "../../../models/tempStudent.schema";
 
 class StudentTempControllers extends AlertService {
 
+    public getTempStudentsList = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
+        const tempstudentList: PipelineStage[] = [
+            {
+              '$lookup': {
+                'from': 'courses', 'localField': 'course', 'foreignField': '_id', 
+                'as': 'selectedCourseList', 
+                'pipeline': [
+                  {'$match': {'status': {'$ne': 'Disabled'}} }
+                ]
+              }
+            }, {
+              '$addFields': {
+                'selectedCourseList': {
+                  '$map': {
+                    'input': '$selectedCourseList', 'as': 'selectedCourse', 
+                    'in': {'_id': '$$selectedCourse._id', 'label': '$$selectedCourse.name'}
+                  }
+                }
+              }
+            },{'$sort': {'name': 1}}
+        ];
+        const response = await tempStudentsDB.aggregate(tempstudentList);
+        return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
+    });
+
+    
     public StudentAddTempOTP = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
         const {email, phone} = req.body;
         const regisData = req.body;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
-//import { useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
@@ -24,9 +24,15 @@ const Dashboard = () => {
   const [auth, setAuth] = useAuthGuard();
   const navigate = useNavigate();
 
-  // const location = useLocation();
-  // const pathnames = location.pathname.split('/').filter((x) => x);
-  // console.log(pathnames)
+   const location = useLocation();
+   //console.log(location.pathname)
+   const pathnames = location.pathname.split('/').filter((x) => x);
+   //console.log(pathnames)
+   const modifiedArray = pathnames.map((item, index) => {
+    // Add '/' to every element except the last one
+    return index === pathnames.length - 1 ? item : `${item} /`;
+  });
+  console.log(modifiedArray)
   // pathnames.map((elem,index)=>{
   //   const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
   //   const isLast = index === pathnames.length - 1;
@@ -140,10 +146,10 @@ const Dashboard = () => {
               </NavLink>
 
 
-              <NavLink to="/dashboard/notification"
+              {/* <NavLink to="/dashboard/notification"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><FaBell size={21} className="drop-shadow-md" /><li>Notification</li></span>
-              </NavLink>
+              </NavLink> */}
 
               <NavLink to="/dashboard/settings"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
@@ -184,11 +190,16 @@ const Dashboard = () => {
 
               <div className="_breadCrums">
                 <ul>
-                  <li>Dashboard  /</li>
+                  {modifiedArray.map((elem, index)=>{
+                     return(
+                      <li>{elem}</li>
+                     )
+                  })}
+                  {/* <li>Dashboard  /</li>
                   {
 
                   }
-                  <li>Home</li>
+                  <li>Home</li> */}
                 </ul>
                 <span className="text-[var(--primary)]">Home</span>
 
@@ -220,11 +231,11 @@ const Dashboard = () => {
 
           <div className="_welcomeKit">
             <label>Welcome Back {toTitleCase(auth?.user?.name)} 🙋‍♂️!</label>
-            <label>Time: <label className="text-blue-500">01</label> : 
+            {/* <label>Time: <label className="text-blue-500">01</label> : 
               <label className="text-red-500"> 24</label> :
               <label className="text-green-500"> 37</label>
               <label className="text-yellow-500"> AM</label>
-            </label>
+            </label> */}
           </div>
 
           <div className="_outlet">

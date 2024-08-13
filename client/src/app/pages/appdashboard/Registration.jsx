@@ -1,12 +1,14 @@
 //import Table from "../../components/students/Table";
 import { useSelector } from "react-redux";
+import { useLoaderData } from 'react-router-dom';
 
 import StudentAddTable from "../../components/form/StudentAddTable";
 import AddForm from "../../components/students/StudentForm";
 
 const Registration = () => {
   
-const studentsPopup = useSelector((store) => store.openPopup.add_student_popup);
+  const tempStudentList = useLoaderData();
+  const studentsPopup = useSelector((store) => store.openPopup.add_student_popup);
 
   return (
     <>
@@ -26,7 +28,8 @@ const studentsPopup = useSelector((store) => store.openPopup.add_student_popup);
           </div>
         </div>
       </section>
-      <StudentAddTable />
+
+      <StudentAddTable list={tempStudentList.data} />
 
       {/* Add Form */}
       {(studentsPopup.add || studentsPopup.edit) &&

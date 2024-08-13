@@ -1,20 +1,22 @@
-
+import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { add_student_popup } from "../../redux/Slices/StateSlice";
+import toTitleCase from "../../common/titleCase";
 
 import { FaUserPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import ig from "../../../assets/img/admin.jpg";
 import "../../../assets/css/component/_studentaddTable.scss";
 
-const StudentAddTable = () => {
+const StudentAddTable = (props) => {
+    
     const dispatch = useDispatch();
 
     return (
         <>
-            <div className="_tableContainerAdd">
+          <div className="_tableContainerAdd">
                 
-                <table className="table">
+            <table className="table">
                     {/* head */}
                     <thead>
                         <tr>
@@ -28,7 +30,7 @@ const StudentAddTable = () => {
                             <th>Phone no.</th>
                             <th>Gender</th>
                             <th>Course</th>
-                            <th>Status</th>
+                            <th>Address</th>
                             <th>
                                 <span className="flex gap-5">
                                     <FaUserPlus size={18} className="text-[#00FFCC]"/> 
@@ -39,7 +41,10 @@ const StudentAddTable = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        <tr>
+
+                        {props.list.map((item)=>{
+                            return(
+                                <tr key={item?._id}>
                             <td>
                                 <label>
                                     <input type="checkbox" className="checkbox" />
@@ -53,25 +58,31 @@ const StudentAddTable = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <div className="font-bold">Aditya Pratap Singh</div>
+                                        <div className="font-bold">{toTitleCase(item?.name)}</div>
                                         <div className="text-sm opacity-50">INDIA</div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                dev.theaditya@gmail.com
+                               {item?.email}
                                 <br />
                                 <span className="badge badge-ghost badge-sm">Dev-Students</span>
                             </td>
-                            <td>+91 8433399250</td>
+                            <td>+91 {item?.phone}</td>
                             <td>
-                                Male
+                                {toTitleCase(item?.gender)}
                             </td>
                             <td>
-                                Mern
+                                {item?.selectedCourseList.map((items) => {
+                                  return (
+                                   <span key={items._id} 
+                                   className="badge badge-ghost badge-sm">
+                                    {toTitleCase(items?.label)}</span>
+                                );
+                                })}
                             </td>
                             <td>
-                                <label className="p-[0.3rem] rounded bg-[#FFBAD6] text-[#CC0052]">Inactive</label>
+                                {item?.address}
                             </td>
                         
                             <td>
@@ -82,280 +93,30 @@ const StudentAddTable = () => {
                                     <MdDelete size={18} className="text-[#FF3675] cursor-pointer"/>
                                 </span>
                             </td>
-                        </tr>
-
-                        {/* row 1 */}
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </td>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={ig} alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">Aditya Pratap Singh</div>
-                                        <div className="text-sm opacity-50">INDIA</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                dev.theaditya@gmail.com
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Dev-Students</span>
-                            </td>
-                            <td>+91 8433399250</td>
-                            <td>
-                                Male
-                            </td>
-                            <td>
-                                Mern
-                            </td>
-                            <td>
-                                <label className="p-[0.3rem] rounded bg-[#FFBAD6] text-[#CC0052]">Inactive</label>
-                            </td>
-                            <td>
-                                <span className="flex gap-5">
-                                    <FaUserPlus size={18} className="text-green-400 cursor-pointer"/> 
-                                    <MdDelete size={18} className="text-[#FF0066] cursor-pointer"/>
-                                </span>
-                            </td>
-                        </tr>
-
-                        {/* row 1 */}
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </td>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={ig} alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">Aditya Pratap Singh</div>
-                                        <div className="text-sm opacity-50">INDIA</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                dev.theaditya@gmail.com
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Dev-Students</span>
-                            </td>
-                            <td>+91 8433399250</td>
-                            <td>
-                                Male
-                            </td>
-                            <td>
-                                Mern
-                            </td>
-                            <td>
-                                <label className="p-[0.3rem] rounded bg-green-300">Active</label>
-                            </td>
-                            <td>
-                                <span className="flex gap-5">
-                                    <FaUserPlus size={18} className="text-green-400 cursor-pointer"/> 
-                                    <MdDelete size={18} className="text-red-500 cursor-pointer"/>
-                                </span>
-                            </td>
-                        </tr>
-
-                        {/* row 1 */}
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </td>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={ig} alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">Aditya Pratap Singh</div>
-                                        <div className="text-sm opacity-50">INDIA</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                dev.theaditya@gmail.com
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Dev-Students</span>
-                            </td>
-                            <td>+91 8433399250</td>
-                            <td>
-                                Male
-                            </td>
-                            <td>
-                                Mern
-                            </td>
-                            <td>
-                                <label className="p-[0.3rem] rounded bg-green-300">Active</label>
-                            </td>
-                            <td>
-                                <span className="flex gap-5">
-                                    <FaUserPlus size={18} className="text-green-400 cursor-pointer"/> 
-                                    <MdDelete size={18} className="text-red-500 cursor-pointer"/>
-                                </span>
-                            </td>
-                        </tr>
-
-                        {/* row 1 */}
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </td>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={ig} alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">Aditya Pratap Singh</div>
-                                        <div className="text-sm opacity-50">INDIA</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                dev.theaditya@gmail.com
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Dev-Students</span>
-                            </td>
-                            <td>+91 8433399250</td>
-                            <td>
-                                Male
-                            </td>
-                            <td>
-                                Mern
-                            </td>
-                            <td>
-                                <label className="p-[0.3rem] rounded bg-green-300">Active</label>
-                            </td>
-                            <td>
-                                <span className="flex gap-5">
-                                    
-                                    <button className="_bt bg-green-50 "
-                            onClick={() => 
-                                dispatch(add_student_popup({check: true, key:'add'}))}>
-                                <FaUserPlus size={18} className="text-green-400 cursor-pointer" /></button>
-
-                                    <MdDelete size={18} className="text-red-500 cursor-pointer"/>
-                                </span>
-                            </td>
-                        </tr>
-
-                        {/* row 1 */}
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </td>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={ig} alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">Aditya Pratap Singh</div>
-                                        <div className="text-sm opacity-50">INDIA</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                dev.theaditya@gmail.com
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Dev-Students</span>
-                            </td>
-                            <td>+91 8433399250</td>
-                            <td>
-                                Male
-                            </td>
-                            <td>
-                                Mern
-                            </td>
-                            <td>
-                                <label className="p-[0.3rem] rounded bg-green-300">Active</label>
-                            </td>
-                            <td>
-                                <span className="flex gap-5">
-                                    <FaUserPlus size={18} className="text-green-400 cursor-pointer"/> 
-                                    <MdDelete size={18} className="text-red-500 cursor-pointer"/>
-                                </span>
-                            </td>
-                        </tr>
-
-                        {/* row 1 */}
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </td>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={ig} alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">Aditya Pratap Singh</div>
-                                        <div className="text-sm opacity-50">INDIA</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                dev.theaditya@gmail.com
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Dev-Students</span>
-                            </td>
-                            <td>+91 8433399250</td>
-                            <td>
-                                Male
-                            </td>
-                            <td>
-                                Mern
-                            </td>
-                            <td>
-                                <label className="p-[0.3rem] rounded bg-green-300">Active</label>
-                            </td>
-                            <td>
-                                <span className="flex gap-5">
-                                    <FaUserPlus size={18} className="text-green-400 cursor-pointer"/> 
-                                    <MdDelete size={18} className="text-red-500 cursor-pointer"/>
-                                </span>
-                            </td>
-                        </tr>
-
-                        
-                        
+                        </tr> 
+                            )
+                        })}  
                     </tbody>
                     {/* foot */}
-
-
                 </table>
             </div>
         </>
     )
 }
+
+
+StudentAddTable.propTypes = {
+    list: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+        gender: PropTypes.string.isRequired,
+        course: PropTypes.string.isRequired,
+        address: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+};
+
 export default StudentAddTable;

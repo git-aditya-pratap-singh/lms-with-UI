@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import PropTypes from "prop-types";
 import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
 import { img_update_popup } from "../../redux/Slices/StateSlice";
+import  AboutShimmersLoad from "../../components/shimmers/AboutShimmers";
 //import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 import toTitleCase from "../../common/titleCase";
 import DateFormet from "../../common/dateFormet";
@@ -21,6 +24,8 @@ import "../../../assets/css/admin/_profile.scss";
 const Profile_admin = () => {
 
     const dispatch = useDispatch();
+    const location = useLocation();
+    console.log(location)
     const [formData, setFormData] = useState({
         username: "",
         designation: "",
@@ -35,6 +40,7 @@ const Profile_admin = () => {
 
     //const [auth, setAuth] = useAuthGuard();
     const userprofileData = useLoaderData();
+    //const loading = lazy(()=> import('../../components/shimmers/AboutShimmers'));
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -81,6 +87,7 @@ const Profile_admin = () => {
 
     return (
         <>
+        {formData != '' ? (
             <section className="_container1">
                 <div className="_subContainer11">
                     <div className="_profile">
@@ -203,6 +210,8 @@ const Profile_admin = () => {
                 </div>
                 <ImgUpdate />
             </section>
+        ) : <AboutShimmersLoad/>
+}
         </>
     )
 }

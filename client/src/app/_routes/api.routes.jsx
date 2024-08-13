@@ -90,7 +90,8 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/registration",
-                element: <Registration />
+                element: <Registration />,
+                loader: new ApiRoutesCall().tempStudentRoutesApiCall
             }
         ]
     },
