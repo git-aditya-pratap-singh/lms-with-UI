@@ -23,23 +23,11 @@ const Dashboard = () => {
   const [toggle, setToggle] = useState(false);
   const [auth, setAuth] = useAuthGuard();
   const navigate = useNavigate();
+  const location = useLocation();
 
-   const location = useLocation();
-   //console.log(location.pathname)
-   const pathnames = location.pathname.split('/').filter((x) => x);
-   //console.log(pathnames)
-   const modifiedArray = pathnames.map((item, index) => {
-    // Add '/' to every element except the last one
-    return index === pathnames.length - 1 ? item : `${item} /`;
-  });
-  console.log(modifiedArray)
-  // pathnames.map((elem,index)=>{
-  //   const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
-  //   const isLast = index === pathnames.length - 1;
-  //   console.log(routeTo);
-  //    console.log(isLast)
-  // })
-
+  const pathnames = location.pathname.split('/').filter((x) => x);
+  const locationPaths = pathnames.map((item, index) => index === pathnames.length - 1 ? toTitleCase(item) : toTitleCase(`${item} /`));
+ 
   const logout = () => {
     setToggle(!toggle);
     setAuth({
@@ -190,19 +178,11 @@ const Dashboard = () => {
 
               <div className="_breadCrums">
                 <ul>
-                  {modifiedArray.map((elem, index)=>{
-                     return(
-                      <li>{elem}</li>
-                     )
+                  {locationPaths.map((elem,index)=>{
+                     return(<li key={index}> {elem} </li>)
                   })}
-                  {/* <li>Dashboard  /</li>
-                  {
-
-                  }
-                  <li>Home</li> */}
                 </ul>
-                <span className="text-[var(--primary)]">Home</span>
-
+                <span className="text-[var(--primary)]">{locationPaths[locationPaths.length-1]}</span>
               </div>
 
             </div>

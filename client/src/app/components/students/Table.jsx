@@ -31,10 +31,11 @@ const Table = (props) => {
               <th>Course</th>
               <th>Status</th>
               <th>
-                <span className="flex gap-5">
+                {/* <span className="flex gap-5">
                   <FaEdit size={18} className="text-[#00FFCC]" />
                   <MdDelete size={18} className="text-[#FF3675]" />
-                </span>
+                </span> */}
+                Action
               </th>
             </tr>
           </thead>
@@ -56,21 +57,21 @@ const Table = (props) => {
                           <img src={ig} alt="Avatar Tailwind CSS Component" />
                         </div> */}
                         <div className="avatar placeholder">
-                          <div className={`text-white w-10 shadow rounded-full`} style={{ backgroundColor: getRandomHexColor()}}>
+                          <div className={`text-white w-11 shadow rounded-full`} style={{ backgroundColor: getRandomHexColor()}}>
                             <span className="text-[1rem] ">{profileName(item?.name)}</span>
                           </div>
                         </div>
                       </div>
                       <div>
                         <div className="font-bold">{toTitleCase(item?.name)}</div>
-                        <div className="text-sm opacity-50">INDIA</div>
+                        <div className="text-sm opacity-60">INDIA</div>
                       </div>
                     </div>
                   </td>
                   <td>
                     {item?.email}
                     <br />
-                    <span className="badge badge-ghost badge-sm">
+                    <span className="rounded-full badge-ghost badge-sm">
                       Dev-Students
                     </span>
                   </td>
@@ -92,7 +93,7 @@ const Table = (props) => {
                     <span className="flex gap-5">
                       <FaEdit
                         size={18}
-                        className="text-[#00ffcc8b] cursor-pointer ease-in-out duration-200 active:scale-90"
+                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90"
                         onClick={() =>
                           dispatch(
                             add_student_popup({ check: true, key: "edit", item: item })
@@ -101,7 +102,7 @@ const Table = (props) => {
                       />
                       <MdDelete
                         size={18}
-                        className="text-[#FF3675] cursor-pointer"
+                        className="text-gray-600 cursor-pointer"
                       />
                     </span>
                   </td>

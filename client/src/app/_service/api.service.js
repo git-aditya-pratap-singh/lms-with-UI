@@ -10,7 +10,8 @@ class ApiService {
             baseURL: environmentURL.apiUrl,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token ? `Bearer ${token}` : ''
+                'Authorization': token ? `Bearer ${token}` : '',
+                'Accept': 'application/json, multipart/form-data',
             },
         });
     }

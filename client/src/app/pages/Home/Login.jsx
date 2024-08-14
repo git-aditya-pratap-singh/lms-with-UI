@@ -175,7 +175,7 @@ const Login = () => {
               <FaLinkedinIn size={20} color="#007DFC" />
             </span>
             <span>
-              <FaGithub size={20} />
+              <FaGithub size={20} className="text-gray-700"/>
             </span>
           </div>
         </div>

@@ -48,6 +48,8 @@
                 input{
                     width: 100%;
                     outline: none;
+                    background-color: var(--background);
+                    color: var(--foreground);
                     @apply pl-12 pr-4 py-2  border border-gray-300 focus:shadow-md focus:shadow-blue-200/50  rounded placeholder-opacity-25 focus:ring-1 focus:ring-ring text-sm;
                 }
                 label{

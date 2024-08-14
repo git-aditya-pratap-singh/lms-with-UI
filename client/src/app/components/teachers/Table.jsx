@@ -57,7 +57,7 @@ const Table = (props) => {
                           <img src={ig} alt="Avatar Tailwind CSS Component" />
                         </div> */}
                         <div className="avatar placeholder">
-                          <div className={`text-white w-10 shadow rounded-full`} style={{ backgroundColor: getRandomHexColor()}} >
+                          <div className={`text-white w-11 shadow rounded-full`} style={{ backgroundColor: getRandomHexColor()}} >
                             <span className="text-[1rem]">{profileName(item?.name)}</span>
                           </div>
                         </div>

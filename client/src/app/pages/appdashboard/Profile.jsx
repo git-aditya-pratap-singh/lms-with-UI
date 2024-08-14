@@ -1,6 +1,4 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
-import { useLocation } from 'react-router-dom';
-
 import PropTypes from "prop-types";
 import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -24,8 +22,6 @@ import "../../../assets/css/admin/_profile.scss";
 const Profile_admin = () => {
 
     const dispatch = useDispatch();
-    const location = useLocation();
-    console.log(location)
     const [formData, setFormData] = useState({
         username: "",
         designation: "",
@@ -69,10 +65,8 @@ const Profile_admin = () => {
             // build userName---------
             const userName = formData.name.split(" ")[0].toLowerCase();
             setFormData({ ...formData, ['username']: userName })
-
             // api call
             new Apiadmin().profileUpdate(formData);
-    
         }
     }
 
@@ -83,7 +77,7 @@ const Profile_admin = () => {
                 ...userprofileData
             }));
         }
-    }, []);
+    }, [userprofileData]);
 
     return (
         <>
@@ -100,7 +94,7 @@ const Profile_admin = () => {
 
                 <div className="_subContainer22">
 
-                    <div className="flex justify-start items-center gap-x-10">
+                    <div className="flex justify-start items-center gap-x-10 text-[var(--foreground)]">
                         <h2>Username:
                             <span className="text-[var(--primary)]"> {formData.username}</span>
                         </h2>
@@ -115,7 +109,7 @@ const Profile_admin = () => {
                             <label>
                                 <FaUser />
                             </label>
-                            <input type="text" placeholder="enter name..." name="name"
+                            <input type="text" placeholder="enter name..." name="name" className="bg-[var(--background)] text-[var(--foreground)]"
                                 value={toTitleCase(formData.name)}
                                 onChange={handleChange} />
                         </span>
@@ -124,7 +118,7 @@ const Profile_admin = () => {
                             <label>
                                 <MdOutlineAlternateEmail />
                             </label>
-                            <input type="email" placeholder="enter email..." name="email"
+                            <input type="email" placeholder="enter email..." name="email" className="bg-[var(--background)] text-[var(--foreground)]"
                                 value={formData.email}
                                 onChange={handleChange} />
                         </span>
@@ -133,7 +127,7 @@ const Profile_admin = () => {
                             <label>
                                 <FaPhoneAlt />
                             </label>
-                            <input type="text" placeholder="enter phone no..." name="phone"
+                            <input type="text" placeholder="enter phone no..." name="phone" className="bg-[var(--background)] text-[var(--foreground)]"
                                 value={formData.phone}
                                 onChange={handleChange} />
                         </span>
@@ -142,7 +136,7 @@ const Profile_admin = () => {
                             <label>
                                 <FaCalendarAlt />
                             </label>
-                            <input type="date" placeholder="enter DOB..." name="dob"
+                            <input type="date" placeholder="enter DOB..." name="dob" className="bg-[var(--background)] text-[var(--foreground)]"
                                 value={DateFormet(formData.dob)}
                                 onChange={handleChange} />
                         </span>
@@ -177,7 +171,7 @@ const Profile_admin = () => {
                                 <p className="text-[var(--foreground)]">True</p>
                                 <input type="radio"
                                     name="hasAllAccess"
-                                    className="radio radio-primary accent-[var(--primary)]"
+                                    className="radio radio-primary accent-[var(--primary)] "
                                     value="true"
                                     checked={formData.hasAllAccess == "true"}
                                     onChange={handleChange}
@@ -197,7 +191,7 @@ const Profile_admin = () => {
                         </div>
 
 
-                        <textarea className="textarea textarea-bordered"
+                        <textarea className="textarea textarea-bordered bg-[var(--background)] text-[var(--foreground)]"
                             style={{ resize: "none" }}
                             placeholder="Address"
                             value={formData.address}
@@ -231,7 +225,7 @@ const ImgUpdate = () => {
         event.preventDefault();
         console.log(file)
         try {
-            const response = await API_INSTANCE.post('/dashboard/profiles/uploadProfilePicture', { "file": file.name });
+            const response = await API_INSTANCE.post('/dashboard/profiles/uploadProfilePicture', { 'image': file.name });
             if (response.status) {
                 toast.success(response.message);
             } else {
@@ -239,7 +233,7 @@ const ImgUpdate = () => {
             }
 
         } catch (err) {
-            toast.error('An error occurred while trying to log in.');
+            toast.error('An error occurred while trying to upload image.');
         }
     }
 
@@ -255,7 +249,7 @@ const ImgUpdate = () => {
                             dispatch(img_update_popup(false))}><RxCross1 /></h3>
                     </span>
                     <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10"
-                        name="file" accept="image/*" required onChange={(event) => setFile(event.target.files[0])} />
+                        name="image" accept="image/*" required onChange={(event) => setFile(event.target.files[0])} />
                     <button><GrUpdate />Update</button>
                 </form>
 

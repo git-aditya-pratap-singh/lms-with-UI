@@ -12,7 +12,7 @@ const app = express();
 const apiUrl = process.env.HOST +':'+ process.env.PORT;
 
 app.use(express.json({limit: "16kb"}))
-app.use(express.urlencoded({extended: true, limit: "16kb"}))
+app.use(express.urlencoded({extended: true, limit: "3mb"}))
 app.use(express.static("../dist/public"))
 
 app.use(cookieParser())

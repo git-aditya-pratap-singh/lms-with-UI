@@ -138,6 +138,7 @@ const Registration = () => {
                   options={courseListItem}
                   isMulti
                   name="course"
+                  className="text-[var(--foreground)]"
                   value={data.course}
                   onChange={(selectedOptions) => setData({ ...data, course: selectedOptions })}
                 />
@@ -152,7 +153,7 @@ const Registration = () => {
               </label>
               <div className="relative mt-2 rounded shadow-sm">
                 <textarea
-                  className="resize-none block w-full rounded-md py-1.5 pl-3 pr-20 text-[var(--foreground)] border border-gray-300  focus:ring-ring placeholder:text-[var(--foreground)]  sm:text-sm sm:leading-6"
+                  className="resize-none block w-full rounded-md py-1.5 pl-3 pr-20 bg-[var(--background)] text-[var(--foreground)] border border-gray-300  focus:ring-ring placeholder:text-[var(--foreground)]  sm:text-sm sm:leading-6"
                   placeholder="Enter the Parmanent address.."
                   rows="2"
                   name="address" value={data.address} onChange={handleChange}>
@@ -163,7 +164,7 @@ const Registration = () => {
 
 
             <div className="space-y-2">
-              <label className="text-[0.9rem]">Select Gender : </label>
+              <label className="text-[0.9rem] text-[var(--foreground)]">Select Gender : </label>
               <div className="flex">
                 <div className="flex items-center me-4">
                   <input id="inline-radio"

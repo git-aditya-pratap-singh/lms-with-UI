@@ -37,7 +37,10 @@
           &:nth-child(3) {
             @apply bg-red-100;
           }
-        }
+        } 
+      }
+      ._tav > a{
+        color: var(--foreground)
       }
     }
   }

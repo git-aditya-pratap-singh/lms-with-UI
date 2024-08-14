@@ -7,6 +7,6 @@ const INSTANCE_OF_PROFILE = new ProfileControllers();
 
 profilesRoutes.get('/getProfileDetails', INSTANCE_OF_PROFILE.getProfileDetails);
 profilesRoutes.put('/updateDetails', INSTANCE_OF_PROFILE.updateDetails);
-profilesRoutes.post('/uploadProfilePicture', upload.single("file"), INSTANCE_OF_PROFILE.uploadProfilePicture);
+profilesRoutes.post('/uploadProfilePicture', upload.single('image'), INSTANCE_OF_PROFILE.uploadProfilePicture);
 
 export default profilesRoutes;

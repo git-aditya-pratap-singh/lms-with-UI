@@ -110,7 +110,9 @@ const TeacherForm = (props) => {
     <>
       <section className="_addForm">
         <div className="flex justify-between items-center">
-          <h3>{`${formEditinfo.add ? "Add" : "Edit"} Teachers 🙋‍♂️`}</h3>
+          <h3 className="text-[var(--foreground)]">
+            {`${formEditinfo.add ? "Add" : "Edit"} Teachers 🙋‍♂️`}
+          </h3>
           <span className="cursor-pointer">
             <RxCross1
               onClick={() => {
@@ -130,13 +132,14 @@ const TeacherForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800">
+              className="block text-sm font-medium leading-3 text-[var(--foreground)]">
               Name
             </label>
             <span className="relative mt-2 rounded-md shadow-sm">
               <input
                 type="text"
                 name="name"
+                className="bg-[var(--background)] text-[var(--foreground)]"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter the name.."
@@ -151,13 +154,14 @@ const TeacherForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800">
+              className="block text-sm font-medium leading-3 text-[var(--foreground)]">
               Email
             </label>
             <span className="relative mt-2 rounded-md shadow-sm">
               <input
                 type="email"
                 name="email"
+                className="bg-[var(--background)] text-[var(--foreground)]"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter the email.."
@@ -172,13 +176,14 @@ const TeacherForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800">
+              className="block text-sm font-medium leading-3 text-[var(--foreground)]">
               Phone no.
             </label>         
             <span className="relative mt-2 rounded-md shadow-sm">
               <input
                 type="tel"
                 name="phone"
+                className="bg-[var(--background)] text-[var(--foreground)]"
                 value={formData.phone}
                 onChange={handleChange}              
                 placeholder="Enter the phone no.."
@@ -193,15 +198,16 @@ const TeacherForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800">
+              className="block text-sm font-medium leading-3 text-[var(--foreground)]">
               Select Course's
             </label>
             <div className="relative mt-2 rounded-md shadow-sm w-[300px] md:w-[250px]">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-800 sm:text-sm"></span>
+                <span className="text-[var(--foreground)] sm:text-sm"></span>
               </div>
               <Select
                 options={courseListItem}
+                className="text-[var(--foreground)]"
                 isMulti
                 name="course"
                 value={formData.course}
@@ -214,7 +220,7 @@ const TeacherForm = (props) => {
 
           {/* Select Gender */}
           <div className="space-x-2 flex items-center">
-            <label className="text-[0.9rem]">Gender : </label>
+            <label className="text-[0.9rem] text-[var(--foreground)]">Gender : </label>
             <div className="flex">
               <div className="flex items-center me-4">
                 <input
@@ -223,10 +229,9 @@ const TeacherForm = (props) => {
                   value="Male"
                   checked={formData.gender === "Male"}
                   onChange={handleChange}
-                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
-                                 dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
+                  className="w-4 h-4 text-[var(--primary)] bg-[var(--background)] border-gray-300 focus:ring-ring accent-[var(--primary)]"
                 />
-                <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-gray-300">
+                <label className="ms-2 text-sm font-medium text-[var(--foreground)]">
                   Male
                 </label>
               </div>
@@ -238,10 +243,9 @@ const TeacherForm = (props) => {
                   value="Female"
                   checked={formData.gender === "Female"}
                   onChange={handleChange}
-                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
-                  dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
+                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]"
                 />
-                <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-gray-300">
+                <label className="ms-2 text-sm font-medium text-[var(--foreground)]">
                   Female
                 </label>
               </div>
@@ -250,7 +254,7 @@ const TeacherForm = (props) => {
 
           {/* Select Status */}
           <div className="space-x-2 flex items-center">
-            <label className="text-[0.9rem]">Status : </label>
+            <label className="text-[0.9rem] text-[var(--foreground)]">Status : </label>
             <div className="flex">
               <div className="flex items-center me-4">
                 <input
@@ -260,10 +264,9 @@ const TeacherForm = (props) => {
                   value="Active"
                   checked={formData.status === "Active"}
                   onChange={handleChange}
-                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
-                                dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
+                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]"
                 />
-                <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-gray-300">
+                <label className="ms-2 text-sm font-medium text-[var(--foreground)]">
                   Active
                 </label>
               </div>
@@ -276,10 +279,9 @@ const TeacherForm = (props) => {
                   checked={formData.status === "Inactive"}
                   onChange={handleChange}
                   disabled={formEditinfo.add}
-                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
-                                dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
+                  className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]"
                 />
-                <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-gray-300">
+                <label className="ms-2 text-sm font-medium text-[var(--foreground)]">
                   Inactive
                 </label>
               </div>
@@ -302,32 +304,31 @@ const TeacherForm = (props) => {
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
-                className="resize-none block w-full rounded focus:shadow-md focus:shadow-blue-200/50 py-1.5 pl-3 pr-20 text-gray-800 placeholder:text-gray-400 
-                 ring-1 ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6"
+                className="resize-none block w-full rounded focus:shadow-md focus:shadow-blue-200/50 py-1.5 pl-3 pr-20 bg-[var(--background)] text-[var(--foreground)] placeholder:text-gray-400 
+                 ring-1 ring-gray-300 focus:ring-2 focus:ring-ring sm:text-sm sm:leading-6"
                 placeholder="Enter the Parmanent address.."
-                rows="5"
+                rows="4"
               ></textarea>
             </div>
           </div>
 
           {/* upload image */}
-          <div className="hidden md:block">
+          <div className="hidden md:block h-fit">
             <label
               htmlFor="cover-photo"
-              className="block text-sm font-medium leading-6  text-[var(--foreground)]"
-            >
+              className="block text-sm font-medium leading-2 text-[var(--foreground)]">
               Cover photo
             </label>
-            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+            <div className="mt-1 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-[1.05rem]">
               <div className="text-center">
                 <MdPhotoSizeSelectActual
-                  className="mx-auto h-12 w-12  text-[var(--foreground)]"
+                  className="mx-auto h-8 w-8 text-[var(--foreground)]"
                   aria-hidden="true"
                 />
-                <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                <div className="flex text-sm leading-2 text-gray-600">
                   <label
                     htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-[var(--primary)] focus-within:outline-none focus-within:ring-2
+                    className="relative cursor-pointer rounded-md bg-[var(--background)] font-semibold text-[var(--primary)] focus-within:outline-none focus-within:ring-2
                      focus-within:ring-[var(--primary)] focus-within:ring-offset-2 hover:text-[var(--primary)]">
                     <span>Upload a file</span>
                     <input
@@ -341,7 +342,7 @@ const TeacherForm = (props) => {
                   </label>
                   <p className="pl-1">or drag and drop</p>
                 </div>
-                <p className="text-xs leading-5 text-gray-600">
+                <p className="text-xs leading-5 text-[var(--foreground)]">
                   PNG, JPG, GIF up to 1MB
                 </p>
               </div>
