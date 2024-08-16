@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import toTitleCase from "../../../common/titleCase";
+import NotificationPopup from "../../../components/NotificationPopup";
 import { useAuthGuard, storeTokenRemove } from "../../../_guard/auth.guard";
 
 import Hamburger from "hamburger-react";
@@ -21,9 +22,11 @@ import "../../../../assets/css/admin/_dashboard.scss";
 const Dashboard = () => {
 
   const [toggle, setToggle] = useState(false);
+  const [notifyPopup , setnotifyPopup] = useState(false);
   const [auth, setAuth] = useAuthGuard();
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(notifyPopup)
 
   const pathnames = location.pathname.split('/').filter((x) => x);
   const locationPaths = pathnames.map((item, index) => index === pathnames.length - 1 ? toTitleCase(item) : toTitleCase(`${item} /`));
@@ -203,10 +206,13 @@ const Dashboard = () => {
               </div>
               <span>
                 <label><FaCircleUser size={21} /></label>
-                <label><FaBell size={18} /></label>
+                <label><FaBell size={18} onClick={() => setnotifyPopup(!notifyPopup)}/></label>
                 <label><HiOutlineDotsVertical size={21} /></label>
               </span>
             </div>
+
+            <NotificationPopup className={`${notifyPopup ? 'block' : 'hidden'}`}/>
+
           </div>
 
           <div className="_welcomeKit">
