@@ -93,7 +93,8 @@ const Dashboard = () => {
             </svg>
             <h1>elearn</h1>
           </div>
-
+          
+          <div className="h-full pb-8 _navItemSection">
           <div className="_navItem">
             <ul>
               <NavLink to="/dashboard/home"
@@ -137,10 +138,10 @@ const Dashboard = () => {
               </NavLink>
 
 
-              {/* <NavLink to="/dashboard/notification"
+               <NavLink to="/dashboard/notification"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
                 <span><FaBell size={21} className="drop-shadow-md" /><li>Notification</li></span>
-              </NavLink> */}
+              </NavLink> 
 
               <NavLink to="/dashboard/settings"
                 style={NavLinkCSS} onClick={() => setToggle(!toggle)}>
@@ -153,6 +154,7 @@ const Dashboard = () => {
               </NavLink>
 
             </ul>
+          </div>
           </div>
         </div>
 
@@ -210,8 +212,12 @@ const Dashboard = () => {
                 <label><HiOutlineDotsVertical size={21} /></label>
               </span>
             </div>
-
-            <NotificationPopup className={`${notifyPopup ? 'block' : 'hidden'}`}/>
+            
+            <div className={`absolute right-[1rem] top-[4.3rem] z-[2] duration-300 
+              ease-in-out ${notifyPopup ? '_notificationPopup_open' : '_notificationPopup_close'} `}>
+              <NotificationPopup/>
+            </div>
+            
 
           </div>
 

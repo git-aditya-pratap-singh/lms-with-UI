@@ -22,6 +22,11 @@
       padding-bottom: 0.8rem;
       border-bottom: 1px solid #999;
     }
+    ._navItemSection{
+      overflow-y: scroll;
+      &::-webkit-scrollbar{
+        display: none;
+      }
     ._navItem {
       margin-top: 0.5rem;
       ul {
@@ -42,6 +47,7 @@
       }
     }
     }
+   }
   }
   ._dashSection {
     position: relative;
@@ -112,6 +118,30 @@
   }
 }
 
+
+._notificationPopup_open {
+  -webkit-transition: max-height 1s;
+  -moz-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  transition: max-height 1s;
+  background-color: var(--card);
+  border-radius: 5px;
+  box-shadow: var(--box-shadow2);
+  max-height: 400px;
+}
+._notificationPopup_close  {
+  -webkit-transition: max-height 1s;
+  -moz-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  transition: max-height 1s;
+  overflow: hidden;
+  background-color: var(--card);
+  border-radius: 5px;
+  max-height: 0;
+}
+
 @media only screen and (max-width: 1400px){
   ._navBar{
     height: auto;
@@ -158,9 +188,6 @@
         span{
           label{
             &:nth-child(1){
-              display: none;
-            }
-            &:nth-child(2){
               display: none;
             }
           }
