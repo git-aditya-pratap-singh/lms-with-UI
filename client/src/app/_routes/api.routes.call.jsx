@@ -4,6 +4,15 @@ const API_INSTANCE = new ApiService();
 
 class ApiRoutesCall {
 
+    homePageRoutesApiCall = async() =>{
+        try{
+            const response = await new ApiService().get('/dashboard/home/gethomePageData');
+            return response.status === true ? response.data : null;
+        }catch(err){
+            return null;
+        }
+    }
+
     atHomeCourseList = async()=>{
         try {
             const response = await API_INSTANCE.get('/fetchcourseOfregistration/getCourseList');

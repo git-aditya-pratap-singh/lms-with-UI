@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Home from "../pages/home/Home";
-import Navbar from "../pages/home/Navbar";
-import About from "../pages/home/About";
-import Service from "../pages/home/Service";
-import Contact from "../pages/home/Contact";
+import Home from "../pages/Home/Home";
+import Navbar from "../pages/Home/Navbar";
+import About from "../pages/Home/About";
+import Service from "../pages/Home/Service";
+import Contact from "../pages/Home/Contact";
+import NotFound from "../pages/Home/NotFound";
 
 import Dashboard from "../pages/appdashboard/layout/Dashboard";
 import UHome from "../pages/appdashboard/Home";
@@ -66,7 +67,8 @@ const router = createBrowserRouter([
             {
                 index: true,
                 path: "/dashboard/home",
-                element: <UHome />
+                element: <UHome />,
+                loader: new ApiRoutesCall().homePageRoutesApiCall
             },
             {
                 path: "/dashboard/profile",
@@ -98,7 +100,7 @@ const router = createBrowserRouter([
     {
         // Catch-all route for 404 errors
         path: "*",
-        element: <h1>NOT FOUND!!</h1>
+        element: <NotFound/>
     },
 
 ]);
