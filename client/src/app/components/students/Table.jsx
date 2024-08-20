@@ -30,13 +30,7 @@ const Table = (props) => {
               <th>Gender</th>
               <th>Course</th>
               <th>Status</th>
-              <th>
-                {/* <span className="flex gap-5">
-                  <FaEdit size={18} className="text-[#00FFCC]" />
-                  <MdDelete size={18} className="text-[#FF3675]" />
-                </span> */}
-                Action
-              </th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -71,7 +65,7 @@ const Table = (props) => {
                   <td>
                     {item?.email}
                     <br />
-                    <span className="rounded-full badge-ghost badge-sm">
+                    <span className="rounded-full bg-slate-400 badge-sm">
                       Dev-Students
                     </span>
                   </td>
@@ -93,7 +87,7 @@ const Table = (props) => {
                     <span className="flex gap-5">
                       <FaEdit
                         size={18}
-                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90"
+                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
                         onClick={() =>
                           dispatch(
                             add_student_popup({ check: true, key: "edit", item: item })
@@ -102,7 +96,7 @@ const Table = (props) => {
                       />
                       <MdDelete
                         size={18}
-                        className="text-gray-600 cursor-pointer"
+                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"
                       />
                     </span>
                   </td>

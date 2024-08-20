@@ -33,12 +33,7 @@ const Table = (props) => {
               <th>Gender</th>
               <th>Course</th>
               <th>Status</th>
-              <th>
-                <span className="flex gap-5">
-                  <FaEdit size={18} className="text-[#00FFCC]" />
-                  <MdDelete size={18} className="text-[#FF3675]" />
-                </span>
-              </th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -53,9 +48,6 @@ const Table = (props) => {
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="avatar">
-                        {/* <div className="mask mask-squircle w-12 h-12">
-                          <img src={ig} alt="Avatar Tailwind CSS Component" />
-                        </div> */}
                         <div className="avatar placeholder">
                           <div className={`text-white w-11 shadow rounded-full`} style={{ backgroundColor: getRandomHexColor()}} >
                             <span className="text-[1rem]">{profileName(item?.name)}</span>
@@ -99,14 +91,14 @@ const Table = (props) => {
                     <span className="flex gap-5">
                       <FaEdit
                         size={18}
-                        className="text-[#00FFCC] cursor-pointer ease-in-out duration-200 active:scale-90"
+                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
                         onClick={() =>
                           dispatch(add_teacher_popup({ check: true, key: "edit", item: item}) )
                         }
                       />
                       <MdDelete
                         size={18}
-                        className="text-[#FF3675] cursor-pointer"
+                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"
                       />
                     </span>
                   </td>

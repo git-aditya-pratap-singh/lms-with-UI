@@ -1,8 +1,5 @@
-
 import { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
-
-
 
 const options= {
   chart: {
@@ -10,7 +7,7 @@ const options= {
     type: 'donut',
   },
   colors: ['#3C50E0', '#6577F3', '#8FD0EF', '#0FADCF'],
-  labels: ['Desktop', 'Tablet', 'Mobile', 'Unknown'],
+  labels: ['Students', 'Teachers', 'Courses', 'Tranning'],
   legend: {
     show: false,
     position: 'bottom',
@@ -19,8 +16,8 @@ const options= {
   plotOptions: {
     pie: {
       donut: {
-        size: '65%',
-        background: 'transparent',
+        size: '55%',
+        background: 'white',
       },
     },
   },
@@ -29,10 +26,10 @@ const options= {
   },
   responsive: [
     {
-      breakpoint: 2600,
+      breakpoint: 2400,
       options: {
         chart: {
-          width: 380,
+          width: 390,
         },
       },
     },
@@ -49,7 +46,7 @@ const options= {
 
 const ChartTwo = () => {
   const [state, setState] = useState({
-    series: [65, 34, 12, 56],
+    series: [10, 15, 12, 5],
   });
 
   const handleReset = () => {
@@ -61,27 +58,15 @@ const ChartTwo = () => {
   handleReset;
 
   return (
-    <div className="max-w-[400px] sm:px-7 col-span-12 rounded border border-stroke bg-white px-5 pb-5 pt-7 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-5">
+    <div className="max-w-[400px] sm:px-7 col-span-12 rounded border border-stroke bg-white px-5 pb-5 pt-7 shadow-default  xl:col-span-5">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white">
-            Visitors Analytics
+          <h5 className="text-xl font-semibold text-black">
+            Dashboard Analysis
           </h5>
         </div>
         <div>
           <div className="relative z-20 inline-block">
-            <select
-              name=""
-              id=""
-              className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
-            >
-              <option value="" className="dark:bg-boxdark">
-                Monthly
-              </option>
-              <option value="" className="dark:bg-boxdark">
-                Yearly
-              </option>
-            </select>
             <span className="absolute right-3 top-1/2 z-10 -translate-y-1/2">
               <svg
                 width="10"
@@ -112,8 +97,6 @@ const ChartTwo = () => {
             options={options}
             series={state.series}
             type="donut"
-            
-           
           />
         </div>
       </div>
@@ -122,8 +105,8 @@ const ChartTwo = () => {
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-5 w-6 rounded-full bg-primary"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Desktop </span>
+            <p className="flex w-full justify-between text-sm font-medium text-black">
+              <span> Students </span>
               <span> 65% </span>
             </p>
           </div>
@@ -131,8 +114,8 @@ const ChartTwo = () => {
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-5 w-6 rounded-full bg-[#6577F3]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Tablet </span>
+            <p className="flex w-full justify-between text-sm font-medium text-black ">
+              <span> Teachers </span>
               <span> 34% </span>
             </p>
           </div>
@@ -140,8 +123,8 @@ const ChartTwo = () => {
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-5 w-6 rounded-full bg-[#8FD0EF]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Mobile </span>
+            <p className="flex w-full justify-between text-sm font-medium text-black ">
+              <span> Courses </span>
               <span> 45% </span>
             </p>
           </div>
@@ -149,8 +132,8 @@ const ChartTwo = () => {
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-5 w-6 rounded-full bg-[#0FADCF]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Unknown </span>
+            <p className="flex w-full justify-between text-sm font-medium text-black ">
+              <span> Tranning </span>
               <span> 12% </span>
             </p>
           </div>

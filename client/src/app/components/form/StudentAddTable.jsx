@@ -31,17 +31,11 @@ const StudentAddTable = (props) => {
                             <th>Gender</th>
                             <th>Course</th>
                             <th>Address</th>
-                            <th>
-                                <span className="flex gap-5">
-                                    <FaUserPlus size={18} className="text-[#00FFCC]"/> 
-                                    <MdDelete size={18} className="text-[#FF3675]"/>
-                                </span>
-                            </th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* row 1 */}
-
                         {props.list.map((item)=>{
                             return(
                                 <tr key={item?._id}>
@@ -87,10 +81,10 @@ const StudentAddTable = (props) => {
                         
                             <td>
                                 <span className="flex gap-5">
-                                    <FaUserPlus size={18} className="text-[#00ffcc8b] cursor-pointer ease-in-out duration-200 active:scale-90"
+                                    <FaUserPlus size={18} className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
                                     onClick={()=>
                                         dispatch(add_student_popup({check: true, key: 'add'}))}/> 
-                                    <MdDelete size={18} className="text-[#FF3675] cursor-pointer"/>
+                                    <MdDelete size={18} className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"/>
                                 </span>
                             </td>
                         </tr> 

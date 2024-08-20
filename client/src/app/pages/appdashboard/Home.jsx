@@ -89,34 +89,9 @@ const Home_admin = () => {
         </div>
         <div className="_chart">
           <div className="_lineChart">
-            {/* <Chart
-              chartType="LineChart"
-              width="100%"
-              height="400px"
-              data={dataLine}
-              options={optionsLine}
-            /> */}
             <ChartOne/>
           </div>
           <div className="_pieChart">
-            {/* <PieChart
-              series={[
-                {
-                  data: [...dataa],
-                  innerRadius: 25,
-                  outerRadius: 100,
-                  paddingAngle: 5,
-                  cornerRadius: 5,
-                  startAngle: -180,
-                  endAngle: 180,
-                  cx: 150,
-                  cy: 150,
-                }
-              ]}
-              width={400}
-              height={300}
-              // legend={{ hidden: true }}
-            /> */}
             <ChartTwo/>
           </div>
         </div>
