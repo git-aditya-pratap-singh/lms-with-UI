@@ -15,7 +15,7 @@ const INSTANCE_OF_MAIL = new EmailSetupService();
 
 class LoginControllers extends AlertService{
 
-    public Login = asyncHandler(async(req: Request, res: Response): Promise<any> =>{
+    public Login = asyncHandler(async(req: Request, res: Response ): Promise<any> =>{
         const {username, password} = req.body;
         const userValid = await this.GetuserByloginPass(username.toLowerCase());
         if(!userValid)

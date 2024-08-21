@@ -1,4 +1,5 @@
-import express, {Request, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
+import mongoose from 'mongoose';
 import AlertService from '../../../helpers/AlertService';
 import asyncHandler from '../../../utils/asyncHandler';
 import loginDB from '../../../models/login.schema';
@@ -15,9 +16,10 @@ class ProfileControllers extends AlertService {
 
     })
 
-    public updateDetails = asyncHandler( async(req: Request, res: Response): Promise<any> =>{
+    public updateDetails = asyncHandler( async(req: Request, res: Response, next: NextFunction, session?: mongoose.ClientSession): Promise<any> =>{
         
         const {_id, username, name, email, phone, hasAllAccess, dob, gender, address} = req.body;
+        
         const updateDetails = await loginDB.findByIdAndUpdate(
             {_id: _id},
             {$set: {
@@ -30,7 +32,7 @@ class ProfileControllers extends AlertService {
                gender: gender,
                address: address
             }},
-            {$upsert: true, $new: true}
+            {upsert: true, new: true, session: session}
         )
         if(updateDetails === null)
             return this.sendErrorResponse(res, false, "Data not be Updated!!");

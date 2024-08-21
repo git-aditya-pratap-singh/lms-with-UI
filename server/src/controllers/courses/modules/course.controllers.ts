@@ -1,5 +1,6 @@
-import {Request, Response} from 'express';
-import {ObjectId} from 'mongodb'
+import {NextFunction, Request, Response} from 'express';
+import {ObjectId} from 'mongodb';
+import mongoose from 'mongoose';
 import AlertService from '../../../helpers/AlertService';
 import asyncHandler from '../../../utils/asyncHandler';
 import courseDB from '../../../models/course.schema';
@@ -17,7 +18,7 @@ class CourseControllers extends AlertService {
         }
     }
 
-    public getCourseList = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
+    public getCourseList = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
         const response = await courseDB.find({
             status: {$ne: "Disabled"}
         },{
@@ -26,8 +27,8 @@ class CourseControllers extends AlertService {
         })
         return this.sendSuccessResponse(res, true, "Course fetched!!", response);
     })
-
-    public addCourse = asyncHandler( async(req: Request, res: Response): Promise<any> =>{
+ 
+    public addCourse = asyncHandler( async(req: Request, res: Response, next: NextFunction, session?: mongoose.ClientSession): Promise<any> =>{
 
         const user = req?.user;
         const {courseName, courseDescription, coursePrice, courseEstiPrice, courseTags, courseCategories, courseLevel,
@@ -40,7 +41,7 @@ class CourseControllers extends AlertService {
             return this.sendErrorResponse(res, false, "Course is already Exists!!")
 
         if(user?.designation === 'admin' && user?.allAccess === 'true'){
-            const response = await new courseDB({
+            const newCourse = new courseDB({
                 name: courseName,
                 description: courseDescription,
                 price: coursePrice,
@@ -56,10 +57,9 @@ class CourseControllers extends AlertService {
                 video_uploaded_url: courseVideo,
                 course_logo_url: courselogo,
                 admin_logs: user?.username
-            }).save()
-            .then(saveData =>{
-                return this.sendSuccessResponse(res, true, "Course Added Successfully!!");
-            })
+            });
+            await newCourse.save({ session });
+            return this.sendSuccessResponse(res, true, "Course Added Successfully!!");
         }
         else{
             return this.sendErrorResponse(res, false, "You are not Authorized !!")
