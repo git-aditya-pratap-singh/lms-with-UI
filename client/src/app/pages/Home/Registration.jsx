@@ -6,6 +6,9 @@ import { registration_popup, registration_otp_popup, registration_Data } from ".
 import toTitleCase from "../../common/titleCase";
 import Apiauth from "../../_api/auth/Apiauth.service";
 
+import Form from "../../components/form/Form";
+import FORM from "../../components/form/constants";
+
 import { BiLogInCircle } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
@@ -14,6 +17,7 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import "../../../assets/css/home/_registration.scss";
 
 const Registration = () => {
+  console.log(FORM)
 
   const CourseList = useLoaderData();
   const dispatch = useDispatch();
@@ -198,6 +202,9 @@ const Registration = () => {
             </button>
           </form>
         </div>
+      
+
+      <Form forms={FORM}/>
       </section>
     </>
   );

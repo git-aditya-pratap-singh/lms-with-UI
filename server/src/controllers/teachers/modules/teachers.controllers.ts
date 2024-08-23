@@ -1,16 +1,16 @@
-import {Request, Response} from 'express';
+import { NextFunction, Request, Response} from 'express';
 import {ObjectId} from 'mongodb';
-import { PipelineStage } from 'mongoose';
+import mongoose,{ PipelineStage } from 'mongoose';
 import AlertService from '../../../helpers/AlertService';
 import asyncHandler from '../../../utils/asyncHandler';
 import CommonServices from '../../../helpers/common.services';
 import Password_Encrypt_Decrypt from '../../../helpers/PswdEncrypt';
-import NewMailFunctions from "../../../mail/mail.controllers";
+import EmailSetupService from "../../../mail/emailSetup.services";
 
 import teachersDB from '../../../models/teachers.schema'; 
 
 const INSTANCE_OF_PSWD = new Password_Encrypt_Decrypt();
-const INSTANCE_OF_MAIL = new NewMailFunctions();
+const INSTANCE_OF_MAIL = new EmailSetupService();
 
 class TeachersControllers extends AlertService {
 
@@ -82,7 +82,7 @@ class TeachersControllers extends AlertService {
         return this.sendSuccessResponse(res, true, "Fetch-Succefully!!", response);
     })
 
-    public addTeachers = asyncHandler( async(req: Request, res: Response): Promise<any> =>{
+    public addTeachers = asyncHandler( async(req: Request, res: Response, next: NextFunction, session?: mongoose.ClientSession): Promise<any> =>{
       
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body; 
         const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));
@@ -100,11 +100,11 @@ class TeachersControllers extends AlertService {
         if(!generatePswd)
             return this.sendErrorResponse(res, false, "Password isn't to be generated!!")
 
-        const emailSent = await this.sendCredentialsByEmail(res, name, userName, generatePswd.pswd, email);
+        const emailSent = await INSTANCE_OF_MAIL.sendCredentialsByEmailOfTeachers(res, name, userName, generatePswd.pswd, email);
         if(!emailSent)
             return this.sendErrorResponse(res, false, "Failed to Send Credential on your email !!")
         
-        const response = new teachersDB({
+        const newTeachers = new teachersDB({
            username: userName,
            name: name,
            password: generatePswd.encyPswd,
@@ -117,7 +117,7 @@ class TeachersControllers extends AlertService {
            imgUrl: imgUrl ? imgUrl : '',
            admin_logs: req?.user?.username
         });
-        await response.save()
+        await newTeachers.save({session})
         .then(saveData =>{
             return this.sendSuccessResponse(res, true, "Credentials Added Successfully!!");
         })
@@ -126,7 +126,7 @@ class TeachersControllers extends AlertService {
         })
     });
 
-    public editTeachers = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
+    public editTeachers = asyncHandler( async(req: Request, res: Response, next: NextFunction, session?: mongoose.ClientSession): Promise<any>=>{
         
         const {name, email, phone, course, gender, status, address, imgUrl} = req.body;
         const courseList: ObjectId[] = course.map((courseItem: any) => new ObjectId(courseItem.value));
@@ -144,7 +144,7 @@ class TeachersControllers extends AlertService {
                 imgUrl: imgUrl,
                 admin_logs: req?.user?.username
             }},
-            {$new: true}
+            {new: true, session}
         );
         return updateTeacherData
             ? this.sendSuccessResponse(res, true, `Student Credential Updated!!`)
@@ -193,27 +193,6 @@ class TeachersControllers extends AlertService {
             const pswd = name.toLowerCase().split(" ")[0] + '@' + Math.floor(Math.random() * 1000);
             const encyPswd = await INSTANCE_OF_PSWD.passwordEncrypt(pswd);
             return {encyPswd, pswd}
-        }catch(err){
-            return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
-        }
-    };
-
-    private sendCredentialsByEmail = async(res: Response, name: string, userName: string, password: string, email: string): Promise<boolean | any> =>{
-        try{
-            const toEmail = email;
-            const subject: string = '🪬Your Account Credential from elearn SoftTech Pvt. Ltd';
-            const messagehtml = `
-                <p>Dear ${name},</p>
-                <p>Your account has been created successfully. Below are your login Credential:</p>
-                <p><strong>Username:</strong> <span style="color: #007DFC">${userName}</span></p>
-                <p><strong>Password:</strong> <span style="color: #007DFC">${password}</span></p>
-                <p>Please keep this information safe and secure.</p><br><br>
-                <p style="color: #007DFC">Best regards,</p>
-                <p style="color: #007DFC">elearn SoftTech Pvt. Ltd</p>
-                <p style="color: #007DFC">Address: WMGV+P43, Varthur Main Rd, Devarabisanahalli, Uttarahalli Hobli, Bengaluru, Karnataka 560103</p>`
-    
-            const sent = await INSTANCE_OF_MAIL.newSmtpMail(toEmail, subject, messagehtml)
-            return sent ? true : false;
         }catch(err){
             return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
         }

@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import {ObjectId} from 'mongodb';
-import { PipelineStage } from 'mongoose';
+import mongoose, { PipelineStage } from 'mongoose';
 import jwt, { TokenExpiredError } from "jsonwebtoken";
 import AlertService from "../../../helpers/AlertService";
 import asyncHandler from "../../../utils/asyncHandler";
@@ -52,7 +52,7 @@ class StudentTempControllers extends AlertService {
         return this.sendSuccessResponse(res, true, "OTP has sent on your email !!", {token, regisData});
     });
 
-    public TempStudentAdd = asyncHandler(async(req: Request, res: Response): Promise<any>=>{
+    public TempStudentAdd = asyncHandler(async(req: Request, res: Response, next: NextFunction, session?: mongoose.ClientSession): Promise<any>=>{
         const {OTP, TOKEN, formData} = req.body;
         const otpStatus = await this.OTPverified(res, OTP, TOKEN);
         if(otpStatus){
@@ -66,7 +66,7 @@ class StudentTempControllers extends AlertService {
                course: courseList,  
                address: address,
             });
-            await studentData.save()
+            await studentData.save({ session })
             .then(saveData =>{
                 const emailSent = new EmailSetupService().sendEmailForRegistered(res, name, email);
                 if(!emailSent)

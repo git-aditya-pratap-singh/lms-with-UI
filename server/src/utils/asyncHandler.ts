@@ -27,7 +27,8 @@ const asyncHandler = (func: (req: Request, res: Response, next: NextFunction, se
             await session.commitTransaction();
         } catch (err) {
             await session.abortTransaction();
-            new AlertService().sendServerErrorResponse(res, false, `SERVER_ERROR!! ${err}`);
+            session.endSession();
+            return new AlertService().sendServerErrorResponse(res, false, `SERVER_ERROR!! ${err}`);
         } finally {
             session.endSession();
         }

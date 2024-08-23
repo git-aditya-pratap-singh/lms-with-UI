@@ -32,7 +32,7 @@ class ProfileControllers extends AlertService {
                gender: gender,
                address: address
             }},
-            {upsert: true, new: true, session: session}
+            {upsert: true, new: true, session}
         )
         if(updateDetails === null)
             return this.sendErrorResponse(res, false, "Data not be Updated!!");
