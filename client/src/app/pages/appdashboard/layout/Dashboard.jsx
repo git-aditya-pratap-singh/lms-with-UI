@@ -26,7 +26,6 @@ const Dashboard = () => {
   const [auth, setAuth] = useAuthGuard();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(notifyPopup)
 
   const pathnames = location.pathname.split('/').filter((x) => x);
   const locationPaths = pathnames.map((item, index) => index === pathnames.length - 1 ? toTitleCase(item) : toTitleCase(`${item} /`));

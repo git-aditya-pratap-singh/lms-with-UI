@@ -5,10 +5,6 @@ import Select from 'react-select'
 import { registration_popup, registration_otp_popup, registration_Data } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase";
 import Apiauth from "../../_api/auth/Apiauth.service";
-
-import Form from "../../components/form/Form";
-import FORM from "../../components/form/constants";
-
 import { BiLogInCircle } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
@@ -17,7 +13,6 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import "../../../assets/css/home/_registration.scss";
 
 const Registration = () => {
-  console.log(FORM)
 
   const CourseList = useLoaderData();
   const dispatch = useDispatch();
@@ -195,16 +190,18 @@ const Registration = () => {
               </div>
               {error.gender && <label className="text-red-500 text-sm -mt-3">{error.gender}</label>}
             </div>
-
+            
             <button>
               <BiLogInCircle />
               Submit
             </button>
+            
           </form>
+          
         </div>
-      
+        
 
-      <Form forms={FORM}/>
+      
       </section>
     </>
   );

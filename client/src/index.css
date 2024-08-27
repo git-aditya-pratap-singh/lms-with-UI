@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+    
+}
+  
+body{
+  overflow-x: hidden;
+  font-size: 16px;
+  font-family: var(--fontStyle);
+  background-color: var(--background);
+    
+}
 
 @layer base{
   :root{
@@ -32,6 +46,7 @@
 
     --slide-down: slide-down 0.7s cubic-bezier(0.215, 0.610, 0.355, 1);
     --fade-in: fade-in 1s ease-in-out forwards;
+    --zigzag: zigzag 0.5s ease-in-out;
 
   }
 }
@@ -129,18 +144,4 @@
   }
 }
 
-  
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-    
-}
-  
-body{
-  overflow-x: hidden;
-  font-size: 16px;
-  font-family: var(--fontStyle);
-  background-color: var(--background);
-    
-}
+

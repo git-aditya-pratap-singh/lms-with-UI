@@ -4,7 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
 import { img_update_popup } from "../../redux/Slices/StateSlice";
-import  AboutShimmersLoad from "../../components/shimmers/AboutShimmers";
+//import  AboutShimmersLoad from "../../components/shimmers/AboutShimmers";
 //import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 import toTitleCase from "../../common/titleCase";
 import DateFormet from "../../common/dateFormet";
@@ -36,7 +36,7 @@ const Profile_admin = () => {
 
     //const [auth, setAuth] = useAuthGuard();
     const userprofileData = useLoaderData();
-    //const loading = lazy(()=> import('../../components/shimmers/AboutShimmers'));
+    const AboutShimmersLoad = lazy(()=> import('../../components/shimmers/AboutShimmers'));
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -79,9 +79,11 @@ const Profile_admin = () => {
         }
     }, [userprofileData]);
 
+    console.log(formData)
+
     return (
         <>
-        {formData != '' ? (
+        <Suspense fallback={<AboutShimmersLoad/>}>
             <section className="_container1">
                 <div className="_subContainer11">
                     <div className="_profile">
@@ -204,8 +206,7 @@ const Profile_admin = () => {
                 </div>
                 <ImgUpdate />
             </section>
-        ) : <AboutShimmersLoad/>
-}
+        </Suspense>
         </>
     )
 }

@@ -10,7 +10,6 @@ const FORM = [{
 {
     id: 'pswd',
     label: 'Password',
-
 }
 ]
 export default FORM;
