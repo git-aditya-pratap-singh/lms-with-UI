@@ -6,6 +6,7 @@ import { login_popup, otp_popup, user_login_popup } from "../../redux/Slices/Sta
 import { useNavigate } from "react-router-dom";
 import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 import Apiauth from "../../_api/auth/Apiauth.service";
+import loginStructure from "../../validation/loginForm/loginStructure";
 
 //-------------ICON--------------------
 import { FaGithub, FaLinkedinIn, FaFingerprint } from "react-icons/fa";
@@ -17,6 +18,12 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import "../../../assets/css/home/_login.scss";
 
 const Login = () => {
+
+  const IconComponents = {
+    MdOutlineAlternateEmail,
+    FaFingerprint
+    // Add more icons here as needed
+  };
 
   const dispatch = useDispatch();
   const [auth, setAuth] = useAuthGuard();
@@ -110,7 +117,23 @@ const Login = () => {
           <p>Choose one of the option to go.</p>
           <form className="_form" onSubmit={handleSubmit}>
 
-            <span>
+            {loginStructure.map((items, index)=>{
+              console.log(IconComponents[items.icon])
+              return(
+              <span key={index}>
+              <input
+                type={items.type}
+                name={items.name}
+                placeholder={items.placeholder}
+                autoComplete={items.autoComplete}
+              />
+              <label>
+                { IconComponents[ items.icon] && <IconComponents />} 
+              </label>
+            </span>
+            )})}
+
+            {/* <span>
               <input
                 type="text"
                 placeholder="enter username/email..."
@@ -135,7 +158,7 @@ const Login = () => {
               <label>
                 <FaFingerprint />
               </label>
-            </span>
+            </span> */}
 
             <button>
               <BiLogInCircle />
