@@ -18,11 +18,12 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import "../../../assets/css/home/_login.scss";
 
 const Login = () => {
-
+  const UserIcon = () => <MdOutlineAlternateEmail/>
+  const LockIcon = () => <FaFingerprint/>
   const IconComponents = {
-    MdOutlineAlternateEmail,
-    FaFingerprint
-    // Add more icons here as needed
+    userIcon: UserIcon,
+    pswdIcon: LockIcon,
+    // Add other icon components here
   };
 
   const dispatch = useDispatch();
@@ -118,7 +119,7 @@ const Login = () => {
           <form className="_form" onSubmit={handleSubmit}>
 
             {loginStructure.map((items, index)=>{
-              console.log(IconComponents[items.icon])
+              const IconComponent = IconComponents[items.icon];
               return(
               <span key={index}>
               <input
@@ -128,7 +129,7 @@ const Login = () => {
                 autoComplete={items.autoComplete}
               />
               <label>
-                { IconComponents[ items.icon] && <IconComponents />} 
+              {IconComponent && <IconComponent />}
               </label>
             </span>
             )})}

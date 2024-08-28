@@ -30,8 +30,6 @@ import OtpRegistrationLayout from './OtpRegistrationLayout';
 import "../../../assets/css/home/_home.scss";
 import Data from "../../Data/Data.json";
 
-import Forms from "../../components/form/Forms";
-import FORM from "../..//components/form/constants";
 
 const iconComponents = {
     FaGraduationCap,
@@ -89,7 +87,6 @@ const Home = () => {
                     <img src={header} className="_img" />
                 </div>
             </section>
-            <Forms forms={FORM}/>
             <Carrier />
             <Trained />
             <MasterSkills />
