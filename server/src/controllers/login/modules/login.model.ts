@@ -16,8 +16,8 @@ const INSTANCE_OF_MAIL = new EmailSetupService();
 class LoginControllers extends AlertService{
 
     public Login = asyncHandler(async(req: Request, res: Response ): Promise<any> =>{
-        const {username, password} = req.body;
-        const userValid = await this.GetuserByloginPass(username.toLowerCase());
+        const {email, password} = req.body;
+        const userValid = await this.GetuserByloginPass(email.toLowerCase());
         if(!userValid)
             return this.sendErrorResponse(res, false, "User not found !!");
         if(userValid.status !== 'Enabled')
