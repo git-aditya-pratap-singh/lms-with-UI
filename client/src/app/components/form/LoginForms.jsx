@@ -1,24 +1,19 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { login_popup, otp_popup, user_login_popup } from "../../redux/Slices/StateSlice";
-import { useNavigate } from "react-router-dom";
 import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 import Apiauth from "../../_api/auth/Apiauth.service";
 import { validateForm } from "../../validation/validate";
-
+import InputField from "../FormComponents/InputField";
 //-------------ICON--------------------
 import IconComponent from "../../../assets/icons/IconComponent";
-import { FaGithub, FaLinkedinIn, FaFingerprint } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-import { BiLogInCircle } from "react-icons/bi";
-import { RxCross1 } from "react-icons/rx";
-import { MdOutlineAlternateEmail } from "react-icons/md";
 //--------------CSS--------------------
 import "../../../assets/css/home/_login.scss";
 
 const LoginForms = ({forms, schema}) => {
-
+  
     const dispatch = useDispatch();
     const [auth, setAuth] = useAuthGuard();
     const navigate = useNavigate();
@@ -91,7 +86,7 @@ return (
           </div>
 
           <h3 onClick={() => dispatch(login_popup(false))}>
-            <RxCross1 />
+            <IconComponent iconType="crossIcon"/>
           </h3>
           <h1>Welcome Back!</h1>
           <p>Choose one of the option to go.</p>
@@ -99,85 +94,53 @@ return (
           <form className="_form" onSubmit={handleSubmit}>
             {forms.map((items, index)=>{
               return(
-              <span key={index}>
-              <input
-                type={items.type || 'text'}
-                name={items.name}
-                placeholder={items.placeholder}
-                autoComplete={items.autoComplete || 'on'}
-              />
-              <label>
-                <IconComponent {...items.icon}/>
-              </label>
-            </span>
-            )})}
-
-            {/* <span>
-              <input
-                type="text"
-                placeholder="enter username/email..."
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-              />
-              <label>
-                <MdOutlineAlternateEmail />
-              </label>
-            </span>
-
-            <span>
-              <input
-                type="password"
-                autoComplete="off"
-                placeholder="enter password..."
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <label>
-                <FaFingerprint />
-              </label>
-            </span> */}
-
-            <button>
-              <BiLogInCircle />
-              login
-            </button>
+                <InputField
+                  key={index}
+                  type={items.type}
+                  name={items.name}
+                  placeholder={items.placeholder}
+                  autoComplete={items.autoComplete}
+                  icon={items.icon}
+                />
+              )
+            })}
+            <button><IconComponent iconType="loginIcon"/>login</button>
           </form>
 
           <div className="flex justify-start items-center">
             <label>
               <label className="text-[var(--primary)] cursor-pointer text-[0.8rem] underline hover:text-green-500"
-                onClick={() => dispatch(user_login_popup(true))}
-              >Are you students/Teachers</label>
+                onClick={() => dispatch(user_login_popup(true))}>
+                Are you students/Teachers</label>
             </label>
           </div>
 
           <div className="flex justify-between items-center -mt-2">
             <label>
               <label className="text-red-500 cursor-pointer text-[0.8rem] underline hover:text-red-400"
-                onClick={() => dispatch(otp_popup({ check: true, key: "forgetPswdOtp" }))}
-              >forget password</label>
+                onClick={() => dispatch(otp_popup({ check: true, key: "forgetPswdOtp" }))}>
+                forget password</label>
             </label>
             <label>
               <label className="text-[var(--primary)] hover:text-green-500 cursor-pointer text-[0.8rem] underline"
-                onClick={() => dispatch(otp_popup({ check: true, key: "otpLogin" }))}
-              >Login via OTP</label>
+                onClick={() => dispatch(otp_popup({ check: true, key: "otpLogin" }))}>
+                Login via OTP</label>
             </label>
           </div>
 
           <span className="-mt-3">
             <p>or Continue with</p>
           </span>
+
           <div className="_loginIcon">
             <span>
-              <FcGoogle size={20} />
+              <IconComponent iconType="googleIcon"/>
             </span>
             <span>
-              <FaLinkedinIn size={20} color="#007DFC" />
+              <IconComponent iconType="linkedInIcon"/>
             </span>
             <span>
-              <FaGithub size={20} className="text-gray-700"/>
+              <IconComponent iconType="githubIcon"/>
             </span>
           </div>
         </div>

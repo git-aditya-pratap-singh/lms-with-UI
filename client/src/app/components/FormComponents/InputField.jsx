@@ -1,0 +1,28 @@
+import PropTypes from 'prop-types';
+import IconComponent from "../../../assets/icons/IconComponent";
+
+const InputField = ({type = 'text', name, placeholder, autoComplete = 'off', icon }) => {
+  return (
+    <span>
+        <input
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            autoComplete={autoComplete}
+        />
+        <label>
+            <IconComponent iconType={icon}/>
+        </label>
+    </span>
+  );
+};
+
+InputField.propTypes = {
+  type: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  autoComplete: PropTypes.string,
+  icon: PropTypes.elementType, // For rendering icon components
+};
+
+export default InputField;
