@@ -11,8 +11,8 @@ import { FaAngleDoubleUp } from "react-icons/fa";
 import Login from "./Login";
 import UserLogin from "./UserLogin";
 import OtpLayout from "./OtpLayout";
-
 import Footer from "./Footer";
+
 import "../../../assets/css/home/_navbar.scss";
 
 const Navbar = () => {

@@ -1,6 +1,8 @@
 
 import PropTypes from 'prop-types';
-import { FaGithub, FaLinkedinIn, FaFingerprint, FaUser, FaPhoneAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaFingerprint, FaUser, FaPhoneAlt, FaLaptopCode, FaChalkboardTeacher,FaChrome } from 'react-icons/fa';
+import { FaArrowRotateLeft, FaBook, FaUsersLine } from "react-icons/fa6";
+import { BsLinkedin, BsGithub, BsYoutube } from "react-icons/bs";
 import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { BiLogInCircle } from 'react-icons/bi';
@@ -18,6 +20,15 @@ const IconComponent = ({ iconType }) => {
     githubIcon: <FaGithub size={20} className="text-gray-700" />,
     loginIcon: <BiLogInCircle />,
     crossIcon: <RxCross1 />,
+    arrowLeftIcon: <FaArrowRotateLeft/>,
+    laptopCodeIcon: <FaLaptopCode/>,
+    chalkBoardIcon: <FaChalkboardTeacher/>,
+    booksIcon: <FaBook/>,
+    userLineIcon: <FaUsersLine/>,
+    chromeIcon: <FaChrome/>,
+    xmLinkedinIcon: <BsLinkedin/>,
+    xmGithubIcon: <BsGithub/>,
+    xmYoutubeIcon: <BsYoutube/>
   };
   return icons[iconType] || null;
 };
@@ -33,7 +44,16 @@ IconComponent.propTypes = {
     'linkedInIcon', 
     'githubIcon', 
     'loginIcon', 
-    'crossIcon'
+    'crossIcon',
+    'arrowLeftIcon',
+    'laptopCodeIcon',
+    'chalkBoardIcon',
+    'booksIcon',
+    'userLineIcon',
+    'chromeIcon',
+    'xmLinkedinIcon',
+    'xmGithubIcon',
+    'xmYoutubeIcon'
   ]).isRequired,
 };
 

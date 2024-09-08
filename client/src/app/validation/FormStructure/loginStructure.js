@@ -9,7 +9,7 @@ const loginStructure = [
 },
 {
     type: 'password',
-    name: 'password',
+    name: 'pswd',
     placeholder: 'enter the password...',
     className: '',
     autoComplete: 'off',

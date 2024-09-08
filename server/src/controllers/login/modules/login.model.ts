@@ -16,13 +16,13 @@ const INSTANCE_OF_MAIL = new EmailSetupService();
 class LoginControllers extends AlertService{
 
     public Login = asyncHandler(async(req: Request, res: Response ): Promise<any> =>{
-        const {email, password} = req.body;
+        const {email, pswd} = req.body;
         const userValid = await this.GetuserByloginPass(email.toLowerCase());
         if(!userValid)
             return this.sendErrorResponse(res, false, "User not found !!");
         if(userValid.status !== 'Enabled')
             return this.sendErrorResponse(res, false, "User account not Activated !!");
-        const pswdMatch: boolean = await AUTH_PASSWORD.passwordDecrypt(password, userValid.password);
+        const pswdMatch: boolean = await AUTH_PASSWORD.passwordDecrypt(pswd, userValid.password);
         if (!pswdMatch) 
             return this.sendErrorResponse(res, false, "Invalid Password !!");
         const token: string = await this.createJWTToken(userValid);

@@ -1,6 +1,6 @@
 import RegistrationForms from "../../components/form/RegistrationForms";
 import RegisterStructure from "../../validation/FormStructure/RegisterStructure"; 
-import validateSchema from "../../validation/validate";
+import validateSchema from "../../validation/validateSchema";
 
-const Registration = () => {return <RegistrationForms forms={RegisterStructure} schema={validateSchema} />}
+const Registration = () => <RegistrationForms forms={RegisterStructure} schema={validateSchema} />
 export default Registration;

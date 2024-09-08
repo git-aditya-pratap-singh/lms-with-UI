@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { login_popup, otp_popup, user_login_popup } from "../../redux/Slices/StateSlice";
 import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 import Apiauth from "../../_api/auth/Apiauth.service";
-import { validateForm } from "../../validation/validate";
+import validateForm from "../../validation/validate";
 import InputField from "../FormComponents/InputField";
 //-------------ICON--------------------
 import IconComponent from "../../../assets/icons/IconComponent";
