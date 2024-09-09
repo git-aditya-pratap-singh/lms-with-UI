@@ -1,10 +1,10 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy, useLayoutEffect } from 'react';
 import PropTypes from "prop-types";
 import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
 import { img_update_popup } from "../../redux/Slices/StateSlice";
-//import  AboutShimmersLoad from "../../components/shimmers/AboutShimmers";
+import  AboutShimmersLoad from "../../components/shimmers/AboutShimmers";
 //import { useAuthGuard, storeTokenInStorage } from "../../_guard/auth.guard";
 import toTitleCase from "../../common/titleCase";
 import DateFormet from "../../common/dateFormet";
@@ -36,7 +36,7 @@ const Profile_admin = () => {
 
     //const [auth, setAuth] = useAuthGuard();
     const userprofileData = useLoaderData();
-    const AboutShimmersLoad = lazy(()=> import('../../components/shimmers/AboutShimmers'));
+    // const AboutShimmersLoad = lazy(()=> import('../../components/shimmers/AboutShimmers'));
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -70,12 +70,12 @@ const Profile_admin = () => {
         }
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (userprofileData) {
             setFormData(prevFormData => ({
                 ...prevFormData,
                 ...userprofileData
-            }));
+            })); 
         }
     }, [userprofileData]);
 
@@ -83,8 +83,9 @@ const Profile_admin = () => {
 
     return (
         <>
-        <Suspense fallback={<AboutShimmersLoad/>}>
-            <section className="_container1">
+        <Suspense fallback={<h1>Hi Baby</h1>}>
+        {formData.username ? 
+            (<section className="_container1">
                 <div className="_subContainer11">
                     <div className="_profile">
                         <img src={ag} alt="Error!" />
@@ -205,7 +206,7 @@ const Profile_admin = () => {
 
                 </div>
                 <ImgUpdate />
-            </section>
+            </section>) : <AboutShimmersLoad/> }
         </Suspense>
         </>
     )
