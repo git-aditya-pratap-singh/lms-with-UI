@@ -77,7 +77,7 @@ const Profile_admin = () => {
                 ...userprofileData
             })); 
         }
-    }, [userprofileData]);
+    }, [formData.name, userprofileData]);
 
     console.log(formData)
 
