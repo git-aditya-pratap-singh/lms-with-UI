@@ -124,23 +124,97 @@ class StudentsControllers extends AlertService {
 
     public downloadExcelSheet = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
         const fetchStudentsInfo = await studentsDB.find();
+
         const getDownloadsFolder = () => path.join(os.homedir(), 'Downloads');
-        console.log(getDownloadsFolder())
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet('Sheet1');
-      
-        // Define columns
-        worksheet.columns = [
-          { header: 'Name', key: 'name', width: 20 },
-          { header: 'Age', key: 'age', width: 10 },
-          { header: 'Occupation', key: 'occupation', width: 30 },
-        ];
-      
-        // Add rows
-        worksheet.addRows(fetchStudentsInfo);
+
+          // Define columns
+     worksheet.columns = [
+        { header: 'Name', key: 'name', width: 20 },
+        { header: 'Age', key: 'age', width: 20 },
+        { header: 'Occupation', key: 'occupation', width: 30 },
+      ];
+
+        worksheet.mergeCells('A1:M1');
+        const headerCell = worksheet.getCell('A1');
+        headerCell.value = 'StudentDetails';
+
+        const headerSecCellDate = worksheet.getCell('A2'); 
+        headerSecCellDate.value = `Date: ${new Date().toISOString().split('T')[0]}`;
+
+        const headerSecCellTime = worksheet.getCell('B2');
+        headerSecCellTime.value = `Time: ${new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
+
+        const headerSecCellFilter = worksheet.getCell('C2');
+        headerSecCellFilter.value = `Filter: All`;
+
+        // Style the header cell
+        headerCell.font = { 
+            size: 24,
+            bold: true, 
+            color: { argb: 'FFFFFFFF' } // White text
+        };
+        headerCell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: '0558FF' } // Blue background
+        };
+        headerCell.alignment = { 
+            vertical: 'middle', 
+            horizontal: 'center',
+            wrapText: true 
+        };
+
+        // Style the header cell
+        headerSecCellDate.font = { 
+            size: 10,
+            bold: true, 
+            color: { argb: '262626' } // White text
+        };
+        headerSecCellDate.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'B7DEE8' } // Blue background
+        };
+        headerSecCellDate.alignment = { 
+            vertical: 'middle', 
+            horizontal: 'center',
+            wrapText: true 
+        };
+
+        // Style the header cell
+        headerSecCellTime.font = { 
+            size: 10,
+            bold: true, 
+            color: { argb: '262626' } // White text
+        };
+        headerSecCellTime.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'B7DEE8' } // Blue background
+        };
+        headerSecCellTime.alignment = { 
+            vertical: 'middle', 
+            horizontal: 'center',
+            wrapText: true 
+        };
+
+
+
+
+
+        worksheet.getRow(1).height = 40;
+
+   
+
+      // Add rows
+      worksheet.addRows(fetchStudentsInfo);
+        
+       
       
         // Style the header row: Set background color and font
-        worksheet.getRow(1).eachCell((cell) => {
+        worksheet.getRow(3).eachCell((cell) => {
           cell.font = { bold: true, color: { argb: 'FFFFFFFF' } }; // White text
           cell.fill = {
             type: 'pattern',
@@ -151,20 +225,20 @@ class StudentsControllers extends AlertService {
         });
       
         // Merge columns A1 and B1 (or any range you want to merge)
-        worksheet.mergeCells('A1:B1');
+       
       
-        // Apply background color to a specific column (e.g., Column C)
-        worksheet.getColumn('C').eachCell({ includeEmpty: true }, (cell) => {
-          cell.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'FFFF00FF' }, // Yellow background for column C
-          };
-        });
+        // // Apply background color to a specific column (e.g., Column C)
+        // worksheet.getColumn('C').eachCell({ includeEmpty: true }, (cell) => {
+        //   cell.fill = {
+        //     type: 'pattern',
+        //     pattern: 'solid',
+        //     fgColor: { argb: 'FFFF00FF' }, // Yellow background for column C
+        //   };
+        // });
       
         // Save the Excel file to the Downloads folder
         const downloadsFolder = getDownloadsFolder();
-        const filePath = path.join(__dirname, '../../../upload', 'styled_data.xlsx');
+        const filePath = path.join(downloadsFolder, 'StudentLists.xlsx');
         
         // Write the workbook to the file
         await workbook.xlsx.writeFile(filePath);

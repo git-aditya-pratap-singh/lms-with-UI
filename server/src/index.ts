@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import path from 'path';
 import dotenv from "dotenv";
 import DatabaseConnection from './config/dbConnection';
 import authRouter from './routes/auth.routes';
@@ -17,6 +18,8 @@ app.use(express.static("../dist/public"))
 
 app.use(cookieParser())
 app.use(bodyParser.json());
+
+app.use('/uploads', express.static(path.join(__dirname, 'upload')));
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
