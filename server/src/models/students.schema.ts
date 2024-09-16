@@ -58,6 +58,10 @@ const studentSchema: Schema<IStudents> = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    registeredMonth: {
+        type: String,
+        default: new Date().toLocaleString('en-US', { month: 'long' })
     }
 });
 

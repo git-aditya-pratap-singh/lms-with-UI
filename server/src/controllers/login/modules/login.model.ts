@@ -26,7 +26,14 @@ class LoginControllers extends AlertService{
         if (!pswdMatch) 
             return this.sendErrorResponse(res, false, "Invalid Password !!");
         const token: string = await this.createJWTToken(userValid);
-        return this.sendSuccessResponseToken(res, true, "You have successfully logged in !!", {userValid, token});
+
+        const UserInfo = {
+            name: userValid.name,
+            designation: userValid.designation,
+            accessType: userValid.hasAllAccess
+        }
+
+        return this.sendSuccessResponseToken(res, true, "You have successfully logged in !!", {UserInfo, token});
     });
 
 

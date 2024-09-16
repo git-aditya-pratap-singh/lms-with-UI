@@ -1,4 +1,8 @@
 import { NextFunction, Request, Response } from "express";
+import ExcelJS from 'exceljs';
+import path from 'path';
+import fs from 'fs';
+import os from 'os';
 import {ObjectId} from 'mongodb';
 import mongoose, { PipelineStage } from 'mongoose';
 import AlertService from '../../../helpers/AlertService';
@@ -116,6 +120,57 @@ class StudentsControllers extends AlertService {
         return updateStudentData
             ? this.sendSuccessResponse(res, true, `Student Credential Updated!!`)
             : this.sendErrorResponse(res, false, `Failed to update student Credential !!`);
+    });
+
+    public downloadExcelSheet = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
+        const fetchStudentsInfo = await studentsDB.find();
+        const getDownloadsFolder = () => path.join(os.homedir(), 'Downloads');
+        console.log(getDownloadsFolder())
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Sheet1');
+      
+        // Define columns
+        worksheet.columns = [
+          { header: 'Name', key: 'name', width: 20 },
+          { header: 'Age', key: 'age', width: 10 },
+          { header: 'Occupation', key: 'occupation', width: 30 },
+        ];
+      
+        // Add rows
+        worksheet.addRows(fetchStudentsInfo);
+      
+        // Style the header row: Set background color and font
+        worksheet.getRow(1).eachCell((cell) => {
+          cell.font = { bold: true, color: { argb: 'FFFFFFFF' } }; // White text
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FF0000FF' }, // Blue background
+          };
+          cell.alignment = { vertical: 'middle', horizontal: 'center' };
+        });
+      
+        // Merge columns A1 and B1 (or any range you want to merge)
+        worksheet.mergeCells('A1:B1');
+      
+        // Apply background color to a specific column (e.g., Column C)
+        worksheet.getColumn('C').eachCell({ includeEmpty: true }, (cell) => {
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFF00FF' }, // Yellow background for column C
+          };
+        });
+      
+        // Save the Excel file to the Downloads folder
+        const downloadsFolder = getDownloadsFolder();
+        const filePath = path.join(__dirname, '../../../upload', 'styled_data.xlsx');
+        
+        // Write the workbook to the file
+        await workbook.xlsx.writeFile(filePath);
+      
+        return this.sendSuccessResponse(res, true, "Credentials Added Successfully!!");
+
     });
 
     // credentialCheck = async(email: string, phone: string, res: Response): Promise<any> =>{

@@ -44,6 +44,16 @@ class Apiadmin extends BaseControllerResponse {
         }
     }
 
+    downloadExcelSheetforStudents = async()=>{
+        try {
+            const response = await new ApiService().get('/dashboard/students/downloadExcelSheet');
+            this.handleResponse(response);
+            return response;
+        } catch (err) {
+            return this.handleResponse(err);
+        }
+    }
+
 }
 
 export default Apiadmin;

@@ -36,7 +36,7 @@ const LoginForms = ({forms, schema}) => {
             storeTokenInStorage(apiResponse.data);
             setAuth({
                 ...auth,
-                user: apiResponse.data.userValid,
+                user: apiResponse.data.UserInfo,
                 token: apiResponse.data.token,
             });
             dispatch(login_popup(false));

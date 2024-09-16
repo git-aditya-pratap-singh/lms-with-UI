@@ -68,7 +68,7 @@ const router = createBrowserRouter([
                 index: true,
                 path: "/dashboard/home",
                 element: <UHome />,
-               // loader: new ApiRoutesCall().homePageRoutesApiCall
+                loader: new ApiRoutesCall().homePageRoutesApiCall
             },
             {
                 path: "/dashboard/profile",

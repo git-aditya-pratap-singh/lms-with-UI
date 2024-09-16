@@ -18,9 +18,9 @@ import Teachers from "../../../assets/img/totalTea.png";
 import Courses from "../../../assets/img/totalCourse.png";
 import Trannings from "../../../assets/img/totalTrann.png";
 
-import Data from "../../Data/Data.json";
 import "../../../assets/css/admin/_home.scss";
 import { useAuthGuard } from "../../_guard/auth.guard";
+import { useLoaderData } from 'react-router-dom';
 
 
 const boxiconComponents = {
@@ -73,14 +73,43 @@ const dataa = [
 const Home_admin = () => {
   const [value, setValue] = useState(dayjs('2022-04-17'));
   const [auth, setAuth] = useAuthGuard();
-  console.log("HOME",auth)
+  const dashboardInfo = useLoaderData();
+  console.log(dashboardInfo)
+
+  const dashboardDetails = [
+        {
+            "id" : 35,
+            "icon" : "Students",
+            "heading" : "Total Students",
+            "info" : `${dashboardInfo.totalStudent} Students`
+        },
+        {
+            "id" : 36,
+            "icon" : "Teachers",
+            "heading" : "Total Teachers",
+            "info" : `${dashboardInfo.totalTeacher} Teachers`
+        },
+        {
+            "id" : 37,
+            "icon" : "Courses",
+            "heading" : "Total Courses",
+            "info" : `${dashboardInfo.totalCourse} Courses`
+        },
+        {
+            "id" : 38,
+            "icon" : "Trannings",
+            "heading" : "Total Trannings",
+            "info" : "47 Trannings"
+        }
+    ]
+  
 
   return (
     <>
       <section className="_homeHeader">
         <div className="_homeNav">
           {
-            Data.dashboard_boxModel.map((item, index) => {
+            dashboardDetails.map((item, index) => {
               return (
                 <Containerbox {...item} key={index} />
               )
@@ -92,7 +121,7 @@ const Home_admin = () => {
             <ChartOne/>
           </div>
           <div className="_pieChart">
-            <ChartTwo/>
+            <ChartTwo {...dashboardInfo}/>
           </div>
         </div>
 

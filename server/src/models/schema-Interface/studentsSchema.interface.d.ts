@@ -13,4 +13,5 @@ export default interface IStudents extends Document {
     imgUrl: string;
     last_login: Date;
     admin_logs: string;
+    registeredMonth: string;
 }

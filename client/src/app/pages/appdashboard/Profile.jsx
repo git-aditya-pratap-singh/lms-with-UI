@@ -70,7 +70,7 @@ const Profile_admin = () => {
         }
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (userprofileData) {
             setFormData(prevFormData => ({
                 ...prevFormData,
@@ -78,8 +78,6 @@ const Profile_admin = () => {
             })); 
         }
     }, [formData.name, userprofileData]);
-
-    console.log(formData)
 
     return (
         <>

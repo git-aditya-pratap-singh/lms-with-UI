@@ -44,10 +44,10 @@ const options= {
   ],
 };
 
-const ChartTwo = () => {
-  const [state, setState] = useState({
-    series: [10, 15, 12, 5],
-  });
+const ChartTwo = (props) => { 
+
+  const percentageList = Object.keys(props).map((items) => Math.floor((props[items] * 100) / (props.totalStudent + props.totalTeacher)))
+  const [state, setState] = useState({series: Object.values(props)});
 
   const handleReset = () => {
     setState((prevState) => ({
@@ -107,7 +107,7 @@ const ChartTwo = () => {
             <span className="mr-2 block h-5 w-6 rounded-full bg-primary"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black">
               <span> Students </span>
-              <span> 65% </span>
+              <span> {percentageList[0]}% </span>
             </p>
           </div>
         </div>
@@ -116,7 +116,7 @@ const ChartTwo = () => {
             <span className="mr-2 block h-5 w-6 rounded-full bg-[#6577F3]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black ">
               <span> Teachers </span>
-              <span> 34% </span>
+              <span> {percentageList[1]}% </span>
             </p>
           </div>
         </div>

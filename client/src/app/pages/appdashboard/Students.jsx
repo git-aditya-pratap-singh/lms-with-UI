@@ -2,12 +2,12 @@
 import { add_student_popup } from "../../redux/Slices/StateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoaderData } from 'react-router-dom';
+import Table from "../../components/students/Table";
+import AddForm from "../../components/students/StudentForm";
+import Apiadmin from "../../_api/admin/Apiadmin.service";
 
 import { FaUserPlus, FaDownload  } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-
-import Table from "../../components/students/Table";
-import AddForm from "../../components/students/StudentForm";
 
 import "../../../assets/css/admin/_students.scss";
 
@@ -16,6 +16,11 @@ const Students = () => {
     const dispatch = useDispatch();
     const studentsPopup = useSelector((store) => store.openPopup.add_student_popup);
     const itemList = useLoaderData();
+
+    const DownloadToExcelSheet = async() =>{
+        const download = await new Apiadmin().downloadExcelSheetforStudents();
+
+    }
 
     return (
         <>
@@ -44,7 +49,8 @@ const Students = () => {
                                 <FaUserPlus  className="text-green-600" /></button>
 
                         <button className="_bt bg-red-100 text-red-500"><MdDelete /></button>
-                        <button className="_bt bg-blue-100 text-blue-500"><FaDownload/></button>
+                        <button className="_bt bg-blue-100 text-blue-500" title="Download to Excel"
+                        onClick={DownloadToExcelSheet}><FaDownload/></button>
                         
                     </div>
 
