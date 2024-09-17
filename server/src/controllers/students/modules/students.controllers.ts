@@ -118,23 +118,25 @@ class StudentsControllers extends AlertService {
             {new: true, session}
         );
         return updateStudentData
-            ? this.sendSuccessResponse(res, true, `Student Credential Updated!!`)
+            ? this.sendSuccessResponse(res, true, `Student Credential Updated !!`)
             : this.sendErrorResponse(res, false, `Failed to update student Credential !!`);
     });
 
     public downloadExcelSheet = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
         const fetchStudentsInfo = await studentsDB.find();
 
-        const getDownloadsFolder = () => path.join(os.homedir(), 'Downloads');
+        const getDownloadsFolder = () => path.join(os.homedir(), 'Documents');
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet('Sheet1');
 
-          // Define columns
-     worksheet.columns = [
-        { header: 'Name', key: 'name', width: 20 },
-        { header: 'Age', key: 'age', width: 20 },
-        { header: 'Occupation', key: 'occupation', width: 30 },
-      ];
+        // Define columns
+        worksheet.columns = [
+            { header: 'Name', width: 20 },
+            { header: 'Age', width: 20 },
+            { header: 'Occupation', width: 30 },
+        ];
+
+
 
         worksheet.mergeCells('A1:M1');
         const headerCell = worksheet.getCell('A1');
@@ -149,97 +151,34 @@ class StudentsControllers extends AlertService {
         const headerSecCellFilter = worksheet.getCell('C2');
         headerSecCellFilter.value = `Filter: All`;
 
-        // Style the header cell
-        headerCell.font = { 
-            size: 24,
-            bold: true, 
-            color: { argb: 'FFFFFFFF' } // White text
-        };
-        headerCell.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: '0558FF' } // Blue background
-        };
-        headerCell.alignment = { 
-            vertical: 'middle', 
-            horizontal: 'center',
-            wrapText: true 
-        };
+        worksheet.mergeCells('D2:M2');
 
-        // Style the header cell
-        headerSecCellDate.font = { 
-            size: 10,
-            bold: true, 
-            color: { argb: '262626' } // White text
-        };
-        headerSecCellDate.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'B7DEE8' } // Blue background
-        };
-        headerSecCellDate.alignment = { 
-            vertical: 'middle', 
-            horizontal: 'center',
-            wrapText: true 
-        };
+        // Freeze the first row (header row)
+        worksheet.views = [
+            { state: 'frozen', ySplit: 2 } // This freezes the first row
+        ];
 
-        // Style the header cell
-        headerSecCellTime.font = { 
-            size: 10,
-            bold: true, 
-            color: { argb: '262626' } // White text
-        };
-        headerSecCellTime.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'B7DEE8' } // Blue background
-        };
-        headerSecCellTime.alignment = { 
-            vertical: 'middle', 
-            horizontal: 'center',
-            wrapText: true 
-        };
+        // Styling for merged header cell
+        headerCell.font = { size: 24, bold: true, color: { argb: 'FFFFFFFF' } }; // White text
+        headerCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '0558FF' } }; // Blue background
+        headerCell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
 
-
-
-
-
+        // Styling for additional header cells
+        [headerSecCellDate, headerSecCellTime, headerSecCellFilter].forEach(cell => {
+            cell.font = { size: 10, bold: true, color: { argb: '262626' } }; // Black text
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'B7DEE8' } }; // Light blue background
+            cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+        });
         worksheet.getRow(1).height = 40;
 
-   
 
-      // Add rows
-      worksheet.addRows(fetchStudentsInfo);
-        
-       
-      
-        // Style the header row: Set background color and font
-        worksheet.getRow(3).eachCell((cell) => {
-          cell.font = { bold: true, color: { argb: 'FFFFFFFF' } }; // White text
-          cell.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'FF0000FF' }, // Blue background
-          };
-          cell.alignment = { vertical: 'middle', horizontal: 'center' };
-        });
-      
-        // Merge columns A1 and B1 (or any range you want to merge)
-       
-      
-        // // Apply background color to a specific column (e.g., Column C)
-        // worksheet.getColumn('C').eachCell({ includeEmpty: true }, (cell) => {
-        //   cell.fill = {
-        //     type: 'pattern',
-        //     pattern: 'solid',
-        //     fgColor: { argb: 'FFFF00FF' }, // Yellow background for column C
-        //   };
-        // });
-      
+
+        // Add rows
+        console.log(worksheet.addRows(fetchStudentsInfo));
         // Save the Excel file to the Downloads folder
         const downloadsFolder = getDownloadsFolder();
         const filePath = path.join(downloadsFolder, 'StudentLists.xlsx');
-        
+    
         // Write the workbook to the file
         await workbook.xlsx.writeFile(filePath);
       
