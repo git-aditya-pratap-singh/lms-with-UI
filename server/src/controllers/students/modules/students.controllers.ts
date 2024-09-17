@@ -127,16 +127,22 @@ class StudentsControllers extends AlertService {
 
         const getDownloadsFolder = () => path.join(os.homedir(), 'Documents');
         const workbook = new ExcelJS.Workbook();
-        const worksheet = workbook.addWorksheet('Sheet1');
+        workbook.creator = 'Aditya Pratap Singh';
+        workbook.lastModifiedBy = "Aditya Singh";
+        workbook.created = new Date();
+        const worksheet = workbook.addWorksheet('Students',{properties: {tabColor: {argb: '0558FF'}}});
 
         // Define columns
         worksheet.columns = [
-            { header: 'Name', width: 20 },
-            { header: 'Age', width: 20 },
-            { header: 'Occupation', width: 30 },
+            { header: 'Username', key: 'username', width: 25},
+            { header: 'Name', key: 'name', width: 25 },
+            { header: 'Email', key: 'email', width: 30 },
+            { header: 'Phone', key: 'phone', width: 14, style:{ alignment : { vertical: 'middle', horizontal: 'center' } }},
+            { header: 'Gender', key: 'gender', width: 8, style:{ alignment : { vertical: 'middle', horizontal: 'center' } }},
+            { header: 'Status', key: 'status', width: 10, style:{ alignment : { vertical: 'middle', horizontal: 'center' } }},
+            { header: 'Address', key: 'address', width: 30 },
+            { header: 'Course', key: 'course', width: 30 }
         ];
-
-
 
         worksheet.mergeCells('A1:M1');
         const headerCell = worksheet.getCell('A1');
@@ -155,12 +161,12 @@ class StudentsControllers extends AlertService {
 
         // Freeze the first row (header row)
         worksheet.views = [
-            { state: 'frozen', ySplit: 2 } // This freezes the first row
+            { state: 'frozen', ySplit: 3 } // This freezes the first row
         ];
 
         // Styling for merged header cell
         headerCell.font = { size: 24, bold: true, color: { argb: 'FFFFFFFF' } }; // White text
-        headerCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '0558FF' } }; // Blue background
+        headerCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '404040' } }; // Blue background
         headerCell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
 
         // Styling for additional header cells
@@ -170,19 +176,46 @@ class StudentsControllers extends AlertService {
             cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
         });
         worksheet.getRow(1).height = 40;
+    
+
+        const row = worksheet.getRow(3);
 
 
+        // worksheet.columns.map((items)=>{
+        //     console.log("------>>>",items._keys)
+        // })
+
+        // Create A Header Column Name-------------
+        const ColData = ['Username', 'Name', 'Email', 'Phone', 'Gender', 'Status', 'Address', 'Course'];
+        ColData.map((item,index)=>{
+            row.getCell(index+1).value = item
+            //row.width = 20;
+        })
+
+        worksheet.getRow(3).eachCell((cell) => {
+            cell.font = { bold: true, color: { argb: '404040' } }; // White text
+            cell.fill = {
+              type: 'pattern',
+              pattern: 'solid',
+              fgColor: { argb: 'FCD5B4' }, // Blue background
+            };
+            cell.alignment = { vertical: 'middle', horizontal: 'center' };
+          });
 
         // Add rows
-        console.log(worksheet.addRows(fetchStudentsInfo));
-        // Save the Excel file to the Downloads folder
+        worksheet.addRows(fetchStudentsInfo);
+    
+        //console.log(worksheet.lastRow)
+ 
+
+        //Save the Excel file to the Downloads folder
         const downloadsFolder = getDownloadsFolder();
-        const filePath = path.join(downloadsFolder, 'StudentLists.xlsx');
+        const filePath = path.join(downloadsFolder, `StudentLists_${new Date().toISOString().split('T')[0]}.xlsx`);
     
         // Write the workbook to the file
         await workbook.xlsx.writeFile(filePath);
       
-        return this.sendSuccessResponse(res, true, "Credentials Added Successfully!!");
+        return this.sendSuccessResponse(res, true, "ExcelSheet Downloaded !!");
 
     });
 
