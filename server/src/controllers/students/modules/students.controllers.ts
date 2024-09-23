@@ -123,14 +123,43 @@ class StudentsControllers extends AlertService {
     });
 
     public downloadExcelSheet = asyncHandler( async(req: Request, res: Response): Promise<any>=>{
+
         const fetchStudentsInfo = await studentsDB.find();
+        const studentList: PipelineStage[] = [
+            {
+              '$lookup': {
+                'from': 'courses', 'localField': 'course', 'foreignField': '_id', 
+                'as': 'selectedCourseList', 
+                'pipeline': [
+                  {'$match': {'status': {'$ne': 'Disabled'}} }
+                ]
+              }
+            }, {
+              '$addFields': {
+                'selectedCourseList': {
+                  '$map': {
+                    'input': '$selectedCourseList', 'as': 'selectedCourse', 
+                    'in': {'label': '$$selectedCourse.name'}
+                  }
+                }
+              }
+            },{'$sort': {'name': 1}}
+        ];
+        const response = await studentsDB.aggregate(studentList);
+      
+        const activeStatus =  fetchStudentsInfo.filter(items =>items.status.includes('Active'));
+        const inactiveStatus =  fetchStudentsInfo.filter(items =>items.status.includes('Inactive'));
+        const totalNo_ofStudent = fetchStudentsInfo.length;
+        const totalActiveStudent = activeStatus.length;
+        const totalInactiveStudent = inactiveStatus.length;
+       
 
         const getDownloadsFolder = () => path.join(os.homedir(), 'Documents');
         const workbook = new ExcelJS.Workbook();
         workbook.creator = 'Aditya Pratap Singh';
         workbook.lastModifiedBy = "Aditya Singh";
         workbook.created = new Date();
-        const worksheet = workbook.addWorksheet('Students',{properties: {tabColor: {argb: '0558FF'}}});
+        const worksheet = workbook.addWorksheet('Students', {properties: {tabColor: {argb: '0558FF'}}});
 
         // Define columns
         worksheet.columns = [
@@ -144,7 +173,7 @@ class StudentsControllers extends AlertService {
             { header: 'Course', key: 'course', width: 30 }
         ];
 
-        worksheet.mergeCells('A1:M1');
+        worksheet.mergeCells('A1:H1');
         const headerCell = worksheet.getCell('A1');
         headerCell.value = 'StudentDetails';
 
@@ -158,80 +187,110 @@ class StudentsControllers extends AlertService {
         headerSecCellFilter.value = `Filter: All`;
 
         worksheet.mergeCells('D2:M2');
-
-        // Freeze the first row (header row)
         worksheet.views = [
-            { state: 'frozen', ySplit: 3 } // This freezes the first row
+            { state: 'frozen', ySplit: 3 } // This freezes the first 3 row
         ];
 
         // Styling for merged header cell
-        headerCell.font = { size: 24, bold: true, color: { argb: 'FFFFFFFF' } }; // White text
-        headerCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '404040' } }; // Blue background
+        headerCell.font = { size: 24, bold: true, color: { argb: '002060' } }; 
+        headerCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'ffc7ce' } }; 
         headerCell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
 
-        // Styling for additional header cells
+        // Styling for additional Date, Time, Filter cells
         [headerSecCellDate, headerSecCellTime, headerSecCellFilter].forEach(cell => {
-            cell.font = { size: 10, bold: true, color: { argb: '262626' } }; // Black text
-            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'B7DEE8' } }; // Light blue background
+            cell.font = { size: 10, bold: false, color: { argb: 'fa7d00' } }; 
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'f2f2f2' } }; 
             cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+            cell.border = {
+                top: { style: 'thin', color: { argb: '7f7f7f' } },
+                left: { style: 'thin', color: { argb: '7f7f7f' } },
+                bottom: { style: 'thin', color: { argb: '7f7f7f' } },
+                right: { style: 'thin', color: { argb: '7f7f7f' } },
+            };
         });
         worksheet.getRow(1).height = 40;
     
-
         const row = worksheet.getRow(3);
-
-
-        // worksheet.columns.map((items)=>{
-        //     console.log("------>>>",items._keys)
-        // })
-
         // Create A Header Column Name-------------
         const ColData = ['Username', 'Name', 'Email', 'Phone', 'Gender', 'Status', 'Address', 'Course'];
         ColData.map((item,index)=>{
             row.getCell(index+1).value = item
-            //row.width = 20;
         })
 
         worksheet.getRow(3).eachCell((cell) => {
-            cell.font = { bold: true, color: { argb: '404040' } }; // White text
+            cell.font = { bold: true, color: { argb: '006100' } }; 
             cell.fill = {
               type: 'pattern',
               pattern: 'solid',
-              fgColor: { argb: 'FCD5B4' }, // Blue background
+              fgColor: { argb: 'c6efce' }, 
             };
             cell.alignment = { vertical: 'middle', horizontal: 'center' };
           });
 
-        // Add rows
-        worksheet.addRows(fetchStudentsInfo);
+        // Add all rows data ---------------
+        response.forEach(student => {
+            worksheet.addRow({
+              username: student.username,
+              name: student.name,
+              email: student.email,
+              phone: student.phone, 
+              gender: student.gender,
+              status: student.status,
+              address: student.address,
+              course: student.selectedCourseList.map((course: any) => 
+                course.label.charAt(0).toUpperCase() + course.label.slice(1).toLowerCase()).join(', ')  // Add course labels
+            });
+          });
+
     
-        //console.log(worksheet.lastRow)
- 
+        let lastRowNumber = 0;
+        worksheet.eachRow((row, rowNumber) => {
+          lastRowNumber = rowNumber;
+          return false;  // Breaks out of the loop once we find the last row
+        });
+
+        // Create Footer Cells ---------------------
+        worksheet.mergeCells(`A ${lastRowNumber+1} : B ${lastRowNumber+1}`);
+        const footerCelltotal = worksheet.getCell(`A ${lastRowNumber+1}`);
+        footerCelltotal.value = `Total Students : ${totalNo_ofStudent}`;
+        footerCelltotal.font = { size: 10, bold: false, color: { argb: '002060' } };
+        footerCelltotal.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'b6dde8' } }; 
+        footerCelltotal.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+
+        worksheet.mergeCells(`C ${lastRowNumber+1} : D ${lastRowNumber+1}`);
+        const footerCellActive = worksheet.getCell(`C ${lastRowNumber+1}`);
+        footerCellActive.value = `Total No. Of Active Students : ${totalActiveStudent}`;
+        footerCellActive.font = { size: 10, bold: false, color: { argb: '002060' } };
+        footerCellActive.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'b6dde8' } }; 
+        footerCellActive.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+
+        worksheet.mergeCells(`E ${lastRowNumber+1} : H ${lastRowNumber+1}`);
+        const footerCellInActive = worksheet.getCell(`E ${lastRowNumber+1}`);
+        footerCellInActive.value = `Total No. Of Inactive Students : ${totalInactiveStudent}`;
+        footerCellInActive.font = { size: 10, bold: false, color: { argb: '002060' } };
+        footerCellInActive.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'b6dde8' } }; 
+        footerCellInActive.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+
+        worksheet.mergeCells(`A ${lastRowNumber+2} : H ${lastRowNumber+2}`);
+        const footerCellSigned = worksheet.getCell(`A ${lastRowNumber+2}`);
+        footerCellSigned.value = `Verified by : elearn Software Pvt Ltd`;
+        footerCellSigned.font = { size: 10, bold: false, color: { argb: '9c0006' } };
+        footerCellSigned.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'ffc7ce' } }; 
+        footerCellSigned.border = {
+            top: { style: 'thin', color: { argb: '7f7f7f' } },
+            left: { style: 'thin', color: { argb: '7f7f7f' } },
+            bottom: { style: 'thin', color: { argb: '7f7f7f' } },
+            right: { style: 'thin', color: { argb: '7f7f7f' } },
+        };
 
         //Save the Excel file to the Downloads folder
         const downloadsFolder = getDownloadsFolder();
         const filePath = path.join(downloadsFolder, `StudentLists_${new Date().toISOString().split('T')[0]}.xlsx`);
-    
-        // Write the workbook to the file
         await workbook.xlsx.writeFile(filePath);
-      
+
         return this.sendSuccessResponse(res, true, "ExcelSheet Downloaded !!");
 
     });
-
-    // credentialCheck = async(email: string, phone: string, res: Response): Promise<any> =>{
-    //     try{
-    //        const response = await studentsDB.findOne({
-    //         $or: [
-    //             {email: email},
-    //             {phone: phone}
-    //         ]
-    //        })
-    //        return response;
-    //     }catch(err){
-    //         return this.sendServerErrorResponse(res, false, `SERVER_ERROR!!${err}`);
-    //     }
-    // };
 
     private credentialUsernameCheck = async(userName: string, res: Response): Promise<any> =>{
         try{

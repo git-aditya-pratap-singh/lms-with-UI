@@ -1,4 +1,4 @@
-
+import { useEffect, useState } from "react";
 import { add_student_popup } from "../../redux/Slices/StateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoaderData } from 'react-router-dom';
@@ -9,18 +9,33 @@ import Apiadmin from "../../_api/admin/Apiadmin.service";
 import { FaUserPlus, FaDownload  } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
+
 import "../../../assets/css/admin/_students.scss";
+
 
 const Students = () => {
 
     const dispatch = useDispatch();
     const studentsPopup = useSelector((store) => store.openPopup.add_student_popup);
-    const itemList = useLoaderData();
+    const itemList = useLoaderData(); 
+    const [studentListArray, setStudentListArray] = useState(itemList[0]);  
+    const [filteredStudents, setFilteredStudents] = useState(itemList[0]);  
+    
 
-    const DownloadToExcelSheet = async() =>{
-        const download = await new Apiadmin().downloadExcelSheetforStudents();
+    const searchInput = async(event) => {
+        const searchValue = event.target.value.toLowerCase(); 
+        const filteredList = studentListArray.filter((student) =>
+            student.name.toLowerCase().includes(searchValue) ||
+            student.email.toLowerCase().includes(searchValue)
+        );
+        setFilteredStudents(filteredList);
+    };
 
-    }
+    useEffect(() => {
+        setFilteredStudents(studentListArray); 
+    }, [studentListArray]);
+
+    const DownloadToExcelSheet = async() => {return await new Apiadmin().downloadExcelSheetforStudents()};
 
     return (
         <>
@@ -37,7 +52,7 @@ const Students = () => {
                                     </svg>
                                 </div>
                                 <input type="search" id="default-search" className="block w-full p-2 ps-10 text-sm text-gray-900 ring-1 ring-gray-300 rounded-lg
-                                    bg-gray-50 focus:ring-blue-500" placeholder="Search..." required />
+                                    bg-gray-50 focus:ring-blue-500" placeholder="Search..." onChange={searchInput} />
                             </div>
                         </div>
                     </div>
@@ -67,7 +82,8 @@ const Students = () => {
                 </div>
             </section>
             
-            <Table list={itemList[0]}/>
+            
+            <Table list={filteredStudents}/>
 
             {/* Add Form */}
             {(studentsPopup.add || studentsPopup.edit) &&

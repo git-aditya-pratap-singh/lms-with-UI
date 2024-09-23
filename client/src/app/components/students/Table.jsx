@@ -65,7 +65,7 @@ const Table = (props) => {
                   <td>
                     {item?.email}
                     <br />
-                    <span className="rounded-full bg-slate-400 badge-sm">
+                    <span className="text-[0.7rem] p-[0.2rem] rounded-sm shadow-sm bg-[#a6ffe6] text-[#1E8267]">
                       Dev-Students
                     </span>
                   </td>
@@ -74,7 +74,7 @@ const Table = (props) => {
                   <td>
                     {item?.selectedCourseList.map((items) => {
                       return (
-                        <span key={items._id} className="badge badge-ghost badge-sm">{toTitleCase(items?.label)}</span>
+                        <span key={items._id} className="m-1 text-[0.7rem] p-[0.2rem] rounded-sm shadow-sm bg-[#a6ffe6] text-[#1E8267]">{toTitleCase(items?.label)}</span>
                       );
                     })}
                   </td>

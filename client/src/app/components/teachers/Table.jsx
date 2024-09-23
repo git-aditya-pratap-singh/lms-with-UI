@@ -58,14 +58,14 @@ const Table = (props) => {
                         <div className="font-bold">
                           {toTitleCase(item?.name)}
                         </div>
-                        <div className="text-sm opacity-50">INDIA</div>
+                        <div className="text-sm opacity-60">INDIA</div>
                       </div>
                     </div>
                   </td>
                   <td>
                     {item?.email}
                     <br />
-                    <span className="badge badge-ghost badge-sm">
+                    <span className= "text-[0.7rem] p-[0.2rem] rounded-sm shadow-sm bg-[#a6ffe6] text-[#1E8267]">
                       Dev-Teachers
                     </span>
                   </td>
@@ -74,7 +74,7 @@ const Table = (props) => {
                   <td>
                     {item?.courseList.map((items) => {
                       return (
-                        <span key={items._id} className="badge badge-ghost badge-sm">{toTitleCase(items?.label)}</span>
+                        <span key={items._id} className="m-1 text-[0.7rem] p-[0.2rem] rounded-sm shadow-sm bg-[#a6ffe6] text-[#1E8267]">{toTitleCase(items?.label)}</span>
                       );
                     })}
                   </td>

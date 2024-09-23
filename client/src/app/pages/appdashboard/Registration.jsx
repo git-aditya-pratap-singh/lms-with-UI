@@ -12,7 +12,7 @@ const Registration = () => {
 
   return (
     <>
-      <section className="space-y-3">
+      <section className="flex justify-between align-middle">
 
         <div className="w-48 pb-5">
           <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -26,6 +26,10 @@ const Registration = () => {
             bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
           </div>
+        </div>
+
+        <div>
+          <label className="text-[2rem] font-bold underline text-[var(--primary)]">New Registration</label>
         </div>
       </section>
 

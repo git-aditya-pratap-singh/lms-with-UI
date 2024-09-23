@@ -53,6 +53,15 @@ class Apiadmin extends BaseControllerResponse {
             return this.handleResponse(err);
         }
     }
+    downloadExcelSheetforTeachers = async()=>{
+        try {
+            const response = await new ApiService().get('/dashboard/teachers/downloadExcelSheet');
+            this.handleResponse(response);
+            return response;
+        } catch (err) {
+            return this.handleResponse(err);
+        }
+    }
 
 }
 

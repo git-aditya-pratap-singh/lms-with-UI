@@ -6,6 +6,7 @@ const INSTANCE_OF_TEACHER = new TeachersControllers();
 
 teachersRoutes.get('/getTeachersDeatils', INSTANCE_OF_TEACHER.getTeachersDeatils);
 teachersRoutes.get('/getCourseTeachersDeatils', INSTANCE_OF_TEACHER.getCourseTeachersDeatils);
+teachersRoutes.get('/downloadExcelSheet', INSTANCE_OF_TEACHER.downloadExcelSheet);
 teachersRoutes.post('/addTeachers', INSTANCE_OF_TEACHER.addTeachers);
 teachersRoutes.put('/editTeachers', INSTANCE_OF_TEACHER.editTeachers); 
 

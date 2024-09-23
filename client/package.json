@@ -47,7 +47,8 @@
     "saas": "^1.0.0",
     "sass-extract": "^3.0.0",
     "styled-components": "^6.1.8",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "update": "^0.7.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.0",

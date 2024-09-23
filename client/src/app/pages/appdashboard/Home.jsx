@@ -62,19 +62,11 @@ export const optionsLine = {
   legend: { position: "bottom" },
 };
 
-const dataa = [
-  { label: 'Group A', value: 400 },
-  { label: 'Group B', value: 300 },
-  { label: 'Group C', value: 300 },
-  { label: 'Group D', value: 200 },
-];
-
 
 const Home_admin = () => {
   const [value, setValue] = useState(dayjs('2022-04-17'));
   const [auth, setAuth] = useAuthGuard();
   const dashboardInfo = useLoaderData();
-  console.log(dashboardInfo)
 
   const dashboardDetails = [
         {
