@@ -56,6 +56,13 @@ const Students = () => {
                             </div>
                         </div>
                     </div>
+
+
+                    <div>
+                         <label className="text-[2rem] font-bold underline text-[var(--primary)]">Students-Info</label>
+                    </div>
+
+
                     <div className="_studentAddDel">
 
                         <button className="_bt bg-green-50 "
