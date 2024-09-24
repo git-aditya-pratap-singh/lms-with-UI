@@ -1,4 +1,5 @@
 //import { useContext } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { add_teacher_popup } from "../../redux/Slices/StateSlice";
@@ -14,6 +15,9 @@ import "../../../assets/css/component/_table.scss";
 const Table = (props) => {
 
   const dispatch = useDispatch();
+  useEffect(()=>{
+    console.log("CHNAGE")
+  })
 
   return (
     <>

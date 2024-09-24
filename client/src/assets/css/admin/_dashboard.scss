@@ -110,8 +110,9 @@
     padding: 0rem 1rem ;
   }
   ._outlet{
+    height: auto;
     padding: 0.1rem;
-    overflow-y:scroll;
+    overflow: hidden;
   }
   ._outlet::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */

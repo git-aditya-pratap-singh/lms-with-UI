@@ -79,6 +79,7 @@ const TeacherForm = (props) => {
       new Apiadmin().addTeachers(formEditinfo, formData)
       .then((apiResponse)=>{
         if (apiResponse.status)
+          console.log(apiResponse)
           dispatch(add_teacher_popup({check: false, key: formEditinfo.add ? "add" : "edit" }));
       })
     }

@@ -18,7 +18,8 @@ const Teachers = () => {
 
     const dispatch = useDispatch();
     const teacherPopup = useSelector((store) => store.openPopup.add_teacher_popup);
-    const itemList = useLoaderData();
+    var itemList = useLoaderData();
+
     const [teacherListArray, setTeacherListArray] = useState(itemList[0]);  
     const [filteredTeachers, setFilteredTeachers] = useState(itemList[0]);  
     
@@ -34,6 +35,7 @@ const Teachers = () => {
     useEffect(() => {
         setFilteredTeachers(teacherListArray); 
     }, [teacherListArray]);
+
 
     const DownloadToExcelSheet = async() =>{return await new Apiadmin().downloadExcelSheetforTeachers();}
 
