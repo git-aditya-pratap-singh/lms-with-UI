@@ -1,6 +1,6 @@
 
 import PropTypes from 'prop-types';
-import { FaGithub, FaLinkedinIn, FaFingerprint, FaUser, FaPhoneAlt, FaLaptopCode, FaChalkboardTeacher,FaChrome } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaFingerprint, FaUser, FaPhoneAlt, FaLaptopCode, FaChalkboardTeacher, FaChrome, FaUserPlus, FaDownload, MdDelete } from 'react-icons/fa';
 import { FaArrowRotateLeft, FaBook, FaUsersLine } from "react-icons/fa6";
 import { BsLinkedin, BsGithub, BsYoutube } from "react-icons/bs";
 import { MdOutlineAlternateEmail } from 'react-icons/md';
@@ -28,7 +28,10 @@ const IconComponent = ({ iconType }) => {
     chromeIcon: <FaChrome/>,
     xmLinkedinIcon: <BsLinkedin/>,
     xmGithubIcon: <BsGithub/>,
-    xmYoutubeIcon: <BsYoutube/>
+    xmYoutubeIcon: <BsYoutube/>,
+    adduserIcon: <FaUserPlus />,
+    downloadIcon: <FaDownload />,
+    deleteIcon: <MdDelete />
   };
   return icons[iconType] || null;
 };
@@ -53,7 +56,10 @@ IconComponent.propTypes = {
     'chromeIcon',
     'xmLinkedinIcon',
     'xmGithubIcon',
-    'xmYoutubeIcon'
+    'xmYoutubeIcon',
+    'adduserIcon',
+    'downloadIcon',
+    'deleteIcon'
   ]).isRequired,
 };
 

@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import { useLoaderData } from 'react-router-dom';
 import { add_teacher_popup } from "../../redux/Slices/StateSlice";
 import { useDispatch, useSelector } from "react-redux";
-
-import { FaUserPlus, FaDownload } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import IconComponent from "../.././../assets/icons/IconComponent";
 
 import Table from "../../components/teachers/Table";
 import TeacherForm from "../../components/teachers/TeacherForm";
@@ -63,10 +61,10 @@ const Teachers = () => {
                         <button className="_bt bg-green-100 text-green-500"
                             onClick={() => 
                                 dispatch(add_teacher_popup({check: true, key:'add', item: ''}))}>
-                                <FaUserPlus color="green" /></button>
-                        <button className="_bt bg-red-100 text-red-500"><MdDelete /></button>
+                                <IconComponent iconType="adduserIcon"/></button>
+                        <button className="_bt bg-red-100 text-red-500"><IconComponent iconType="deleteIcon"/></button>
                         <button className="_bt bg-blue-100 text-blue-500" title="Download to Excel"
-                        onClick={DownloadToExcelSheet}><FaDownload/></button>
+                        onClick={DownloadToExcelSheet}><IconComponent iconType="downloadIcon"/></button>
                     </div>
                 </div>
 

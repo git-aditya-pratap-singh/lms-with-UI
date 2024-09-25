@@ -5,13 +5,9 @@ import { useLoaderData } from 'react-router-dom';
 import Table from "../../components/students/Table";
 import AddForm from "../../components/students/StudentForm";
 import Apiadmin from "../../_api/admin/Apiadmin.service";
-
-import { FaUserPlus, FaDownload  } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-
+import IconComponent from "../.././../assets/icons/IconComponent";
 
 import "../../../assets/css/admin/_students.scss";
-
 
 const Students = () => {
 
@@ -19,8 +15,7 @@ const Students = () => {
     const studentsPopup = useSelector((store) => store.openPopup.add_student_popup);
     const itemList = useLoaderData(); 
     const [studentListArray, setStudentListArray] = useState(itemList[0]);  
-    const [filteredStudents, setFilteredStudents] = useState(itemList[0]);  
-    
+    const [filteredStudents, setFilteredStudents] = useState(itemList[0]);    
 
     const searchInput = async(event) => {
         const searchValue = event.target.value.toLowerCase(); 
@@ -68,11 +63,10 @@ const Students = () => {
                         <button className="_bt bg-green-50 "
                             onClick={() => 
                                 dispatch(add_student_popup({check: true, key:'add', item: ''}))}>
-                                <FaUserPlus  className="text-green-600" /></button>
-
-                        <button className="_bt bg-red-100 text-red-500"><MdDelete /></button>
+                                 <IconComponent iconType="adduserIcon"/></button>
+                        <button className="_bt bg-red-100 text-red-500"><IconComponent iconType="deleteIcon"/></button>
                         <button className="_bt bg-blue-100 text-blue-500" title="Download to Excel"
-                        onClick={DownloadToExcelSheet}><FaDownload/></button>
+                        onClick={DownloadToExcelSheet}><IconComponent iconType="downloadIcon"/></button>
                         
                     </div>
 
