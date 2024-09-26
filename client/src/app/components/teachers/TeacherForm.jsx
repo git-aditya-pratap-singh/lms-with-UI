@@ -6,13 +6,7 @@ import { toast } from "react-toastify";
 import Select from "react-select";
 import toTitleCase from "../../common/titleCase";
 import Apiadmin from "../../_api/admin/Apiadmin.service";
-
-import { MdPhotoSizeSelectActual } from "react-icons/md";
-import { RxCross1 } from "react-icons/rx";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaUser, FaPhoneAlt } from "react-icons/fa";
-import { GrUpdate } from "react-icons/gr";
-import { FaPlus } from "react-icons/fa6";
+import IconComponent from "../../../assets/icons/IconComponent";
 
 import "../../../assets/css/component/_addform.scss";
 
@@ -114,17 +108,13 @@ const TeacherForm = (props) => {
           <h3 className="text-[var(--foreground)]">
             {`${formEditinfo.add ? "Add" : "Edit"} Teachers 🙋‍♂️`}
           </h3>
-          <span className="cursor-pointer">
-            <RxCross1
-              onClick={() => {
-                if (formEditinfo.add == true) {
+          <span className="cursor-pointer" onClick={() => {
+                if (formEditinfo.add == true) 
                   dispatch(add_teacher_popup({ check: false, key: "add" }));
-                }
-                if (formEditinfo.edit == true) {
+                if (formEditinfo.edit == true)
                   dispatch(add_teacher_popup({ check: false, key: "edit" }));
-                }
-              }}
-            />
+              }}>
+            <IconComponent iconType="crossIcon" />
           </span>
         </div>
         <h2>{`Please, ${formEditinfo.add ? "add" : "edit"} Teachers`}</h2>
@@ -146,7 +136,7 @@ const TeacherForm = (props) => {
                 placeholder="Enter the name.."
               />
               <label>
-                <FaUser />
+                <IconComponent iconType="userIcon" />
               </label>
             </span>
           </div>
@@ -168,7 +158,7 @@ const TeacherForm = (props) => {
                 placeholder="Enter the email.."
               />
               <label>
-                <MdOutlineAlternateEmail />
+                 <IconComponent iconType="emailIcon" />
               </label>
             </span>
           </div>
@@ -190,7 +180,7 @@ const TeacherForm = (props) => {
                 placeholder="Enter the phone no.."
               />
               <label>
-                <FaPhoneAlt />
+                 <IconComponent iconType="phoneIcon" />
               </label>
             </span>
           </div>
@@ -322,7 +312,7 @@ const TeacherForm = (props) => {
             </label>
             <div className="mt-1 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-[1.05rem]">
               <div className="text-center">
-                <MdPhotoSizeSelectActual
+                <IconComponent iconType="photoIcon"
                   className="mx-auto h-8 w-8 text-[var(--foreground)]"
                   aria-hidden="true"
                 />
@@ -351,7 +341,7 @@ const TeacherForm = (props) => {
           </div>
           <button className="button">
             {`${formEditinfo.add ? "Add Teachers" : "Update"}`}
-            {formEditinfo.add ? <FaPlus /> : <GrUpdate />}
+            {formEditinfo.add ? <IconComponent iconType="adduserIcon" /> : <IconComponent iconType="updateIcon" />}
           </button>
         </form>
       </section>

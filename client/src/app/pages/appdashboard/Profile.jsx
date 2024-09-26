@@ -11,12 +11,8 @@ import DateFormet from "../../common/dateFormet";
 import ApiService from "../../_service/api.service";
 import Apiadmin from "../../_api/admin/Apiadmin.service";
 
-import { FaEdit, FaUser, FaPhoneAlt, FaCalendarAlt } from "react-icons/fa";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { GrUpdate } from "react-icons/gr";
-import { RxCross1 } from "react-icons/rx";
-
 import ag from "../../../assets/img/admin.jpg";
+import IconComponent from '../../../assets/icons/IconComponent';
 import "../../../assets/css/admin/_profile.scss";
 
 const Profile_admin = () => {
@@ -89,8 +85,8 @@ const Profile_admin = () => {
                         <img src={ag} alt="Error!" />
                     </div>
                     <div className="_pfedit"
-                        onClick={() => dispatch(img_update_popup(true))}
-                    ><FaEdit /></div>
+                        onClick={() => dispatch(img_update_popup(true))}>
+                        <IconComponent iconType='editIcon' /></div>
                 </div>
 
                 <div className="_subContainer22">
@@ -108,7 +104,7 @@ const Profile_admin = () => {
 
                         <span>
                             <label>
-                                <FaUser />
+                                <IconComponent iconType='userIcon' />
                             </label>
                             <input type="text" placeholder="enter name..." name="name" className="bg-[var(--background)] text-[var(--foreground)]"
                                 value={toTitleCase(formData.name)}
@@ -117,7 +113,7 @@ const Profile_admin = () => {
 
                         <span>
                             <label>
-                                <MdOutlineAlternateEmail />
+                                <IconComponent iconType='emailIcon' />
                             </label>
                             <input type="email" placeholder="enter email..." name="email" className="bg-[var(--background)] text-[var(--foreground)]"
                                 value={formData.email}
@@ -126,7 +122,7 @@ const Profile_admin = () => {
 
                         <span>
                             <label>
-                                <FaPhoneAlt />
+                                <IconComponent iconType='phoneIcon' />
                             </label>
                             <input type="text" placeholder="enter phone no..." name="phone" className="bg-[var(--background)] text-[var(--foreground)]"
                                 value={formData.phone}
@@ -135,7 +131,7 @@ const Profile_admin = () => {
 
                         <span>
                             <label>
-                                <FaCalendarAlt />
+                                <IconComponent iconType='calenderIcon' />
                             </label>
                             <input type="date" placeholder="enter DOB..." name="dob" className="bg-[var(--background)] text-[var(--foreground)]"
                                 value={DateFormet(formData.dob)}
@@ -199,7 +195,7 @@ const Profile_admin = () => {
                             onChange={handleChange}
                         >
                         </textarea>
-                        <button><GrUpdate />Update</button>
+                        <button><IconComponent iconType='updateIcon' />Update</button>
                     </form>
 
                 </div>
@@ -246,11 +242,11 @@ const ImgUpdate = () => {
                     <span className="flex justify-between items-center">
                         <h2 className="text-gray-700 font-semibold text-xl">Upload Image..!</h2>
                         <h3 style={{ cursor: "pointer" }} onClick={() =>
-                            dispatch(img_update_popup(false))}><RxCross1 /></h3>
+                            dispatch(img_update_popup(false))}><IconComponent iconType='crossIcon' /></h3>
                     </span>
                     <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10"
                         name="image" accept="image/*" required onChange={(event) => setFile(event.target.files[0])} />
-                    <button><GrUpdate />Update</button>
+                    <button><IconComponent iconType='updateIcon' />Update</button>
                 </form>
 
             </section>
@@ -259,8 +255,9 @@ const ImgUpdate = () => {
 }
 
 ImgUpdate.propTypes = {
-    toggle: PropTypes.any.isRequired
-}
+    popupState: PropTypes.bool // Assuming it's a boolean
+};
+
 
 
 export default Profile_admin;

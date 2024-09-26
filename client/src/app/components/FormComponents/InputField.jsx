@@ -11,9 +11,11 @@ const InputField = ({type = 'text', name, value, placeholder, autoComplete = 'of
             placeholder={placeholder}
             autoComplete={autoComplete}
         />
+        { icon && 
         <label>
             <IconComponent iconType={icon}/>
         </label>
+        }
     </span>
   );
 };

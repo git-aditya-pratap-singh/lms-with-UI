@@ -14,6 +14,8 @@ import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import { GrUpdate } from "react-icons/gr";
 import { FaPlus } from "react-icons/fa6";
 
+import IconComponent from "../../../assets/icons/IconComponent";
+
 import "../../../assets/css/component/_addform.scss";
 
 const AddForm = (props) => {
@@ -113,8 +115,7 @@ const AddForm = (props) => {
           <h3 className="text-[var(--foreground)]">
             {`${formEditinfo.add ? "Add" : "Edit"} Students 🙋‍♂️`}
           </h3>
-          <span className="cursor-pointer">
-            <RxCross1
+          <span className="cursor-pointer"
               onClick={() => {
                 if (formEditinfo.add == true) {
                   dispatch(add_student_popup({ check: false, key: "add" }));
@@ -122,8 +123,8 @@ const AddForm = (props) => {
                 if (formEditinfo.edit == true) {
                   dispatch(add_student_popup({ check: false, key: "edit" }));
                 }
-              }}
-            />
+              }}>
+              <IconComponent iconType="crossIcon"/>
           </span>
         </div>
         <h2>{`Please, ${formEditinfo.add ? "add" : "edit"} students`}</h2>
@@ -146,7 +147,7 @@ const AddForm = (props) => {
                 placeholder="Enter the name.."
               />
               <label>
-                <FaUser />
+                <IconComponent iconType="userIcon"/>
               </label>
             </span>
           </div>
@@ -168,7 +169,7 @@ const AddForm = (props) => {
                 placeholder="Enter the email.."
               />
               <label>
-                <MdOutlineAlternateEmail />
+                <IconComponent iconType="emailIcon"/>
               </label>
             </span>
           </div>
@@ -190,7 +191,7 @@ const AddForm = (props) => {
                 placeholder="Enter the phone no.."
               />
               <label>
-                <FaPhoneAlt />
+                 <IconComponent iconType="phoneIcon"/>
               </label>
             </span>
           </div>
@@ -318,7 +319,7 @@ const AddForm = (props) => {
             </label>
             <div className="mt-1 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-[1.05rem]">
               <div className="text-center">
-                <MdPhotoSizeSelectActual
+                <IconComponent iconType="photoIcon"
                   className="mx-auto h-8 w-8 text-[var(--foreground)]"
                   aria-hidden="true"/>
                 <div className="flex text-sm leading-2 text-gray-600">

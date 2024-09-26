@@ -10,9 +10,9 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@testing-library/jest-dom']
   },
-  server: {
-    host: '0.0.0.0',
-    port: 5173
-  }
+  // server: {
+  //   host: '0.0.0.0',
+  //   port: 5173
+  // }
 });
 

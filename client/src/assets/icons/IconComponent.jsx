@@ -1,11 +1,12 @@
 
 import PropTypes from 'prop-types';
-import { FaGithub, FaLinkedinIn, FaFingerprint, FaUser, FaPhoneAlt, FaLaptopCode, FaChalkboardTeacher, FaChrome, FaUserPlus, FaDownload } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaFingerprint, FaUser, FaPhoneAlt, FaLaptopCode, FaChalkboardTeacher, FaChrome, FaUserPlus, FaDownload, FaEdit, FaCalendarAlt } from 'react-icons/fa';
 import { FaArrowRotateLeft, FaBook, FaUsersLine } from "react-icons/fa6";
 import { BsLinkedin, BsGithub, BsYoutube } from "react-icons/bs";
-import { MdOutlineAlternateEmail, MdDelete } from 'react-icons/md';
+import { MdOutlineAlternateEmail, MdDelete, MdPhotoSizeSelectActual } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { BiLogInCircle } from 'react-icons/bi';
+import { GrUpdate } from "react-icons/gr";
 import { RxCross1 } from 'react-icons/rx';
 
 
@@ -31,7 +32,11 @@ const IconComponent = ({ iconType }) => {
     xmYoutubeIcon: <BsYoutube/>,
     adduserIcon: <FaUserPlus />,
     downloadIcon: <FaDownload />,
-    deleteIcon: <MdDelete />
+    deleteIcon: <MdDelete />,
+    editIcon: <FaEdit/>,
+    calenderIcon: <FaCalendarAlt/>,
+    updateIcon: <GrUpdate/>,
+    photoIcon: <MdPhotoSizeSelectActual className="mx-auto h-8 w-8 text-[var(--foreground)]"/>
   };
   return icons[iconType] || null;
 };
@@ -59,7 +64,11 @@ IconComponent.propTypes = {
     'xmYoutubeIcon',
     'adduserIcon',
     'downloadIcon',
-    'deleteIcon'
+    'deleteIcon',
+    'editIcon',
+    'calenderIcon',
+    'updateIcon',
+    'photoIcon'
   ]).isRequired,
 };
 

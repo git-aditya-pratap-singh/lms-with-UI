@@ -53,14 +53,14 @@ const Students = () => {
                     </div>
 
 
-                    <div>
+                    {/* <div>
                          <label className="text-[2rem] font-bold underline text-[var(--primary)]">Students-Info</label>
-                    </div>
+                    </div> */}
 
 
                     <div className="_studentAddDel">
 
-                        <button className="_bt bg-green-50 "
+                        <button className="_bt bg-green-50 text-green-500"
                             onClick={() => 
                                 dispatch(add_student_popup({check: true, key:'add', item: ''}))}>
                                  <IconComponent iconType="adduserIcon"/></button>

@@ -1,5 +1,5 @@
 //import { useContext } from "react";
-import { useEffect } from "react";
+//import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { add_teacher_popup } from "../../redux/Slices/StateSlice";
@@ -9,15 +9,16 @@ import getRandomHexColor from "../../common/randomColorgenerate";
 
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import IconComponent from "../../../assets/icons/IconComponent";
 //import ig from "../../../assets/img/admin.jpg";
 import "../../../assets/css/component/_table.scss";
 
 const Table = (props) => {
 
   const dispatch = useDispatch();
-  useEffect(()=>{
-    console.log("CHNAGE")
-  })
+  // useEffect(()=>{
+  //   console.log("CHNAGE")
+  // })
 
   return (
     <>
