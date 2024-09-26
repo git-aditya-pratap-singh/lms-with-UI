@@ -11,10 +11,8 @@ export default defineConfig({
     include: ['@testing-library/jest-dom']
   },
   server: {
-    proxy: {
-      // string shorthand: http://localhost:5173/foo -> http://localhost:4567/foo
-      '/api/v1': 'http://localhost:3000/api/v1'
-    }
+    host: '0.0.0.0',
+    port: 5173
   }
 });
 
