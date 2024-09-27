@@ -2,20 +2,17 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { add_student_popup } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase";
+import IconComponent from "../../../assets/icons/IconComponent";
 
-import { FaUserPlus } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 import ig from "../../../assets/img/admin.jpg";
 import "../../../assets/css/component/_studentaddTable.scss";
 
 const StudentAddTable = (props) => {
     
     const dispatch = useDispatch();
-
     return (
         <>
-          <div className="_tableContainerAdd">
-                
+          <div className="_tableContainerAdd">   
             <table className="table">
                     {/* head */}
                     <thead>
@@ -78,13 +75,15 @@ const StudentAddTable = (props) => {
                             <td>
                                 {item?.address}
                             </td>
-                        
                             <td>
                                 <span className="flex gap-5">
-                                    <FaUserPlus size={18} className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
-                                    onClick={()=>
-                                        dispatch(add_student_popup({check: true, key: 'add'}))}/> 
-                                    <MdDelete size={18} className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"/>
+                                    <IconComponent iconType="adduserIcon" iconSize="18" 
+                                        iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
+                                         onClick={() => dispatch(add_student_popup({check: true, key: 'add'}) )}
+                                    />
+                                    <IconComponent iconType="deleteIcon" iconSize="18" 
+                                      iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"
+                                    />
                                 </span>
                             </td>
                         </tr> 

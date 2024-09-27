@@ -6,14 +6,6 @@ import { toast } from "react-toastify";
 import toTitleCase from "../../common/titleCase";
 import Select from "react-select";
 import Apiadmin from "../../_api/admin/Apiadmin.service";
-
-import { MdPhotoSizeSelectActual } from "react-icons/md";
-import { RxCross1 } from "react-icons/rx";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaUser, FaPhoneAlt } from "react-icons/fa";
-import { GrUpdate } from "react-icons/gr";
-import { FaPlus } from "react-icons/fa6";
-
 import IconComponent from "../../../assets/icons/IconComponent";
 
 import "../../../assets/css/component/_addform.scss";
@@ -347,7 +339,7 @@ const AddForm = (props) => {
           </div>
           <button className="button">
             {`${formEditinfo.add ? "Add Students" : "Update"}`}
-            {formEditinfo.add ? <FaPlus /> : <GrUpdate />}
+            {formEditinfo.add ? <IconComponent iconType="adduserIcon"/> : <IconComponent iconType="updateIcon"/>}
           </button>
         </form>
       </section>

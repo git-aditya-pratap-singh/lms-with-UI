@@ -4,10 +4,8 @@ import { add_student_popup } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase"
 import profileName from "../../common/profileName";
 import getRandomHexColor from "../../common/randomColorgenerate"; 
+import IconComponent from "../../../assets/icons/IconComponent"; 
 
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-//import ig from "../../../assets/img/admin.jpg";
 import "../../../assets/css/component/_table.scss";
 
 const Table = (props) => {
@@ -85,18 +83,12 @@ const Table = (props) => {
                   </td>
                   <td>
                     <span className="flex gap-5">
-                      <FaEdit
-                        size={18}
-                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
-                        onClick={() =>
-                          dispatch(
-                            add_student_popup({ check: true, key: "edit", item: item })
-                          )
-                        }
+                      <IconComponent iconType="editIcon" iconSize="18" 
+                        iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
+                        onClick={() => dispatch( add_student_popup({ check: true, key: "edit", item: item }) )}
                       />
-                      <MdDelete
-                        size={18}
-                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"
+                      <IconComponent iconType="deleteIcon" iconSize="18" 
+                        iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"
                       />
                     </span>
                   </td>

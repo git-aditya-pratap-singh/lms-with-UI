@@ -4,9 +4,7 @@ import Select from 'react-select'
 import JoditEditor from 'jodit-react';
 import toTitleCase from '../../common/titleCase';
 import Apiadmin from "../../_api/admin/Apiadmin.service";
-
-import { FaBookOpen, FaHandHoldingDollar, FaDollarSign, FaTag, FaBuffer } from "react-icons/fa6";
-import { FaVideo, FaLink, FaArrowRight } from "react-icons/fa";
+import IconComponent from "../../../assets/icons/IconComponent";
 
 import "../../../assets/css/component/_formcourse.scss";
 
@@ -139,7 +137,7 @@ const FormCourse = (props) => {
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    < FaBookOpen color='#007DFC' />
+                                    <IconComponent iconType="bookopenIcon" iconColor="#007DFC"/>
                                 </span>
                             </div>
                             <input
@@ -184,7 +182,7 @@ const FormCourse = (props) => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <FaHandHoldingDollar color='#007DFC' />
+                                    <IconComponent iconType="holdDollerIcon" iconColor="#007DFC"/>
                                 </span>
                             </div>
                             <input
@@ -207,7 +205,7 @@ const FormCourse = (props) => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <FaDollarSign color='#007DFC' />
+                                   <IconComponent iconType="dollerIcon" iconColor="#007DFC"/>
                                 </span>
                             </div>
                             <input
@@ -231,7 +229,7 @@ const FormCourse = (props) => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <FaTag color='#007DFC' />
+                                   <IconComponent iconType="tagIcon" iconColor="#007DFC"/>
                                 </span>
                             </div>
                             <Select
@@ -253,7 +251,7 @@ const FormCourse = (props) => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <FaBuffer color='#007DFC' />
+                                   <IconComponent iconType="bufferIcon" iconColor="#007DFC"/>
                                 </span>
                             </div>
                             <input
@@ -295,7 +293,7 @@ const FormCourse = (props) => {
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <FaVideo color='#007DFC' />
+                                    <IconComponent iconType="videoIcon" iconColor="#007DFC"/>
                                 </span>
                             </div>
                             <input
@@ -318,7 +316,7 @@ const FormCourse = (props) => {
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <FaLink color='#007DFC' />
+                                   <IconComponent iconType="videoIcon" iconColor="#007DFC"/>
                                 </span>
                             </div>
                             <input
@@ -340,7 +338,7 @@ const FormCourse = (props) => {
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <FaLink color='#007DFC' />
+                                    <IconComponent iconType="linkIcon" iconColor="#007DFC"/>
                                 </span>
                             </div>
                             <input
@@ -423,7 +421,7 @@ const FormCourse = (props) => {
                     <div className="flex justify-end items-center">
                         <button className=" w-24 flex justify-center items-center gap-x-2 bg-[#007DFC] p-2 text-white rounded 
                             shadow-md duration-300 ease-in-out active:scale-90">
-                            Submit <FaArrowRight size={12} />
+                            Submit <IconComponent iconType="arrowIcon" iconSize="12"/>
                         </button>
                     </div>
                 </form>

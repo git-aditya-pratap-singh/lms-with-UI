@@ -1,25 +1,16 @@
-//import { useContext } from "react";
-//import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { add_teacher_popup } from "../../redux/Slices/StateSlice";
 import toTitleCase from "../../common/titleCase";
 import profileName from "../../common/profileName";
 import getRandomHexColor from "../../common/randomColorgenerate";
+import IconComponent from "../../../assets/icons/IconComponent"; 
 
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import IconComponent from "../../../assets/icons/IconComponent";
-//import ig from "../../../assets/img/admin.jpg";
 import "../../../assets/css/component/_table.scss";
 
 const Table = (props) => {
 
   const dispatch = useDispatch();
-  // useEffect(()=>{
-  //   console.log("CHNAGE")
-  // })
-
   return (
     <>
       <div className="_tableContainer">
@@ -94,16 +85,12 @@ const Table = (props) => {
                   </td>
                   <td>
                     <span className="flex gap-5">
-                      <FaEdit
-                        size={18}
-                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
-                        onClick={() =>
-                          dispatch(add_teacher_popup({ check: true, key: "edit", item: item}) )
-                        }
+                      <IconComponent iconType="editIcon" iconSize="18" 
+                        iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
+                        onClick={() => dispatch(add_teacher_popup({ check: true, key: "edit", item: item}) )}
                       />
-                      <MdDelete
-                        size={18}
-                        className="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"
+                      <IconComponent iconType="deleteIcon" iconSize="18" 
+                        iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"
                       />
                     </span>
                   </td>

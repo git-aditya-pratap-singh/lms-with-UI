@@ -134,13 +134,13 @@ return (
 
           <div className="_loginIcon">
             <span>
-              <IconComponent iconType="googleIcon"/>
+              <IconComponent iconType="googleIcon" iconSize="20"/>
             </span>
             <span>
-              <IconComponent iconType="linkedInIcon"/>
+              <IconComponent iconType="linkedInIcon" iconSize="20" iconColor="#007DFC"/>
             </span>
             <span>
-              <IconComponent iconType="githubIcon"/>
+              <IconComponent iconType="githubIcon" iconSize="20" iconStyle="text-gray-700"/>
             </span>
           </div>
         </div>
