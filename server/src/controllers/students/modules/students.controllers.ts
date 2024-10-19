@@ -225,7 +225,7 @@ class StudentsControllers extends AlertService {
               fgColor: { argb: 'c6efce' }, 
             };
             cell.alignment = { vertical: 'middle', horizontal: 'center' };
-          });
+        });
 
         // Add all rows data ---------------
         response.forEach(student => {

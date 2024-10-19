@@ -31,6 +31,7 @@ class CourseControllers extends AlertService {
     public addCourse = asyncHandler( async(req: Request, res: Response, next: NextFunction, session?: mongoose.ClientSession): Promise<any> =>{
 
         const user = req?.user;
+     
         const {courseName, courseDescription, coursePrice, courseEstiPrice, courseTags, courseCategories, courseLevel,
             videoTitle, videoURL, sourceCode, courseBenifit, faculity, courseVideo, courselogo} = req.body;
          

@@ -59,6 +59,11 @@ const loginSchema: Schema<ILogin> = new Schema({
         required: true,
         trim: true
     },
+    imageUrl: {
+        type: String,
+        required: false,
+        trim: true
+    },
     loginOtp: {
         type: Number,
         trim: true

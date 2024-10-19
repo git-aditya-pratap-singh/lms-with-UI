@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense, lazy, useLayoutEffect } from 'react';
+import { useState, useEffect, Suspense, lazy, useLayoutEffect, useCallback } from 'react';
 import PropTypes from "prop-types";
 import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -18,28 +18,15 @@ import "../../../assets/css/admin/_profile.scss";
 const Profile_admin = () => {
 
     const dispatch = useDispatch();
-    const [formData, setFormData] = useState({
-        username: "",
-        designation: "",
-        name: "",
-        email: "",
-        phone: "",
-        hasAllAccess: null,
-        dob: "",
-        gender: "",
-        address: ""
-    });
-
-    //const [auth, setAuth] = useAuthGuard();
     const userprofileData = useLoaderData();
-    // const AboutShimmersLoad = lazy(()=> import('../../components/shimmers/AboutShimmers'));
+    const [formData, setFormData] = useState(userprofileData);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
 
         const validateFormData = () => {
@@ -62,7 +49,11 @@ const Profile_admin = () => {
             const userName = formData.name.split(" ")[0].toLowerCase();
             setFormData({ ...formData, ['username']: userName })
             // api call
-            new Apiadmin().profileUpdate(formData);
+            const apiResult = await new Apiadmin().profileUpdate(formData);
+            setFormData((prevFormdata)=>({
+                ...prevFormdata,
+                ...apiResult?.data
+            }))
         }
     }
 
@@ -73,7 +64,7 @@ const Profile_admin = () => {
                 ...userprofileData
             })); 
         }
-    }, [formData.name, userprofileData]);
+    }, [userprofileData]);
 
     return (
         <>
@@ -82,7 +73,7 @@ const Profile_admin = () => {
             (<section className="_container1">
                 <div className="_subContainer11">
                     <div className="_profile">
-                        <img src={ag} alt="Error!" />
+                        <img src={userprofileData.imageUrl} alt="Error!" />
                     </div>
                     <div className="_pfedit"
                         onClick={() => dispatch(img_update_popup(true))}>
@@ -219,11 +210,13 @@ const ImgUpdate = () => {
 
     const FileUploadFunc = async (event) => {
         event.preventDefault();
-        console.log(file)
+        const form = new FormData();
+        form.append('image',file)
         try {
-            const response = await API_INSTANCE.post('/dashboard/profiles/uploadProfilePicture', { 'image': file.name });
+            const response = await API_INSTANCE.uploadFile('/dashboard/profiles/uploadProfilePicture', form);
             if (response.status) {
                 toast.success(response.message);
+                dispatch(img_update_popup(false))
             } else {
                 toast.error(response.message);
             }

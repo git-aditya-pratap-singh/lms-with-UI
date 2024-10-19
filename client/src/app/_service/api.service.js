@@ -6,18 +6,18 @@ class ApiService {
     constructor() {
         const userToken = JSON.parse(localStorage.getItem('token')); 
         const token = userToken ? userToken.token : null;
-        this.api = axios.create({
+        this.api = (upload) => axios.create({
             baseURL: environmentURL.apiUrl,
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': upload ? 'multipart/form-data' : 'application/form-data',
                 'Authorization': token ? `Bearer ${token}` : '',
                 'Accept': 'application/json, multipart/form-data',
             },
         });
     }
-    async request(method, url, data = null, params = null) {
+    async request(method, url, data = null, params = null,upload=null) {
         try {
-            const response = await this.api.request({
+            const response = await this.api(upload).request({
                 method,
                 url,
                 data,
@@ -33,6 +33,9 @@ class ApiService {
     }
     async post(url, data) {
         return this.request('POST', url, data, null);
+    }
+    async uploadFile(url, data) {
+        return this.request('POST', url, data, null, true);
     }
     async put(url, data) {
         return this.request('PUT', url, data, null);

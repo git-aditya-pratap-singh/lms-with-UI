@@ -51,61 +51,61 @@ const FormCourse = (props) => {
         const FormValidation = () => {
             const error = {};
             // ------------Course Name validate--------------
-            if (!courseData.courseName) 
-                error.courseName = "Course-name shouln't be empty!"
+            // if (!courseData.courseName) 
+            //     error.courseName = "Course-name shouln't be empty!"
             
-            else if (!courseData.courseName.match(/^[a-zA-Z\s]{5,150}$/)) 
-                error.courseName = 'A name must be contain only characters & length must be atleast 5 characters!';
+            // else if (!courseData.courseName.match(/^[a-zA-Z\s]{5,150}$/)) 
+            //     error.courseName = 'A name must be contain only characters & length must be atleast 5 characters!';
             
-            //------------Course Discription validate--------------
-            if (!courseData.courseDescription) 
-                error.courseDescription = "Course Discription shouln't be empty!"
+            // //------------Course Discription validate--------------
+            // if (!courseData.courseDescription) 
+            //     error.courseDescription = "Course Discription shouln't be empty!"
 
-            // ------------Course Price validate--------------
-            if (!courseData.coursePrice) 
-                error.coursePrice = "Course Price($) shouln't be empty!"
+            // // ------------Course Price validate--------------
+            // if (!courseData.coursePrice) 
+            //     error.coursePrice = "Course Price($) shouln't be empty!"
             
-            else if (isNaN(courseData.coursePrice)) 
-                error.coursePrice = "Course Price($) shouln't be Alphabet only Number Allowed!"
+            // else if (isNaN(courseData.coursePrice)) 
+            //     error.coursePrice = "Course Price($) shouln't be Alphabet only Number Allowed!"
 
-            // ------------Course Estimated Price validate--------------
-            if (!courseData.courseEstiPrice) 
-                error.courseEstiPrice = "Course Estimated Price($) shouln't be empty!"
+            // // ------------Course Estimated Price validate--------------
+            // if (!courseData.courseEstiPrice) 
+            //     error.courseEstiPrice = "Course Estimated Price($) shouln't be empty!"
             
-            else if (isNaN(courseData.courseEstiPrice)) 
-                error.courseEstiPrice = "Course Estimated Price($) shouln't be Alphabet only Number Allowed!"
+            // else if (isNaN(courseData.courseEstiPrice)) 
+            //     error.courseEstiPrice = "Course Estimated Price($) shouln't be Alphabet only Number Allowed!"
 
-            //------------course Validation -----------------
-            if (courseData.courseTags.length === 0)
-                error.courseTags = 'Please! Select atleast One Tags.'
+            // //------------course Validation -----------------
+            // if (courseData.courseTags.length === 0)
+            //     error.courseTags = 'Please! Select atleast One Tags.'
 
-            //------------course courseCategories -----------------
-            if (!courseData.courseCategories) 
-                error.courseCategories = 'Please! Select atleast One Categories.'
+            // //------------course courseCategories -----------------
+            // if (!courseData.courseCategories) 
+            //     error.courseCategories = 'Please! Select atleast One Categories.'
 
-            //------------course courseLevel-----------------
-            if (!courseData.courseLevel) 
-                error.courseLevels = 'Please! Select Level.'
+            // //------------course courseLevel-----------------
+            // if (!courseData.courseLevel) 
+            //     error.courseLevels = 'Please! Select Level.'
 
-            //------------course videoTitle-----------------
-            if (!courseData.videoTitle)
-                error.videoTitle = 'Please! Enter the Video Title.'
+            // //------------course videoTitle-----------------
+            // if (!courseData.videoTitle)
+            //     error.videoTitle = 'Please! Enter the Video Title.'
 
-            // ------------Course Discription validate--------------
-            if (!courseData.courseBenifit)
-                error.courseBenifit = "Course Benifits shouln't be empty!"
+            // // ------------Course Discription validate--------------
+            // if (!courseData.courseBenifit)
+            //     error.courseBenifit = "Course Benifits shouln't be empty!"
 
-            //------------course Validation -----------------
-            if (courseData.faculity.length === 0)
-                error.faculity = 'Please! Select atleast One faculity member.'
+            // //------------course Validation -----------------
+            // if (courseData.faculity.length === 0)
+            //     error.faculity = 'Please! Select atleast One faculity member.'
 
-            //------------course courseVideo -----------------
-            if (!courseData.courseVideo) 
-                error.courseVideo = 'Please! Upload a Video.'
+            // //------------course courseVideo -----------------
+            // if (!courseData.courseVideo) 
+            //     error.courseVideo = 'Please! Upload a Video.'
 
-            //------------course courselogo -----------------
-            if (!courseData.courselogo) 
-                error.courselogo = 'Please! Upload a Logo.'
+            // //------------course courselogo -----------------
+            // if (!courseData.courselogo) 
+            //     error.courselogo = 'Please! Upload a Logo.'
 
             return error;
         }
@@ -117,7 +117,14 @@ const FormCourse = (props) => {
         else {
             setError(validateFormError);
             {/* Api Calling */ }
-            new Apiadmin().addCourses(courseData)
+            console.log(courseData)
+
+            const formData = new FormData();
+            // formData.append("courseVideo", courseData?.courseVideo);
+            formData.append("courselogo:", courseData?.courselogo); 
+            console.log(formData)
+
+            new Apiadmin().addCourses(formData)
             .then((apiResponse)=>{
                 if(apiResponse.status)
                     setCourseData(initialState)
@@ -128,7 +135,7 @@ const FormCourse = (props) => {
     return (
         <>
             <section className="_courseForm">
-                <form className="_courseForm1" onSubmit={handleSubmit}>
+                <form className="_courseForm1" onSubmit={handleSubmit} encType="multipart/form-data">
                     {/* Name */}
                     <div className="">
                         <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
@@ -399,8 +406,7 @@ const FormCourse = (props) => {
                         <input type="file"
                             name="courseVideo"
                             className="file-input file-input-bordered w-full h-10"
-                            value={courseData.courseVideo}
-                            onChange={handleChange} />
+                            onChange={(event)=>setCourseData({...courseData, 'courseVideo': event.target.files[0]})} />
                         {error.courseVideo && <label className="text-red-500 text-sm -mt-3">{error.courseVideo}</label>}
                     </div>
 
@@ -412,8 +418,7 @@ const FormCourse = (props) => {
                         <input type="file"
                             name="courselogo"
                             className="file-input file-input-bordered w-full h-10"
-                            value={courseData.courselogo}
-                            onChange={handleChange} />
+                            onChange={(event)=>setCourseData({...courseData, 'courselogo': event.target.files[0]})} />
                         {error.courselogo && <label className="text-red-500 text-sm -mt-3">{error.courselogo}</label>}
                     </div>
 

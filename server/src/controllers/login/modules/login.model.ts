@@ -133,6 +133,7 @@ class LoginControllers extends AlertService{
             _id: userValid._id,
             username: userValid.username,
             name: userValid.name,
+            email: userValid.email,
             designation: userValid.designation,
             status: userValid.status,
             allAccess: userValid.hasAllAccess,

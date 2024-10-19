@@ -6,7 +6,8 @@ class Apiadmin extends BaseControllerResponse {
     profileUpdate = async(formData) => {
         try{
             const response = await new ApiService().put('/dashboard/profiles/updateDetails', formData);
-            return this.handleResponse(response);
+            this.handleResponse(response);
+            return response;
         }catch(err){
             return this.handleResponse(err);
         }

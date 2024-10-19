@@ -14,7 +14,6 @@ const apiUrl = process.env.HOST +':'+ process.env.PORT;
 
 app.use(express.json({limit: "16kb"}))
 app.use(express.urlencoded({extended: true, limit: "3mb"}))
-app.use(express.static("./upload"))
 
 app.use(cookieParser())
 app.use(bodyParser.json());
