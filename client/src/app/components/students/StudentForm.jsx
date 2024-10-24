@@ -311,10 +311,10 @@ const AddForm = (props) => {
             </label>
             <div className="mt-1 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-[1.05rem]">
               <div className="text-center">
-                <IconComponent iconType="photoIcon"
+                <IconComponent iconType="photoIcon" iconSize="32"
                   className="mx-auto h-8 w-8 text-[var(--foreground)]"
                   aria-hidden="true"/>
-                <div className="flex text-sm leading-2 text-gray-600">
+                <div className="flex text-sm leading-2 text-gray-800">
                   <label
                     htmlFor="file-upload"
                     className="relative cursor-pointer rounded-md bg-white font-semibold text-[var(--primary)] focus-within:outline-none focus-within:ring-2

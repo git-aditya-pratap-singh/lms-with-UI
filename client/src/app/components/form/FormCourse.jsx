@@ -33,8 +33,8 @@ const FormCourse = (props) => {
         sourceCode: '',
         courseBenifit: '',
         faculity: [],
-        courseVideo: '',
-        courselogo: ''
+        video: '',
+        logo: ''
     }
 
     const [courseData, setCourseData] = useState(initialState);
@@ -51,61 +51,61 @@ const FormCourse = (props) => {
         const FormValidation = () => {
             const error = {};
             // ------------Course Name validate--------------
-            // if (!courseData.courseName) 
-            //     error.courseName = "Course-name shouln't be empty!"
+            if (!courseData.courseName) 
+                error.courseName = "Course-name shouln't be empty!"
             
-            // else if (!courseData.courseName.match(/^[a-zA-Z\s]{5,150}$/)) 
-            //     error.courseName = 'A name must be contain only characters & length must be atleast 5 characters!';
+            else if (!courseData.courseName.match(/^[a-zA-Z\s]{5,150}$/)) 
+                error.courseName = 'A name must be contain only characters & length must be atleast 5 characters!';
             
-            // //------------Course Discription validate--------------
-            // if (!courseData.courseDescription) 
-            //     error.courseDescription = "Course Discription shouln't be empty!"
+            //------------Course Discription validate--------------
+            if (!courseData.courseDescription) 
+                error.courseDescription = "Course Discription shouln't be empty!"
 
-            // // ------------Course Price validate--------------
-            // if (!courseData.coursePrice) 
-            //     error.coursePrice = "Course Price($) shouln't be empty!"
+            // ------------Course Price validate--------------
+            if (!courseData.coursePrice) 
+                error.coursePrice = "Course Price($) shouln't be empty!"
             
-            // else if (isNaN(courseData.coursePrice)) 
-            //     error.coursePrice = "Course Price($) shouln't be Alphabet only Number Allowed!"
+            else if (isNaN(courseData.coursePrice)) 
+                error.coursePrice = "Course Price($) shouln't be Alphabet only Number Allowed!"
 
-            // // ------------Course Estimated Price validate--------------
-            // if (!courseData.courseEstiPrice) 
-            //     error.courseEstiPrice = "Course Estimated Price($) shouln't be empty!"
+            // ------------Course Estimated Price validate--------------
+            if (!courseData.courseEstiPrice) 
+                error.courseEstiPrice = "Course Estimated Price($) shouln't be empty!"
             
-            // else if (isNaN(courseData.courseEstiPrice)) 
-            //     error.courseEstiPrice = "Course Estimated Price($) shouln't be Alphabet only Number Allowed!"
+            else if (isNaN(courseData.courseEstiPrice)) 
+                error.courseEstiPrice = "Course Estimated Price($) shouln't be Alphabet only Number Allowed!"
 
-            // //------------course Validation -----------------
-            // if (courseData.courseTags.length === 0)
-            //     error.courseTags = 'Please! Select atleast One Tags.'
+            //------------course Validation -----------------
+            if (courseData.courseTags.length === 0)
+                error.courseTags = 'Please! Select atleast One Tags.'
 
-            // //------------course courseCategories -----------------
-            // if (!courseData.courseCategories) 
-            //     error.courseCategories = 'Please! Select atleast One Categories.'
+            //------------course courseCategories -----------------
+            if (!courseData.courseCategories) 
+                error.courseCategories = 'Please! Select atleast One Categories.'
 
-            // //------------course courseLevel-----------------
-            // if (!courseData.courseLevel) 
-            //     error.courseLevels = 'Please! Select Level.'
+            //------------course courseLevel-----------------
+            if (!courseData.courseLevel) 
+                error.courseLevels = 'Please! Select Level.'
 
-            // //------------course videoTitle-----------------
-            // if (!courseData.videoTitle)
-            //     error.videoTitle = 'Please! Enter the Video Title.'
+            //------------course videoTitle-----------------
+            if (!courseData.videoTitle)
+                error.videoTitle = 'Please! Enter the Video Title.'
 
-            // // ------------Course Discription validate--------------
-            // if (!courseData.courseBenifit)
-            //     error.courseBenifit = "Course Benifits shouln't be empty!"
+            // ------------Course Discription validate--------------
+            if (!courseData.courseBenifit)
+                error.courseBenifit = "Course Benifits shouln't be empty!"
 
-            // //------------course Validation -----------------
-            // if (courseData.faculity.length === 0)
-            //     error.faculity = 'Please! Select atleast One faculity member.'
+            //------------course Validation -----------------
+            if (courseData.faculity.length === 0)
+                error.faculity = 'Please! Select atleast One faculity member.'
 
-            // //------------course courseVideo -----------------
-            // if (!courseData.courseVideo) 
-            //     error.courseVideo = 'Please! Upload a Video.'
+            //------------course courseVideo -----------------
+            if (!courseData.video) 
+                error.courseVideo = 'Please! Upload a Video.'
 
-            // //------------course courselogo -----------------
-            // if (!courseData.courselogo) 
-            //     error.courselogo = 'Please! Upload a Logo.'
+            //------------course courselogo -----------------
+            if (!courseData.logo) 
+                error.courselogo = 'Please! Upload a Logo.'
 
             return error;
         }
@@ -118,13 +118,7 @@ const FormCourse = (props) => {
             setError(validateFormError);
             {/* Api Calling */ }
             console.log(courseData)
-
-            const formData = new FormData();
-            // formData.append("courseVideo", courseData?.courseVideo);
-            formData.append("courselogo:", courseData?.courselogo); 
-            console.log(formData)
-
-            new Apiadmin().addCourses(formData)
+            new Apiadmin().addCourses(courseData)
             .then((apiResponse)=>{
                 if(apiResponse.status)
                     setCourseData(initialState)
@@ -152,7 +146,7 @@ const FormCourse = (props) => {
                                 name="courseName"
                                 value={courseData.courseName}
                                 onChange={handleChange}
-                                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
                                 placeholder="Enter the Course name.."
                             />
                         </div>
@@ -197,7 +191,7 @@ const FormCourse = (props) => {
                                 name="coursePrice"
                                 value={courseData.coursePrice}
                                 onChange={handleChange}
-                                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
                                 placeholder="Enter the Course Price..."
                             />
                         </div>
@@ -221,7 +215,7 @@ const FormCourse = (props) => {
                                 id="courseEstiPrice"
                                 value={courseData.courseEstiPrice}
                                 onChange={handleChange}
-                                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
                                 placeholder="Enter the Course Estimated Price.."
                             />
                         </div>
@@ -244,6 +238,7 @@ const FormCourse = (props) => {
                                 isMulti
                                 name="courseTags"
                                 value={courseData.courseTags}
+                                className="bg-[var(--background)] text-[var(--foreground)]"
                                 onChange={(selectedOptions) => setCourseData({ ...courseData, courseTags: selectedOptions })}
                             />
                         </div>
@@ -267,7 +262,7 @@ const FormCourse = (props) => {
                                 id="courseCategories"
                                 value={courseData.courseCategories}
                                 onChange={handleChange}
-                                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
                                 placeholder="Enter the Course name.."
                             />
                         </div>
@@ -281,7 +276,7 @@ const FormCourse = (props) => {
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <select name="courseLevel" value={courseData.courseLevel} onChange={handleChange}
-                                className="block w-full rounded-md border-0 py-2 pl-3 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6">
+                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6">
                                 <option value="" disabled >Select Course Level</option>
                                 <option value="Easy">Easy</option>
                                 <option value="Medium">Medium</option>
@@ -308,7 +303,7 @@ const FormCourse = (props) => {
                                 name="videoTitle"
                                 value={courseData.videoTitle}
                                 onChange={handleChange}
-                                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
                                 placeholder="Enter the Video Title.."
                             />
                         </div>
@@ -331,7 +326,7 @@ const FormCourse = (props) => {
                                 name="videoURL"
                                 value={courseData.videoURL}
                                 onChange={handleChange}
-                                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7  ring-1  placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
                                 placeholder="Enter the Video URL.."
                             />
                         </div>
@@ -353,7 +348,7 @@ const FormCourse = (props) => {
                                 name="sourceCode"
                                 value={courseData.sourceCode}
                                 onChange={handleChange}
-                                className="block w-full rounded-md border-0 py-2 pl-9 pr-7 text-gray-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7  ring-1 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
                                 placeholder="Enter the Source Code Link.."
                             />
                         </div>
@@ -392,6 +387,7 @@ const FormCourse = (props) => {
                                 isMulti
                                 name="faculity"
                                 value={courseData.faculity}
+                                className="bg-[var(--background)] text-[var(--foreground)]"
                                 onChange={(selectedOptions) => setCourseData({ ...courseData, faculity: selectedOptions })}
                             />
                         </div>
@@ -404,9 +400,9 @@ const FormCourse = (props) => {
                             Video upload here.. <span className="text-red-500">*</span>
                         </label>
                         <input type="file"
-                            name="courseVideo"
-                            className="file-input file-input-bordered w-full h-10"
-                            onChange={(event)=>setCourseData({...courseData, 'courseVideo': event.target.files[0]})} />
+                            name="video"
+                            className="file-input file-input-bordered w-full h-10 bg-[var(--background)] text-[var(--foreground)]"
+                            onChange={(event)=>setCourseData({...courseData, 'video': event.target.files[0]})} />
                         {error.courseVideo && <label className="text-red-500 text-sm -mt-3">{error.courseVideo}</label>}
                     </div>
 
@@ -416,9 +412,9 @@ const FormCourse = (props) => {
                             Course Logo upload here.. <span className="text-red-500">*</span>
                         </label>
                         <input type="file"
-                            name="courselogo"
-                            className="file-input file-input-bordered w-full h-10"
-                            onChange={(event)=>setCourseData({...courseData, 'courselogo': event.target.files[0]})} />
+                            name="logo"
+                            className="file-input file-input-bordered w-full h-10 bg-[var(--background)] text-[var(--foreground)]"
+                            onChange={(event)=>setCourseData({...courseData, 'logo': event.target.files[0]})} />
                         {error.courselogo && <label className="text-red-500 text-sm -mt-3">{error.courselogo}</label>}
                     </div>
 

@@ -68,7 +68,7 @@ const Profile_admin = () => {
 
     return (
         <>
-        <Suspense fallback={<h1>Hi Baby</h1>}>
+        <Suspense fallback={<h1>Loading...</h1>}>
         {formData.username ? 
             (<section className="_container1">
                 <div className="_subContainer11">

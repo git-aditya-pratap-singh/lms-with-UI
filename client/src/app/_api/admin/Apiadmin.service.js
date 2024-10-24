@@ -37,7 +37,7 @@ class Apiadmin extends BaseControllerResponse {
 
     addCourses = async(formData)=>{
         try {
-            const response = await new ApiService().post('/dashboard/course/addCourse', formData);
+            const response = await new ApiService().uploadFileWithData('/dashboard/course/addCourse', formData);
             this.handleResponse(response);
             return response;
         } catch (err) {

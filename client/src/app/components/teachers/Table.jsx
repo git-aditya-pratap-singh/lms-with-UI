@@ -8,7 +8,7 @@ import IconComponent from "../../../assets/icons/IconComponent";
 
 import "../../../assets/css/component/_table.scss";
 
-const Table = (props) => {
+const Table = (props) => { 
 
   const dispatch = useDispatch();
   return (
@@ -85,13 +85,15 @@ const Table = (props) => {
                   </td>
                   <td>
                     <span className="flex gap-5">
-                      <IconComponent iconType="editIcon" iconSize="18" 
-                        iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"
-                        onClick={() => dispatch(add_teacher_popup({ check: true, key: "edit", item: item}) )}
-                      />
-                      <IconComponent iconType="deleteIcon" iconSize="18" 
-                        iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500"
-                      />
+                      <label onClick={() => dispatch(add_teacher_popup({ check: true, key: "edit", item: item}) )}>
+                        <IconComponent iconType="editIcon" iconSize="18" 
+                           iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500"/>
+                      </label>
+                     
+                     <label>
+                        <IconComponent iconType="deleteIcon" iconSize="18" 
+                          iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500" />
+                     </label>
                     </span>
                   </td>
                 </tr>

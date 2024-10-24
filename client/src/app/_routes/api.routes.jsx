@@ -14,6 +14,7 @@ import Students from "../pages/appdashboard/Students";
 import Teachers from "../pages/appdashboard/Teachers";
 import Course from "../pages/appdashboard/Courses";
 import Registration from "../pages/appdashboard/Registration";
+import Tranning from "../pages/appdashboard/Tranning";
 
 import { ProctedRouteGuard, IsloginGuard } from "../_guard/route.guard";
 import ApiRoutesCall from "./api.routes.call";
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
                 path: "/dashboard/profile",
                 element: <Profile />,
                 loader: new ApiRoutesCall().profileRoutesApiCall
+            },
+            {
+                path: "/dashboard/tranning",
+                element: <Tranning />
             },
             {
                 path: "/dashboard/students",

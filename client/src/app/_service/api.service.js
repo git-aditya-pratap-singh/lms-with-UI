@@ -9,7 +9,7 @@ class ApiService {
         this.api = (upload) => axios.create({
             baseURL: environmentURL.apiUrl,
             headers: {
-                'Content-Type': upload ? 'multipart/form-data' : 'application/form-data',
+                'Content-Type': upload ? 'multipart/form-data' : 'application/json',
                 'Authorization': token ? `Bearer ${token}` : '',
                 'Accept': 'application/json, multipart/form-data',
             },
@@ -34,14 +34,17 @@ class ApiService {
     async post(url, data) {
         return this.request('POST', url, data, null);
     }
-    async uploadFile(url, data) {
-        return this.request('POST', url, data, null, true);
-    }
     async put(url, data) {
         return this.request('PUT', url, data, null);
     }
     async delete(url, data = null) {
         return this.request('DELETE', url, data, null);
+    }
+    async uploadFile(url, data) {
+        return this.request('POST', url, data, null, true);
+    }
+    async uploadFileWithData(url, data) {
+        return this.request('POST', url, data, null, true);
     }
     handleError(error) {
         console.error('API Error:', error);
