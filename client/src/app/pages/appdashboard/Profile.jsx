@@ -135,7 +135,7 @@ const Profile_admin = () => {
                                 <p className="text-[var(--foreground)]">Male</p>
                                 <input type="radio"
                                     name="gender"
-                                    className="radio radio-primary accent-[var(--primary)]"
+                                    className="w-5 h-5 text-[var(--primary)] bg-[var(--background)] border-gray-300 focus:ring-ring accent-[var(--primary)]"
                                     value="Male"
                                     checked={formData.gender === 'Male'}
                                     onChange={handleChange}
@@ -145,7 +145,7 @@ const Profile_admin = () => {
                                 <p className="text-[var(--foreground)]">Female</p>
                                 <input type="radio"
                                     name="gender"
-                                    className="radio radio-primary accent-[var(--primary)]"
+                                    className="w-5 h-5 text-[var(--primary)] bg-[var(--background)] border-gray-300 focus:ring-ring accent-[var(--primary)]"
                                     value="Female"
                                     checked={formData.gender === 'Female'}
                                     onChange={handleChange}
@@ -159,7 +159,7 @@ const Profile_admin = () => {
                                 <p className="text-[var(--foreground)]">True</p>
                                 <input type="radio"
                                     name="hasAllAccess"
-                                    className="radio radio-primary accent-[var(--primary)] "
+                                    className="w-5 h-5 text-[var(--primary)] bg-[var(--background)] border-gray-300 focus:ring-ring accent-[var(--primary)]"
                                     value="true"
                                     checked={formData.hasAllAccess == "true"}
                                     onChange={handleChange}
@@ -170,7 +170,7 @@ const Profile_admin = () => {
                                 <p className="text-[var(--foreground)]">False</p>
                                 <input type="radio"
                                     name="hasAllAccess"
-                                    className="radio radio-primary accent-[var(--primary)]"
+                                    className="w-5 h-5 text-[var(--primary)] bg-[var(--background)] border-gray-300 focus:ring-ring accent-[var(--primary)]"
                                     value="false"
                                     checked={formData.hasAllAccess == "false"}
                                     onChange={handleChange}
@@ -179,7 +179,7 @@ const Profile_admin = () => {
                         </div>
 
 
-                        <textarea className="textarea textarea-bordered bg-[var(--background)] text-[var(--foreground)]"
+                        <textarea className="textarea textarea-bordered bg-[var(--background)] text-[var(--foreground)] focus:border-2 focus:border-[var(--primary)]"
                             style={{ resize: "none" }}
                             placeholder="Address"
                             value={formData.address}

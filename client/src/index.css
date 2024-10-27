@@ -22,6 +22,9 @@ body{
     --primary: #007DFC;
     --secondary: #03aeec4f;
 
+    --secondaryDash: #5faefe;
+    --ternaryDash: #a0cfff;
+
     --fontStyle: 'Signika Negative', sans-serif;
 
     --heading-color:#04223a;
@@ -48,6 +51,33 @@ body{
     --fade-in: fade-in 1s ease-in-out forwards;
     --zigzag: zigzag 0.5s ease-in-out;
 
+  }
+
+  .blue-theme{
+    --primary: #007DFC;
+    --secondaryDash: #5faefe;
+    --ternaryDash: #a0cfff;
+    
+  }
+  .red-theme{
+    --primary: #FF0026;
+    --secondaryDash: #ff5972;
+    --ternaryDash: #fe9baa;
+  }
+  .green-theme{
+    --primary: #03dd65;
+    --secondaryDash: #6af6a9;
+    --ternaryDash: #9ffdc9;
+  }
+  .orange-theme{
+    --primary: #f78126;
+    --secondaryDash: #fca766;
+    --ternaryDash: #ffc89f;
+  }
+  .violet-theme{
+    --primary: #9E3DFF;
+    --secondaryDash: #bd7bff;
+    --ternaryDash: #cc9cfcda;
   }
 }
 /* @layer base {

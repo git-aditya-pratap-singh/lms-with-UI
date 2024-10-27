@@ -167,8 +167,8 @@ const RegistrationForms = ({forms, schema}) => {
                     checked={data.gender === 'male'}
                     onChange={handleChange}
                     className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
-                 dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-[var(--primary)] "/>
-                  <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-[var(--foreground)]">Male</label>
+                  focus:ring-2 dark:bg-gray-700 "/>
+                  <label className="ms-2 text-sm font-medium text-[var(--foreground)]">Male</label>
                 </div>
                 <div className="flex items-center me-4">
                   <input id="inline-radio"
@@ -178,8 +178,8 @@ const RegistrationForms = ({forms, schema}) => {
                     checked={data.gender === 'female'}
                     onChange={handleChange}
                     className="w-4 h-4 text-[var(--primary)] bg-gray-100 border-gray-300 focus:ring-ring accent-[var(--primary)]
-                 dark:focus:ring-ring dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-[var(--primary)]"/>
-                  <label className="ms-2 text-sm font-medium text-[var(--foreground)] dark:text-[var(--foreground)]">Female</label>
+                    focus:ring-2"/>
+                  <label className="ms-2 text-sm font-medium text-[var(--foreground)] ">Female</label>
                 </div>
               </div>
               {error.gender && <label className="text-red-500 text-sm -mt-3">{error.gender}</label>}

@@ -88,7 +88,7 @@ IconComponent.propTypes = {
     'tagIcon',
     'bufferIcon'
   ]).isRequired,
-  iconSize: PropTypes.number,
+  iconSize: PropTypes.string,
   iconColor: PropTypes.any,
   iconStyle: PropTypes.any,
 };

@@ -198,7 +198,7 @@ const TeacherForm = (props) => {
               </div>
               <Select
                 options={courseListItem}
-                className="text-[var(--foreground)]"
+                className="text-[var(--foreground)] text-sm"
                 isMulti
                 name="course"
                 value={formData.course}
@@ -283,8 +283,7 @@ const TeacherForm = (props) => {
           <div>
             <label
               htmlFor="price"
-              className="block text-sm font-medium leading-3 text-gray-800"
-            >
+              className="block text-sm font-medium leading-3 text-gray-800">
               Parmanent address
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -295,8 +294,8 @@ const TeacherForm = (props) => {
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
-                className="resize-none block w-full rounded focus:shadow-md focus:shadow-blue-200/50 py-1.5 pl-3 pr-20 bg-[var(--background)] text-[var(--foreground)] placeholder:text-gray-400 
-                 ring-1 ring-gray-300 focus:ring-2 focus:ring-ring sm:text-sm sm:leading-6"
+                className="resize-none block w-full rounded focus:shadow-md py-1.5 pl-3 pr-20 bg-[var(--background)] text-[var(--foreground)] placeholder:text-gray-400 
+                 border-2 sm:text-sm sm:leading-6 textarea textarea-bordered focus:border-2 focus:border-[var(--primary)] outline-none"
                 placeholder="Enter the Parmanent address.."
                 rows="4"
               ></textarea>
@@ -311,8 +310,8 @@ const TeacherForm = (props) => {
               Cover photo
             </label>
             <div className="mt-1 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-[1.05rem]">
-              <div className="text-center">
-                <IconComponent iconType="photoIcon"
+              <div className="text-center flex flex-col items-center">
+                <IconComponent iconType="photoIcon" iconSize="36"
                   className="mx-auto h-8 w-8 text-[var(--foreground)]"
                   aria-hidden="true"
                 />

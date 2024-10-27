@@ -43,6 +43,7 @@ const getTokenFromStorage = ()=>{
 }
 const storeTokenRemove = ()=>{
     localStorage.removeItem('token')
+    localStorage.removeItem('theme')
 }
 
 export default AuthGuard; 

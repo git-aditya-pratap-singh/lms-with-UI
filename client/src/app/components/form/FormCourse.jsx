@@ -5,6 +5,7 @@ import JoditEditor from 'jodit-react';
 import toTitleCase from '../../common/titleCase';
 import Apiadmin from "../../_api/admin/Apiadmin.service";
 import IconComponent from "../../../assets/icons/IconComponent";
+import SelectDropDown from "../FormComponents/ThemeDropDown";
 
 import "../../../assets/css/component/_formcourse.scss";
 
@@ -138,7 +139,7 @@ const FormCourse = (props) => {
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <IconComponent iconType="bookopenIcon" iconColor="#007DFC"/>
+                                    <IconComponent iconType="bookopenIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
                             <input
@@ -146,7 +147,7 @@ const FormCourse = (props) => {
                                 name="courseName"
                                 value={courseData.courseName}
                                 onChange={handleChange}
-                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="outline-none bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-[var(--primary)] focus:shadow-md sm:text-sm sm:leading-6"
                                 placeholder="Enter the Course name.."
                             />
                         </div>
@@ -183,7 +184,7 @@ const FormCourse = (props) => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <IconComponent iconType="holdDollerIcon" iconColor="#007DFC"/>
+                                    <IconComponent iconType="holdDollerIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
                             <input
@@ -191,7 +192,7 @@ const FormCourse = (props) => {
                                 name="coursePrice"
                                 value={courseData.coursePrice}
                                 onChange={handleChange}
-                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="outline-none bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-[var(--primary)] focus:shadow-md sm:text-sm sm:leading-6"
                                 placeholder="Enter the Course Price..."
                             />
                         </div>
@@ -206,7 +207,7 @@ const FormCourse = (props) => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                   <IconComponent iconType="dollerIcon" iconColor="#007DFC"/>
+                                   <IconComponent iconType="dollerIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
                             <input
@@ -215,7 +216,7 @@ const FormCourse = (props) => {
                                 id="courseEstiPrice"
                                 value={courseData.courseEstiPrice}
                                 onChange={handleChange}
-                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="outline-none bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-[var(--primary)] focus:shadow-md sm:text-sm sm:leading-6"
                                 placeholder="Enter the Course Estimated Price.."
                             />
                         </div>
@@ -230,7 +231,7 @@ const FormCourse = (props) => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                   <IconComponent iconType="tagIcon" iconColor="#007DFC"/>
+                                   <IconComponent iconType="tagIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
                             <Select
@@ -238,7 +239,7 @@ const FormCourse = (props) => {
                                 isMulti
                                 name="courseTags"
                                 value={courseData.courseTags}
-                                className="bg-[var(--background)] text-[var(--foreground)]"
+                                className="bg-[var(--background)] text-[var(--foreground)] text-sm"
                                 onChange={(selectedOptions) => setCourseData({ ...courseData, courseTags: selectedOptions })}
                             />
                         </div>
@@ -253,7 +254,7 @@ const FormCourse = (props) => {
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                   <IconComponent iconType="bufferIcon" iconColor="#007DFC"/>
+                                   <IconComponent iconType="bufferIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
                             <input
@@ -262,7 +263,7 @@ const FormCourse = (props) => {
                                 id="courseCategories"
                                 value={courseData.courseCategories}
                                 onChange={handleChange}
-                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="outline-none bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-[var(--primary)] focus:shadow-md sm:text-sm sm:leading-6"
                                 placeholder="Enter the Course name.."
                             />
                         </div>
@@ -276,7 +277,7 @@ const FormCourse = (props) => {
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <select name="courseLevel" value={courseData.courseLevel} onChange={handleChange}
-                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6">
+                                className="outline-none bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-[var(--primary)] focus:shadow-md sm:text-sm sm:leading-6">
                                 <option value="" disabled >Select Course Level</option>
                                 <option value="Easy">Easy</option>
                                 <option value="Medium">Medium</option>
@@ -295,7 +296,7 @@ const FormCourse = (props) => {
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <IconComponent iconType="videoIcon" iconColor="#007DFC"/>
+                                    <IconComponent iconType="videoIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
                             <input
@@ -303,7 +304,7 @@ const FormCourse = (props) => {
                                 name="videoTitle"
                                 value={courseData.videoTitle}
                                 onChange={handleChange}
-                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="outline-none bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-[var(--primary)] focus:shadow-md sm:text-sm sm:leading-6"
                                 placeholder="Enter the Video Title.."
                             />
                         </div>
@@ -318,7 +319,7 @@ const FormCourse = (props) => {
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                   <IconComponent iconType="videoIcon" iconColor="#007DFC"/>
+                                   <IconComponent iconType="videoIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
                             <input
@@ -326,7 +327,7 @@ const FormCourse = (props) => {
                                 name="videoURL"
                                 value={courseData.videoURL}
                                 onChange={handleChange}
-                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7  ring-1  placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="outline-none bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-[var(--primary)] focus:shadow-md sm:text-sm sm:leading-6"
                                 placeholder="Enter the Video URL.."
                             />
                         </div>
@@ -340,7 +341,7 @@ const FormCourse = (props) => {
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span className="text-gray-800 sm:text-sm">
-                                    <IconComponent iconType="linkIcon" iconColor="#007DFC"/>
+                                    <IconComponent iconType="linkIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
                             <input
@@ -348,7 +349,7 @@ const FormCourse = (props) => {
                                 name="sourceCode"
                                 value={courseData.sourceCode}
                                 onChange={handleChange}
-                                className="bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7  ring-1 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-[#007DFC] sm:text-sm sm:leading-6"
+                                className="outline-none bg-[var(--background)] text-[var(--foreground)] w-full rounded-md border-0 py-2 pl-9 pr-7 ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-[var(--primary)] focus:shadow-md sm:text-sm sm:leading-6"
                                 placeholder="Enter the Source Code Link.."
                             />
                         </div>
@@ -387,7 +388,7 @@ const FormCourse = (props) => {
                                 isMulti
                                 name="faculity"
                                 value={courseData.faculity}
-                                className="bg-[var(--background)] text-[var(--foreground)]"
+                                className="bg-[var(--background)] text-[var(--foreground)] text-sm"
                                 onChange={(selectedOptions) => setCourseData({ ...courseData, faculity: selectedOptions })}
                             />
                         </div>
@@ -420,7 +421,7 @@ const FormCourse = (props) => {
 
 
                     <div className="flex justify-end items-center">
-                        <button className=" w-24 flex justify-center items-center gap-x-2 bg-[#007DFC] p-2 text-white rounded 
+                        <button className="w-24 flex justify-center items-center gap-x-2 bg-[var(--primary)] p-2 text-white rounded 
                             shadow-md duration-300 ease-in-out active:scale-90">
                             Submit <IconComponent iconType="arrowIcon" iconSize="12"/>
                         </button>

@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import toTitleCase from "../../../common/titleCase";
 import NotificationPopup from "../../../components/NotificationPopup";
 import { useAuthGuard, storeTokenRemove } from "../../../_guard/auth.guard";
-import SelectDropDown from "../../../components/FormComponents/SelectDropDown";
+import ThemeSwitcher from "../../../_themes/ThemeSwitcher";
 
 import { AiFillDashboard } from "react-icons/ai";
 import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader, FaDatabase, FaBell } from "react-icons/fa";
@@ -24,7 +24,6 @@ const Dashboard = () => {
 
   const [toggle, setToggle] = useState(false);
   const [notifyPopup , setnotifyPopup] = useState(false);
-  const [themeItems, setThemeItems] = useState();
   const [auth, setAuth] = useAuthGuard();
   const navigate = useNavigate();
   const location = useLocation();
@@ -195,20 +194,7 @@ const Dashboard = () => {
 
             <div className="_dashDetails">
 
-                <SelectDropDown
-                value={themeItems}
-                onChange={(newValue)=> setThemeItems(newValue)}
-                placeholder="Select Theme"
-                options={
-                  [
-                    {color: 'bg-[#FF0026]', themeName: 'Red Theme'}, 
-                    {color: 'bg-[#007DFC]', themeName: 'Blue Theme'},  
-                    {color: 'bg-[#2BFF8B]', themeName: 'Green Theme'},
-                    {color: 'bg-[#f78126]', themeName: 'Orange Theme'},
-                    {color: 'bg-[#9E3DFF]', themeName: 'Violet Theme'}
-                  ]
-                }
-                />
+              <ThemeSwitcher/>
 
               <span>
                 <label><FaCircleUser size={21} /></label>
