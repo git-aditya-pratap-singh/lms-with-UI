@@ -8,7 +8,7 @@ import { PiCertificate, PiUsersThree, PiBooksLight, PiApplePodcastsLogoLight, Pi
 import { MdComputer } from "react-icons/md";
 
 import header from "../../../assets/img/home-image.png";
-import join from "../../../assets/img/cd.png";
+import join from "../../../assets/img/cartoon.png";
 import img_1 from "../../../assets/img/img_1.jpg";
 import img_2 from "../../../assets/img/img_2.jpg";
 import img_3 from "../../../assets/img/img_3.jpg";

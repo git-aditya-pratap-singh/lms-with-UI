@@ -9,6 +9,7 @@ import toTitleCase from "../../../common/titleCase";
 import NotificationPopup from "../../../components/NotificationPopup";
 import { useAuthGuard, storeTokenRemove } from "../../../_guard/auth.guard";
 import ThemeSwitcher from "../../../_themes/ThemeSwitcher";
+import ThemeMode from "../../../_themes/ThemeMode";
 
 import { AiFillDashboard } from "react-icons/ai";
 import { FaUserCircle, FaChalkboardTeacher, FaUsers, FaBookReader, FaDatabase, FaBell } from "react-icons/fa";
@@ -194,13 +195,18 @@ const Dashboard = () => {
 
             <div className="_dashDetails">
 
-              <ThemeSwitcher/>
+              <div className="hidden md:block">
+                <ThemeSwitcher/>
+              </div>
 
               <span>
                 <label><FaCircleUser size={21} /></label>
                 <label><FaBell size={18} onClick={() => setnotifyPopup(!notifyPopup)}/></label>
                 <label><HiOutlineDotsVertical size={21} /></label>
               </span>
+
+              <ThemeMode/>
+              
             </div>
             
             <div className={`absolute right-[1rem] top-[4.3rem] z-[2] duration-300 
@@ -212,12 +218,16 @@ const Dashboard = () => {
           </div>
 
           <div className="_welcomeKit">
-            <label>Welcome Back {toTitleCase(auth?.user?.name)} 🙋‍♂️!</label>
+            <label>Hi, {toTitleCase(JSON.parse(localStorage.getItem('token')).UserInfo?.name.split(" ")[0])}!</label>
             {/* <label>Time: <label className="text-blue-500">01</label> : 
               <label className="text-red-500"> 24</label> :
               <label className="text-green-500"> 37</label>
               <label className="text-yellow-500"> AM</label>
             </label> */}
+            <label className="block sm:hidden">
+              <ThemeSwitcher/>
+            </label>
+
           </div>
 
           <div className="_outlet">

@@ -15,7 +15,7 @@ const AuthGuard = ({ children }) => {
             const parseData = JSON.parse(data)
             setAuth({
                 ...auth,
-                user : parseData.userValid,
+                user : parseData.UserInfo,
                 token : parseData.token,
             }) 
         }

@@ -69,7 +69,7 @@ const options= {
   },
   markers: {
     size: 4,
-    colors: '#fff',
+    colors: 'var(--primary)',
     strokeColors: ['#3056D3', '#80CAEE'],
     strokeWidth: 3,
     strokeOpacity: 0.8,
@@ -140,7 +140,7 @@ const ChartOne= () => {
   handleReset;
 
   return (
-    <div className="col-span-12 rounded border border-stroke bg-white px-5 pt-7 pb-5 shadow-default sm:px-7 xl:col-span-8">
+    <div className="col-span-12 rounded bg-[var(--card)] px-5 pt-7 pb-5 sm:px-7 xl:col-span-8"  style={{boxShadow: "var(--box-shadow2)"}}>
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-[800px] flex-wrap gap-3">
           <div className="flex">
@@ -163,14 +163,14 @@ const ChartOne= () => {
           </div>
         </div>
         <div className="flex w-full max-w-45 justify-end">
-          <div className="inline-flex items-center rounded-md bg-whiter p-1 dark:bg-meta-4">
-            <button className="rounded bg-white py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card">
+          <div className="inline-flex items-center rounded-md bg-whiter p-1 ">
+            <button className="rounded bg-[var(--primary)] py-1 px-3 text-xs font-medium text-[var(--card-foreground)] shadow-card hover:bg-bg-[var(--primary)] hover:shadow-card">
               Day
             </button>
-            <button className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card ">
+            <button className="rounded py-1 px-3 text-xs font-medium text-[var(--card-foreground)] hover:bg-[var(--primary)] hover:shadow-card hover:">
               Week
             </button>
-            <button className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card ">
+            <button className="rounded py-1 px-3 text-xs font-medium text-[var(--card-foreground)] hover:bg-[var(--primary)] hover:shadow-card ">
               Month
             </button>
           </div>

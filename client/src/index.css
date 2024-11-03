@@ -1,85 +1,126 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-    
+
 }
-  
-body{
+
+body {
   overflow-x: hidden;
   font-size: 16px;
   font-family: var(--fontStyle);
   background-color: var(--background);
-    
+
 }
 
-@layer base{
-  :root{
-    --primary: #007DFC;
-    --secondary: #03aeec4f;
+@layer base {
+  :root {
+    .light {
+      --primary: #007DFC;
+      --secondary: #03aeec4f;
 
-    --secondaryDash: #5faefe;
-    --ternaryDash: #a0cfff;
+      --secondaryDash: #5faefe;
+      --ternaryDash: #a0cfff;
 
-    --fontStyle: 'Signika Negative', sans-serif;
+      --fontStyle: 'Signika Negative', sans-serif;
 
-    --heading-color:#04223a;
-    --paragraph-color:#494949;
+      --heading-color: #04223a;
+      --paragraph-color: #494949;
 
-    --background: #fff;
-    --foreground: #212e3a;
-    --foreground-active: #fff;
+      --background: #fff;
+      --foreground: #212e3a;
+      --foreground-active: #fff;
 
-    --card: #fcfcfc;
-    --card-foreground: #212e3a;
+      --card: #fcfcfc;
+      --card-foreground: #212e3a;
 
-    --ring: var(--primary);
-    --radius: 0.5rem;
+      --ring: var(--primary);
+      --radius: 0.5rem;
 
-    --footer-color:#9ab3ff53;
+      --footer-color: #9ab3ff53;
 
 
-    --navbar-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-    --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    --box-shadow2: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      --navbar-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+      --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      --box-shadow2: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 
-    --slide-down: slide-down 0.7s cubic-bezier(0.215, 0.610, 0.355, 1);
-    --fade-in: fade-in 1s ease-in-out forwards;
-    --zigzag: zigzag 0.5s ease-in-out;
+      --slide-down: slide-down 0.7s cubic-bezier(0.215, 0.610, 0.355, 1);
+      --fade-in: fade-in 1s ease-in-out forwards;
+      --zigzag: zigzag 0.5s ease-in-out;
+    }
+
+    .dark{
+      --primary: #007DFC;
+      --secondary: #03aeec4f;
+
+      --secondaryDash: #5faefe;
+      --ternaryDash: #a0cfff;
+
+      --fontStyle: 'Signika Negative', sans-serif;
+
+      --heading-color: #04223a;
+      --paragraph-color: #494949;
+
+      --background: #212121;
+      --foreground: #212e3a;
+      --foreground-active: #fff;
+
+      --card: #fcfcfc;
+      --card-foreground: #212e3a;
+
+      --ring: var(--primary);
+      --radius: 0.5rem;
+
+      --footer-color: #9ab3ff53;
+
+
+      --navbar-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+      --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      --box-shadow2: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+      --slide-down: slide-down 0.7s cubic-bezier(0.215, 0.610, 0.355, 1);
+      --fade-in: fade-in 1s ease-in-out forwards;
+      --zigzag: zigzag 0.5s ease-in-out;
+    }
 
   }
 
-  .blue-theme{
+  .blue-theme {
     --primary: #007DFC;
     --secondaryDash: #5faefe;
     --ternaryDash: #a0cfff;
-    
+
   }
-  .red-theme{
+
+  .red-theme {
     --primary: #FF0026;
     --secondaryDash: #ff5972;
     --ternaryDash: #fe9baa;
   }
-  .green-theme{
+
+  .green-theme {
     --primary: #03dd65;
     --secondaryDash: #6af6a9;
     --ternaryDash: #9ffdc9;
   }
-  .orange-theme{
+
+  .orange-theme {
     --primary: #f78126;
     --secondaryDash: #fca766;
     --ternaryDash: #ffc89f;
   }
-  .violet-theme{
+
+  .violet-theme {
     --primary: #9E3DFF;
     --secondaryDash: #bd7bff;
     --ternaryDash: #cc9cfcda;
   }
 }
+
 /* @layer base {
     :root {
     .light{
@@ -146,16 +187,117 @@ body{
 }
 }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
-  } */
+/* src/styles/animations.css */
 
-  /* src/styles/animations.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  font-size: 16px;
+  font-family: var(--fontStyle);
+  background-color: var(--background);
+}
+
+@layer base {
+  :root {
+    /* Common Variables */
+    --fontStyle: 'Signika Negative', sans-serif;
+    --primary: #007DFC;
+    --secondary: #03aeec3a;
+    --secondaryDash: #5faefe;
+    --ternaryDash: #a0cfff;
+    --ring: var(--primary);
+    --radius: 0.5rem;
+    --navbar-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    --box-shadow2: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    --slide-down: slide-down 0.7s cubic-bezier(0.215, 0.610, 0.355, 1);
+    --fade-in: fade-in 1s ease-in-out forwards;
+    --zigzag: zigzag 0.5s ease-in-out;
+  }
+
+  /* Light Theme */
+  .light {
+    --secondary: #03aeec4f;
+    --heading-color: #04223a;
+    --paragraph-color: #494949;
+
+    --background: #fff;
+    --foreground: #212e3a;
+    --foreground-active: #fff;
+
+    --card: #fcfcfc;
+    --card-foreground: #212e3a;
+    --footer-color: #9ab3ff53;
+
+    --borderColor: #fff;
+
+    --backgroundImageCarrier: url("./assets/img/b2.jpg");
+    --background-image-service: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%);
+
+  }
+
+  /* Dark Theme */
+  .dark {
+    --secondary: #69bedac7;
+    --heading-color: #ddeffe;
+    --paragraph-color: #fdf9f9;
+
+    --background: #243642;
+    --foreground: #f6f6f6;
+    --foreground-active: #fff;
+
+    --card: #2d3d48;
+    --card-foreground: #f6f6f6;
+    --footer-color: #243642;
+
+    --borderColor: #334155;
+
+    --backgroundImageCarrier: url("");
+    --background-image-service: '';
+  }
+
+  /* Color Themes */
+  .blue-theme {
+    --primary: #007DFC;
+    --secondaryDash: #5faefe;
+    --ternaryDash: #a0cfff;
+  }
+
+  .red-theme {
+    --primary: #FF0026;
+    --secondaryDash: #ff5972;
+    --ternaryDash: #fe9baa;
+  }
+
+  .green-theme {
+    --primary: #03dd65;
+    --secondaryDash: #6af6a9;
+    --ternaryDash: #9ffdc9;
+  }
+
+  .orange-theme {
+    --primary: #f78126;
+    --secondaryDash: #fca766;
+    --ternaryDash: #ffc89f;
+  }
+
+  .violet-theme {
+    --primary: #9E3DFF;
+    --secondaryDash: #bd7bff;
+    --ternaryDash: #cc9cfcda;
+  }
+}
+
+/* Animations */
 @keyframes slide-down {
   from {
     transform: translateY(-50%);
@@ -173,5 +315,3 @@ body{
     opacity: 1;
   }
 }
-
-

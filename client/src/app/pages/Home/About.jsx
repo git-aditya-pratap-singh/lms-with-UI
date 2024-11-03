@@ -4,7 +4,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import about_img from "../../../assets/img/about.jpg"
+import about_img from "../../../assets/img/about.png"
 import admin from "../../../assets/img/admin.jpg";
 //-------------ICON--------------------
 import IconComponent from "../../../assets/icons/IconComponent";
@@ -121,20 +121,20 @@ const Card = () => {
 const Aboutme = ()=>{
     return(
         <>
-        <section className="flex flex-col justify-center items-center space-y-5 w-11/12 mx-auto py-10 px-5 rounded" data-aos="zoom-in">
+        <section className="_class flex flex-col justify-center items-center space-y-5 w-11/12 mx-auto py-10 px-5 rounded" data-aos="zoom-in">
             <h1 className="font text-4xl text-[var(--primary)]">About me</h1>
             <img src={admin} alt="Error!" className="w-44 h-44 object-cover rounded-full flex justify-center items-center drop-shadow-xl" data-aos="zoom-out"/>
-            <h1 className="font text-xl">Aditya Pratap Singh</h1>
-            <p className="text-gray-600 text-justify font-serif lg:w-1/2 text-[1rem]"> Hello! I am Aditya Pratap Singh, a passionate MERN-Stack Web developer specializing in Reactjs, Nodejs, Expressjs & MongoDB. With a strong foundation 
+            <h1 className="font text-xl text-[var(--foreground)]">Aditya Pratap Singh</h1>
+            <p className="text-[var(--paragraph-color)] text-justify font-serif lg:w-1/2 text-[1rem]"> Hello! I am Aditya Pratap Singh, a passionate MERN-Stack Web developer specializing in Reactjs, Nodejs, Expressjs & MongoDB. With a strong foundation 
             in HTML, CSS, and responsive web design, I have the skills to create visually appealing and user-friendly web applications.</p>
-            <span className="font text-md">Connect with me</span>
+            <span className="font text-md text-[var(--paragraph-color)]">Connect with me</span>
             
             <span className="flex justify-center items-center gap-x-8 text-2xl">
 
                <NavLink to="https://www.Linkedin.com/in/theaditya-pratap-singh/">
                 <h1 className="text-blue-500"><IconComponent iconType="xmLinkedinIcon" /></h1></NavLink>
 
-               <NavLink to="https://github.com/git-aditya-pratap-singh"><h1 className="text-gray-700">
+               <NavLink to="https://github.com/git-aditya-pratap-singh"><h1 className="text-[var(--foreground)]">
                 <IconComponent iconType="xmGithubIcon" /></h1></NavLink>
 
                <NavLink to="https://gitweb-portfolio.netlify.app/"><h1 className="text-[#8c03fcfd]">

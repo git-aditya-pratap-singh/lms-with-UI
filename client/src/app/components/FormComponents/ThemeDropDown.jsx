@@ -6,7 +6,7 @@ const ThemeDropDown = ({onChange, placeholder, value, options})=>{
     const [open, setOpen] = useState(false);
 
     return(
-        <section className="w-[200px]">
+        <section className="w-[11rem]">
             <div onClick={()=> setOpen(!open)}
             tabIndex={0} 
             className="w-full flex justify-between items-center py-2 px-3 border-2 border-gray-400
@@ -21,7 +21,7 @@ const ThemeDropDown = ({onChange, placeholder, value, options})=>{
             </div>
 
 
-            {open &&  <div className="bg-[var(--card)] absolute top-16 w-[200px] max-h-[300px] px-1 py-3 border shadow-lg border-gray-200 rounded-md z-20 overflow-y-scroll ">
+            {open &&  <div className="bg-[var(--card)] absolute top-[8.3rem] sm:top-[4rem] w-[11rem] max-h-[300px] px-2 py-3 border shadow-lg border-gray-200 rounded-md z-20 overflow-y-scroll ">
               <style jsx>{`
                 ::-webkit-scrollbar {
                 display: none;
@@ -33,9 +33,10 @@ const ThemeDropDown = ({onChange, placeholder, value, options})=>{
                     onChange(option);
                     setOpen(false);
                   }}
-                  className={`flex justify-start items-center ${option?.themeName === value?.themeName ? 'bg-[#d5e9fb]' : 'bg-white'} space-x-2 hover:bg-[aliceblue] px-2 rounded-md cursor-pointer`}>
+                  className={`flex justify-start items-center ${option?.themeName === value?.themeName && 'bg-[#d5e9fb]'} space-x-2 hover:bg-[aliceblue] px-2 rounded-md cursor-pointer`}>
                     <span className={`w-5 h-5 ${option?.color} rounded-full`}></span>
-                    <p className="text-sm py-2 text-[var(--card-foreground)] cursor-pointer">{option?.themeName}</p>
+                    <p className={`text-sm py-2 ${option?.themeName === value?.themeName ? 'text-gray-800' : 'text-[var(--card-foreground)]'}  
+                      cursor-pointer`}>{option?.themeName}</p>
                   </div>
                 )}
             </div>

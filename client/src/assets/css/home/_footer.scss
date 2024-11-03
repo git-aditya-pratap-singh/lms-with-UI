@@ -16,12 +16,15 @@ $background-color_7: #212121;
 	gap: 0.2rem;
 	padding: 1rem;
 	background-color: var(--footer-color);
+	border-top: 1px solid var(--borderColor);
+	border-bottom-style: none;
 }
 
 ._subContainer-1 {
 	padding: 3rem;
 	max-width: 600px;
 	text-align: justify;
+	
 	h1 {
 		font-size: 1.7rem;
 		color: var(--heading-color);

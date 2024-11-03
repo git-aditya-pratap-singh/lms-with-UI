@@ -27,8 +27,9 @@
       border-radius: 10px;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
         rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-        transition: all 0.5s ease-in-out;
-        cursor: pointer;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+      background-color: var(--card);
       ._head {
         display: flex;
         justify-content: flex-start;
@@ -69,7 +70,7 @@
   justify-content: space-evenly;
   align-items: center;
   gap:3rem;
-  background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%);
+  background-image: var(--background-image-service);
   ._serviceFooterChild-1{ 
     display: flex;
     flex-direction: column;
@@ -82,7 +83,7 @@
     }
     h2{
       font-size: 3rem;
-      color:var(--heading-color);
+      color: var(--heading-color);
       font-weight: 600;
       line-height: normal;
       span{
@@ -141,6 +142,7 @@
           h2{
             font-size: 1.4rem;
             font-weight: 600;
+            color: var(--card-foreground);
           }
           p{
             font-size: 0.9rem;

@@ -6,7 +6,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-image: url('../../img/toor.jpg');
+    background-image: url('../../img/join.png');
+    object-fit: cover;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -66,7 +67,7 @@
                 font-size: 1rem;
                 margin: 10px 0;
                 border: none;
-                border-bottom: 2px solid #333;
+                border-bottom: 2px solid var(--primary);
                 outline: none;
                 resize: none;
                 background-color: transparent;
@@ -96,7 +97,7 @@
                 font-size: 1rem;
                 margin: 10px 0;
                 border: none;
-                border-bottom: 2px solid #333;
+                border-bottom: 2px solid var(--primary);
                 outline: none;
                 resize: none;
                 background-color: transparent;
@@ -127,6 +128,7 @@
                 margin: 10px 0;
                 pointer-events: none;
                 transition: 0.5s;
+                color: var(--foreground);
                 
             }
         }

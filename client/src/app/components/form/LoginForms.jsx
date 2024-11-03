@@ -140,7 +140,7 @@ return (
               <IconComponent iconType="linkedInIcon" iconSize="20" iconColor="#007DFC"/>
             </span>
             <span>
-              <IconComponent iconType="githubIcon" iconSize="20" iconStyle="text-gray-700"/>
+              <IconComponent iconType="githubIcon" iconSize="20" iconStyle="text-[var(--foreground)]"/>
             </span>
           </div>
         </div>

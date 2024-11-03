@@ -58,10 +58,11 @@ const ChartTwo = (props) => {
   handleReset;
 
   return (
-    <div className="max-w-[400px] sm:px-7 col-span-12 rounded border border-stroke bg-white px-5 pb-5 pt-7 shadow-default  xl:col-span-5">
+    <div className="w-[20rem] sm:w-full sm:px-7 col-span-12 rounded bg-[var(--card)] px-5 pb-5 pt-7 xl:col-span-5" 
+    style={{boxShadow: "var(--box-shadow2)"}}>
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black">
+          <h5 className="text-xl font-semibold text-[var(--card-foreground)]">
             Dashboard Analysis
           </h5>
         </div>
@@ -81,7 +82,7 @@ const ChartTwo = (props) => {
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-5 w-6 rounded-full bg-[var(--primary)]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black">
+            <p className="flex w-full justify-between text-sm font-medium text-[var(--card-foreground)]">
               <span> Students </span>
               <span> {percentageList[0]}% </span>
             </p>
@@ -90,7 +91,7 @@ const ChartTwo = (props) => {
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-5 w-6 rounded-full bg-[var(--secondaryDash)]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black ">
+            <p className="flex w-full justify-between text-sm font-medium text-[var(--card-foreground)] ">
               <span> Teachers </span>
               <span> {percentageList[1]}% </span>
             </p>
@@ -99,7 +100,7 @@ const ChartTwo = (props) => {
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-5 w-6 rounded-full bg-[var(--ternaryDash)]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black ">
+            <p className="flex w-full justify-between text-sm font-medium text-[var(--card-foreground)] ">
               <span> Courses </span>
               <span> 45% </span>
             </p>
@@ -108,7 +109,7 @@ const ChartTwo = (props) => {
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-5 w-6 rounded-full bg-[var(--ternaryDash)]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black ">
+            <p className="flex w-full justify-between text-sm font-medium text-[var(--card-foreground)] ">
               <span> Tranning </span>
               <span> 12% </span>
             </p>

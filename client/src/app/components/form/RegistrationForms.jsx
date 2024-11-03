@@ -133,7 +133,7 @@ const RegistrationForms = ({forms, schema}) => {
                   options={courseListItem}
                   isMulti
                   name="course"
-                  className="text-[var(--foreground)]"
+                  className="text-[var(--foreground)] text-sm"
                   value={data.course}
                   onChange={(selectedOptions) => setData({ ...data, course: selectedOptions })}
                 />

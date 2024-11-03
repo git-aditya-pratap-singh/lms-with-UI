@@ -29,14 +29,16 @@ const Tranning = ()=>{
               </div>
             </div>
 
-            <div className="_courseGridSection">
-            <CourseCard/>
-            <CourseCard/>
-            <CourseCard/>
-            <CourseCard/>
-            <CourseCard/>
-            <CourseCard/>
-            <CourseCard/>
+            <div className="_courseGridSection bg-red-500 h-full overflow-scroll">
+              {
+              [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((item)=>{
+                return(
+                  <CourseCard/>
+                )
+              })
+              }
+           
+            
             </div>
         </section>
     )

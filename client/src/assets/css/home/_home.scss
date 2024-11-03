@@ -77,7 +77,7 @@ $background-color_5: #f10156;
     p {
       line-height: 1rem;
       font-size: 0.8rem;
-      color: var(--paragraph-color);
+      color: var(--foreground);
     }
   }
   ._subIconContainer2 {
@@ -149,10 +149,11 @@ $background-color_5: #f10156;
   padding: 2rem;
   gap: 1rem;
   overflow: hidden;
+  border-top: 1px solid var(--borderColor);
   ._sub-strip {
     width: 250px;
     padding: 0.8rem;
-    background-color: var(--background);
+    background-color: var(--card);
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -174,7 +175,7 @@ $background-color_5: #f10156;
     p {
       line-height: 1rem;
       font-size: 0.8rem;
-      color: var(--paragraph-color);
+      color: var(--card-foreground);
     }
     &:nth-child(1) {
       span {
@@ -221,7 +222,7 @@ $background-color_5: #f10156;
 
 ._carrier {
   padding: 2rem;
-  background-image: url("../../img/b2.jpg");
+  background-image: var(--backgroundImageCarrier);
   background-size: cover;
   ._carrierText {
     font-size: 2.5rem;
@@ -249,7 +250,8 @@ $background-color_5: #f10156;
     justify-items: center;
     align-items: self-start;
     gap: 0.8rem;
-    background-color: $background-color_1;
+    background-color: var(--card);
+    border: 1px solid var(--borderColor);
     transition: all 0.4s ease-in-out;
     cursor: pointer;
     span {
@@ -303,6 +305,7 @@ $background-color_5: #f10156;
   justify-content: space-around;
   align-items: center;
   gap: 0.8rem;
+  border: 1px solid var(--borderColor);
 }
 
 ._Trained-child-1 {
@@ -427,7 +430,7 @@ $background-color_5: #f10156;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%);
+  background-image: var(--background-image-service);
   padding: 2rem 4rem;
   ._child-masterSkills-1 {
     width: 100%;
@@ -483,7 +486,7 @@ $background-color_5: #f10156;
     position: relative;
     width: 100%;
     img {
-      mix-blend-mode: multiply;
+      
       width: 500px;
       margin: auto;
     }
@@ -763,6 +766,7 @@ $background-color_5: #f10156;
       font-size: 2rem;
       margin-top: 0rem;
       line-height: normal;
+      color: var(--heading-color)
       span {
         font-size: 2rem;
       }
