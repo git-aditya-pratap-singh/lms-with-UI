@@ -85,12 +85,12 @@ const Table = (props) => {
                     <span className="flex gap-5">
                       <label onClick={() => dispatch( add_student_popup({ check: true, key: "edit", item: item }) )} >
                         <IconComponent iconType="editIcon" iconSize="18" 
-                          iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500" />
+                          iconStyle="text-[var(--foreground)] cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-green-500" />
                       </label>
 
                       <label>
                         <IconComponent iconType="deleteIcon" iconSize="18" 
-                          iconStyle="text-gray-600 cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500" />
+                          iconStyle="text-[var(--foreground)] cursor-pointer ease-in-out duration-200 active:scale-90 hover:text-red-500" />
                       </label>
                     </span>
                   </td>

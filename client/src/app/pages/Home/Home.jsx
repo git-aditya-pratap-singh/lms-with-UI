@@ -102,7 +102,7 @@ const Carrier = () => {
     return (
         <>
             <section className="_carrier">
-                <h1 className="_carrierText">Browse Top Essential <span>Carrier Course</span></h1>
+                <h1 className="_carrierText text-[var(--heading-color)]">Browse Top Essential <span>Carrier Course</span></h1>
                 <div className="_grid">
                     {
                         Data.Carrier_course.map((data) => {

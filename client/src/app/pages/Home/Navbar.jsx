@@ -160,9 +160,10 @@ const Navbar = () => {
         </button>
       </nav>
 
-      <ThemeMode/>
+      <div className="absolute z-[2] top-[5.6rem] right-[3rem]">
+        <ThemeMode/>
+      </div>
 
-      
       <Outlet />
       <Footer />
 

@@ -24,8 +24,9 @@ const ThemeMode = ()=>{
     }, []);
 
     return(
+        
         <section>
-            <label className="bg-[var(--primary)] shodow-md swap swap-rotate sm:right-16 fixed top-[1.7rem] right-3 sm:top-[5.4rem] z-[1] p-1.5 text-white rounded">
+            <label className="bg-[var(--primary)] shodow-md swap swap-rotate fixed z-[1] p-1.5 text-white rounded">
             {/* this hidden checkbox controls the state */}
             <input
                 type="checkbox"
@@ -37,7 +38,7 @@ const ThemeMode = ()=>{
             
             {/* moon icon */}
             <svg
-                className="swap-on fill-current w-5 h-5"
+                className="swap-off fill-current w-5 h-5"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
             >
@@ -45,7 +46,7 @@ const ThemeMode = ()=>{
             </svg> 
             {/* sun icon */}
             <svg
-                className="swap-off fill-current w-5 h-5"
+                className="swap-on fill-current w-5 h-5"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
             >

@@ -21,7 +21,7 @@ const ThemeDropDown = ({onChange, placeholder, value, options})=>{
             </div>
 
 
-            {open &&  <div className="bg-[var(--card)] absolute top-[8.3rem] sm:top-[4rem] w-[11rem] max-h-[300px] px-2 py-3 border shadow-lg border-gray-200 rounded-md z-20 overflow-y-scroll ">
+            {open &&  <div className="bg-[var(--card)] absolute top-[8.3rem] sm:top-[4rem] w-[11rem] px-2 py-3 border shadow-lg border-gray-200 rounded-md z-20 overflow-y-scroll ">
               <style jsx>{`
                 ::-webkit-scrollbar {
                 display: none;

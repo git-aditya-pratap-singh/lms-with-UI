@@ -78,7 +78,7 @@ const Profile_admin = () => {
                     <div className="_pfedit"
                         onClick={() => dispatch(img_update_popup(true))}>
                         <IconComponent iconType='editIcon' /></div>
-                </div>
+                    </div>
 
                 <div className="_subContainer22">
 
@@ -233,11 +233,11 @@ const ImgUpdate = () => {
 
                 <form className="_imgupdate mt-16" encType="multipart/form-data" onSubmit={FileUploadFunc}>
                     <span className="flex justify-between items-center">
-                        <h2 className="text-gray-700 font-semibold text-xl">Upload Image..!</h2>
+                        <h2 className="text-[var(--foreground)] font-semibold text-xl">Upload Image..!</h2>
                         <h3 style={{ cursor: "pointer" }} onClick={() =>
                             dispatch(img_update_popup(false))}><IconComponent iconType='crossIcon' /></h3>
                     </span>
-                    <input type="file" className="file-input file-input-bordered w-full max-w-xs h-10"
+                    <input type="file" className="file-input file-input-bordered w-full h-10 bg-[var(--background)] text-[var(--foreground)]"
                         name="image" accept="image/*" required onChange={(event) => setFile(event.target.files[0])} />
                     <button><IconComponent iconType='updateIcon' />Update</button>
                 </form>

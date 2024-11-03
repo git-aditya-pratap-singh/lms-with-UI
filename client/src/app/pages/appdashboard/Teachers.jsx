@@ -73,7 +73,7 @@ const Teachers = () => {
                 <div className="_studentSubContainer2">
                     <div className="_tableHeader">
                         <div role="tablist" className="tabs tabs-lifted _tav">
-                            <a role="tab" className="tab tab-active [--tab-bg:aliceblue;] [--tab-border-color:aliceblue] text-gray">All<span>(45)</span></a>
+                            <a role="tab" className="tab tab-active [--tab-bg:var(--primary);] [--tab-border-color:aliceblue] text-gray">All<span>(45)</span></a>
                             <a role="tab" className="tab">Active<span>(45)</span></a>
                             <a role="tab" className="tab">InActive<span>(45)</span></a>
                         </div>

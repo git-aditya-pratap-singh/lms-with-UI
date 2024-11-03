@@ -312,12 +312,12 @@ const AddForm = (props) => {
             <div className="mt-1 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-[1.05rem]">
               <div className="text-center flex flex-col items-center">
                 <IconComponent iconType="photoIcon" iconSize="36"
-                  className="mx-auto h-8 w-8 text-gray-800"/>
+                  className="mx-auto h-8 w-8 text-[var(--foreground)]"/>
 
-                <div className="flex text-sm leading-2 text-gray-800">
+                <div className="flex text-sm leading-2 text-[var(--foreground)]">
                   <label
                     htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-[var(--primary)] focus-within:outline-none focus-within:ring-2
+                    className="relative cursor-pointer rounded-md font-semibold text-[var(--primary)] focus-within:outline-none focus-within:ring-2
                      focus-within:ring-[var(--primary)] focus-within:ring-offset-2 hover:text-[var(--primary)]">
                     <span>Upload a file</span>
                     <input

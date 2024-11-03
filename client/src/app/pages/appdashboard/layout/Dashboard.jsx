@@ -167,10 +167,10 @@ const Dashboard = () => {
             <div className="flex justify-center items-center gap-5">
 
               <div className="_navIcon">
-                <div className="bg-gray-200 rounded">
+                <div className="bg-[var(--card)] border border-gray-300 rounded">
                   <a onClick={() => setToggle(!toggle)}>
                     <Hamburger
-                      color="#323035"
+                      color="#828282"
                       size={25}
                       duration={0.5}
                       easing="ease-in"
@@ -205,7 +205,9 @@ const Dashboard = () => {
                 <label><HiOutlineDotsVertical size={21} /></label>
               </span>
 
-              <ThemeMode/>
+              <div className="absolute z-[2] top-[4.8rem] right-[3rem]">
+                <ThemeMode/>
+              </div>
               
             </div>
             

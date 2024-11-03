@@ -16,8 +16,9 @@
           top: 0;
           z-index: 1;
           padding: 0.6rem 0.8rem;
-          background-color: #f0f8ff;
-          @apply text-gray-700 text-sm;
+          background-color: var(--card);
+          color: var(--card-foreground);
+          @apply text-sm;
         }
       }
     }

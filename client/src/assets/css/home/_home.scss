@@ -227,7 +227,7 @@ $background-color_5: #f10156;
   ._carrierText {
     font-size: 2.5rem;
     font-weight: 600;
-    color: var(--heading-color);
+    
     span {
       font-size: 2.5rem;
       color: var(--primary);
@@ -766,7 +766,7 @@ $background-color_5: #f10156;
       font-size: 2rem;
       margin-top: 0rem;
       line-height: normal;
-      color: var(--heading-color)
+      color: var(--heading-color);
       span {
         font-size: 2rem;
       }

@@ -133,12 +133,12 @@ const FormCourse = (props) => {
                 <form className="_courseForm1" onSubmit={handleSubmit} encType="multipart/form-data">
                     {/* Name */}
                     <div className="">
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Course Name <span className="text-red-500">*</span>
                         </label>
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <span className="text-gray-800 sm:text-sm">
+                                <span className="sm:text-sm">
                                     <IconComponent iconType="bookopenIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
@@ -156,7 +156,7 @@ const FormCourse = (props) => {
 
                     {/* Discription. */}
                     <div>
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Course Discription <span className="text-red-500">*</span>
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -178,7 +178,7 @@ const FormCourse = (props) => {
 
                     {/* Price */}
                     <div className="">
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Course Price <span className="text-red-500">*</span>
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -201,7 +201,7 @@ const FormCourse = (props) => {
 
                     {/* Estimated Price */}
                     <div>
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Estimated Price <span className="text-red-500">*</span>
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -225,7 +225,7 @@ const FormCourse = (props) => {
 
                     {/* Tags */}
                     <div>
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Course Tags <span className="text-red-500">*</span>
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -248,7 +248,7 @@ const FormCourse = (props) => {
 
                     {/* categories */}
                     <div>
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Course Categories <span className="text-red-500">*</span>
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -272,7 +272,7 @@ const FormCourse = (props) => {
 
                     {/* Level */}
                     <div>
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Course Level <span className="text-red-500">*</span>
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -290,7 +290,7 @@ const FormCourse = (props) => {
 
                     {/* Video Title */}
                     <div className="">
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Video Title <span className="text-red-500">*</span>
                         </label>
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
@@ -313,7 +313,7 @@ const FormCourse = (props) => {
 
                     {/* Video URL */}
                     <div className="">
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Video URL
                         </label>
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
@@ -335,12 +335,12 @@ const FormCourse = (props) => {
 
                     {/* Source Code */}
                     <div className="">
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Source Code Link
                         </label>
                         <div className="w-full relative mt-2 rounded-md shadow-sm">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <span className="text-gray-800 sm:text-sm">
+                                <span className="sm:text-sm">
                                     <IconComponent iconType="linkIcon" iconStyle="text-[var(--primary)]"/>
                                 </span>
                             </div>
@@ -357,7 +357,7 @@ const FormCourse = (props) => {
 
                     {/* Course Benifits */}
                     <div>
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-600">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Course Benifits <span className="text-red-500">*</span>
                         </label>
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -379,10 +379,10 @@ const FormCourse = (props) => {
 
                     {/* Select teachers */}
                     <div className="w-full">
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-800">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Select Faculity <span className="text-red-500">*</span>
                         </label>
-                        <div className="relative mt-2 rounded-md shadow-sm bg-black">
+                        <div className="relative mt-2 rounded-md shadow-sm">
                             <Select
                                 options={faculityList}
                                 isMulti
@@ -397,7 +397,7 @@ const FormCourse = (props) => {
 
                     {/* Upload Video. */}
                     <div className="w-full space-y-2">
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-800">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Video upload here.. <span className="text-red-500">*</span>
                         </label>
                         <input type="file"
@@ -409,7 +409,7 @@ const FormCourse = (props) => {
 
                     {/* Logo Upload. */}
                     <div className="w-full space-y-2">
-                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-gray-800">
+                        <label htmlFor="price" className="block text-sm font-medium leading-3 text-[var(--card-foreground)]">
                             Course Logo upload here.. <span className="text-red-500">*</span>
                         </label>
                         <input type="file"

@@ -12,7 +12,7 @@
   }
   h2 {
     font-size: small;
-    @apply text-gray-500;
+    color: var(--foreground);
   }
   ._form {
     display: grid;
@@ -30,10 +30,10 @@
       input{
           width: 100%;
           outline: none;
-          @apply pl-12 pr-4 py-2  border border-gray-300 focus:shadow-md focus:shadow-blue-200/50  rounded placeholder-opacity-25 focus:ring-1 focus:ring-ring text-sm;
+          @apply pl-12 pr-4 py-2 border border-gray-300 focus:shadow-sm focus:shadow-[var(--primary)] focus:border focus:border-[var(--primary)] rounded placeholder-opacity-25  text-sm;
       }
       label{
-          background-color: aliceblue;
+          background-color: var(--secondary);
           padding: 0.8rem;
           border-radius: 5px 5px 5px 5px;
           color: var(--primary);
